@@ -1,0 +1,31 @@
+.navbar-new {
+  transform: translate3d(0, 0, 0);
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.navbar-new .nav-bg-main {
+  background-color: #fdfcfa;
+  transition: opacity 180ms ease-out;
+}
+
+.navbar-new.is-scroll-hidden {
+  transform: translate3d(0, calc(-100% - 0.5rem), 0);
+}
+
+.navbar-new.is-scroll-revealed,
+.navbar-new:focus-within {
+  transform: translate3d(0, 0, 0);
+}
+
+.navbar-new.is-scroll-revealed .nav-bg-main,
+.navbar-new:focus-within .nav-bg-main {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-new,
+  .navbar-new .nav-bg-main {
+    transition: none !important;
+  }
+}

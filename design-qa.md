@@ -1,0 +1,509 @@
+# Contact Page Design QA
+
+## Evidence
+
+- Source visual truth:
+  - `.capture/contact-source-desktop-top.jpg`
+  - `.capture/contact-source-mobile-top.jpg`
+  - `.capture/faq-canvas-palette-1280x720.jpg`
+- Browser-rendered implementation:
+  - `.capture/contact-local-desktop-final.png`
+  - `.capture/contact-local-mobile-final.png`
+  - `.capture/contact-local-mobile-menu.png`
+- Normalized comparison images:
+  - `.capture/contact-comparison-desktop-final.png`
+  - `.capture/contact-comparison-mobile-final.png`
+- Route: `http://localhost:4321/contact-us/`
+- Desktop viewport: `1440 × 1000` CSS px. Source pixels: `1425 × 990`. Implementation full-page pixels: `1425 × 1315`; comparison uses a `1425 × 990` top crop at the browser's default 1× capture density.
+- Mobile viewport: `390 × 844` CSS px with a `375 px` rendered client width. Source pixels: `375 × 844`. Implementation full-page pixels: `375 × 1235`; comparison uses a `375 × 844` top crop at the browser's default 1× capture density.
+- State: compact shared navigation, contact hero visible, and the first FAQ item open by default.
+
+## Full-view comparison evidence
+
+- The retained Action Blue contact folder matches the source hierarchy, width, tab silhouette, radius, type roles, content, and link treatment on desktop and mobile.
+- The legacy “Ready to fix your positioning?” and green marquee/footer region are absent by design. The contact hero now hands directly into the homepage FAQ and footer requested by the user.
+- The FAQ and footer use the same generated homepage source, preserving copy, colors, spacing, accordion behavior, and copyright treatment.
+- No horizontal overflow was detected: desktop `scrollWidth 1425` at a `1425 px` rendered client width; mobile `scrollWidth 375` at a `375 px` rendered client width.
+
+## Focused region comparison evidence
+
+- Navigation: the supplied SVG wordmark, desktop link alignment, outlined “Book a call” control, and mobile hamburger match the homepage shell. The mobile menu was opened and closed successfully; its expanded state locked page scrolling.
+- Contact folder: Fraunces Light is used for “Contact us”; DM Sans is used for the prompt and action. The Action Blue and White token mapping matches the source.
+- FAQ: the first item opens by default; another item was opened with the rendered control; height measurement, plus rotation, and ARIA expanded state all updated correctly.
+- Footer: the same homepage footer markup is used and the copyright year resolves dynamically.
+- Runtime console: only Vite connection debug messages were present; no warnings or errors were observed.
+
+## Required fidelity surfaces
+
+- Fonts and typography: passed. Fraunces remains light and unsynthesized; DM Sans carries body, navigation, and utility text. No serif bold was introduced.
+- Spacing and layout rhythm: passed after one iteration. The folder and subsequent FAQ align with the source contact proportions and homepage editorial rhythm at both target widths.
+- Colors and visual tokens: passed. Canvas, Ink, Action Blue, White, and 14%-Ink rules match the documented system.
+- Image quality and asset fidelity: passed. The canonical `itk-logo.svg` is used directly; the existing `yellow-tab.svg` supplies the folder-tab mask without a generated substitute.
+- Copy and content: passed. The contact copy remains unchanged; FAQ/footer copy is sourced from the current homepage.
+- Responsiveness and accessibility: passed. No horizontal overflow, keyboard-operable accordion headers, visible focus outlines, semantic heading order, responsive mobile menu, and reduced-motion fallbacks are present.
+
+## Findings
+
+- No actionable P0, P1, or P2 findings remain.
+
+## Comparison history
+
+1. Initial comparison
+   - Finding: `[P2] Contact folder sat too low`, most visibly on mobile, increasing the gap below the fixed navigation and pushing the replacement FAQ below the source section boundary.
+   - Evidence: `.capture/contact-comparison-desktop.png` and `.capture/contact-comparison-mobile.png`.
+2. Fix applied
+   - Reduced the contact hero's desktop, tablet, and mobile top padding while preserving the folder's size and internal spacing.
+3. Post-fix comparison
+   - Evidence: `.capture/contact-comparison-desktop-final.png` and `.capture/contact-comparison-mobile-final.png`.
+   - Result: the contact folder now matches the source position and the FAQ begins at the intended post-hero boundary. No further P0/P1/P2 mismatches were visible.
+
+## Primary interactions tested
+
+- Homepage navigation “Book a call” → `/contact-us/`.
+- Homepage hero “Book a call” → `/contact-us/`.
+- Contact-page desktop navigation link destinations.
+- Mobile menu open/close, transformed close icon, and scroll lock.
+- FAQ first-item default open state and additional-item expansion.
+- Calendly contact action retains `https://calendly.com/jonitkin/new-meeting` in a new tab.
+
+## Implementation checklist
+
+- [x] Local contact route generated by Astro.
+- [x] Homepage navigation reused on the contact route.
+- [x] Existing contact hero retained.
+- [x] Legacy lower contact sections removed.
+- [x] Homepage FAQ and footer reused.
+- [x] Homepage “Book a call” links routed locally.
+- [x] Desktop and mobile browser QA completed.
+- [x] Production build completed successfully.
+
+final result: passed
+
+---
+
+# Centered Testimonial Heading QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/testimonial-heading-centered-desktop.png` and `.capture/testimonial-heading-centered-mobile.png`
+- Route: `http://localhost:4321/`
+- Responsive checks: `1280 × 720` and `390 × 844` CSS px.
+
+## Findings
+
+- The testimonial heading is an intrinsic-width block placed at the exact horizontal center of the yellow section on desktop and mobile.
+- Both authored desktop lines are center-aligned; the responsive heading retains centered alignment while wrapping naturally at the mobile measure.
+- Desktop and mobile heading centers match their section centers exactly in browser geometry checks.
+- No horizontal overflow was detected at either viewport.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Content-Driven Positioning Quote QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/positioning-quote-content-height-desktop.png` and `.capture/positioning-quote-content-height-mobile.png`
+- Route: `http://localhost:4321/#positioning-quote`
+- Responsive checks: `1280 × 720` and `390 × 844` CSS px.
+
+## Findings
+
+- The panel has no fixed or minimum height at desktop, tablet, or mobile breakpoints; its computed `min-height` is `0px`.
+- At `1280 × 720`, the panel resolves naturally to `302.28px` tall, matching its `302px` scroll height after subpixel rounding.
+- At `390 × 844`, the longer wrapped quote expands the panel naturally to `444.28px`, matching its `444px` scroll height after subpixel rounding.
+- The quote, 24 px attribution gap, attribution, and responsive bottom padding remain inside the dark field without clipping.
+- No horizontal overflow was detected at either viewport.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Four Cs Headline Typography QA
+
+## Intent
+
+- Apply the supplied Fraunces Light treatment to Capability, Credibility, Convenience, and Cost.
+- Leave descriptions, rules, and grid geometry unchanged.
+
+## Implementation
+
+- All four headings use Fraunces Light (`300`) at `36 px / 36 px` with `-1.41 px` tracking.
+- Synthetic styling remains disabled.
+- The typography remains consistent across desktop, tablet, and mobile breakpoints.
+
+## Evidence
+
+- Browser-rendered desktop check: `.capture/four-cs-headlines-fraunces-desktop.png`
+- Browser-rendered mobile check: `.capture/four-cs-headlines-fraunces-mobile.png`
+- Responsive checks: `1280 × 720` and `390 × 844` CSS px.
+
+## Findings
+
+- All four headings resolve to the exact supplied Fraunces Light `36 px / 36 px / -1.41 px` specification at both tested widths.
+- Every label remains on one line in the two-column desktop and one-column mobile compositions.
+- Supporting copy and rules remain unchanged.
+- Neither viewport has horizontal overflow.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Positioning Statement Typography QA
+
+## Intent
+
+- Apply the supplied Fraunces Light typography to the positioning-consultancy statement.
+- Preserve the authored four-line desktop composition and natural mobile wrapping.
+
+## Implementation
+
+- Desktop typography is Fraunces Light (`300`) at `36 px / 48 px` with `-1.41 px` tracking.
+- Synthetic styling remains disabled.
+- Below 768 px, the statement uses `32 px / 40 px` with `-1.25 px` tracking.
+
+## Evidence
+
+- Browser-rendered desktop check: `.capture/positioning-statement-fraunces-desktop.png`
+- Browser-rendered mobile check: `.capture/positioning-statement-fraunces-mobile.png`
+- Responsive checks: `1280 × 720` and `390 × 844` CSS px.
+
+## Findings
+
+- The desktop statement resolves to the exact supplied `36 px / 48 px / -1.41 px` specification and retains all four authored lines.
+- The mobile statement wraps naturally at `32 px / 40 px / -1.25 px`.
+- Fraunces remains Light (`300`) with no synthetic bolding.
+- Neither viewport has horizontal overflow.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# FAQ Heading Typography QA
+
+## Intent
+
+- Match the supplied FAQ heading specification: Fraunces Light, 62 px size, 64 px line height, and -2 px tracking.
+- Preserve “answered.” as the slightly smaller DM Sans emphasis.
+
+## Implementation
+
+- The homepage and contact-page FAQ headings share the same responsive `48–62 px` type rule and `50–64 px` line-height rule.
+- The serif line is explicitly Light (`300`) with synthetic styling disabled.
+- The paired sans-serif line remains `0.94em` and uses Regular (`400`).
+
+## Evidence
+
+- Browser-rendered desktop check: `.capture/faq-heading-typography-desktop.png`
+- Browser-rendered mobile check: `.capture/faq-heading-typography-mobile.png`
+- Routes: `http://localhost:4321/#faqs` and `http://localhost:4321/contact-us/#faqs`
+
+## Findings
+
+- At 1280 px, both pages resolve the serif line to Fraunces Light at exactly `62 px / 64 px` with `-2 px` tracking.
+- The DM Sans emphasis resolves to 58.28 px and Regular (`400`) at the desktop reference.
+- At 390 px, the heading scales to `48 px / 50 px`; the emphasis resolves to 45.12 px.
+- Neither viewport has horizontal overflow.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Closing Folder Vertical Alignment QA
+
+## Intent
+
+- Vertically center the closing headline and CTA within the blue folder body.
+- Exclude the raised folder tab from the centering calculation so the composition remains optically balanced.
+
+## Implementation
+
+- The blue body is now a vertical flex alignment context.
+- The content group keeps its approved horizontal insets but no longer uses fixed top and bottom padding for placement.
+- Tablet and mobile variants inherit the same centered behavior with their existing responsive side insets.
+
+## Evidence
+
+- Browser-rendered desktop check: `.capture/closing-folder-centered-desktop.png`
+- Browser-rendered mobile check: `.capture/closing-folder-centered-mobile.png`
+- Responsive checks: `1280 × 720` and `390 × 844` CSS px.
+
+## Findings
+
+- The content and folder-body centerlines match exactly at both tested widths.
+- The raised tab remains outside the centering calculation.
+- Neither viewport has horizontal overflow.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Compact Testimonial Card QA
+
+## Intent
+
+- Reduce the height of every rotating testimonial card and slightly reduce its typography.
+- Preserve equal desktop card heights, consistent attribution alignment, and content-driven responsive behavior.
+
+## Implementation
+
+- Desktop grid rows reduce from `19.25rem` to `17rem`.
+- Quote copy reduces from `1rem` to `0.9375rem`; attribution copy reduces from `0.875rem` to `0.8125rem`.
+- Card padding reduces to 18–20 px, with tighter spacing above and within the attribution footer.
+- Tablet and mobile cards inherit the compact type and use 20 px padding with natural content height.
+
+## Evidence
+
+- Browser-rendered desktop check: `.capture/testimonial-cards-compact-desktop.png`
+- Browser-rendered mobile check: `.capture/testimonial-cards-compact-mobile.png`
+- Responsive checks: `1280 × 720` and `390 × 844` CSS px.
+
+## Findings
+
+- At the desktop reference width, all eight visible cards render at approximately 251 px high with no content clipping.
+- Mobile cards collapse to natural content heights between approximately 147 px and 294 px for the currently visible rotating set.
+- The mobile quote size resolves to 15 px; the tested desktop fluid root scale resolves the same token to approximately 13.83 px.
+- Neither viewport has horizontal overflow.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Positioning Quote Typography QA
+
+## Intent
+
+- Reduce the Redpanda testimonial scale without changing the surrounding editorial-card composition.
+- Keep the attribution visually connected to the quote instead of pushing it to the bottom of the dark panel.
+
+## Implementation
+
+- The quote now caps at 24 px on desktop and tablet and uses 22 px on mobile.
+- The panel uses a normal top-aligned flex stack; the attribution follows the quote with a 24 px gap.
+- The panel height, padding, background, and surrounding White gutter remain unchanged.
+
+## Evidence
+
+- Browser-rendered desktop check: `.capture/positioning-quote-compact-desktop.png`
+- Browser-rendered narrow check: `.capture/positioning-quote-compact-mobile.png`
+- Responsive checks: `1280 × 720` and `667 × 900` CSS px.
+
+## Findings
+
+- The rendered attribution gap is approximately 22 px at the fluid desktop scale and exactly 24 px at the narrow breakpoint.
+- The quote renders at 21.12 px at the tested desktop width and 22 px at the narrow breakpoint.
+- Neither viewport has horizontal overflow.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Shared Footer Logo Replacement QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/footer-logo-replaced-desktop.png`
+- Routes: `http://localhost:4321/` and `http://localhost:4321/contact-us/`
+- Responsive checks: `1440 × 1000` and `390 × 844` CSS px.
+
+## Findings
+
+- The retired 150:29 inline footer mark is replaced on both routes by the supplied `public/assets/itk-logo.svg` asset.
+- The SVG reports its native 160 × 20 dimensions and renders at the intended 8:1 aspect ratio without stretching or clipping.
+- The navigation continues to use its existing logo treatment and was not structurally changed.
+- No horizontal overflow was detected at desktop or mobile widths.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Ten-item Shared FAQ QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/faq-ten-items-desktop.png`
+- Routes: `http://localhost:4321/#faqs` and `http://localhost:4321/contact-us/#faqs`
+- Responsive checks: desktop browser viewport and `390 × 844` CSS px.
+
+## Findings
+
+- Both routes render the same ten questions in the approved order and with the supplied answers.
+- The first item opens by default on both routes.
+- The long “Do you use AI?” answer expands to its measured content height without clipping, and its control updates the expanded state and plus icon correctly.
+- No horizontal overflow was detected at desktop or mobile widths.
+
+final result: passed
+
+---
+
+# Restored Positioning Decision Module QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/positioning-decisions-restored-desktop.png`
+- Route: `http://localhost:4321/#four-cs`
+- Responsive checks: desktop browser viewport, `768 × 900`, and `390 × 844` CSS px.
+
+## Findings
+
+- The white positioning card now continues below the inset Redpanda quote with the complete “Marketing copy doesn’t make you a category leader. Decisions do.” module.
+- All three approved explanatory paragraphs and all eight decision rows are present in the reference order, including Buyer at 4 decisions.
+- The light-Fraunces headings, quiet divider, DM Sans body copy, ruled rows, outlined count pills, and centered white-card proportions match the supplied reference.
+- The Positioning Lavender to Deep Positioning Lavender scroll transition continues behind the complete sequence.
+- No horizontal overflow, clipped copy, or row overflow was detected at desktop, tablet, or mobile widths.
+
+final result: passed
+
+---
+
+# Full-width Testimonial Removal QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/removed-fullwidth-testimonial-desktop.png`
+- Route: `http://localhost:4321/`
+- Responsive checks: desktop browser viewport and `390 × 844` mobile viewport.
+
+## Findings
+
+- No `.home-testimonial-section` remains in the rendered homepage or production output.
+- The positioning process now hands directly into the Testimonial Yellow rotating grid without an empty wrapper or residual dark field.
+- The Alison Gonzalez testimonial remains once in the approved rotating grid.
+- The page has no horizontal overflow at desktop or mobile widths.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Compact Testimonial Cards QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/testimonial-cards-compact-1440.png`
+- Route: `http://localhost:4321/`
+- Desktop viewport: `1440 × 1000` CSS px.
+- Additional responsive checks: `768 × 900` and `390 × 844` CSS px.
+
+## Findings
+
+- Desktop testimonial rows now resolve to approximately 297 px at the approved 1440 px viewport, down from the previous oversized 21.5rem rows.
+- All eight visible cards retain the same height in the desktop 3 × 3 composition, and the longest approved quote and attribution fit without clipping.
+- Tablet rows follow their content in equal-height pairs; mobile cards use natural content height.
+- No horizontal overflow or testimonial-card content overflow was detected at desktop, tablet, or mobile widths.
+- The quote-rotation behavior, centered Fraunces heading, attribution rules, card radius, and Yellow field remain unchanged.
+
+final result: passed
+
+---
+
+# Founder Investment Headline Rag QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/founder-investment-rag-desktop.png`
+- Route: `http://localhost:4321/#founder`
+- Responsive checks: `1200 × 800` and `390 × 844` CSS px.
+
+## Findings
+
+- The right commercial headline now uses three intentional desktop lines: “This is an investment in,” “changing the trajectory,” and “of your business.”
+- The previous single-word “changing” line is eliminated.
+- Below 1100 px, the authored spans return to natural inline wrapping; mobile has no horizontal overflow.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Post-Hero Navigation Inset QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/nav-balanced-post-hero.png`
+- Routes: `http://localhost:4321/` and `http://localhost:4321/contact-us/`
+- Responsive checks: `1288 × 720` and `390 × 844` CSS px.
+
+## Findings
+
+- At the desktop reference width, the scrolled homepage logo begins 81.66 px from the left content edge and the CTA ends 81.67 px from the right content edge, an optical difference under 0.02 px.
+- The contact page inherits the same compact navigation alignment with an edge difference under 0.03 px.
+- The right cluster uses the same 240 ms transform timing as the logo, avoiding navigation reflow.
+- The shift is disabled below 992 px; the mobile navigation retains its existing placement with no horizontal overflow.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Centered Client Statement QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/clients-statement-centered-desktop.png` and `.capture/clients-statement-centered-mobile.png`
+- Route: `http://localhost:4321/#clients`
+- Responsive checks: `1280 × 720` and `390 × 844` CSS px.
+
+## Findings
+
+- The desktop statement is an intrinsic `621.45px`-wide block centered within the rendered `1265px` viewport; its left and right gutters differ by less than `0.02px`.
+- The statement remains left-aligned internally and preserves the approved four authored desktop lines.
+- On mobile, the block uses the available `327px` content width and returns to natural wrapping while remaining left-aligned.
+- No horizontal overflow was detected at either viewport.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Directional Navigation QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/nav-directional-reveal-desktop.png` and `.capture/nav-directional-reveal-mobile.png`
+- Routes: `http://localhost:4321/` and `http://localhost:4321/contact-us/`
+- Responsive checks: `1280 × 720` and `390 × 844` CSS px.
+
+## Findings
+
+- At the top of the homepage, the navigation remains visible in its original transparent hero state.
+- After downward scrolling beyond the navigation height, the desktop nav resolves fully above the viewport at approximately `-97.94px`; mobile resolves at approximately `-79.03px`.
+- Any upward scroll restores the nav to `top: 0` and raises the Canvas-white background to full opacity.
+- Returning to the page top removes the directional state and restores a transparent homepage background.
+- The contact route uses the same hide/reveal interaction while retaining its intentionally white top-state navigation.
+- Keyboard focus and an expanded mobile menu force the nav visible; reduced-motion users receive the same states without animation.
+- No horizontal overflow was detected at either viewport.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Faster Testimonial Rotation QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/testimonial-rotation-fast.png`
+- Route: `http://localhost:4321/`
+- Desktop viewport: `1280 × 720` CSS px.
+
+## Findings
+
+- The testimonial replacement interval is reduced from `3600ms` to `2200ms`.
+- Browser polling observed consecutive card replacements approximately `2135ms` apart, within the expected sampling tolerance for the `2200ms` interval.
+- The existing `220ms` fade-and-rise transition remains intact, so the faster cadence is still readable.
+- Hover, keyboard-focus, offscreen, hidden-document, and reduced-motion safeguards remain unchanged.
+- No horizontal overflow was detected.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed

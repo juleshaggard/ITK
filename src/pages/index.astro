@@ -1,0 +1,2497 @@
+---
+import sourceBody from '../content/source-body.html?raw';
+import { applySiteCopy } from '../content/site-copy.mjs';
+import '../styles/directional-navigation.css';
+
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const copiedBody = applySiteCopy(sourceBody);
+const clientSectionPattern = /<section id="clients"[\s\S]*?<\/section><section class="section light-bg">[\s\S]*?<\/section>/;
+const clientSection = `<section id="clients" class="section light-bg positioning-clients-section">
+  <div class="container positioning-clients-container">
+    <h2 class="positioning-clients-heading">
+      <span>In The Kitchen is a positioning consultancy</span>
+      <span>built to help B2B technology leadership</span>
+      <span>teams build, defend, and expand authentic</span>
+      <span>category leadership.</span>
+    </h2>
+    <p class="positioning-clients-intro">Positioning support for founders and executives making the next big bet.</p>
+    <div class="best-fit-clients-tags positioning-clients-tags" aria-label="Best-fit client qualities">
+      <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Ready to change</p></div>
+      <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Challenger mindset</p></div>
+      <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Facing hard decisions</p></div>
+      <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">High ACV</p></div>
+      <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Scrappy</p></div>
+      <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Sales led</p></div>
+      <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Growth stage</p></div>
+      <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Reaching for greatness</p></div>
+    </div>
+    <div class="logos-grid positioning-clients-logos" aria-label="Selected clients">
+      <img src="assets/meta.svg" loading="lazy" alt="Meta" class="logo-image bigger" />
+      <img src="assets/summation.webp" loading="lazy" alt="Summation" class="logo-image bigger" />
+      <img src="assets/moneylion.svg" loading="lazy" alt="MoneyLion" class="logo-image bigger" />
+      <img src="assets/latent.png" loading="lazy" alt="Latent" class="logo-image bigger" />
+      <img src="assets/valence.png" loading="lazy" alt="Valence" class="logo-image bigger" />
+      <img src="assets/every.png" loading="lazy" alt="Every" class="logo-image bigger" />
+      <img src="assets/thunder.svg" loading="lazy" alt="Pulley" class="logo-image bigger" />
+      <img src="assets/pulley.svg" loading="lazy" alt="Thunder" class="logo-image bigger" />
+      <img src="assets/genesys.png" loading="lazy" alt="Genesys" class="logo-image bigger" />
+      <img src="assets/crewai.png" loading="lazy" alt="CrewAI" class="logo-image bigger" />
+      <img src="assets/exclaimer.svg" loading="lazy" alt="Exclaimer" class="logo-image bigger" />
+      <img src="assets/redpanda.png" loading="lazy" alt="Redpanda" class="logo-image bigger" />
+    </div>
+  </div>
+</section>`;
+
+const investorSectionPattern = /<section class="section lean-in-section">[\s\S]*?<\/section>/;
+const investorSection = `<section id="investors" class="section investor-trust-section">
+  <div class="investor-trust-panel">
+    <h2 class="investor-trust-heading">Trusted by investors who lean in.</h2>
+    <div class="investor-trust-layout">
+      <div class="investor-trust-group investor-partnerships-group">
+        <h3 class="investor-trust-label">Investor partnerships</h3>
+        <div class="investor-partnerships-grid">
+          <article class="investor-partnership-card">
+            <img src="assets/first-round.svg" loading="eager" alt="First Round" />
+            <p>Expert in Residence</p>
+          </article>
+          <article class="investor-partnership-card">
+            <img src="assets/norwest.svg" loading="eager" alt="Norwest" />
+            <p>Senior Advisor</p>
+          </article>
+        </div>
+      </div>
+      <div class="investor-trust-group investor-portcos-group">
+        <h3 class="investor-trust-label">We've worked with portcos of</h3>
+        <div class="investor-portcos-grid">
+          <div class="investor-portco-card"><img src="assets/gv.svg" loading="eager" alt="GV" /></div>
+          <div class="investor-portco-card"><img src="assets/insight-partners.png" loading="eager" alt="Insight Partners" /></div>
+          <div class="investor-portco-card"><img src="assets/bessemer.png" loading="eager" alt="Bessemer Venture Partners" /></div>
+          <div class="investor-portco-card"><img src="assets/salesforce-ventures.svg" loading="eager" alt="Salesforce Ventures" /></div>
+          <div class="investor-portco-card"><img src="assets/y-combinator.svg" loading="eager" alt="Y Combinator" /></div>
+          <div class="investor-portco-card"><img src="assets/sequoia.svg" loading="eager" alt="Sequoia" /></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>`;
+
+const positioningStoryPattern =
+  /<section class="section reinventing-section">[\s\S]*?<section class="section deciding-section">[\s\S]*?<\/section>/;
+const duplicateDecisionProcessPattern =
+  /<section class="section home-three-items-section">[\s\S]*?<\/section>/;
+const testimonialHeadingPattern =
+  /(<section class="section b2b-ceos-section">\s*<div class="container">)\s*<h2[\s\S]*?<\/h2>/;
+const founderSectionPattern =
+  /<section class="section meet-founder-section">[\s\S]*?<\/section>/;
+const closingSectionPattern =
+  /<section class="section own-your-strategy-section">[\s\S]*?<\/section>/;
+const navigationLogoPattern =
+  /(<a[^>]*class="brand-new-inner w-inline-block"[^>]*>)<svg[\s\S]*?<\/svg>(<\/a>)/;
+const footerLogoPattern =
+  /(<a[^>]*class="footer-link-logo w-inline-block"[^>]*>)<svg[\s\S]*?<\/svg>(<\/a>)/;
+const howItWorksLinkPattern =
+  /(<a[^>]*href=")#("[^>]*class="nav-link-new w-inline-block"[^>]*><div>How it works<\/div>)/;
+const navigationLogo = `<img src="${base}assets/itk-logo.svg" alt="" class="contain-image nav-brand-logo" width="160" height="20" />`;
+const footerLogo = `<img src="${base}assets/itk-logo.svg" alt="" class="contain-image footer-brand-logo" width="160" height="20" style="display:block;width:100%;height:auto;aspect-ratio:8 / 1" />`;
+const positioningStorySection = `<section id="four-cs" class="section positioning-story-section">
+  <div class="positioning-story-stack">
+  <article class="four-cs-card positioning-story-card">
+    <div class="four-cs-inner">
+      <div class="four-cs-headlines">
+        <h2>
+          <span>You don’t create category</span>
+          <span>leadership by being a little bit better.</span>
+        </h2>
+        <h2>
+          <span>You do it by being</span>
+          <span>fundamentally different.</span>
+        </h2>
+      </div>
+      <div class="four-cs-divider" aria-hidden="true"></div>
+      <div class="four-cs-copy">
+        <p>People will tell you positioning is a game of inches. Category leaders disagree. They drive compounding advantages across four dimensions, and product capabilities are only one.</p>
+        <p>We use the Four Cs heuristic to deeply understand why you win. Then we channel our learnings into positioning and messaging that hits the market like a pile driver.</p>
+        <p class="four-cs-label">The four sources of competitive advantage:</p>
+      </div>
+      <div class="four-cs-grid">
+        <article class="four-cs-item">
+          <h3>Capability</h3>
+          <p>What your buyers can do (and not do) as a result of your product.</p>
+        </article>
+        <article class="four-cs-item">
+          <h3>Credibility</h3>
+          <p>What makes you exceptionally trustworthy.</p>
+        </article>
+        <article class="four-cs-item">
+          <h3>Convenience</h3>
+          <p>Why it’s easier to buy from you</p>
+        </article>
+        <article class="four-cs-item">
+          <h3>Cost</h3>
+          <p>Why you deliver outstanding value relative to investment.</p>
+        </article>
+      </div>
+    </div>
+    <figure id="positioning-quote" class="positioning-quote-panel">
+      <blockquote>
+        <p>“Jon helped us execute a crucial strategic repositioning and build a message that we fully own. Within weeks of launching, we closed our first enterprise deal and built a deep pipeline. The ideas and language we co-created are pulling the company forward.”</p>
+      </blockquote>
+      <figcaption>Alex Gallego, CEO, Redpanda</figcaption>
+    </figure>
+    <section class="positioning-decisions-panel" aria-labelledby="positioning-decisions-heading">
+      <div class="positioning-decisions-headlines">
+        <h2 id="positioning-decisions-heading">
+          <span>Marketing copy doesn’t</span>
+          <span>make you a category leader.</span>
+        </h2>
+        <h2>Decisions do.</h2>
+      </div>
+      <div class="positioning-decisions-divider" aria-hidden="true"></div>
+      <div class="positioning-decisions-copy">
+        <p>After more than 45 deep-dive positioning exercises, we’ve learned that the most important factor behind positioning success is the integrity of the decisions beneath it.</p>
+        <p>So we developed Decision-Based Positioning: a methodology that treats decisions as a first-class deliverable of the positioning process.</p>
+        <p>With us, executives spend time debating crucial decisions, not splitting hairs over headlines. You leave with conviction about the path you’re taking, not just what you will say.</p>
+      </div>
+      <h3 class="positioning-decisions-label">Decisions to win:</h3>
+      <ul class="positioning-decisions-list">
+        <li><span>Intentions</span><span class="positioning-decision-count">7 decisions</span></li>
+        <li><span>Playing Field</span><span class="positioning-decision-count">4 decisions</span></li>
+        <li><span>Market Segment</span><span class="positioning-decision-count">3 decisions</span></li>
+        <li><span>Buyer</span><span class="positioning-decision-count">4 decisions</span></li>
+        <li><span>Problem</span><span class="positioning-decision-count">3 decisions</span></li>
+        <li><span>Alternatives</span><span class="positioning-decision-count">3 decisions</span></li>
+        <li><span>Advantages</span><span class="positioning-decision-count">5 decisions</span></li>
+        <li><span>How You Win</span><span class="positioning-decision-count">2 decisions</span></li>
+      </ul>
+    </section>
+  </article>
+  </div>
+</section>`;
+
+const positioningProcessSection = `<section id="how-it-works" class="section positioning-process-section">
+  <div class="positioning-process-inner">
+    <div class="positioning-process-layout">
+      <header class="positioning-process-intro">
+        <h2 class="positioning-process-heading">
+          <span>In The Kitchen does more</span>
+          <span>thinking and deeper</span>
+          <span>creative work than you’ve</span>
+          <span>been taught to expect</span>
+        </h2>
+        <p>This isn’t overdressed copywriting. It’s not an over-engineered workshop. It’s a methodical process to gather the right information, have the right conversations, take full ownership of your ideas, and get them in market with full fidelity.</p>
+      </header>
+      <ol class="positioning-process-timeline" aria-label="The In The Kitchen process">
+        <li>
+          <div class="positioning-process-step">
+            <h3>First we learn</h3>
+            <p>The underlying truths that matter about your company, category, and buyers.</p>
+          </div>
+        </li>
+        <li>
+          <div class="positioning-process-step">
+            <h3>Then we talk</h3>
+            <p>Genuine working conversations with the people who hold a stake in positioning.</p>
+          </div>
+        </li>
+        <li>
+          <div class="positioning-process-step">
+            <h3>Then we craft</h3>
+            <p>Simply expressed, unadorned definition of your positioning.</p>
+          </div>
+        </li>
+        <li>
+          <div class="positioning-process-step">
+            <h3>Then we build</h3>
+            <p>Core GTM assets that make positioning shippable.</p>
+          </div>
+        </li>
+        <li>
+          <div class="positioning-process-step">
+            <h3>Then we scale</h3>
+            <p>For select clients, we take on limited brand-level creative work.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+    <p class="positioning-process-outcome">You walk away with a set of positioning decisions your leadership team fully owns, plus the homepage, sales deck, and executive narrative that get them in market</p>
+  </div>
+</section>`;
+
+const founderSection = `<section id="founder" class="section founder-profile-section">
+  <div class="founder-profile-inner">
+    <div class="founder-profile-intro">
+      <figure class="founder-profile-portrait">
+        <img src="assets/jon-itkin.avif" loading="lazy" alt="Jon Itkin, founder of In The Kitchen" />
+      </figure>
+      <div class="founder-profile-bio">
+        <h2>Meet the person behind<br />your positioning</h2>
+        <p>Jon Itkin cut his teeth as a copywriter, strategist, and product marketing leader for companies from Google and Salesforce to early-stage startups.</p>
+        <p>Jon shares ideas on <a href="https://www.linkedin.com/in/jonitkin/" target="_blank" rel="noreferrer">LinkedIn</a>, in his <a href="https://in-the-kitchen.webflow.io/home-new?feedbucketKey=itk-feedback#">newsletter</a>, and in the <a href="https://in-the-kitchen.webflow.io/home-new?feedbucketKey=itk-feedback#">articles section</a> of this site.</p>
+      </div>
+    </div>
+    <div class="founder-profile-details">
+      <article class="founder-profile-detail">
+        <h3>It costs a minimum of<br />$25,000 to hire In The Kitchen.</h3>
+        <div class="founder-profile-rule" aria-hidden="true"></div>
+        <p>It takes at least four weeks of deep, meaningful work to partner with us. We are booked anywhere from weeks to quarters ahead. We don’t farm out positioning work. What you see, you get.</p>
+      </article>
+      <article class="founder-profile-detail">
+        <h3 class="founder-profile-investment-heading"><span>This is an investment in</span> <span>changing the trajectory</span> <span>of your business</span></h3>
+        <div class="founder-profile-rule" aria-hidden="true"></div>
+        <p>Our clients’ competitors would love to read case studies about why they’re losing, so we don’t publish them. But we can tell you what happened after the work. One client tripled their win rate against the entrenched category leader. Another launched a new category and closed six-figure enterprise deals within six weeks. Another got 17 press hits and 10x product signups on launch day.</p>
+        <p><a href="https://in-the-kitchen.webflow.io/contact-us">Get on the calendar</a>, and we’ll walk you through the work and the stories behind it.</p>
+      </article>
+    </div>
+  </div>
+</section>`;
+
+const closingSection = `<section id="contact" class="section closing-folder-section" style="--closing-folder-tab-mask: url('${base}assets/yellow-tab.svg')">
+  <div class="closing-folder-shell">
+    <div class="closing-folder-tab" aria-hidden="true"></div>
+    <div class="closing-folder-panel">
+      <div class="closing-folder-content">
+        <h2 class="closing-folder-heading">
+          <span>It’s time to take</span>
+          <span class="closing-folder-emphasis">a position.</span>
+        </h2>
+        <a class="closing-folder-cta" href="https://in-the-kitchen.webflow.io/contact-us">
+          <span>Get In The Kitchen</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>`;
+
+if (!clientSectionPattern.test(copiedBody)) {
+  throw new Error('Unable to locate the client-fit and logo sections.');
+}
+
+const clientComposedBody = copiedBody.replace(clientSectionPattern, clientSection);
+
+if (!investorSectionPattern.test(clientComposedBody)) {
+  throw new Error('Unable to locate the investor partnership section.');
+}
+
+const investorComposedBody = clientComposedBody.replace(investorSectionPattern, investorSection);
+
+if (!positioningStoryPattern.test(investorComposedBody)) {
+  throw new Error('Unable to locate the positioning story sections.');
+}
+
+const positioningStoryComposedBody = investorComposedBody.replace(
+  positioningStoryPattern,
+  `${positioningStorySection}${positioningProcessSection}`,
+);
+
+if (!duplicateDecisionProcessPattern.test(positioningStoryComposedBody)) {
+  throw new Error('Unable to locate the duplicate decision and process section.');
+}
+
+const streamlinedBody = positioningStoryComposedBody.replace(
+  duplicateDecisionProcessPattern,
+  '',
+);
+
+if (!testimonialHeadingPattern.test(streamlinedBody)) {
+  throw new Error('Unable to locate the testimonial grid heading.');
+}
+
+const testimonialComposedBody = streamlinedBody.replace(
+  testimonialHeadingPattern,
+  '$1<h2 id="testimonial-grid-heading" class="b2b-testimonial-heading"><span>B2B CEOs and CMOs</span><span>love In The Kitchen</span></h2>',
+);
+
+if (!founderSectionPattern.test(testimonialComposedBody)) {
+  throw new Error('Unable to locate the founder section.');
+}
+
+const founderComposedBody = testimonialComposedBody.replace(
+  founderSectionPattern,
+  founderSection,
+);
+
+if (!closingSectionPattern.test(founderComposedBody)) {
+  throw new Error('Unable to locate the closing call-to-action section.');
+}
+
+const closingComposedBody = founderComposedBody.replace(
+  closingSectionPattern,
+  closingSection,
+);
+
+if (!navigationLogoPattern.test(closingComposedBody)) {
+  throw new Error('Unable to locate the navigation logo.');
+}
+
+const pageWithNavigationLogo = closingComposedBody.replace(
+  navigationLogoPattern,
+  `$1${navigationLogo}$2`,
+);
+
+if (!howItWorksLinkPattern.test(pageWithNavigationLogo)) {
+  throw new Error('Unable to locate the How it works navigation link.');
+}
+
+const pageBodyWithAnchors = pageWithNavigationLogo.replace(
+  howItWorksLinkPattern,
+  '$1#how-it-works$2',
+);
+
+if (!footerLogoPattern.test(pageBodyWithAnchors)) {
+  throw new Error('Unable to locate the footer logo.');
+}
+
+const pageWithFooterLogo = pageBodyWithAnchors.replace(
+  footerLogoPattern,
+  `$1${footerLogo}$2`,
+);
+const pageBody = pageWithFooterLogo.replaceAll(
+  'href="https://in-the-kitchen.webflow.io/contact-us"',
+  `href="${base}contact-us/"`,
+);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Only one company will be the leader in your category. Let’s make it you."
+    />
+    <title>Take the lead position | In The Kitchen</title>
+    <link rel="stylesheet" href={`${base}styles/webflow.css`} />
+    <link rel="icon" href={`${base}assets/favicon-small.png`} />
+  </head>
+  <body class="body-new">
+    <Fragment set:html={pageBody} />
+
+    <script is:inline>
+      (() => {
+        const menuButton = document.querySelector('.menu-button-new');
+        const navigation = document.querySelector('.navigation-new');
+        const navbar = document.querySelector('.navbar-new');
+
+        if (menuButton && navigation && navbar) {
+          menuButton.setAttribute('role', 'button');
+          menuButton.setAttribute('tabindex', '0');
+          menuButton.setAttribute('aria-label', 'menu');
+          menuButton.setAttribute('aria-expanded', 'false');
+
+          const setMenu = (open) => {
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+            menuButton.classList.toggle('w--open', open);
+            navigation.classList.toggle('w--open', open);
+            navigation.style.transition = open ? 'all, transform 400ms' : '';
+            navigation.style.transform = open ? 'translateY(0px)' : '';
+            document.documentElement.style.overflow = open ? 'hidden' : '';
+            document.documentElement.style.boxSizing = open ? 'border-box' : '';
+            document.documentElement.style.paddingRight = open ? `${scrollbarWidth}px` : '';
+            menuButton.setAttribute('aria-expanded', String(open));
+          };
+
+          const toggleMenu = () => setMenu(menuButton.getAttribute('aria-expanded') !== 'true');
+
+          menuButton.addEventListener('click', toggleMenu);
+          menuButton.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              toggleMenu();
+            }
+          });
+
+          navigation.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => setMenu(false));
+          });
+
+          window.addEventListener('resize', () => {
+            if (window.innerWidth > 991) setMenu(false);
+          });
+        }
+
+        const heroSection = document.querySelector('.home-hero-section');
+
+        if (navbar && heroSection) {
+          let heroObserver;
+          let resizeFrame;
+
+          const observeHero = () => {
+            heroObserver?.disconnect();
+            const navHeight = Math.round(navbar.getBoundingClientRect().height);
+
+            heroObserver = new IntersectionObserver(
+              ([entry]) => {
+                navbar.classList.toggle('is-away-from-hero', !entry.isIntersecting);
+              },
+              {
+                rootMargin: `-${navHeight}px 0px 0px 0px`,
+                threshold: 0,
+              },
+            );
+
+            heroObserver.observe(heroSection);
+          };
+
+          observeHero();
+          window.addEventListener('resize', () => {
+            cancelAnimationFrame(resizeFrame);
+            resizeFrame = requestAnimationFrame(observeHero);
+          });
+        }
+
+        const faqItems = [...document.querySelectorAll('.faq-item')];
+
+        const setFaq = (item, open) => {
+          const header = item.querySelector('.faq-header-new');
+          const answer = item.querySelector('.faq-answer-wrapper');
+          const plus = item.querySelector('.plus-icon-faq');
+          if (!header || !answer || !plus) return;
+
+          item.classList.toggle('is-open', open);
+          header.setAttribute('aria-expanded', String(open));
+          answer.style.height = open ? `${answer.scrollHeight}px` : '0px';
+          plus.style.transform = open ? 'rotate(45deg)' : 'rotate(0deg)';
+        };
+
+        faqItems.forEach((item, index) => {
+          const header = item.querySelector('.faq-header-new');
+          const answer = item.querySelector('.faq-answer-wrapper');
+          if (!header || !answer) return;
+
+          header.setAttribute('role', 'button');
+          header.setAttribute('tabindex', '0');
+          header.setAttribute('aria-controls', `faq-answer-${index}`);
+          answer.id = `faq-answer-${index}`;
+
+          const toggle = () => setFaq(item, !item.classList.contains('is-open'));
+          header.addEventListener('click', toggle);
+          header.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              toggle();
+            }
+          });
+        });
+
+        if (faqItems[0]) {
+          setFaq(faqItems[0], true);
+        }
+
+        const syncOpenFaqs = () => {
+          faqItems.forEach((item) => {
+            if (item.classList.contains('is-open')) setFaq(item, true);
+          });
+        };
+
+        document.fonts?.ready.then(syncOpenFaqs);
+        window.addEventListener('resize', syncOpenFaqs);
+
+        document.querySelectorAll('.copyright-year').forEach((year) => {
+          year.textContent = String(new Date().getFullYear());
+        });
+
+        const testimonialSection = document.querySelector('.b2b-ceos-section');
+
+        if (testimonialSection) {
+          const heading = testimonialSection.querySelector('h2');
+          const sourceCards = [...testimonialSection.querySelectorAll('.b2b-card-home')];
+          const visibleSlots = sourceCards.slice(0, 8);
+          const testimonials = sourceCards
+            .map((card) => {
+              const quote = card.querySelector('p');
+              const attribution = card.querySelector('h3');
+
+              return quote && attribution
+                ? {
+                    quote: quote.textContent?.trim() ?? '',
+                    attribution: attribution.textContent?.trim() ?? '',
+                  }
+                : null;
+            })
+            .filter(Boolean);
+
+          if (heading) {
+            heading.id = 'testimonial-grid-heading';
+            heading.className = 'b2b-testimonial-heading';
+            heading.innerHTML =
+              '<span>B2B CEOs and CMOs</span><span>love In The Kitchen</span>';
+            testimonialSection.setAttribute('aria-labelledby', heading.id);
+            testimonialSection.setAttribute('tabindex', '0');
+          }
+
+          if (visibleSlots.length === 8 && testimonials.length > visibleSlots.length) {
+            sourceCards.slice(8).forEach((card) => {
+              card.hidden = true;
+            });
+
+            visibleSlots.forEach((card, index) => {
+              card.dataset.testimonialSlot = String(index);
+              card.setAttribute('aria-live', 'off');
+            });
+
+            let slotIndex = 0;
+            let nextTestimonialIndex = visibleSlots.length;
+            let rotationTimer = 0;
+            let transitionTimer = 0;
+            const rotationInterval = 2200;
+            let isVisible = false;
+            let isPointerPaused = false;
+            let isKeyboardPaused = false;
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+            const stopRotation = () => {
+              window.clearInterval(rotationTimer);
+              rotationTimer = 0;
+            };
+
+            const rotateTestimonial = () => {
+              const card = visibleSlots[slotIndex];
+              const quote = card?.querySelector('p');
+              const attribution = card?.querySelector('h3');
+              const testimonial = testimonials[nextTestimonialIndex];
+              if (!card || !quote || !attribution || !testimonial) return;
+
+              card.classList.add('is-changing');
+              window.clearTimeout(transitionTimer);
+              transitionTimer = window.setTimeout(() => {
+                quote.textContent = testimonial.quote;
+                attribution.textContent = testimonial.attribution;
+                requestAnimationFrame(() => card.classList.remove('is-changing'));
+              }, 220);
+
+              slotIndex = (slotIndex + 1) % visibleSlots.length;
+              nextTestimonialIndex = (nextTestimonialIndex + 1) % testimonials.length;
+            };
+
+            const startRotation = () => {
+              if (
+                rotationTimer ||
+                reducedMotion.matches ||
+                !isVisible ||
+                isPointerPaused ||
+                isKeyboardPaused ||
+                document.hidden
+              ) {
+                return;
+              }
+
+              rotationTimer = window.setInterval(rotateTestimonial, rotationInterval);
+            };
+
+            const syncRotation = () => {
+              stopRotation();
+              startRotation();
+            };
+
+            testimonialSection.addEventListener('pointerenter', () => {
+              isPointerPaused = true;
+              stopRotation();
+            });
+
+            testimonialSection.addEventListener('pointerleave', () => {
+              isPointerPaused = false;
+              startRotation();
+            });
+
+            testimonialSection.addEventListener('focusin', () => {
+              isKeyboardPaused = true;
+              stopRotation();
+            });
+
+            testimonialSection.addEventListener('focusout', () => {
+              isKeyboardPaused = false;
+              startRotation();
+            });
+
+            document.addEventListener('visibilitychange', syncRotation);
+            reducedMotion.addEventListener?.('change', syncRotation);
+
+            if ('IntersectionObserver' in window) {
+              const testimonialObserver = new IntersectionObserver(
+                ([entry]) => {
+                  isVisible = entry.isIntersecting;
+                  syncRotation();
+                },
+                { threshold: 0.12 },
+              );
+
+              testimonialObserver.observe(testimonialSection);
+            } else {
+              isVisible = true;
+              startRotation();
+            }
+          }
+        }
+      })();
+    </script>
+    <script>
+      import { gsap } from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+      import { initDirectionalNavigation } from '../scripts/directional-navigation.js';
+
+      gsap.registerPlugin(ScrollTrigger);
+      initDirectionalNavigation();
+
+      const storySection = document.querySelector('.positioning-story-section');
+      const quotePanel = document.querySelector('.positioning-quote-panel');
+
+      if (storySection && quotePanel) {
+        const storyMotion = gsap.matchMedia();
+
+        storyMotion.add(
+          {
+            reduceMotion: '(prefers-reduced-motion: reduce)',
+            allowMotion: '(prefers-reduced-motion: no-preference)',
+          },
+          ({ conditions }) => {
+            if (conditions?.reduceMotion) {
+              const reducedTrigger = ScrollTrigger.create({
+                trigger: quotePanel,
+                start: 'top 60%',
+                onEnter: () => gsap.set(storySection, { backgroundColor: '#afa4e0' }),
+                onLeaveBack: () => gsap.set(storySection, { backgroundColor: '#e1dbfc' }),
+              });
+
+              return () => reducedTrigger.kill();
+            }
+
+            const colorTween = gsap.to(storySection, {
+              backgroundColor: '#afa4e0',
+              ease: 'none',
+              scrollTrigger: {
+                id: 'positioning-story-color-shift',
+                trigger: quotePanel,
+                start: 'top 72%',
+                end: 'bottom 42%',
+                scrub: 0.65,
+              },
+            });
+
+            return () => colorTween.scrollTrigger?.kill();
+          },
+        );
+
+        document.fonts?.ready.then(() => ScrollTrigger.refresh());
+      }
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --type-paired-emphasis-scale: 0.94em;
+    --type-hero-size: clamp(3.25rem, 6.79vw, 7.5rem);
+    --type-serif-weight-light: 300;
+    --type-serif-weight-regular: 400;
+    --hero-folder-gutter: clamp(1rem, 1.8vw, 2rem);
+    --hero-folder-bottom-gap: clamp(1.5rem, 2.2vw, 2rem);
+    --hero-folder-radius: clamp(0.75rem, 0.95vw, 1rem);
+    --hero-tab-width: clamp(14rem, 20.6vw, 22rem);
+    --hero-tab-half-width: clamp(7rem, 10.3vw, 11rem);
+    --hero-tab-height: clamp(2.94rem, 4.327vw, 4.625rem);
+    --hero-tab-top: clamp(1.5rem, 2.75vw, 2.5rem);
+    --hero-tab-offset: clamp(0.625rem, 0.85vw, 0.875rem);
+    --hero-tab-overlap: 0.15rem;
+    --hero-nav-top: clamp(1.25rem, 1.6vw, 1.5rem);
+    --hero-content-gutter: clamp(1.5rem, 8.85vw, 8rem);
+    --nav-away-inline-shift: calc(
+      -1 * (var(--hero-tab-offset) + var(--hero-tab-half-width) - 5.7rem)
+    );
+    --hero-folder-cap-height: calc(
+      var(--hero-tab-top) + var(--hero-tab-height) - var(--hero-tab-overlap)
+    );
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .faq-header-new:focus-visible,
+  .menu-button-new:focus-visible,
+  a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
+
+  .faq-answer-wrapper {
+    overflow: hidden;
+    transition: height 300ms ease;
+  }
+
+  /* Keep the FAQ editorial and quiet: Canvas, Ink, and soft hairlines only. */
+  .page-wrapper .section.faq-section {
+    background-color: #fdfcfa;
+    color: #222;
+  }
+
+  .page-wrapper .faq-sticky-column h2 {
+    font-family: Fraunces, Arial, sans-serif;
+    font-size: clamp(48px, 4.85vw, 62px);
+    font-weight: 300 !important;
+    line-height: clamp(50px, 5vw, 64px);
+    letter-spacing: -2px;
+    font-synthesis: none;
+  }
+
+  .page-wrapper .faq-sticky-column h2 .h2-span {
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: 0.94em;
+    font-weight: 400;
+  }
+
+  .faq-section .faq-header-new {
+    border-top-color: rgba(34, 34, 34, 0.14);
+  }
+
+  .faq-section .faq-list-new {
+    border-bottom-color: rgba(34, 34, 34, 0.14);
+  }
+
+  .faq-section .plus-icon-faq {
+    color: #222;
+  }
+
+  .nav-link-underline {
+    width: 0;
+    transition: width 200ms ease;
+  }
+
+  .nav-link-new:hover .nav-link-underline,
+  .nav-link-new:focus-visible .nav-link-underline {
+    width: 100%;
+  }
+
+  .plus-icon-faq {
+    transition: transform 300ms ease;
+  }
+
+  /* Reverse the display-type roles: serif narrative, sans-serif emphasis. */
+  .page-wrapper h1,
+  .page-wrapper h2 {
+    font-family: Fraunces, Arial, sans-serif;
+    font-synthesis: none;
+    font-weight: var(--type-serif-weight-regular) !important;
+  }
+
+  .page-wrapper h1.font-weight-300,
+  .page-wrapper h2.font-weight-300 {
+    font-weight: var(--type-serif-weight-light) !important;
+  }
+
+  .page-wrapper h2.meet-the-founder-heading {
+    font-family: Dmsans, Impact, sans-serif;
+    font-weight: 400 !important;
+  }
+
+  .positioning-clients-section {
+    min-height: 55.8125rem;
+    padding-top: 6rem;
+    padding-bottom: 5.375rem;
+  }
+
+  .positioning-clients-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: none;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .page-wrapper h2.positioning-clients-heading {
+    width: fit-content;
+    max-width: 52rem;
+    margin: 0 auto;
+    font-family: Fraunces, Arial, sans-serif !important;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 300 !important;
+    line-height: 48px;
+    letter-spacing: -1.41px;
+    text-align: left;
+    font-synthesis: none;
+  }
+
+  .positioning-clients-heading > span {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .positioning-clients-intro {
+    margin-top: 7rem;
+    font-size: 1.3125rem;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+
+  .positioning-clients-tags {
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    flex-wrap: nowrap;
+    justify-content: center;
+    width: calc(100% - 40px);
+    max-width: none;
+    margin-top: 2.125rem;
+  }
+
+  .positioning-clients-tags .best-fit-clients-tag {
+    flex: 0 0 auto;
+    height: 40px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+  }
+
+  .positioning-clients-tags .paragraph-s {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .positioning-clients-logos {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-column-gap: 80px;
+    grid-row-gap: 32px;
+    width: calc(100% - 128px);
+    margin-top: 42px;
+  }
+
+  .positioning-clients-logos .logo-image.bigger {
+    width: 192px;
+    height: 58px;
+    justify-self: center;
+  }
+
+  .investor-trust-section {
+    display: block;
+    min-height: 0;
+    padding: clamp(1.5rem, 2.19vw, 2.4375rem) clamp(1rem, 1.74vw, 1.9375rem)
+      clamp(2rem, 2.7vw, 3rem);
+    background-color: #fdfcfa;
+  }
+
+  .investor-trust-panel {
+    padding: clamp(2.5rem, 3.09vw, 3.4375rem) clamp(2rem, 3.37vw, 3.75rem)
+      clamp(2.75rem, 3.42vw, 3.8125rem);
+    border-radius: clamp(0.75rem, 0.9vw, 1rem);
+    background-color: #f6f4f1;
+  }
+
+  .page-wrapper h2.investor-trust-heading {
+    margin: 0;
+    font-size: clamp(3rem, 4vw, 4.5rem);
+    font-weight: 300 !important;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+
+  .investor-trust-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.024fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 3.14vw, 3.5rem);
+    margin-top: clamp(7.5rem, 8.69vw, 9.6875rem);
+  }
+
+  .investor-trust-label {
+    margin: 0;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: clamp(1rem, 1.235vw, 1.375rem);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  .investor-partnerships-grid,
+  .investor-portcos-grid {
+    display: grid;
+    margin-top: clamp(1.5rem, 1.8vw, 2rem);
+  }
+
+  .investor-partnerships-grid {
+    grid-template-columns: minmax(0, 0.94fr) minmax(0, 1fr);
+    gap: clamp(0.75rem, 0.95vw, 1.0625rem);
+  }
+
+  .investor-partnership-card,
+  .investor-portco-card {
+    overflow: hidden;
+    border-radius: clamp(0.625rem, 0.785vw, 0.875rem);
+    background-color: #fff;
+  }
+
+  .investor-partnership-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: clamp(12.5rem, 15.48vw, 17.25rem);
+    padding: clamp(2.5rem, 3.14vw, 3.5rem) clamp(2rem, 3.14vw, 3.5rem)
+      clamp(2.5rem, 2.69vw, 3rem);
+  }
+
+  .investor-partnership-card img {
+    width: auto;
+    height: clamp(3rem, 3.76vw, 4.1875rem);
+    max-width: 100%;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  .investor-partnership-card p {
+    margin: 0;
+    font-size: clamp(1rem, 1.235vw, 1.375rem);
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+  }
+
+  .investor-portcos-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.25rem, 1.74vw, 1.9375rem) clamp(1.5rem, 2.02vw, 2.25rem);
+  }
+
+  .investor-portco-card {
+    height: clamp(5.75rem, 6.84vw, 7.625rem);
+  }
+
+  .investor-portco-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+  }
+
+  .positioning-story-section {
+    display: flex;
+    justify-content: center;
+    min-height: 0;
+    padding: min(4.523vw, 66px) 0 calc(min(5.278vw, 77px) + 1px);
+    background-color: #e1dbfc;
+    overflow: clip;
+  }
+
+  .positioning-story-stack {
+    position: relative;
+    width: min(49.76vw, 726px);
+  }
+
+  .four-cs-card {
+    box-sizing: border-box;
+    width: 100%;
+    padding: min(2.742vw, 40px) min(3.084vw, 45px) min(3.084vw, 45px);
+    border-radius: min(0.685vw, 10px);
+    background-color: #fff;
+  }
+
+  .four-cs-inner {
+    width: 100%;
+  }
+
+  .page-wrapper .four-cs-headlines h2 {
+    margin: 0;
+    font-family: Fraunces, Arial, sans-serif;
+    font-size: min(2.742vw, 40px);
+    font-weight: 300 !important;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+
+  .page-wrapper .four-cs-headlines h2 + h2 {
+    margin-top: min(2.879vw, 42px);
+  }
+
+  .four-cs-headlines h2 > span {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .four-cs-divider {
+    height: 1px;
+    margin-top: min(2.673vw, 39px);
+    background-color: #e3e3e3;
+  }
+
+  .four-cs-copy {
+    margin-top: min(2.125vw, 31px);
+  }
+
+  .four-cs-copy p,
+  .four-cs-item p {
+    margin: 0;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: min(1.234vw, 18px);
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .four-cs-copy p {
+    line-height: 1.278;
+  }
+
+  .four-cs-copy p + p {
+    margin-top: min(1.576vw, 23px);
+  }
+
+  .four-cs-copy .four-cs-label {
+    margin-top: min(2.742vw, 40px);
+    font-weight: 700;
+  }
+
+  .four-cs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: min(11.378vw, 166px);
+    column-gap: min(1.645vw, 24px);
+    margin-top: min(1.714vw, 25px);
+  }
+
+  .four-cs-item {
+    padding-top: min(1.645vw, 24px);
+    border-top: 1px solid #e3e3e3;
+  }
+
+  .page-wrapper .four-cs-item h3 {
+    margin: 0;
+    font-family: Fraunces, Arial, sans-serif !important;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 300 !important;
+    line-height: 36px;
+    letter-spacing: -1.41px;
+    font-synthesis: none;
+  }
+
+  .four-cs-item p {
+    margin-top: min(0.891vw, 13px);
+    line-height: 1.5;
+  }
+
+  .positioning-quote-panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    min-height: 0;
+    margin: min(3.084vw, 45px) 0 0;
+    padding: min(4.8vw, 70px) min(6.854vw, 100px) min(3.084vw, 45px);
+    border-radius: 0;
+    color: #fff;
+    background-color: #1a1a1a;
+    scroll-margin-top: 6rem;
+  }
+
+  .positioning-quote-panel blockquote {
+    max-width: min(32.907vw, 480px);
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .positioning-quote-panel blockquote p {
+    margin: 0;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: min(1.65vw, 24px);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+
+  .positioning-quote-panel figcaption {
+    margin-top: 1.5rem;
+    color: #cffd93;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: min(0.822vw, 12px);
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: left;
+  }
+
+  .positioning-decisions-panel {
+    padding-top: min(4.455vw, 65px);
+  }
+
+  .page-wrapper .positioning-decisions-headlines h2 {
+    margin: 0;
+    font-family: Fraunces, Arial, sans-serif;
+    font-size: min(2.742vw, 40px);
+    font-weight: 300 !important;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    font-synthesis: none;
+  }
+
+  .page-wrapper .positioning-decisions-headlines h2 + h2 {
+    margin-top: min(2.879vw, 42px);
+  }
+
+  .positioning-decisions-headlines h2 > span {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .positioning-decisions-divider {
+    height: 1px;
+    margin-top: min(2.056vw, 30px);
+    background-color: #e3e3e3;
+  }
+
+  .positioning-decisions-copy {
+    margin-top: min(2.125vw, 31px);
+  }
+
+  .positioning-decisions-copy p {
+    margin: 0;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: min(1.234vw, 18px);
+    font-weight: 400;
+    line-height: 1.278;
+    letter-spacing: 0;
+  }
+
+  .positioning-decisions-copy p + p {
+    margin-top: min(1.576vw, 23px);
+  }
+
+  .page-wrapper .positioning-decisions-label {
+    margin: min(2.742vw, 40px) 0 0;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: min(1.234vw, 18px);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0;
+  }
+
+  .positioning-decisions-list {
+    margin: min(1.714vw, 25px) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .positioning-decisions-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: min(3.702vw, 54px);
+    border-top: 1px solid #e3e3e3;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: min(1.234vw, 18px);
+    font-weight: 400;
+    line-height: 1.25;
+  }
+
+  .positioning-decision-count {
+    flex: none;
+    padding: min(0.343vw, 5px) min(0.685vw, 10px);
+    border: 1px solid #e3e3e3;
+    border-radius: 999px;
+    font-size: min(0.822vw, 12px);
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .positioning-process-section {
+    box-sizing: border-box;
+    padding: clamp(7rem, 12.5vw, 11.75rem) clamp(2rem, 4.25vw, 4.5rem)
+      clamp(8rem, 13.35vw, 12.5rem);
+    background-color: #fdfcfa;
+    scroll-margin-top: 6rem;
+  }
+
+  .positioning-process-inner {
+    width: min(100%, 69.625rem);
+    margin: 0 auto;
+  }
+
+  .positioning-process-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 26.875rem) minmax(0, 27.5625rem);
+    align-items: start;
+    justify-content: start;
+    gap: 12.3125rem;
+  }
+
+  .positioning-process-intro {
+    padding-top: 6.25rem;
+  }
+
+  .page-wrapper h2.positioning-process-heading {
+    max-width: none;
+    margin: 0;
+    font-family: Fraunces, Arial, sans-serif;
+    font-size: clamp(2.65rem, 2.95vw, 2.75rem);
+    font-weight: 300 !important;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+  }
+
+  .positioning-process-heading > span {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .positioning-process-intro > p {
+    max-width: 26rem;
+    margin: 2rem 0 0;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+  }
+
+  .positioning-process-timeline {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid rgba(34, 34, 34, 0.14);
+    list-style: none;
+  }
+
+  .positioning-process-timeline li {
+    min-width: 0;
+    padding: 1.125rem 0 0.9375rem;
+    border-top: 1px solid rgba(34, 34, 34, 0.14);
+  }
+
+  .positioning-process-step {
+    margin: 0;
+  }
+
+  .page-wrapper .positioning-process-step h3 {
+    margin: 0;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: 1.375rem;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  .positioning-process-step p {
+    max-width: 26rem;
+    margin: 0.75rem 0 0;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+
+  .positioning-process-outcome {
+    max-width: 48rem;
+    margin: 4.75rem auto 0;
+    padding: 0;
+    border: 0;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 400 !important;
+    line-height: 1.25;
+    letter-spacing: -0.012em;
+    text-align: center;
+  }
+
+  .founder-profile-section {
+    box-sizing: border-box;
+    min-height: 0;
+    padding: clamp(6rem, 8.73vw, 8.125rem) clamp(1.5rem, 8.52vw, 7.5rem)
+      clamp(3.75rem, 6vw, 4rem);
+    background-color: #fdfcfa;
+  }
+
+  .founder-profile-inner {
+    width: min(100%, 1168px);
+    margin: 0 auto;
+  }
+
+  .founder-profile-intro {
+    display: grid;
+    grid-template-columns: 362px 365px;
+    align-items: center;
+    gap: 2.75rem;
+    justify-content: center;
+    transform: translateX(-1.25rem);
+  }
+
+  .founder-profile-portrait {
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    margin: 0;
+    border-radius: 0.625rem;
+  }
+
+  .founder-profile-portrait img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .page-wrapper .founder-profile-bio h2,
+  .page-wrapper .founder-profile-detail h3 {
+    margin: 0;
+    font-family: Fraunces, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 300 !important;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    font-synthesis: none;
+  }
+
+  .page-wrapper .founder-profile-bio h2 {
+    font-size: 2.5rem;
+  }
+
+  .founder-profile-bio p,
+  .founder-profile-detail p {
+    margin: 0;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.28;
+    letter-spacing: -0.012em;
+  }
+
+  .founder-profile-bio p:first-of-type {
+    max-width: 19.5rem;
+    margin-top: 2rem;
+  }
+
+  .founder-profile-bio p + p {
+    max-width: 22.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .founder-profile-section a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.12em;
+  }
+
+  .founder-profile-details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(4rem, 10.8vw, 9.5rem);
+    width: min(100%, 1153px);
+    margin-top: clamp(7rem, 9.95vw, 9.25rem);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .page-wrapper .founder-profile-detail h3 {
+    font-size: 2.375rem;
+  }
+
+  @media (min-width: 1100px) {
+    .founder-profile-investment-heading > span {
+      display: block;
+      white-space: nowrap;
+    }
+  }
+
+  .founder-profile-rule {
+    width: 100%;
+    height: 1px;
+    margin-top: 1.5rem;
+    background-color: rgba(34, 34, 34, 0.16);
+  }
+
+  .founder-profile-detail > p:first-of-type {
+    margin-top: 1rem;
+  }
+
+  .founder-profile-detail p + p {
+    margin-top: 1.5rem;
+  }
+
+  .closing-folder-section {
+    box-sizing: border-box;
+    min-height: 0;
+    padding: 82px 0 95px;
+    background-color: #fdfcfa;
+  }
+
+  .closing-folder-shell {
+    position: relative;
+    width: 66.04%;
+    margin: 0 auto;
+    padding-top: 25px;
+  }
+
+  .closing-folder-tab {
+    position: absolute;
+    top: 0;
+    left: 0.41%;
+    width: 24.56%;
+    height: 28px;
+    background-color: #2800e8;
+    -webkit-mask: var(--closing-folder-tab-mask) center / 100% 100% no-repeat;
+    mask: var(--closing-folder-tab-mask) center / 100% 100% no-repeat;
+  }
+
+  .closing-folder-panel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    aspect-ratio: 1.647 / 1;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background-color: #2800e8;
+    color: #fff;
+  }
+
+  .closing-folder-content {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 78px;
+  }
+
+  .page-wrapper .closing-folder-heading {
+    width: min(100%, 400px);
+    margin: 0;
+    color: inherit;
+    font-family: Fraunces, Arial, sans-serif !important;
+    font-size: 64px;
+    font-weight: 300 !important;
+    line-height: 0.92;
+    letter-spacing: -0.055em;
+    font-synthesis: none;
+  }
+
+  .closing-folder-heading > span {
+    display: block;
+  }
+
+  .page-wrapper .closing-folder-emphasis {
+    font-family: 'DM Sans', Arial, sans-serif !important;
+    font-size: 0.94em;
+    font-weight: 400 !important;
+    letter-spacing: -0.02em;
+  }
+
+  .closing-folder-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    min-width: 182px;
+    min-height: 43px;
+    margin-top: 33px;
+    padding: 0 24px;
+    border-radius: 999px;
+    background-color: #cffd93;
+    color: #1a1a1a;
+    font-family: 'DM Sans', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+      transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 180ms ease;
+  }
+
+  .closing-folder-cta:hover {
+    transform: translateY(-2px);
+    background-color: #fff27b;
+  }
+
+  .closing-folder-cta:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
+
+  .b2b-ceos-section {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(3, 17rem);
+    align-items: stretch;
+    gap: clamp(1.75rem, 2.75vw, 2.75rem) clamp(2rem, 4.25vw, 4.25rem);
+    box-sizing: border-box;
+    min-height: 0;
+    padding: clamp(5rem, 8.25vw, 8.25rem) clamp(1.5rem, 3.5vw, 3.5rem)
+      clamp(2rem, 2.5vw, 2.5rem);
+    background-color: #fff27b;
+  }
+
+  .b2b-ceos-section > .container {
+    display: contents !important;
+  }
+
+  .b2b-ceos-section:focus-visible {
+    outline: 2px solid #222;
+    outline-offset: -0.5rem;
+  }
+
+  .page-wrapper .b2b-testimonial-heading {
+    grid-area: 2 / 2 / 3 / 3 !important;
+    place-self: center;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+    font-family: Fraunces, Arial, sans-serif !important;
+    font-size: clamp(2.5rem, 3.45vw, 3.5rem);
+    font-weight: 300 !important;
+    line-height: 0.94;
+    letter-spacing: -0.045em;
+    text-align: center !important;
+    font-synthesis: none;
+  }
+
+  .b2b-testimonial-heading > span {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .b2b-ceos-section .b2b-card-home {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    padding: clamp(1.125rem, 1.4vw, 1.25rem);
+    border-radius: 0.625rem;
+    background-color: #fdfcfa;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition:
+      opacity 220ms ease,
+      transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+
+  .b2b-ceos-section .b2b-card-home:nth-child(1) {
+    grid-area: 1 / 1 / 2 / 2 !important;
+  }
+
+  .b2b-ceos-section .b2b-card-home:nth-child(2) {
+    grid-area: 1 / 2 / 2 / 3 !important;
+  }
+
+  .b2b-ceos-section .b2b-card-home:nth-child(3) {
+    grid-area: 1 / 3 / 2 / 4 !important;
+  }
+
+  .b2b-ceos-section .b2b-card-home:nth-child(4) {
+    grid-area: 2 / 1 / 3 / 2 !important;
+  }
+
+  .b2b-ceos-section .b2b-card-home:nth-child(5) {
+    grid-area: 2 / 3 / 3 / 4 !important;
+  }
+
+  .b2b-ceos-section .b2b-card-home:nth-child(6) {
+    grid-area: 3 / 1 / 4 / 2 !important;
+  }
+
+  .b2b-ceos-section .b2b-card-home:nth-child(7) {
+    grid-area: 3 / 2 / 4 / 3 !important;
+  }
+
+  .b2b-ceos-section .b2b-card-home:nth-child(8) {
+    grid-area: 3 / 3 / 4 / 4 !important;
+  }
+
+  .b2b-ceos-section .b2b-card-home:nth-child(n + 9),
+  .b2b-ceos-section .b2b-card-home[hidden] {
+    display: none !important;
+  }
+
+  .b2b-ceos-section .b2b-card-home.is-changing {
+    opacity: 0;
+    transform: translate3d(0, 0.5rem, 0);
+  }
+
+  .b2b-ceos-section .b2b-card-home > p {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.38;
+    letter-spacing: -0.012em;
+  }
+
+  .b2b-ceos-section .b2b-card-footer {
+    width: 100%;
+    margin-top: 1.125rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(34, 34, 34, 0.18);
+  }
+
+  .page-wrapper .b2b-ceos-section .b2b-card-footer h3 {
+    margin: 0;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+
+  .home-hero-section .h1-home-hero {
+    font-size: var(--type-hero-size);
+    line-height: 0.92;
+  }
+
+  .section.home-hero-section {
+    isolation: isolate;
+    background-color: transparent;
+    min-height: calc(100svh - var(--hero-folder-bottom-gap));
+    gap: 0.25rem;
+    margin-right: var(--hero-folder-gutter);
+    margin-bottom: var(--hero-folder-bottom-gap);
+    margin-left: var(--hero-folder-gutter);
+    padding-top: 14.25rem;
+    padding-bottom: 8rem;
+    position: relative;
+    top: auto;
+  }
+
+  .home-hero-section::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: var(--hero-folder-cap-height) 0 0;
+    border-radius: var(--hero-folder-radius);
+    background-color: #fcf387;
+  }
+
+  .home-hero-absolute-nav-bg {
+    padding-top: var(--hero-tab-top);
+  }
+
+  .home-hero-absolute-nav-bg > .container {
+    max-width: none;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .home-hero-absolute-nav-bg .brand-new,
+  .navbar-new .brand-new {
+    width: var(--hero-tab-width);
+    height: var(--hero-tab-height);
+    margin-left: var(--hero-tab-offset);
+  }
+
+  .navbar-new .brand-new {
+    margin-top: calc(var(--hero-tab-top) - var(--hero-nav-top));
+    transform: translate3d(0, 0, 0);
+    transition: transform 240ms cubic-bezier(0.77, 0, 0.175, 1);
+    will-change: transform;
+  }
+
+  .navbar-new.is-away-from-hero .brand-new {
+    transform: translate3d(
+      0,
+      calc(-1 * (var(--hero-tab-top) - var(--hero-nav-top) + 0.25rem)),
+      0
+    );
+  }
+
+  .navbar-new .brand-new-inner {
+    width: 11.4rem;
+    height: auto;
+    aspect-ratio: 8 / 1;
+  }
+
+  .navbar-new .nav-brand-logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .footer-link-logo {
+    width: 10rem;
+    height: auto;
+    aspect-ratio: 8 / 1;
+  }
+
+  .footer-link-logo .footer-brand-logo {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .navbar-new {
+    padding-top: var(--hero-nav-top);
+  }
+
+  .navbar-new .nav-container-new {
+    max-width: none;
+    padding-right: var(--hero-folder-gutter);
+    padding-left: var(--hero-folder-gutter);
+  }
+
+  @media (min-width: 992px) {
+    .navbar-new .navigation-new {
+      transform: translate3d(0, 0, 0);
+      transition: transform 240ms cubic-bezier(0.77, 0, 0.175, 1);
+      will-change: transform;
+    }
+
+    .navbar-new.is-away-from-hero .navigation-new {
+      transform: translate3d(var(--nav-away-inline-shift), 0, 0);
+    }
+  }
+
+  .home-hero-section > .container.grid {
+    padding-right: var(--hero-content-gutter);
+    padding-left: var(--hero-content-gutter);
+  }
+
+  .home-hero-section .container.grid.grid-24-gap {
+    row-gap: 2.75rem;
+  }
+
+  .home-hero-section .paragraph-s {
+    font-size: 1.6875rem;
+    line-height: 1.25;
+  }
+
+  .home-hero-section .arrow-button {
+    justify-content: center;
+    min-width: 9.8125rem;
+    height: 3.25rem;
+    max-height: none;
+  }
+
+  .page-wrapper h1 .font-fraunces,
+  .page-wrapper h2 .font-fraunces {
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: var(--type-paired-emphasis-scale);
+  }
+
+  .page-wrapper h3.font-fraunces {
+    font-family: Dmsans, Impact, sans-serif;
+  }
+
+  @media (min-width: 768px) {
+    .home-hero-section .container.grid.grid-24-gap > :first-child {
+      grid-column: 1 / span 10 !important;
+      max-width: none;
+    }
+
+    .home-hero-section .container.grid.grid-24-gap > :last-child {
+      grid-column: 1 / span 3 !important;
+      grid-row: 2 !important;
+      justify-self: start;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .positioning-process-section {
+      padding: 5rem 1.25rem 5.5rem;
+    }
+
+    .page-wrapper h2.positioning-process-heading {
+      font-size: 2.65rem;
+      line-height: 1;
+    }
+
+    .positioning-process-heading > span {
+      display: inline;
+      white-space: normal;
+    }
+
+    .positioning-process-intro > p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .positioning-process-timeline li {
+      padding: 1.25rem 0 1.5rem;
+    }
+
+    .page-wrapper .positioning-process-step h3 {
+      font-size: 1.5rem;
+    }
+
+    .positioning-process-step p {
+      font-size: 1rem;
+    }
+
+    .positioning-process-outcome {
+      max-width: 32rem;
+      margin-top: 4rem;
+      padding: 0;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    .positioning-clients-container {
+      padding-right: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .positioning-clients-section {
+      min-height: 0;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    .page-wrapper h2.positioning-clients-heading {
+      width: 100%;
+      max-width: 33rem;
+      font-size: 2rem;
+      line-height: 1.25;
+      letter-spacing: -1.25px;
+    }
+
+    .positioning-clients-heading > span {
+      display: inline;
+      white-space: normal;
+    }
+
+    .positioning-clients-intro {
+      margin-top: 3rem;
+      font-size: 1.125rem;
+      line-height: 1.35;
+      text-align: left;
+    }
+
+    .positioning-clients-tags {
+      width: 100%;
+      margin-top: 1.5rem;
+    }
+
+    .positioning-clients-logos {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-column-gap: 1rem;
+      grid-row-gap: 1.5rem;
+      width: 100%;
+      margin-top: 3rem;
+    }
+
+    .positioning-clients-logos .logo-image.bigger {
+      width: 100%;
+      max-width: 10rem;
+      height: 3rem;
+    }
+
+    .investor-trust-section {
+      padding: 1rem 1rem 2rem;
+    }
+
+    .investor-trust-panel {
+      padding: 2.5rem 1.5rem;
+      border-radius: 0.875rem;
+    }
+
+    .page-wrapper h2.investor-trust-heading {
+      font-size: 2.5rem;
+      line-height: 1.05;
+    }
+
+    .investor-trust-layout,
+    .investor-partnerships-grid,
+    .investor-portcos-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .investor-trust-layout {
+      gap: 3.5rem;
+      margin-top: 4rem;
+    }
+
+    .investor-partnerships-grid,
+    .investor-portcos-grid {
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .investor-partnership-card {
+      height: 13rem;
+      padding: 2rem;
+    }
+
+    .investor-portco-card {
+      height: 8rem;
+    }
+
+    .positioning-story-section {
+      padding: 2rem 1rem;
+    }
+
+    .positioning-story-stack {
+      width: 100%;
+    }
+
+    .four-cs-card {
+      width: 100%;
+      padding: 2rem 2rem 2.5rem;
+      border-radius: 0.625rem;
+    }
+
+    .four-cs-inner {
+      width: 100%;
+    }
+
+    .page-wrapper .four-cs-headlines h2 {
+      font-size: 2.25rem;
+      line-height: 1.05;
+    }
+
+    .page-wrapper .four-cs-headlines h2 + h2 {
+      margin-top: 2rem;
+    }
+
+    .four-cs-headlines h2 > span {
+      display: inline;
+      white-space: normal;
+    }
+
+    .four-cs-divider {
+      margin-top: 2rem;
+    }
+
+    .four-cs-copy {
+      margin-top: 1.5rem;
+    }
+
+    .four-cs-copy p,
+    .four-cs-item p {
+      font-size: 1rem;
+    }
+
+    .four-cs-copy p {
+      line-height: 1.45;
+    }
+
+    .four-cs-copy p + p {
+      margin-top: 1.25rem;
+    }
+
+    .four-cs-copy .four-cs-label {
+      margin-top: 2rem;
+    }
+
+    .four-cs-grid {
+      grid-template-columns: 1fr;
+      grid-auto-rows: auto;
+      row-gap: 0;
+      margin-top: 1.5rem;
+    }
+
+    .four-cs-item {
+      min-height: 9rem;
+      padding: 1.5rem 0 2rem;
+    }
+
+    .page-wrapper .four-cs-item h3 {
+      font-size: 36px;
+    }
+
+    .four-cs-item p {
+      margin-top: 0.75rem;
+      line-height: 1.45;
+    }
+
+    .positioning-quote-panel {
+      min-height: 0;
+      margin-top: 3.5rem;
+      padding: 3rem 1.5rem 2.5rem;
+      border-radius: 0;
+    }
+
+    .positioning-quote-panel blockquote {
+      max-width: none;
+    }
+
+    .positioning-quote-panel blockquote p {
+      font-size: 1.375rem;
+      line-height: 1.2;
+    }
+
+    .positioning-quote-panel figcaption {
+      font-size: 0.75rem;
+    }
+
+    .positioning-decisions-panel {
+      padding-top: 3.5rem;
+    }
+
+    .page-wrapper .positioning-decisions-headlines h2 {
+      font-size: 2.25rem;
+    }
+
+    .page-wrapper .positioning-decisions-headlines h2 + h2 {
+      margin-top: 2rem;
+    }
+
+    .positioning-decisions-headlines h2 > span {
+      display: inline;
+      white-space: normal;
+    }
+
+    .positioning-decisions-divider {
+      margin-top: 2rem;
+    }
+
+    .positioning-decisions-copy {
+      margin-top: 1.5rem;
+    }
+
+    .positioning-decisions-copy p {
+      font-size: 1rem;
+      line-height: 1.45;
+    }
+
+    .positioning-decisions-copy p + p {
+      margin-top: 1.25rem;
+    }
+
+    .page-wrapper .positioning-decisions-label {
+      margin-top: 2rem;
+      font-size: 1rem;
+    }
+
+    .positioning-decisions-list {
+      margin-top: 1.5rem;
+    }
+
+    .positioning-decisions-list li {
+      min-height: 3.5rem;
+      font-size: 1rem;
+    }
+
+    .positioning-decision-count {
+      padding: 0.3125rem 0.625rem;
+      font-size: 0.75rem;
+    }
+
+    .section.home-hero-section {
+      gap: 2.5rem;
+      padding-top: 10rem;
+      padding-bottom: 6rem;
+    }
+
+    .home-hero-section > .container.grid {
+      padding-right: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .home-hero-section .container.grid.grid-24-gap {
+      row-gap: 1.5rem;
+    }
+
+    .home-hero-section .paragraph-s {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .home-hero-section .arrow-button {
+      justify-content: flex-start;
+      min-width: 0;
+      height: 3rem;
+      max-height: 3rem;
+    }
+
+    .home-hero-section .h1-home-hero {
+      line-height: 1;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    .positioning-story-section {
+      padding: 3rem 2rem;
+    }
+
+    .positioning-story-stack {
+      width: 100%;
+      max-width: 45.375rem;
+    }
+
+    .four-cs-card {
+      width: 100%;
+      padding: 2.5rem 2.75rem 3rem;
+      border-radius: 0.625rem;
+    }
+
+    .four-cs-inner {
+      width: 100%;
+    }
+
+    .page-wrapper .four-cs-headlines h2 {
+      font-size: 2.5rem;
+    }
+
+    .page-wrapper .four-cs-headlines h2 + h2 {
+      margin-top: 2.625rem;
+    }
+
+    .four-cs-divider {
+      margin-top: 2.4375rem;
+    }
+
+    .four-cs-copy {
+      margin-top: 1.9375rem;
+    }
+
+    .four-cs-copy p,
+    .four-cs-item p {
+      font-size: 1.125rem;
+    }
+
+    .four-cs-copy p + p {
+      margin-top: 1.4375rem;
+    }
+
+    .four-cs-copy .four-cs-label {
+      margin-top: 2.5rem;
+    }
+
+    .four-cs-grid {
+      grid-auto-rows: 10.375rem;
+      column-gap: 1.5rem;
+      margin-top: 1.5625rem;
+    }
+
+    .four-cs-item {
+      padding-top: 1.5rem;
+    }
+
+    .page-wrapper .four-cs-item h3 {
+      font-size: 36px;
+    }
+
+    .four-cs-item p {
+      margin-top: 0.8125rem;
+    }
+
+    .positioning-quote-panel {
+      min-height: 0;
+      margin-top: 3rem;
+      padding: 4rem 3.75rem 3rem;
+      border-radius: 0;
+    }
+
+    .positioning-quote-panel blockquote p {
+      font-size: 1.5rem;
+      line-height: 1.18;
+    }
+
+    .positioning-quote-panel figcaption {
+      font-size: 0.75rem;
+    }
+
+    .positioning-decisions-panel {
+      padding-top: 4rem;
+    }
+
+    .page-wrapper .positioning-decisions-headlines h2 {
+      font-size: 2.5rem;
+    }
+
+    .page-wrapper .positioning-decisions-headlines h2 + h2 {
+      margin-top: 2.625rem;
+    }
+
+    .positioning-decisions-divider {
+      margin-top: 2.25rem;
+    }
+
+    .positioning-decisions-copy {
+      margin-top: 1.9375rem;
+    }
+
+    .positioning-decisions-copy p {
+      font-size: 1.125rem;
+      line-height: 1.4;
+    }
+
+    .positioning-decisions-copy p + p {
+      margin-top: 1.4375rem;
+    }
+
+    .page-wrapper .positioning-decisions-label {
+      margin-top: 2.5rem;
+      font-size: 1.125rem;
+    }
+
+    .positioning-decisions-list {
+      margin-top: 1.5625rem;
+    }
+
+    .positioning-decisions-list li {
+      min-height: 3.75rem;
+      font-size: 1.125rem;
+    }
+
+    .positioning-decision-count {
+      padding: 0.3125rem 0.625rem;
+      font-size: 0.75rem;
+    }
+
+  }
+
+  @media (max-width: 991px) {
+    .founder-profile-section {
+      padding: 6rem 2rem 5rem;
+    }
+
+    .founder-profile-intro {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 2.5rem;
+      transform: none;
+    }
+
+    .founder-profile-details {
+      gap: 3rem;
+      margin-top: 7rem;
+    }
+
+    .page-wrapper .founder-profile-bio h2,
+    .page-wrapper .founder-profile-detail h3 {
+      font-size: 2.35rem;
+    }
+
+    .closing-folder-section {
+      padding: 4.5rem 2rem 5rem;
+    }
+
+    .closing-folder-shell {
+      width: min(100%, 45.75rem);
+    }
+
+    .closing-folder-content {
+      padding: 0 3.5rem;
+    }
+
+    .b2b-ceos-section {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: auto;
+      gap: 1.5rem;
+      padding: 5rem 2rem 3rem;
+    }
+
+    .page-wrapper .b2b-testimonial-heading,
+    .b2b-ceos-section .b2b-card-home:nth-child(-n + 8) {
+      grid-area: auto !important;
+    }
+
+    .page-wrapper .b2b-testimonial-heading {
+      grid-column: 1 / -1 !important;
+      width: fit-content;
+      max-width: 100%;
+      margin-bottom: 2.5rem;
+      font-size: clamp(3rem, 6vw, 3.75rem);
+    }
+
+    .b2b-ceos-section .b2b-card-home {
+      min-height: 0;
+    }
+
+    .positioning-process-layout {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+
+    .positioning-process-intro {
+      padding-top: 0;
+    }
+
+    .page-wrapper h2.positioning-process-heading {
+      max-width: 15ch;
+    }
+
+    .positioning-process-timeline {
+      margin: 0;
+      padding: 0;
+      border-left: 0;
+    }
+
+    .positioning-process-timeline li {
+      padding: 1.25rem 0 1.5rem;
+    }
+
+    .positioning-process-step {
+      margin: 0;
+    }
+
+    .positioning-process-step p {
+      max-width: 34rem;
+    }
+
+    .positioning-process-outcome {
+      max-width: 40rem;
+    }
+
+    .investor-trust-layout {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+      margin-top: 5rem;
+    }
+
+    .positioning-clients-tags {
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .positioning-clients-logos {
+      grid-column-gap: 2rem;
+    }
+
+    .navigation-new.w--open {
+      display: block !important;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100vw;
+    }
+
+    .menu-button-new.w--open .burger-line._1 {
+      transform: translate3d(0, 0.6875rem, 0) rotate(-45deg) !important;
+    }
+
+    .menu-button-new.w--open .burger-line._2 {
+      width: 0 !important;
+      height: 1px !important;
+    }
+
+    .menu-button-new.w--open .burger-line._3 {
+      transform: translate3d(0, -0.6875rem, 0) rotate(45deg) !important;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .founder-profile-section {
+      padding: 5rem 1rem 4.5rem;
+    }
+
+    .founder-profile-intro,
+    .founder-profile-details {
+      grid-template-columns: 1fr;
+    }
+
+    .founder-profile-intro {
+      gap: 0;
+    }
+
+    .founder-profile-portrait {
+      width: 100%;
+      max-width: 28rem;
+      margin: 0 auto;
+    }
+
+    .founder-profile-bio {
+      margin-top: 3rem;
+    }
+
+    .founder-profile-bio p:first-of-type,
+    .founder-profile-bio p + p {
+      max-width: none;
+    }
+
+    .founder-profile-details {
+      gap: 4.5rem;
+      margin-top: 6rem;
+    }
+
+    .page-wrapper .founder-profile-bio h2,
+    .page-wrapper .founder-profile-detail h3 {
+      font-size: 2.35rem;
+      line-height: 1;
+    }
+
+    .closing-folder-section {
+      padding: 4rem 1rem 4.5rem;
+    }
+
+    .closing-folder-shell {
+      width: 100%;
+      padding-top: 1.5rem;
+    }
+
+    .closing-folder-tab {
+      left: 1.5rem;
+      width: 8rem;
+      height: 1.625rem;
+    }
+
+    .closing-folder-panel {
+      min-height: 30rem;
+      aspect-ratio: auto;
+    }
+
+    .closing-folder-content {
+      padding: 0 1.5rem;
+    }
+
+    .page-wrapper .closing-folder-heading {
+      max-width: 7.2em;
+      font-size: clamp(2.75rem, 13.25vw, 3.25rem);
+      line-height: 0.98;
+    }
+
+    .closing-folder-cta {
+      margin-top: 2.5rem;
+    }
+
+    .b2b-ceos-section {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 4rem 1rem 2rem;
+    }
+
+    .page-wrapper .b2b-testimonial-heading {
+      grid-column: 1 !important;
+      width: min(100%, 12ch);
+      margin-inline: auto;
+      margin-bottom: 2rem;
+      font-size: 2.75rem;
+      line-height: 0.96;
+    }
+
+    .b2b-testimonial-heading > span {
+      white-space: normal;
+    }
+
+    .b2b-ceos-section .b2b-card-home {
+      min-height: 0;
+      padding: 1.25rem;
+    }
+
+    .b2b-ceos-section .b2b-card-home > p {
+      font-size: 0.9375rem;
+      line-height: 1.4;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    .faq-answer-wrapper,
+    .plus-icon-faq,
+    .burger-line {
+      transition: none !important;
+    }
+
+    .navbar-new .brand-new,
+    .navbar-new .navigation-new {
+      transition: none;
+    }
+
+    .b2b-ceos-section .b2b-card-home {
+      transition: none;
+    }
+
+    .closing-folder-cta {
+      transition: none;
+    }
+  }
+</style>
