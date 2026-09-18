@@ -589,3 +589,42 @@ final result: passed
 - Standard and GitHub Pages project-path builds complete successfully.
 
 final result: passed
+
+---
+
+# Upright Positioning Quote QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/positioning-quote-upright.png`
+- Route: `http://localhost:4321/#positioning-quote`
+- Desktop viewport: `1280 × 720` CSS px.
+
+## Findings
+
+- The inset Redpanda quote now uses upright DM Sans Regular rather than italics.
+- Its attribution now uses the site’s warm White (`#FDFCFA`) instead of Decision Green.
+- Quote sizing, spacing, and the content-driven panel height remain unchanged.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Smaller Closing Folder QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/closing-folder-smaller-desktop.png`, `.capture/closing-folder-smaller-tablet.png`, and `.capture/closing-folder-smaller-mobile.png`
+- Route: `http://localhost:4321/#contact`
+- Responsive checks: `1280 × 900`, `768 × 900`, and `390 × 844` CSS px.
+
+## Findings
+
+- The desktop folder width is reduced from `66.04%` to `58%` with a `56rem` cap; its existing aspect ratio reduces height proportionally.
+- Tablet width is reduced to 86% with a `40rem` cap. Mobile width is 92% and its minimum panel height is reduced from `30rem` to `26rem`.
+- The headline and CTA remain vertically centered inside the folder body, and the tab remains attached without a visible seam.
+- No horizontal overflow was detected at any tested viewport.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed

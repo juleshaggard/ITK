@@ -1,293 +1,359 @@
-# In The Kitchen Design System
+---
+name: "In The Kitchen"
+description: "A bold editorial design system for a B2B positioning consultancy."
+colors:
+  action-blue: "#2800E8"
+  hero-yellow: "#FCF387"
+  testimonial-yellow: "#FFF27B"
+  decision-green: "#CFFD93"
+  positioning-lavender: "#E1DBFC"
+  positioning-lavender-deep: "#AFA4E0"
+  signal-pink: "#F2ACD7"
+  canvas: "#FDFCFA"
+  paper: "#FFFFFF"
+  soft-stone: "#F6F4F1"
+  soft-stone-hover: "#F4F2EF"
+  ink: "#222222"
+  deep-ink: "#1A1A1A"
+  secondary-copy: "#625F5A"
+  hairline: "#E3E3E3"
+typography:
+  display-hero:
+    fontFamily: "Fraunces, Georgia, serif"
+    fontSize: "clamp(3.25rem, 6.79vw, 7.5rem)"
+    fontWeight: 300
+    lineHeight: 0.92
+    letterSpacing: "-0.01em"
+  display-section:
+    fontFamily: "Fraunces, Georgia, serif"
+    fontSize: "clamp(3rem, 4vw, 4.5rem)"
+    fontWeight: 300
+    lineHeight: 1.08
+    letterSpacing: "-0.02em"
+  headline-editorial:
+    fontFamily: "Fraunces, Georgia, serif"
+    fontSize: "2.5rem"
+    fontWeight: 300
+    lineHeight: 1.05
+    letterSpacing: "-0.025em"
+  headline-statement:
+    fontFamily: "Fraunces, Georgia, serif"
+    fontSize: "2.25rem"
+    fontWeight: 300
+    lineHeight: "3rem"
+    letterSpacing: "-1.41px"
+  title:
+    fontFamily: "DM Sans, Arial, sans-serif"
+    fontSize: "1.375rem"
+    fontWeight: 400
+    lineHeight: 1.15
+    letterSpacing: "-0.025em"
+  body-large:
+    fontFamily: "DM Sans, Arial, sans-serif"
+    fontSize: "1.125rem"
+    fontWeight: 400
+    lineHeight: 1.35
+    letterSpacing: "-0.015em"
+  body:
+    fontFamily: "DM Sans, Arial, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 400
+    lineHeight: 1.45
+    letterSpacing: "-0.01em"
+  body-small:
+    fontFamily: "DM Sans, Arial, sans-serif"
+    fontSize: "0.9375rem"
+    fontWeight: 400
+    lineHeight: 1.38
+    letterSpacing: "-0.012em"
+  label:
+    fontFamily: "DM Sans, Arial, sans-serif"
+    fontSize: "0.8125rem"
+    fontWeight: 600
+    lineHeight: 1
+    letterSpacing: "-0.01em"
+rounded:
+  subtle: "8px"
+  card: "10px"
+  panel: "16px"
+  folder: "clamp(0.65rem, 0.95vw, 1rem)"
+  pill: "999px"
+spacing:
+  1: "4px"
+  2: "8px"
+  3: "12px"
+  4: "16px"
+  6: "24px"
+  8: "32px"
+  12: "48px"
+  16: "64px"
+  24: "96px"
+  32: "128px"
+components:
+  button-primary:
+    backgroundColor: "{colors.deep-ink}"
+    textColor: "{colors.paper}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
+    padding: "0 24px"
+    height: "52px"
+  button-outline:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.deep-ink}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
+    padding: "0 19px"
+    height: "46px"
+  button-accent:
+    backgroundColor: "{colors.decision-green}"
+    textColor: "{colors.deep-ink}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
+    padding: "0 24px"
+    height: "43px"
+  fit-chip:
+    backgroundColor: "{colors.signal-pink}"
+    textColor: "{colors.ink}"
+    typography: "{typography.body-small}"
+    rounded: "{rounded.pill}"
+    padding: "0 14px"
+    height: "36px"
+  editorial-card:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.card}"
+    padding: "40px 45px 45px"
+  testimonial-card:
+    backgroundColor: "{colors.canvas}"
+    textColor: "{colors.ink}"
+    typography: "{typography.body-small}"
+    rounded: "{rounded.card}"
+    padding: "20px"
+---
 
-This file is the source of truth for the site's visual language. It documents the implemented system; it does not replace `public/styles/webflow.css`. Any global brand change—type roles, scale, palette, spacing, component shape, motion, or responsive behavior—must update this file in the same change.
+# Design System: In The Kitchen
 
-## 1. Brand atmosphere
+## Overview
 
-In The Kitchen is an editorial B2B consultancy site: direct, opinionated, warm, and high-contrast. Large expressive typography carries the story while flat color fields, crisp dividers, and restrained pill shapes keep the experience practical. The visual density is medium-low, the composition is intentionally asymmetric, and motion is restrained and functional.
+**Creative North Star: "The Strategic Editorial"**
 
-- Preserve the long-form, section-by-section narrative rhythm.
-- Favor flat color, typography, borders, and whitespace over decoration.
-- Keep surfaces shadow-free except where the captured source explicitly supplies one.
-- Do not introduce gradients, neon glows, glass effects, or generic SaaS dashboard styling.
+In The Kitchen should feel like a sharply edited independent publication run by an experienced operator: bold, direct, warm, and assured. Typography carries the argument. Flat color fields create chapter breaks. Asymmetric compositions, narrow reading measures, and purposeful whitespace make the page feel authored rather than templated.
 
-## 2. Color palette and roles
+The system is medium-low density and deliberately high contrast. It rejects generic SaaS polish in favor of an editorial cadence: large statements, crisp hairlines, lightly rounded paper surfaces, and a small number of saturated brand fields. Motion is restrained and functional. Nothing should compete with the positioning story.
 
-- **Canvas** (`#FDFCFA`) — default page, testimonial-card, founder, FAQ, and footer surface.
-- **Soft Stone** (`#F6F4F1`) — process, partnership, and investor section surface.
-- **Ink** (`#222222`) — primary text and dark controls.
-- **Deep Ink** (`#1A1A1A`) — dark quote surface, button text, and dark controls.
-- **White** (`#FFFFFF`) — text on dark fields.
-- **Hero Yellow** (`#FCF387`) — opening brand field.
-- **Testimonial Yellow** (`#FFF27B`) — testimonial-grid field.
-- **Decision Green** (`#CFFD93`) — decision-framework fields and high-emphasis action fills.
-- **Positioning Lavender** (`#E1DBFC`) — Four Cs field.
-- **Deep Positioning Lavender** (`#AFA4E0`) — scroll-complete field for the positioning editorial sequence.
-- **Signal Pink** (`#F2ACD7`) — client-fit tags and selected accents.
-- **Action Blue** (`#2800E8`) — primary action treatment and the closing folder field.
-- **Muted Brown-Gray** (`#615B55`) — secondary copy and low-emphasis metadata.
+The implementation remains responsive and accessible. The wide layout uses a Webflow-derived 24-column grid inside a centered container that caps near 1408px. Primary breakpoints are desktop at 992px and above, tablet from 768px through 991px, and mobile below 768px; 479px remains a narrow-mobile stress point. Desktop page gutters are approximately 62px at 1440px, while mobile gutters are normally 16–24px. No viewport may scroll horizontally.
 
-Use these colors as solid fields. Do not invent new brand colors without updating this file and verifying contrast in both light and dark sections.
+**Key Characteristics:**
 
-## 3. Typography
+- Editorial typography with a light serif narrative voice and a clean sans-serif working voice.
+- Flat, committed color fields rather than gradients or decorative effects.
+- Quiet structure through whitespace, 1px rules, and restrained 8–16px radii.
+- Intentional asymmetry on wide screens; one clear reading flow on mobile.
+- Functional motion using opacity and transforms, with complete reduced-motion fallbacks.
+- A direct path from understanding the offer to booking a call.
 
-### Font families
+**The Source-of-Truth Rule.** Any global change to type roles, scale, palette, spacing, shape, motion, or responsive behavior must update this file and `.impeccable/design.json` in the same change. Build both the root and GitHub Pages base-path variants, then record material visual checks in `design-qa.md`.
 
-- **Narrative display:** Fraunces, loaded locally from `public/assets/fonts/fraunces.woff2`.
-- **Emphasis display and all utility/body text:** DM Sans, loaded locally from `public/assets/fonts/dm-sans.ttf`.
-- Fallbacks exist for resilience only and are not acceptable substitutes in production.
+**The Normal-Flow Rule.** Sections, folder shapes, and calls to action participate in normal document flow. Sticky or fixed positioning is reserved for the navigation; never pin, scroll-jack, or artificially hold a narrative section.
 
-### Headline pairing rule
+## Colors
 
-The font roles are intentionally reversed from the original source design:
+The palette combines warm editorial neutrals with highly committed single-color fields. Saturated colors own whole sections or singular actions; they are not scattered as decoration.
 
-- Regular H1 and H2 headline text is **Fraunces**.
-- Emphasized words inside those headlines are **DM Sans**.
-- When both appear on the same line, the DM Sans emphasis is slightly smaller: `--type-paired-emphasis-scale: 0.94em`.
-- **Fraunces is never bold.** The only approved serif weights are light (`300`) and regular (`400`); weights `500–900` are prohibited everywhere.
-- Global CSS explicitly caps serif headings at `400`, preserves intentional `font-weight-300` headings at `300`, and disables synthetic bolding with `font-synthesis: none`.
-- Keep the two faces aligned on the same inherited line-height; do not compensate with transforms, relative positioning, or manual baselines.
-- Decision-card H3 labels that previously carried the serif utility class also resolve to DM Sans.
-- **Founder-profile treatment:** the founder biography and commercial-context headings use Fraunces Light (`300`) throughout. The former oversized DM Sans “Meet the founder” display treatment is retired.
-- **Positioning/client-section treatment:** the introductory positioning statement uses Fraunces Light (`300`) at `36 px / 48 px` with `-1.41 px` tracking and synthetic styling disabled. Center the statement as one intrinsic-width block while keeping its lines left-aligned. Preserve its authored four-line desktop composition; below 768 px it uses the available content width and returns to natural wrapping at `32 px / 40 px` with `-1.25 px` tracking.
-- **Testimonial-grid exception:** “B2B CEOs and CMOs / love In The Kitchen” is an all-Fraunces composition at light weight (`300`). It uses two authored desktop lines and never introduces a DM Sans emphasis span.
+### Primary
 
-This `0.94em` scale is a global brand rule. If it changes, update the CSS variable and this document together.
+- **Action Blue** (`{colors.action-blue}`): closing folder field and the strongest branded action surface.
+- **Ink** (`{colors.ink}`): primary copy, rules expressed through opacity, outlines, and most controls.
+- **Deep Ink** (`{colors.deep-ink}`): dark quote surface and dark filled actions. Use this instead of pure black.
 
-### Implemented scale
+### Secondary
 
-Desktop values are fluid and resolve approximately as follows at a 1440 px viewport:
+- **Hero Yellow** (`{colors.hero-yellow}`): the opening folder field only.
+- **Testimonial Yellow** (`{colors.testimonial-yellow}`): the rotating testimonial-grid field and the closing CTA hover.
+- **Decision Green** (`{colors.decision-green}`): the closing folder action and decision-oriented emphasis.
+- **Signal Pink** (`{colors.signal-pink}`): best-fit client chips.
 
-- **Hero H1:** `clamp(3.25rem, 6.79vw, 7.5rem)` with `0.92` desktop line-height and `1` mobile line-height. The paired DM Sans emphasis remains `0.94em`, so both headline faces scale together.
-- **Large H2:** Fraunces 61.7 px / 1.05 line-height / 300 weight; paired emphasis approximately 58 px.
-- **Smaller H2:** Fraunces 50.1 px / 1.05 line-height; paired emphasis approximately 47.1 px.
-- **Jumbo process H2:** Fraunces 77.1 px / 1.05 line-height; paired emphasis approximately 72.5 px.
-- **Small H3:** DM Sans 30.8 px / 1.05 line-height.
-- **Body large:** DM Sans 23.1 px.
-- **Body medium:** DM Sans 19.3 px / 1.5 line-height.
-- **Body small:** DM Sans 15.4 px / 1.5 line-height.
-- **Metadata / labels:** DM Sans 13.5 px.
+### Tertiary
 
-At 390 px:
+- **Positioning Lavender** (`{colors.positioning-lavender}`): the initial background of the positioning editorial sequence.
+- **Deep Positioning Lavender** (`{colors.positioning-lavender-deep}`): the sequence's scroll-complete background after the dark quote enters.
 
-- **Hero H1:** 52 px / 52 px; paired emphasis 48.88 px.
-- **Smaller H2:** 32 px / 33.6 px.
-- **Jumbo H2:** 48 px / 50.4 px.
-- **Body large:** 18 px minimum.
-- **Body medium:** 20 px / 30 px.
-- **Body small:** 16 px / 24 px.
+### Neutral
 
-Display copy uses tight negative tracking, generally around `-0.01em`; body copy remains neutral and readable. Preserve authored line breaks when they are part of the composition, but never allow mobile overflow.
+- **Canvas** (`{colors.canvas}`): default page, founder, FAQ, footer, and testimonial-card surface.
+- **Paper** (`{colors.paper}`): contained editorial and investor cards; also the approved text color on Action Blue and Deep Ink.
+- **Soft Stone** (`{colors.soft-stone}`): investor proof panel.
+- **Soft Stone Hover** (`{colors.soft-stone-hover}`): quiet hover/pressed surface for the Listen control only.
+- **Secondary Copy** (`{colors.secondary-copy}`): reading metadata and intentionally subdued copy.
+- **Hairline** (`{colors.hairline}`): neutral dividers when an opacity-based Ink rule is not used.
 
-## 4. Layout and spacing
+**The Solid-Field Rule.** Brand colors are solid. Gradients, glows, transparent color washes, and glass effects are prohibited.
 
-- The main container is centered and maxes out at approximately 1408 px.
-- The hero is the exception to the full-width section rhythm: it uses `clamp(1rem, 1.8vw, 2rem)` side gutters and `clamp(1.5rem, 2.2vw, 2rem)` below the yellow folder field.
-- Desktop container gutters resolve to approximately 62 px at 1440 px; mobile gutters are 24 px.
-- The page uses a 24-column Webflow-derived grid for wide compositions and collapses cleanly at the existing breakpoints.
-- Primary responsive breakpoints are 991 px, 767 px, and 479 px.
-- Mobile multi-column content becomes a single readable flow. Horizontal page scrolling is a critical defect.
-- Sections use generous vertical separation. Typical desktop section padding is approximately 96–154 px, depending on narrative role; mobile hero padding is 160 px top and 96 px bottom.
-- Maintain existing max-width classes for readable copy. Long body text should remain visually narrow even when its section spans the viewport.
-- Do not center layouts that are currently left-aligned or rebalance asymmetric compositions without an explicit redesign request.
+**The One-Field Rule.** Give each saturated color a clear job. Never mix multiple bright accents inside one component or use them as arbitrary highlights.
 
-## 5. Components
+**The Warm-Neutral Rule.** Canvas is the default white. Paper is reserved for explicit contained surfaces. Pure black and cool gray page backgrounds are forbidden.
 
-### Hero folder
+## Typography
 
-- The yellow hero is an inset folder panel rather than a full-bleed rectangle.
-- Preserve Canvas-colored space around the yellow silhouette using `--hero-folder-gutter` on the left and right and `--hero-folder-bottom-gap` below it. At the 1311 px reference width these resolve to approximately 24 px and 29 px.
-- The hero uses `hero-yellow-tab.svg` for its tab geometry. It preserves the native 338:71 ratio and resolves to approximately 270 × 57 px at the 1311 px reference width. Its two upper shoulder curves are tuned to the same responsive radius family as the folder body's lower corners, so the silhouette reads as one consistent shape. The tab is inset approximately 11 px from the folder body's left edge and starts approximately 36 px below the viewport top. The closing CTA continues to use `yellow-tab.svg` independently.
-- The yellow folder body is a dedicated layer beginning at approximately 90 px in the reference viewport. The tab overlaps this edge by roughly 2 px to prevent an antialiasing seam. The body's four corners use `clamp(0.65rem, 0.95vw, 1rem)`—the radius belongs to the yellow body, not the transparent outer hero container, and remains optically matched to the tab's upper shoulders across breakpoints.
-- The tab and body must touch without a white seam so they read as one continuous folder. The navigation logo remains centered over the tab.
-- The hero participates in normal document flow (`position: relative`). Never make the hero or folder body sticky, fixed, or scroll-jacked.
-- Keep the folder-tab layer visible above the body; do not add `overflow: hidden` or `overflow: clip` to the hero container.
+**Display Font:** Fraunces, loaded locally from `public/assets/fonts/fraunces.woff2`, with Georgia and serif fallbacks.
 
-### Hero content proportions
+**Body Font:** DM Sans, loaded locally from `public/assets/fonts/dm-sans.ttf`, with Arial and sans-serif fallbacks.
 
-- On desktop, hero content begins at `--hero-content-gutter: clamp(1.5rem, 8.85vw, 8rem)` inside the yellow body; this places the text at approximately x=140 px in the 1311 px reference viewport.
-- Preserve the responsive headline scale and the `0.94em` sans-serif pairing. The approved 1311 px reference resolves the headline to approximately 89 px with a 0.92 line-height.
-- Desktop supporting copy is intentionally larger at `1.6875rem / 1.25` and may occupy up to ten grid columns so it reads as one continuous statement where space permits.
-- The headline and supporting-copy blocks use a tight `0.25rem` section gap. The supporting copy and CTA use a wider `2.75rem` row gap.
-- The desktop hero CTA is approximately 9.8125rem wide and 3.25rem tall. Mobile restores the established compact copy and spacing scale.
+**Character:** Fraunces supplies intelligence, specificity, and editorial pacing. DM Sans supplies clarity, confidence, and utility. Their contrast should feel intentional but calm, never decorative.
+
+### Hierarchy
+
+| Role | Family / weight | Size | Line height | Tracking | Primary use |
+| --- | --- | --- | --- | --- | --- |
+| Hero display | Fraunces Light 300 | `clamp(52px, 6.79vw, 120px)` | `0.92` desktop, `1` mobile | about `-0.01em` | Hero H1 only |
+| Section display | Fraunces Light 300 | `clamp(48px, 4vw, 72px)` | `1.08` | `-0.02em` | Investor proof headline |
+| Editorial headline | Fraunces Light 300 | `40px` | `1.05` | `-0.025em` | Four Cs and decisions statements |
+| Positioning statement | Fraunces Light 300 | `36px` desktop; `32px` mobile | `48px`; `40px` mobile | `-1.41px`; `-1.25px` mobile | Centered intrinsic-width client statement, left-aligned internally |
+| Advantage title | Fraunces Light 300 | `36px` | `36px` | `-1.41px` | Capability, Credibility, Convenience, Cost |
+| Process thesis | Fraunces Light 300 | `clamp(42.4px, 2.95vw, 44px)` | `0.92` | `-0.04em` | Two-column process introduction |
+| Founder title | Fraunces Light 300 | `40px` | `0.98` | `-0.04em` | Founder biography heading |
+| Commercial title | Fraunces Light 300 | `38px` | `0.98` | `-0.04em` | Cost and investment headings |
+| Testimonial center | Fraunces Light 300 | `clamp(40px, 3.45vw, 56px)` | `0.94` | `-0.045em` | Center cell of the testimonial grid |
+| Closing display | Fraunces Light 300 | `64px` | `0.92` | `-0.055em` | Closing folder headline |
+| FAQ display | Fraunces Light 300 | `clamp(48px, 4.85vw, 62px)` | `clamp(50px, 5vw, 64px)` | `-2px` | “Questions, answered.” |
+| Title | DM Sans Regular 400 | `22px` | `1.15` | `-0.025em` | Process row titles and large utility headings |
+| Body large | DM Sans Regular 400 | `18px` | `1.35` | `-0.015em` | Introductory and closing copy |
+| Body | DM Sans Regular 400 | `16px` | `1.45` | `-0.01em` | Standard paragraphs, FAQ answers, biographies |
+| Body small | DM Sans Regular 400 | `15px` | `1.38` | `-0.012em` | Testimonial copy and compact editorial text |
+| Label | DM Sans Medium/Semibold 500–600 | `12–14px` | `1–1.35` | `-0.01em` or neutral | Buttons, counts, metadata, attributions |
+
+Body copy should normally remain between 45ch and 70ch. Preserve authored desktop line breaks where they are part of a composition, but return to natural wrapping below 768px. Never permit a forced line break to create overflow.
+
+### Paired headline rule
+
+Regular headline language is Fraunces. Emphasized language inside a mixed headline is DM Sans at `0.94em`, inheriting the same line height. The sans-serif emphasis is intentionally a touch smaller so the two faces feel optically balanced. Do not use transforms, relative positioning, or hand-tuned baselines to align them.
+
+The hero and closing folder follow this pattern. The testimonial-grid headline is an approved all-Fraunces exception. Process row titles and decision utility labels are DM Sans rather than serif.
+
+**The Never-Bold-Serif Rule.** Fraunces is only Light 300 or Regular 400. Bold, semibold, synthetic bold, and faux italic Fraunces are prohibited. Keep `font-synthesis: none` on display treatments.
+
+**The Sans-Is-Slightly-Smaller Rule.** Paired DM Sans emphasis remains `0.94em` unless a future global brand change explicitly replaces the ratio in both code and this specification.
+
+**The Upright-Quote Rule.** The dark Redpanda quote uses upright DM Sans Regular, not italics. Its attribution is warm white and follows the quote in normal flow.
+
+## Elevation
+
+The system is flat. It uses no box-shadow vocabulary in production. Depth and hierarchy come from committed color fields, nested paper surfaces, whitespace, 1px dividers, and subtle corner changes. A component should never appear to float above the page.
+
+Hairlines are either Hairline or Ink at 14–18% opacity. Content cards use gently curved edges: 8px for folders and compact controls, 10px for editorial/testimonial cards, and up to 16px for the large investor panel. Only buttons, chips, count badges, and the Listen control use full pill radii.
+
+**The Flat-by-Default Rule.** No shadows at rest, on hover, or on focus. Use a color change, underline, opacity, or a 2px translation for feedback.
+
+**The Quiet-Structure Rule.** If the border becomes the first thing you notice, it is too strong. Rules divide content; they do not frame it.
+
+## Components
+
+### Buttons and links
+
+- **Primary action:** Deep Ink pill with Paper text, DM Sans 600, approximately 52px tall and 24px horizontal padding. The canonical label is **Book a call**.
+- **Outline navigation action:** Canvas fill, 1px Deep Ink border, 46px tall, approximately 19px horizontal padding.
+- **Closing action:** Decision Green pill, 43px tall, minimum width 182px, with the approved label **Get In The Kitchen →**. Hover moves up 2px over 180ms and changes to Testimonial Yellow.
+- **Focus:** every link and button receives a visible `2px solid currentColor` outline with a 4px offset; the compact Listen button uses a 3px offset.
+- **Text links:** visibly underlined, 1px thickness, `0.12em` underline offset, and inherited Ink color.
+- **Prohibited:** gradients, glows, oversized shadows, icon-only primary actions, and inconsistent CTA copy.
 
 ### Navigation
 
-- The desktop navigation is light, horizontally arranged, and visually secondary to the page narrative.
-- The canonical navigation lockup is `public/assets/itk-logo.svg`. Use the supplied vector directly at its native 160:20 (8:1) aspect ratio; do not rebuild the wordmark from live type or substitute the previous inline mark.
-- Link underlines are hidden at rest and expand to full width on hover or keyboard focus.
-- At 991 px and below, navigation becomes an absolute full-width menu beneath the header.
-- The hamburger transitions into a close icon. Opening the menu locks document scrolling; closing it restores scrolling.
-- The logo has two vertical states. Over the hero it remains centered in the yellow folder tab; once the hero has scrolled beyond the fixed navigation, it translates upward until its visible lockup shares the navigation-link centerline.
-- The logo movement uses only `transform`, lasts 240 ms, and follows the established strong ease-in-out curve (`cubic-bezier(0.77, 0, 0.175, 1)`). It must reverse cleanly when returning to the hero and becomes instantaneous under `prefers-reduced-motion`.
-- On desktop, the right navigation cluster also responds to the post-hero state. It translates inward by the calculated distance between the page gutter and the visible logo edge, giving the two sides matching optical insets. It uses the same 240 ms transform timing as the logo and does not alter mobile-menu positioning.
-- After the user scrolls downward beyond the navigation's own height, the entire fixed navigation exits above the viewport using only a vertical transform. Any upward scroll reveals it again on a solid Canvas-white (`#FDFCFA`) background. Returning to the top restores the original transparent hero state. Keyboard focus and an open mobile menu always keep the navigation visible.
-- The directional hide/reveal transition lasts 280 ms with `cubic-bezier(0.16, 1, 0.3, 1)`; the background fades in over 180 ms. Both transitions become instantaneous under `prefers-reduced-motion`.
-- **Cross-page continuity:** “Book a call” routes to the local `/contact-us/` page. That route reuses the homepage navigation and keeps the logo in its compact, vertically aligned post-hero state. “How it works” and “Clients” return to their homepage anchors; “FAQ” targets the contact page’s shared FAQ.
+The supplied `public/assets/itk-logo.svg` is the only approved navigation and footer lockup. Render it at its native 160:20 ratio; never recreate it with live type.
 
-### Buttons
+The desktop navigation is fixed, visually quiet, and transparent over the hero. The logo begins centered in the yellow tab. After the hero, it translates upward over 240ms with `cubic-bezier(0.77, 0, 0.175, 1)`, while the right cluster moves inward by the calculated logo-side inset. Downward scrolling beyond the navigation height hides the whole bar with a transform. Upward scrolling reveals it on Canvas over 280ms with `cubic-bezier(0.16, 1, 0.3, 1)`; the background fades over 180ms. Keyboard focus and an open mobile menu always keep it visible.
 
-- CTAs are compact horizontal pills with a very large radius, DM Sans semibold labels, and approximately 13 px vertical / 19 px horizontal padding on desktop.
-- Preserve the source-defined light, dark, transparent, and blue modes.
-- Use one concise action label consistently: **Book a call**.
-- The closing folder is the approved exception: its lime CTA reads **Get In The Kitchen →** to match the selected composition.
-- In the hero, the primary CTA sits directly below and left-aligned with the supporting paragraph at every breakpoint; it never occupies a separate far-right grid column.
-- Provide a visible `2px solid currentColor` focus outline with a 4 px offset.
-- No glow, gradient, or oversized shadow treatment.
+Links show no underline at rest. A 200ms underline expands to full width on hover and focus. At 991px and below, the navigation becomes a full-width menu under the header and the hamburger morphs into a close icon. Opening the menu locks page scrolling.
 
-### Tags
+### Hero folder
 
-- Client-fit tags are compact 36 px-tall pills with Signal Pink backgrounds, dark text, 14 px horizontal padding, and DM Sans at `15 px / 18 px`.
-- At wide desktop sizes, the eight client-fit tags form one centered rail with a 16 px gap and approximately 20 px of viewport-edge breathing room at the 1305 px reference width.
-- Tags wrap naturally below 992 px. Keep capitalization and hyphenation intentional.
+The opening field is an inset yellow folder, not a full-bleed rectangle. It uses side gutters of `clamp(16px, 1.8vw, 32px)` and a bottom gap of `clamp(24px, 2.2vw, 32px)`. The yellow body begins below the supplied `hero-yellow-tab.svg`; tab and body overlap by about 2px so no Canvas seam appears. The body's responsive corner radius must optically match the tab shoulders.
 
-### Positioning and client proof
+Hero content begins at `clamp(24px, 8.85vw, 128px)` inside the body. Desktop padding is 228px top and 128px bottom; mobile uses 160px top and 96px bottom. The hero remains in normal flow and approximates one viewport in height. Supporting copy is 27px / 1.25 on desktop and 16px / 1.5 on mobile. The CTA sits directly below and left-aligned with the copy.
 
-- The first section after the hero combines the positioning statement, client-fit tags, and selected-client logos into one continuous Canvas field.
-- At the 1305 × 893 desktop reference, the section uses approximately 90 px of top space and 80 px of bottom space. Its four-line statement is 776 px wide; the supporting line follows after 104 px.
-- The logo field is a 4 × 3 grid on desktop. Logo image boxes resolve to approximately 192 × 58 px with 80 px column gaps and 32 px row gaps, preserving the transparent padding and visual weight built into each supplied asset.
-- Preserve the supplied logo order: Meta, Summation, MoneyLion, Latent; Valence, Every, Pulley, Thunder; Genesys, CrewAI, Exclaimer, Redpanda.
-- At 767 px and below, the logo field becomes two columns and all statement line breaks return to natural reflow.
+### Fit chips and client logos
 
-### Investor proof panel
+Best-fit chips are 36px tall Signal Pink pills with 14px horizontal padding and DM Sans 15px / 18px. The eight-chip rail is centered with a 16px gap and wraps below 992px.
 
-- The third section is an inset Soft Stone panel on the Canvas background with a 16 px corner radius. At the 1783 × 774 reference, the outer frame uses approximately 31 px side gutters, 39 px above, and 48 px below.
-- The section headline is light Fraunces, never bold, at approximately 72 px / 1.08 line-height on the wide reference.
-- The lower proof area begins well below the headline and divides into two nearly equal columns: two tall partnership cards on the left and a 3 × 2 portfolio-company card grid on the right.
-- Partnership cards are White, 276 px tall at the wide reference, with the supplied logo aligned top-left and the role aligned bottom-left. Portfolio cards are White and approximately 230 × 122 px.
-- Use the supplied First Round, Norwest, GV, Insight Partners, Bessemer Venture Partners, Salesforce Ventures, Y Combinator, and Sequoia assets directly. Their embedded whitespace is part of their visual sizing and must not be cropped.
-- Below 992 px, the two main proof groups stack so their cards retain useful width. Below 768 px, both card grids also collapse to a single readable column. The inset panel and its hierarchy remain intact, and the page must not scroll horizontally.
+Client logos form a 4 × 3 desktop grid with 80px column gaps and 32px row gaps. Each logo box is approximately 192 × 58px and preserves the supplied asset's transparent padding. Below 768px the grid becomes two columns. Never crop, stretch, recolor, or equalize logos by force.
 
-### Positioning editorial sequence
+### Investor proof
 
-- The Four Cs, Redpanda testimonial, and compact Decision-Based Positioning explanation form one continuous centered editorial card. The dark testimonial is an inset content block inside the White panel rather than a detached band, and the decision explanation continues on White directly beneath it.
-- The outer card is approximately half the viewport width on desktop and caps at 726 px with a restrained 10 px radius. The testimonial aligns to the Four Cs content rail and keeps a clear White gutter on its top, left, right, and bottom edges. Neither surface uses a border or shadow.
-- The outer field begins with Positioning Lavender (`#E1DBFC`) and scroll-shifts to Deep Positioning Lavender (`#AFA4E0`) while the quote band moves through the viewport. GSAP ScrollTrigger uses a linear color tween with a `0.65` scrub catch-up from `top 72%` to `bottom 42%`, reverses naturally when scrolling upward, and never pins or scroll-jacks content.
-- Under `prefers-reduced-motion`, the field switches colors discretely when the quote crosses the trigger rather than interpolating.
-- The Four Cs panel's internal content rail is approximately 632 px wide and begins about 45 px from the left edge.
-- The two opening statements use Fraunces at light weight (`300`) only, approximately 40 px / 1.05 line-height on the wide reference. Preserve their authored two-line desktop breaks and return them to natural wrapping below 768 px.
-- Immediately beneath the opening statements, an editorial metadata row pairs “4 min read” with a compact outlined Listen control on the left and a circular Jon Itkin byline on the right. Reuse `public/assets/jon-itkin.avif` at 40 px with a face-focused crop; do not introduce a separate headshot asset. The row stays horizontally balanced on mobile, with the portrait reducing to 36 px.
-- The Listen control reads the complete positioning editorial sequence through the browser speech-synthesis API, toggles visibly between **Listen** and **Stop**, exposes its pressed state, and hides when speech synthesis is unavailable. It uses the restrained Canvas surface and Ink hairline, with no filled accent treatment.
-- A quiet neutral divider separates the opening statement from the explanatory copy. Body copy remains DM Sans at approximately 18 px, with a readable measure and compact 23 px line height.
-- The four advantage sources form a 2 × 2 grid with 24 px between columns. Each item begins with a 1 px top rule; the Capability, Credibility, Convenience, and Cost titles use Fraunces Light (`300`) at `36 px / 36 px` with `-1.41 px` tracking and synthetic styling disabled at every breakpoint. Descriptions use the DM Sans body scale. The grid becomes one column below 768 px.
-- The dark quote panel uses DM Sans italic copy at a restrained 24 px maximum on desktop and tablet, stepping down to 22 px on mobile. Its green attribution follows the quote in the normal text flow with an approximately 24 px gap; never pin the attribution to the panel bottom. The panel height is content-driven with no fixed or minimum height, so it grows naturally with the quote while retaining its responsive inner padding. It has no oversized or decorative quotation marks; only the quotation punctuation authored into the testimonial copy remains.
-- The restored decision block uses two light-Fraunces statements: “Marketing copy doesn’t make you a category leader.” and “Decisions do.” A quiet divider leads into three DM Sans paragraphs explaining Decision-Based Positioning.
-- “Decisions to win:” introduces eight compact ruled rows in this order: Intentions, Playing Field, Market Segment, Buyer, Problem, Alternatives, Advantages, and How You Win. Each row ends with a small outlined count pill; Buyer uses 4 decisions in the approved composition.
-- This sequence is editorial grouping, not elevation: never add a shadow, gradient, border chrome, or decorative iconography.
+Investor proof is an inset Soft Stone panel on Canvas with a responsive 12–16px radius. The wide composition has two partnership cards on the left and a 3 × 2 portfolio grid on the right. Partnership cards are Paper, up to 276px tall, with logo at top-left and role at bottom-left. Portfolio cards are Paper and approximately 230 × 122px. Use the supplied assets without cropping their embedded whitespace. Stack the two groups below 992px and collapse internal grids to one column below 768px.
 
-### Positioning process list
+### Positioning editorial card
 
-- The positioning process follows the positioning editorial sequence on a Canvas (`#FDFCFA`) field and remains the destination for the navigation's “How it works” link.
-- On wide screens it is a quiet two-column editorial spread: the light-Fraunces thesis and DM Sans method statement form the left column, while the five ordered steps form a ruled list on the right.
-- The left column begins lower than the first process rule so the thesis aligns with the body of the step list rather than its top edge. On wide screens the thesis holds the authored four-line wrap shown in the approved reference; it returns to natural wrapping on mobile. The serif remains weight `300` and never uses bold emphasis.
-- Process rows use only quiet 14%-Ink horizontal rules, DM Sans Regular titles, and compact explanatory copy. Do not add numbers, timeline nodes, alternating offsets, cards, shadows, or ornamental illustrations.
-- The closing takeaway is centered beneath both columns in DM Sans Regular at the body-display scale. It has no divider, badge, or card treatment.
-- Below 992 px, the columns become one linear flow with the thesis first, the five ruled steps second, and the centered outcome last. The exact step order and semantic ordered list are preserved.
+The Four Cs, Redpanda quote, and decision explanation form one continuous Paper card centered on a lavender field. The outer card is `min(49.76vw, 726px)`, uses a 10px radius, and has no border or shadow. Its inner rail uses approximately 40px top, 45px side, and 45px bottom padding on wide screens.
 
-### Cards and tab rows
+The background shifts from Positioning Lavender to Deep Positioning Lavender as the quote passes through the viewport. GSAP ScrollTrigger uses a linear tween, `0.65` scrub catch-up, `top 72%` start, and `bottom 42%` end. It reverses naturally, never pins, and becomes a discrete color switch under reduced motion.
 
-- Testimonial cards use the Canvas surface, 8 px rounded corners, approximately 23 px padding, and no decorative elevation.
-- FAQ items use borders, spacing, and flat fields to express hierarchy.
-- Do not convert the site's structured rows into generic elevated SaaS cards.
+The article metadata row places “4 min read” and a compact outlined Listen/Stop control on the left, with a 40px circular crop of `jon-itkin.avif` and “By Jon Itkin” on the right. The portrait reduces to 36px on mobile. The browser speech-synthesis control hides when unsupported and exposes pressed state.
+
+The four advantage sources use a 2 × 2 ruled grid with 24px between columns; below 768px they become one column. The dark quote is inset inside the Paper card, uses Deep Ink, upright DM Sans up to 24px, content-driven height, and responsive padding. It has no decorative quotation marks. The attribution is Paper-colored, approximately 24px below the quote, and never pinned to the bottom.
+
+The decision module continues on Paper beneath the quote. It ends with eight compact ruled rows in this order: Intentions, Playing Field, Market Segment, Buyer, Problem, Alternatives, Advantages, How You Win. Count badges are outlined pills; Buyer has 4 decisions.
+
+### Process list
+
+The process section is a quiet two-column editorial spread: light-Fraunces thesis and DM Sans method copy on the left, five ruled DM Sans steps on the right, and a centered outcome beneath. Use only 14%-Ink horizontal rules. Do not add numbers, timeline nodes, cards, illustrations, or alternating offsets. Below 992px, the section becomes one linear flow.
 
 ### Rotating testimonial grid
 
-- The Testimonial Yellow field is a 3 × 3 desktop composition: eight equal White/Canvas quote cards occupy the perimeter cells and the light-Fraunces heading occupies the exact center cell.
-- Preserve the authored two-line desktop heading: “B2B CEOs and CMOs” followed by “love In The Kitchen.” It is an intrinsic-width block placed in the exact center of its grid cell, with both lines center-aligned. It uses Fraunces `300`, tight tracking, and no synthetic styling. On mobile, keep the heading block centered and allow the two lines to wrap naturally within its responsive measure.
-- Perimeter cards are equal-height within the desktop grid and use compact `15rem` rows with approximately 18–20 px of internal padding, avoiding excess empty space while preserving room for the longest approved quote. Quote copy uses DM Sans Regular at `0.9375rem`; attribution copy uses `0.8125rem` with a compact `0.75rem` inset above its quiet top rule. Cards retain a restrained 10 px radius and no shadow.
-- The complete approved pool remains 11 testimonials. Eight are visible at once; every 2.2 seconds one perimeter card crossfades to the next quote so the field changes briskly and incrementally rather than flashing as a whole.
-- Each swap is a 220 ms opacity and 8 px vertical-transform transition. Rotation pauses while the field is hovered or keyboard-focused, while it is outside the viewport, and while the document is hidden. The focusable testimonial region receives a restrained inset outline. Under `prefers-reduced-motion`, the first eight testimonials remain static.
-- Below 992 px, the heading moves above a two-column card grid and each row follows its content rather than retaining the desktop fixed height. Below 768 px, the field becomes one column with content-driven natural card height. The center-cell desktop composition must never force horizontal overflow on smaller screens.
+The Testimonial Yellow field uses a 3 × 3 desktop grid. Eight equal Canvas cards occupy the perimeter and the all-Fraunces heading occupies the exact center cell. Desktop rows are 240px high with 28–44px grid gaps. Cards use 18–20px padding, a 10px radius, DM Sans 15px quote copy, and 13px attribution copy separated by a quiet top rule.
 
-### Founder profile and commercial context
+The approved pool contains 11 testimonials. Eight are visible; every 2.2 seconds one perimeter card crossfades and moves 8px over 220ms. Rotation pauses on hover, keyboard focus, viewport exit, and document hide. Under reduced motion, the first eight remain static. Below 992px the heading moves above a two-column grid; below 768px cards become a one-column, content-driven list.
 
-- The founder section is a single Canvas field with two editorial bands. The upper band pairs the supplied 4:5 Jon Itkin portrait with a compact biography; the lower band presents minimum engagement cost and investment context in two equal columns.
-- At the 1409 × 1066 reference, the portrait resolves to approximately 362 × 452 px with a restrained 10 px radius. Use `public/assets/jon-itkin.avif` at its natural 4:5 crop; do not generate, substitute, stretch, or crop away the supplied image.
-- The upper composition is intentionally narrower than the lower band and sits slightly left of mathematical center, matching the reference. The biography aligns to the portrait’s vertical center rather than its top edge.
-- “Meet the person behind your positioning” and both lower commercial headings use Fraunces Light (`300`), tight tracking, and no synthetic bold. Biography and explanatory copy use DM Sans Regular (`400`) at approximately 16 px with compact, readable line height.
-- At desktop widths, the right commercial headline uses the authored three-line lockup `This is an investment in / changing the trajectory / of your business` to maintain an even rag. Below 1100 px, those spans return to natural inline wrapping.
-- The lower band begins after a generous editorial pause. Each column uses a single quiet divider between its heading and body; there are no cards, shadows, tinted panels, or decorative illustrations.
-- Text links remain visibly underlined and inherit the surrounding Ink color. The final calendar link uses the existing contact destination.
-- Below 992 px, the upper band remains a balanced two-column composition and the lower columns tighten their gap. Below 768 px, portrait, biography, cost, and investment context become one linear reading flow with natural headline wrapping and no horizontal overflow.
+### Founder profile
 
-### Closing folder call to action
+The founder section uses one Canvas field with two editorial bands. The upper band pairs the supplied 4:5 `jon-itkin.avif` portrait with a vertically centered biography. At the desktop reference the portrait is approximately 362 × 452px with a 10px radius. The lower band presents cost and investment context in two equal columns separated internally by one quiet divider each.
 
-- The closing CTA is an inset Action Blue folder on the Canvas surface, replacing the former full-bleed Deep Ink section. It remains in normal document flow and introduces no sticky or scroll-linked behavior.
-- At the 1110 × 647 reference, the folder body is approximately 733 × 444 px and centered with about 188 px side margins. A compact tab begins roughly 28 px inside its left edge and rises 26 px above the body.
-- The folder body and tab share the same solid `#2800E8` fill, restrained 8 px radii, and no border, shadow, gradient, or decorative imagery.
-- The headline-and-action group is vertically centered inside the rectangular folder body, excluding the raised tab from the centering calculation, and begins approximately 78 px from the body’s left edge. The first authored line, “It’s time to take,” is Fraunces Light (`300`); “a position.” is the smaller paired DM Sans Regular (`400`) emphasis. Both lines are White and preserve the global no-bold-serif rule.
-- The only supporting action is a Decision Green pill labeled “Get In The Kitchen →” that links to the existing contact destination. It uses DM Sans semibold text and the standard visible focus outline.
-- Below 992 px, the folder expands to the available content width while retaining the inset white frame. Below 768 px, it becomes a tall mobile panel with natural headline scaling, a full-width-safe content inset, and no horizontal overflow.
+The upper composition sits slightly left of mathematical center. On desktop, the investment headline preserves the authored three-line rag: “This is an investment in / changing the trajectory / of your business.” Below 1100px it returns to natural wrapping. Below 768px portrait, biography, cost, and investment context become one reading flow.
 
-### FAQ
+### Closing folder
 
-- The FAQ uses the Canvas (`#FDFCFA`) surface with Ink (`#222222`) type and controls, matching the site's restrained editorial sections rather than a saturated color field.
-- The FAQ heading uses Fraunces Light (`300`) at `62 px / 64 px` with `-2 px` tracking on desktop. “answered.” remains the paired DM Sans Regular (`400`) emphasis at `0.94em`; the two faces share the same inherited line-height. The heading scales down to `48 px / 50 px` on narrow screens.
-- The canonical FAQ contains ten items and is generated once for both the homepage and contact page so question order, copy, and behavior remain synchronized.
-- Accordion rows are separated by quiet Ink hairlines at 14% opacity. Do not introduce cards, shadows, tinted row fills, or high-contrast rules.
-- The first item is open by default.
-- Headers are keyboard-operable and expose expanded state to assistive technology.
-- Answers animate by measured height over 300 ms; the plus rotates 45 degrees when open.
-- Recalculate open height after fonts load and on resize so copy changes never clip.
+The closing CTA is a centered Action Blue folder on Canvas. At the 1110 × 647 reference, its body is approximately 644 × 391px; on wide screens it caps at 56rem. The shell is `min(58%, 56rem)` on desktop, `min(86%, 40rem)` below 992px, and 92% below 768px. The mobile panel has a 26rem minimum height.
 
-### Contact page
+The body uses a 1.647:1 aspect ratio, 8px radius, and a compact tab rising 25px. The headline/action group is vertically centered within the body, with 78px desktop side padding. The first line is Fraunces Light; the second is DM Sans Regular at `0.94em`. The only action is the Decision Green pill.
 
-- Preserve the established contact hero: a centered Action Blue folder on Canvas with a light-Fraunces “Contact us” heading, the email prompt, and an underlined Calendly “Book a call” action.
-- The contact folder remains a normal-flow section. It uses the same restrained rounded corners and folder-tab silhouette as the rest of the site, without a shadow, gradient, or scroll effect.
-- The legacy “Ready to fix your positioning?” interstitial, Tailor illustration, green testimonial marquee, and legacy footer are retired.
-- The contact hero flows directly into the same Canvas FAQ and compact footer used on the homepage. FAQ content and behavior must stay synchronized with the homepage source.
+### FAQ, contact, and footer
 
-### Images and logos
+FAQ uses Canvas with Ink type and 14%-Ink row rules. The ten-item source is shared by homepage and contact page; the first item is open by default. Headers are keyboard-operable and expose expanded state. Answers animate to measured height over 300ms, and the plus rotates 45 degrees. Recalculate open heights after fonts load and on resize.
 
-- Production images and fonts are local. Do not add hotlinked visual assets.
-- Logos retain their native aspect ratio and visual weight. Do not add card chrome unless a supplied composition explicitly calls for it; the investor proof panel is the approved exception and uses flat White cards without borders or shadows.
-- The shared homepage/contact footer uses the same supplied `public/assets/itk-logo.svg` vector as the navigation, rendered at its native 160:20 (8:1) aspect ratio. Do not use the retired 150:29 inline footer mark or recreate the lockup with live type.
-- The compact footer descriptor is case-sensitive: `Positioning for B2B tech` uses a capital **P** on every route.
-- The founder portrait remains editorial, uses the supplied `jon-itkin.avif`, and sits in the documented 4:5 profile composition.
+The contact page keeps the shared navigation, a centered Action Blue contact folder, the shared FAQ, and the shared compact footer. Retired legacy interstitials, marquees, and alternate footers must not return.
 
-## 6. Motion and interaction
+The footer reuses `itk-logo.svg` at 160:20. Its descriptor is case-sensitive: **Positioning for B2B tech** always uses a capital P.
 
-- Motion is functional, not ornamental.
-- Use smooth anchor scrolling, a 200 ms navigation underline, and 300 ms FAQ transitions.
-- Prefer `transform` and `opacity` for new motion. Color interpolation is allowed only for the documented light-to-deep lavender positioning-story transition. Avoid scroll-jacking and gratuitous entrance sequences.
-- Respect `prefers-reduced-motion`: disable smooth scrolling and nonessential transitions.
-- Every hover interaction must have an equivalent keyboard-focus treatment.
+### Motion and accessibility
 
-## 7. Content architecture
+Motion is feedback, not ornament. Prefer opacity and transform. Core timings are 160–180ms for small state changes, 200–220ms for underlines and card swaps, 240–280ms for navigation movement, and 300ms for accordion height. Smooth anchor scrolling is allowed. Every hover state needs a keyboard-focus equivalent.
 
-- `src/content/source-body.html` preserves the captured source structure.
-- `src/content/site-copy.mjs` owns the approved copy replacement and validates structural counts in the preserved source capture, including source-only decision tabs, testimonials, and FAQs. It also removes the superseded “What you see, you get.” partnership section and the duplicate full-width client testimonials before rendering.
-- `src/pages/index.astro` assembles the page and contains only the minimal behavioral and global-brand overrides needed by the recreation.
-- Copy revisions may change natural section height, but they must not silently add, remove, or redesign layout primitives.
+Under `prefers-reduced-motion`, disable smooth scrolling, testimonial rotation, animated navigation movement, accordion transitions, and nonessential hover translations. Preserve state changes without interpolation.
 
-Current structural contract: 10 top-level rendered sections (the former client-fit/logo bands are one section, the Four Cs/testimonial/decision sequence is one continuous card with three modules, and the positioning process timeline is one section). The superseded source decision/process section, its eight colored decision tabs, both duplicate full-width client testimonials, and the “What you see, you get.” partnership section are not rendered. The compact eight-row decision list remains inside the positioning editorial card. The remaining page includes 11 testimonial cards and 10 shared FAQ items.
+## Do's and Don'ts
 
-## 8. Accessibility and responsive requirements
+### Do:
 
-- All interactive controls need visible focus states and keyboard support.
-- Preserve semantic headings and logical reading order.
-- Keep meaningful image alternative text; decorative imagery should use empty alternative text.
-- Verify at minimum at 1440 × 1000, 768 × 900, and 390 × 844.
-- A release fails if it introduces horizontal overflow, clipped copy, broken images, inaccessible menus, or stale FAQ heights.
+- **Do** preserve the recognizable identity and treat the implemented site and supplied references as the primary visual authority.
+- **Do** let typography carry hierarchy through contrast, scale, pacing, and authored line breaks.
+- **Do** use Fraunces only at weight 300 or 400 and DM Sans for body, utility, controls, and paired emphasis.
+- **Do** center text blocks by their container when requested while preserving the intended internal text alignment.
+- **Do** use Canvas as the default surface, Deep Ink instead of pure black, and 1px quiet rules for structure.
+- **Do** keep calls to action concise, visible, and consistent: **Book a call**, except for the approved closing-folder label.
+- **Do** use supplied local fonts, logos, and photography at their native proportions.
+- **Do** preserve keyboard operability, visible focus states, semantic reading order, meaningful alternative text, WCAG 2.2 AA contrast, and reduced-motion behavior.
+- **Do** verify at 1440 × 1000, 768 × 900, and 390 × 844. Horizontal overflow, clipped copy, broken assets, inaccessible menus, and stale FAQ heights are release blockers.
 
-## 9. Banned patterns
+### Don't:
 
-- No new fonts or font-role swaps without an explicit brand decision.
-- No generic system serif in production; Fraunces is the only display serif.
-- No bold, semibold, or synthetic-bold Fraunces. Serif weight must remain `300` or `400`.
-- No `Inter`, neon color, gradients, glassmorphism, outer glows, custom cursors, or emoji decoration.
-- No pure black; use Ink or Deep Ink.
-- No arbitrary border-radius inflation; pills are reserved for actions and tags, while content cards stay subtly rounded.
-- No generic stock imagery, fake statistics, filler UI prompts, or AI-marketing clichés.
-- No design changes disguised as copy work.
-
-## 10. Change-management rule
-
-For every global brand or design-system change:
-
-1. Update the implementation and this `DESIGN.md` together.
-2. Build both the normal site and the GitHub Pages project-path variant.
-3. Verify desktop, tablet, and mobile behavior.
-4. Record material visual or interaction checks in `design-qa.md`.
-
-Copy-only changes do not require a design-system revision unless they establish a reusable voice, content, or component rule.
+- **Don't** create “Generic SaaS landing pages with interchangeable card grids and stock visual language.”
+- **Don't** use “Timid typography or neutralized styling that weakens the existing identity.”
+- **Don't** add “Decorative complexity that competes with the positioning story.”
+- **Don't** make “Unnecessary departures from the supplied site's established visual language.”
+- **Don't** introduce new fonts, swap type roles, or bold Fraunces without an explicit brand decision.
+- **Don't** use Inter, pure black, neon accents, gradients, glassmorphism, outer glows, heavy shadows, custom cursors, or emoji decoration.
+- **Don't** inflate border radii. Pills are reserved for actions, chips, Listen, and counts; editorial cards remain subtly rounded.
+- **Don't** turn structured editorial rows into elevated SaaS cards or add decorative timeline nodes.
+- **Don't** use stock imagery, fake statistics, filler prompts, or AI-marketing clichés.
+- **Don't** pin folder shapes, fix narrative sections, scroll-jack the page, or animate layout properties when transform/opacity will work.
+- **Don't** crop, stretch, recolor, hotlink, or replace supplied image and logo assets.
+- **Don't** disguise a layout or brand change as a copy-only edit.

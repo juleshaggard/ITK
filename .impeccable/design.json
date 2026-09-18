@@ -1,0 +1,342 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-18T23:28:53Z",
+  "title": "Design System: In The Kitchen",
+  "extensions": {
+    "colorMeta": {
+      "action-blue": {
+        "role": "primary",
+        "displayName": "Action Blue",
+        "canonical": "#2800E8",
+        "tonalRamp": ["#08002F", "#10005D", "#19008C", "#2100BA", "#2800E8", "#6547EF", "#A38FF7", "#EAE5FF"]
+      },
+      "hero-yellow": {
+        "role": "secondary",
+        "displayName": "Hero Yellow",
+        "canonical": "#FCF387",
+        "tonalRamp": ["#3A3602", "#6F6807", "#A49B18", "#D5CA43", "#FCF387", "#FFF7A7", "#FFFBCB", "#FFFEEB"]
+      },
+      "testimonial-yellow": {
+        "role": "secondary",
+        "displayName": "Testimonial Yellow",
+        "canonical": "#FFF27B",
+        "tonalRamp": ["#3B3400", "#716500", "#A9980B", "#DDCA35", "#FFF27B", "#FFF6A1", "#FFFAC8", "#FFFEEA"]
+      },
+      "decision-green": {
+        "role": "secondary",
+        "displayName": "Decision Green",
+        "canonical": "#CFFD93",
+        "tonalRamp": ["#183A00", "#316D08", "#54A321", "#86D84E", "#CFFD93", "#DDFEB0", "#EBFDCF", "#F7FFEF"]
+      },
+      "positioning-lavender": {
+        "role": "tertiary",
+        "displayName": "Positioning Lavender",
+        "canonical": "#E1DBFC",
+        "tonalRamp": ["#211A45", "#43387B", "#695EAA", "#998FD5", "#C5BDEE", "#E1DBFC", "#EEEAFE", "#F9F7FF"]
+      },
+      "positioning-lavender-deep": {
+        "role": "tertiary",
+        "displayName": "Deep Positioning Lavender",
+        "canonical": "#AFA4E0",
+        "tonalRamp": ["#211840", "#41366F", "#63589D", "#877BC4", "#AFA4E0", "#C9C1EB", "#E2DDF5", "#F7F4FD"]
+      },
+      "signal-pink": {
+        "role": "secondary",
+        "displayName": "Signal Pink",
+        "canonical": "#F2ACD7",
+        "tonalRamp": ["#3B142D", "#712B59", "#A84D86", "#D77AAF", "#F2ACD7", "#F7C4E3", "#FADCEE", "#FEF3F9"]
+      },
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Warm Canvas",
+        "canonical": "#FDFCFA",
+        "tonalRamp": ["#252321", "#4B4844", "#716D67", "#99948D", "#C2BDB6", "#E2DED9", "#F1EEEA", "#FDFCFA"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "#FFFFFF",
+        "tonalRamp": ["#262626", "#4C4C4C", "#737373", "#999999", "#BFBFBF", "#D9D9D9", "#F0F0F0", "#FFFFFF"]
+      },
+      "soft-stone": {
+        "role": "neutral",
+        "displayName": "Soft Stone",
+        "canonical": "#F6F4F1",
+        "tonalRamp": ["#24221F", "#494642", "#6F6B65", "#96918A", "#BDB8B1", "#DAD6D0", "#ECE9E5", "#F6F4F1"]
+      },
+      "soft-stone-hover": {
+        "role": "neutral",
+        "displayName": "Soft Stone Hover",
+        "canonical": "#F4F2EF",
+        "tonalRamp": ["#24221F", "#484541", "#6E6A64", "#948F88", "#BBB6AF", "#D8D4CE", "#EAE7E2", "#F4F2EF"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Editorial Ink",
+        "canonical": "#222222",
+        "tonalRamp": ["#111111", "#222222", "#3B3B3B", "#5A5A5A", "#7D7D7D", "#A6A6A6", "#D2D2D2", "#F2F2F2"]
+      },
+      "deep-ink": {
+        "role": "neutral",
+        "displayName": "Deep Ink",
+        "canonical": "#1A1A1A",
+        "tonalRamp": ["#0D0D0D", "#1A1A1A", "#343434", "#535353", "#767676", "#A0A0A0", "#CECECE", "#F1F1F1"]
+      },
+      "secondary-copy": {
+        "role": "neutral",
+        "displayName": "Secondary Copy",
+        "canonical": "#625F5A",
+        "tonalRamp": ["#1B1917", "#373431", "#514E49", "#625F5A", "#85817B", "#AAA6A0", "#D2CEC8", "#F3F0EC"]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Quiet Hairline",
+        "canonical": "#E3E3E3",
+        "tonalRamp": ["#232323", "#474747", "#6C6C6C", "#919191", "#B7B7B7", "#D0D0D0", "#E3E3E3", "#F6F6F6"]
+      }
+    },
+    "typographyMeta": {
+      "display-hero": {
+        "displayName": "Hero Display",
+        "purpose": "Largest mixed-face statement in the opening folder."
+      },
+      "display-section": {
+        "displayName": "Section Display",
+        "purpose": "Large standalone serif section statements."
+      },
+      "headline-editorial": {
+        "displayName": "Editorial Headline",
+        "purpose": "Long-form positioning and decision statements."
+      },
+      "headline-statement": {
+        "displayName": "Positioning Statement",
+        "purpose": "Centered intrinsic-width statement with left-aligned lines."
+      },
+      "title": {
+        "displayName": "Working Title",
+        "purpose": "Process steps and practical subheadings."
+      },
+      "body-large": {
+        "displayName": "Large Body",
+        "purpose": "Lead paragraphs and section outcomes."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default readable paragraph copy."
+      },
+      "body-small": {
+        "displayName": "Compact Body",
+        "purpose": "Testimonials and dense editorial support copy."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Actions, counts, metadata, and attributions."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "state-fast",
+        "value": "160ms ease",
+        "purpose": "Compact control color and border feedback."
+      },
+      {
+        "name": "action-hover",
+        "value": "180ms cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Closing CTA translation and color response."
+      },
+      {
+        "name": "link-reveal",
+        "value": "200ms ease",
+        "purpose": "Navigation underline expansion."
+      },
+      {
+        "name": "testimonial-swap",
+        "value": "220ms cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Perimeter testimonial opacity and 8px movement."
+      },
+      {
+        "name": "nav-align",
+        "value": "240ms cubic-bezier(0.77, 0, 0.175, 1)",
+        "purpose": "Logo and right navigation alignment after the hero."
+      },
+      {
+        "name": "nav-direction",
+        "value": "280ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Directional navigation hide and reveal."
+      },
+      {
+        "name": "accordion",
+        "value": "300ms ease",
+        "purpose": "Measured FAQ answer height and plus rotation."
+      }
+    ],
+    "breakpoints": [
+      { "name": "narrow-mobile", "value": "479px" },
+      { "name": "mobile-max", "value": "767px" },
+      { "name": "tablet", "value": "768px–991px" },
+      { "name": "desktop", "value": "992px" },
+      { "name": "founder-rag", "value": "1100px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The default high-contrast Book a call action.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Book a call</a>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 24px;border-radius:999px;background:#1A1A1A;color:#FFFFFF;font:600 13px/1 'DM Sans',Arial,sans-serif;text-decoration:none;transition:background-color 180ms ease,color 180ms ease}.ds-btn-primary:hover{background:#2800E8}.ds-btn-primary:focus-visible{outline:2px solid currentColor;outline-offset:4px}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Quiet navigation action on Canvas.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">Book a call</a>",
+      "css": ".ds-btn-outline{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 19px;border:1px solid #1A1A1A;border-radius:999px;background:#FDFCFA;color:#1A1A1A;font:600 13px/1 'DM Sans',Arial,sans-serif;text-decoration:none;transition:background-color 180ms ease,color 180ms ease}.ds-btn-outline:hover{background:#1A1A1A;color:#FFFFFF}.ds-btn-outline:focus-visible{outline:2px solid currentColor;outline-offset:4px}"
+    },
+    {
+      "name": "Accent Button",
+      "kind": "button",
+      "refersTo": "button-accent",
+      "description": "The lime action used only inside the closing blue folder.",
+      "html": "<a class=\"ds-btn-accent\" href=\"#\">Get In The Kitchen →</a>",
+      "css": ".ds-btn-accent{display:inline-flex;align-items:center;justify-content:center;min-width:182px;height:43px;padding:0 24px;border-radius:999px;background:#CFFD93;color:#1A1A1A;font:600 14px/1 'DM Sans',Arial,sans-serif;text-decoration:none;transition:transform 180ms cubic-bezier(.22,1,.36,1),background-color 180ms ease}.ds-btn-accent:hover{transform:translateY(-2px);background:#FFF27B}.ds-btn-accent:focus-visible{outline:2px solid currentColor;outline-offset:4px}"
+    },
+    {
+      "name": "Fit Chip",
+      "kind": "chip",
+      "refersTo": "fit-chip",
+      "description": "Compact static marker for best-fit client qualities.",
+      "html": "<span class=\"ds-fit-chip\">Challenger mindset</span>",
+      "css": ".ds-fit-chip{display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:999px;background:#F2ACD7;color:#222222;font:500 15px/18px 'DM Sans',Arial,sans-serif;white-space:nowrap}"
+    },
+    {
+      "name": "Editorial Card",
+      "kind": "card",
+      "refersTo": "editorial-card",
+      "description": "Flat Paper container for the long-form positioning sequence.",
+      "html": "<article class=\"ds-editorial-card\"><h3>Fundamentally different.</h3><p>Positioning is a system of decisions, not a coat of copy.</p></article>",
+      "css": ".ds-editorial-card{max-width:640px;padding:40px 45px 45px;border-radius:10px;background:#FFFFFF;color:#222222}.ds-editorial-card h3{margin:0;font:300 40px/1.05 Fraunces,Georgia,serif;letter-spacing:-.025em}.ds-editorial-card p{max-width:55ch;margin:28px 0 0;font:400 16px/1.45 'DM Sans',Arial,sans-serif}"
+    },
+    {
+      "name": "Testimonial Card",
+      "kind": "card",
+      "refersTo": "testimonial-card",
+      "description": "Compact flat quote card for the rotating perimeter grid.",
+      "html": "<figure class=\"ds-testimonial-card\"><blockquote>“The ideas and language we co-created are pulling the company forward.”</blockquote><figcaption>Alex Gallego, CEO, Redpanda</figcaption></figure>",
+      "css": ".ds-testimonial-card{display:flex;flex-direction:column;justify-content:space-between;min-height:200px;margin:0;padding:20px;border-radius:10px;background:#FDFCFA;color:#222222}.ds-testimonial-card blockquote{margin:0;font:400 15px/1.38 'DM Sans',Arial,sans-serif;letter-spacing:-.012em}.ds-testimonial-card figcaption{margin-top:18px;padding-top:12px;border-top:1px solid rgba(34,34,34,.18);font:400 13px/1.35 'DM Sans',Arial,sans-serif}"
+    },
+    {
+      "name": "Listen Control",
+      "kind": "button",
+      "description": "Compact outlined speech-synthesis control for editorial metadata.",
+      "html": "<button class=\"ds-listen\" type=\"button\"><svg viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4 14v-2a8 8 0 0 1 16 0v2M4 14h2v5H4a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2Zm16 0h-2v5h2a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2Z\"/></svg><span>Listen</span></button>",
+      "css": ".ds-listen{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:6px 11px;border:1px solid rgba(34,34,34,.14);border-radius:999px;background:#FDFCFA;color:#222222;font:600 13px/1 'DM Sans',Arial,sans-serif}.ds-listen svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.ds-listen:hover,.ds-listen[aria-pressed=true]{border-color:rgba(34,34,34,.24);background:#F4F2EF}.ds-listen:focus-visible{outline:2px solid currentColor;outline-offset:3px}"
+    },
+    {
+      "name": "FAQ Row",
+      "kind": "custom",
+      "description": "Quiet ruled accordion header with a rotating plus.",
+      "html": "<button class=\"ds-faq-row\" type=\"button\" aria-expanded=\"false\"><span>How much does it cost?</span><span class=\"ds-faq-plus\" aria-hidden=\"true\">+</span></button>",
+      "css": ".ds-faq-row{display:flex;align-items:center;justify-content:space-between;width:100%;padding:24px 0;border:0;border-top:1px solid rgba(34,34,34,.14);background:#FDFCFA;color:#222222;font:400 22px/1.25 'DM Sans',Arial,sans-serif;text-align:left}.ds-faq-plus{transition:transform 300ms ease}.ds-faq-row:hover .ds-faq-plus{transform:rotate(45deg)}.ds-faq-row:focus-visible{outline:2px solid currentColor;outline-offset:4px}"
+    },
+    {
+      "name": "Closing Folder",
+      "kind": "custom",
+      "description": "Signature centered Action Blue conversion surface.",
+      "html": "<section class=\"ds-folder\"><span class=\"ds-folder-tab\" aria-hidden=\"true\"></span><div class=\"ds-folder-body\"><div><h2>It’s time to take<br><span>a position.</span></h2><a href=\"#\">Get In The Kitchen →</a></div></div></section>",
+      "css": ".ds-folder{position:relative;width:min(58%,896px);padding-top:25px}.ds-folder-tab{position:absolute;top:0;left:.41%;width:24.56%;height:28px;border-radius:8px 8px 0 0;background:#2800E8}.ds-folder-body{display:flex;align-items:center;aspect-ratio:1.647/1;padding:0 78px;border-radius:8px;background:#2800E8;color:#FFFFFF}.ds-folder h2{margin:0;font:300 64px/.92 Fraunces,Georgia,serif;letter-spacing:-.055em}.ds-folder h2 span{font-family:'DM Sans',Arial,sans-serif;font-size:.94em;font-weight:400;letter-spacing:-.02em}.ds-folder a{display:inline-flex;align-items:center;min-height:43px;margin-top:33px;padding:0 24px;border-radius:999px;background:#CFFD93;color:#1A1A1A;font:600 14px/1 'DM Sans',Arial,sans-serif;text-decoration:none}.ds-folder a:focus-visible{outline:2px solid currentColor;outline-offset:4px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Strategic Editorial",
+    "overview": "In The Kitchen should feel like a sharply edited independent publication run by an experienced operator: bold, direct, warm, and assured. Typography carries the argument. Flat color fields create chapter breaks. Asymmetric compositions, narrow reading measures, and purposeful whitespace make the page feel authored rather than templated.\n\nThe system is medium-low density and deliberately high contrast. It rejects generic SaaS polish in favor of an editorial cadence: large statements, crisp hairlines, lightly rounded paper surfaces, and a small number of saturated brand fields. Motion is restrained and functional. Nothing should compete with the positioning story.",
+    "keyCharacteristics": [
+      "Editorial typography with a light serif narrative voice and a clean sans-serif working voice.",
+      "Flat, committed color fields rather than gradients or decorative effects.",
+      "Quiet structure through whitespace, 1px rules, and restrained 8–16px radii.",
+      "Intentional asymmetry on wide screens; one clear reading flow on mobile.",
+      "Functional motion using opacity and transforms, with complete reduced-motion fallbacks.",
+      "A direct path from understanding the offer to booking a call."
+    ],
+    "rules": [
+      {
+        "name": "The Source-of-Truth Rule",
+        "body": "Any global change to type roles, scale, palette, spacing, shape, motion, or responsive behavior must update this file and `.impeccable/design.json` in the same change. Build both the root and GitHub Pages base-path variants, then record material visual checks in `design-qa.md`.",
+        "section": "overview"
+      },
+      {
+        "name": "The Normal-Flow Rule",
+        "body": "Sections, folder shapes, and calls to action participate in normal document flow. Sticky or fixed positioning is reserved for the navigation; never pin, scroll-jack, or artificially hold a narrative section.",
+        "section": "overview"
+      },
+      {
+        "name": "The Solid-Field Rule",
+        "body": "Brand colors are solid. Gradients, glows, transparent color washes, and glass effects are prohibited.",
+        "section": "colors"
+      },
+      {
+        "name": "The One-Field Rule",
+        "body": "Give each saturated color a clear job. Never mix multiple bright accents inside one component or use them as arbitrary highlights.",
+        "section": "colors"
+      },
+      {
+        "name": "The Warm-Neutral Rule",
+        "body": "Canvas is the default white. Paper is reserved for explicit contained surfaces. Pure black and cool gray page backgrounds are forbidden.",
+        "section": "colors"
+      },
+      {
+        "name": "The Never-Bold-Serif Rule",
+        "body": "Fraunces is only Light 300 or Regular 400. Bold, semibold, synthetic bold, and faux italic Fraunces are prohibited. Keep `font-synthesis: none` on display treatments.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sans-Is-Slightly-Smaller Rule",
+        "body": "Paired DM Sans emphasis remains `0.94em` unless a future global brand change explicitly replaces the ratio in both code and this specification.",
+        "section": "typography"
+      },
+      {
+        "name": "The Upright-Quote Rule",
+        "body": "The dark Redpanda quote uses upright DM Sans Regular, not italics. Its attribution is warm white and follows the quote in normal flow.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-by-Default Rule",
+        "body": "No shadows at rest, on hover, or on focus. Use a color change, underline, opacity, or a 2px translation for feedback.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Quiet-Structure Rule",
+        "body": "If the border becomes the first thing you notice, it is too strong. Rules divide content; they do not frame it.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do preserve the recognizable identity and treat the implemented site and supplied references as the primary visual authority.",
+      "Do let typography carry hierarchy through contrast, scale, pacing, and authored line breaks.",
+      "Do use Fraunces only at weight 300 or 400 and DM Sans for body, utility, controls, and paired emphasis.",
+      "Do center text blocks by their container when requested while preserving the intended internal text alignment.",
+      "Do use Canvas as the default surface, Deep Ink instead of pure black, and 1px quiet rules for structure.",
+      "Do keep calls to action concise, visible, and consistent: Book a call, except for the approved closing-folder label.",
+      "Do use supplied local fonts, logos, and photography at their native proportions.",
+      "Do preserve keyboard operability, visible focus states, semantic reading order, meaningful alternative text, WCAG 2.2 AA contrast, and reduced-motion behavior.",
+      "Do verify at 1440 × 1000, 768 × 900, and 390 × 844. Horizontal overflow, clipped copy, broken assets, inaccessible menus, and stale FAQ heights are release blockers."
+    ],
+    "donts": [
+      "Don't create “Generic SaaS landing pages with interchangeable card grids and stock visual language.”",
+      "Don't use “Timid typography or neutralized styling that weakens the existing identity.”",
+      "Don't add “Decorative complexity that competes with the positioning story.”",
+      "Don't make “Unnecessary departures from the supplied site's established visual language.”",
+      "Don't introduce new fonts, swap type roles, or bold Fraunces without an explicit brand decision.",
+      "Don't use Inter, pure black, neon accents, gradients, glassmorphism, outer glows, heavy shadows, custom cursors, or emoji decoration.",
+      "Don't inflate border radii. Pills are reserved for actions, chips, Listen, and counts; editorial cards remain subtly rounded.",
+      "Don't turn structured editorial rows into elevated SaaS cards or add decorative timeline nodes.",
+      "Don't use stock imagery, fake statistics, filler prompts, or AI-marketing clichés.",
+      "Don't pin folder shapes, fix narrative sections, scroll-jack the page, or animate layout properties when transform/opacity will work.",
+      "Don't crop, stretch, recolor, hotlink, or replace supplied image and logo assets.",
+      "Don't disguise a layout or brand change as a copy-only edit."
+    ]
+  }
+}
