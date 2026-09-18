@@ -31,7 +31,7 @@ const replaceMatch = (html, pattern, replacement, label) => {
 const testimonials = [
   {
     quote:
-      '“We knew our brand was not reflecting our aspirations to be a generational company. Jon spent the time to deeply understand our origin, vision, and positioning. We also loved that when we met Jon in the selection process, we met exactly who would do the work for us. We’d recommend Jon to anyone who wants to build a unique, differentiated brand.”',
+      '“We knew our brand was not reflecting our aspirations to be a generational company. Jon spent the time to deeply understand our origin, vision, and positioning. We also loved that when we met Jon in the selection process, we met exactly who would do the work for us.”',
     author: 'Johannes Jaeckle, CEO &amp; Co-founder, Heron',
   },
   {

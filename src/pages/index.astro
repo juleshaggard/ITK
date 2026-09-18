@@ -7,6 +7,16 @@ const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 const copiedBody = applySiteCopy(sourceBody);
+const heroTabAssetPattern = 'src="assets/yellow-tab.svg"';
+
+if (!copiedBody.includes(heroTabAssetPattern)) {
+  throw new Error('Unable to locate the hero folder tab asset.');
+}
+
+const bodyWithHeroTab = copiedBody.replace(
+  heroTabAssetPattern,
+  `src="${base}assets/hero-yellow-tab.svg"`,
+);
 const clientSectionPattern = /<section id="clients"[\s\S]*?<\/section><section class="section light-bg">[\s\S]*?<\/section>/;
 const clientSection = `<section id="clients" class="section light-bg positioning-clients-section">
   <div class="container positioning-clients-container">
@@ -108,6 +118,25 @@ const positioningStorySection = `<section id="four-cs" class="section positionin
           <span>You do it by being</span>
           <span>fundamentally different.</span>
         </h2>
+      </div>
+      <div class="four-cs-meta" aria-label="Article details">
+        <div class="four-cs-reading-meta">
+          <span>4 min read</span>
+          <button class="four-cs-listen" type="button" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
+              <path d="M4 14h2v5H4a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2Z" />
+              <path d="M20 14h-2v5h2a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2Z" />
+            </svg>
+            <span class="four-cs-listen-label">Listen</span>
+          </button>
+        </div>
+        <div class="four-cs-author">
+          <span class="four-cs-author-portrait" aria-hidden="true">
+            <img src="${base}assets/jon-itkin.avif" alt="" width="40" height="40" />
+          </span>
+          <span>By Jon Itkin</span>
+        </div>
       </div>
       <div class="four-cs-divider" aria-hidden="true"></div>
       <div class="four-cs-copy">
@@ -269,7 +298,7 @@ if (!clientSectionPattern.test(copiedBody)) {
   throw new Error('Unable to locate the client-fit and logo sections.');
 }
 
-const clientComposedBody = copiedBody.replace(clientSectionPattern, clientSection);
+const clientComposedBody = bodyWithHeroTab.replace(clientSectionPattern, clientSection);
 
 if (!investorSectionPattern.test(clientComposedBody)) {
   throw new Error('Unable to locate the investor partnership section.');
@@ -494,6 +523,53 @@ const pageBody = pageWithFooterLogo.replaceAll(
           year.textContent = String(new Date().getFullYear());
         });
 
+        const listenButton = document.querySelector('.four-cs-listen');
+
+        if (listenButton && 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window) {
+          const listenLabel = listenButton.querySelector('.four-cs-listen-label');
+          const storyCard = listenButton.closest('.positioning-story-card');
+          let activeUtterance = null;
+
+          const resetListenButton = () => {
+            activeUtterance = null;
+            listenButton.setAttribute('aria-pressed', 'false');
+            if (listenLabel) listenLabel.textContent = 'Listen';
+          };
+
+          listenButton.addEventListener('click', () => {
+            if (activeUtterance) {
+              window.speechSynthesis.cancel();
+              resetListenButton();
+              return;
+            }
+
+            const storyText = storyCard
+              ? [...storyCard.querySelectorAll(
+                  '.four-cs-headlines h2, .four-cs-copy p, .four-cs-item h3, .four-cs-item p, .positioning-quote-panel blockquote p, .positioning-quote-panel figcaption, .positioning-decisions-headlines h2, .positioning-decisions-copy p, .positioning-decisions-label, .positioning-decisions-list li',
+                )]
+                  .map((element) => element.textContent?.trim())
+                  .filter(Boolean)
+                  .join('. ')
+              : '';
+
+            if (!storyText) return;
+
+            activeUtterance = new window.SpeechSynthesisUtterance(storyText);
+            activeUtterance.rate = 0.95;
+            activeUtterance.onend = resetListenButton;
+            activeUtterance.onerror = resetListenButton;
+            listenButton.setAttribute('aria-pressed', 'true');
+            if (listenLabel) listenLabel.textContent = 'Stop';
+            window.speechSynthesis.speak(activeUtterance);
+          });
+
+          window.addEventListener('pagehide', () => {
+            if (activeUtterance) window.speechSynthesis.cancel();
+          });
+        } else if (listenButton) {
+          listenButton.hidden = true;
+        }
+
         const testimonialSection = document.querySelector('.b2b-ceos-section');
 
         if (testimonialSection) {
@@ -689,7 +765,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
     --type-serif-weight-regular: 400;
     --hero-folder-gutter: clamp(1rem, 1.8vw, 2rem);
     --hero-folder-bottom-gap: clamp(1.5rem, 2.2vw, 2rem);
-    --hero-folder-radius: clamp(0.75rem, 0.95vw, 1rem);
+    --hero-folder-radius: clamp(0.65rem, 0.95vw, 1rem);
     --hero-tab-width: clamp(14rem, 20.6vw, 22rem);
     --hero-tab-half-width: clamp(7rem, 10.3vw, 11rem);
     --hero-tab-height: clamp(2.94rem, 4.327vw, 4.625rem);
@@ -842,15 +918,15 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
   .positioning-clients-tags .best-fit-clients-tag {
     flex: 0 0 auto;
-    height: 40px;
-    padding: 0 16px;
+    height: 36px;
+    padding: 0 14px;
     display: flex;
     align-items: center;
   }
 
   .positioning-clients-tags .paragraph-s {
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 15px;
+    line-height: 18px;
   }
 
   .positioning-clients-logos {
@@ -1009,9 +1085,97 @@ const pageBody = pageWithFooterLogo.replaceAll(
     white-space: nowrap;
   }
 
+  .four-cs-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: min(2.056vw, 30px);
+    color: #625f5a;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: clamp(0.8125rem, 0.96vw, 0.875rem);
+    font-weight: 400;
+    line-height: 1.25;
+  }
+
+  .four-cs-reading-meta,
+  .four-cs-author,
+  .four-cs-listen {
+    display: flex;
+    align-items: center;
+  }
+
+  .four-cs-reading-meta {
+    gap: min(0.822vw, 12px);
+  }
+
+  .four-cs-listen {
+    gap: 0.375rem;
+    min-height: 2rem;
+    padding: 0.375rem 0.6875rem;
+    border: 1px solid rgb(34 34 34 / 14%);
+    border-radius: 999px;
+    color: #222;
+    background-color: #fdfcfa;
+    font: inherit;
+    font-size: clamp(0.75rem, 0.891vw, 0.8125rem);
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      color 160ms ease,
+      background-color 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .four-cs-listen:hover,
+  .four-cs-listen[aria-pressed='true'] {
+    border-color: rgb(34 34 34 / 24%);
+    background-color: #f4f2ef;
+  }
+
+  .four-cs-listen:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+
+  .four-cs-listen svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    flex: 0 0 auto;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .four-cs-author {
+    gap: 0.75rem;
+    flex: 0 0 auto;
+    color: #222;
+  }
+
+  .four-cs-author-portrait {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .four-cs-author img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 53% 27%;
+    transform: scale(2.2);
+    transform-origin: 53% 29%;
+  }
+
   .four-cs-divider {
     height: 1px;
-    margin-top: min(2.673vw, 39px);
+    margin-top: min(1.919vw, 28px);
     background-color: #e3e3e3;
   }
 
@@ -1513,7 +1677,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
   .b2b-ceos-section {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: repeat(3, 17rem);
+    grid-template-rows: repeat(3, 15rem);
     align-items: stretch;
     gap: clamp(1.75rem, 2.75vw, 2.75rem) clamp(2rem, 4.25vw, 4.25rem);
     box-sizing: border-box;
@@ -1952,8 +2116,33 @@ const pageBody = pageWithFooterLogo.replaceAll(
       white-space: normal;
     }
 
+    .four-cs-meta {
+      gap: 1rem;
+      margin-top: 1.75rem;
+      font-size: 0.8125rem;
+    }
+
+    .four-cs-reading-meta {
+      gap: 0.5rem;
+    }
+
+    .four-cs-listen {
+      min-height: 1.875rem;
+      padding: 0.3125rem 0.625rem;
+      font-size: 0.75rem;
+    }
+
+    .four-cs-author {
+      gap: 0.625rem;
+    }
+
+    .four-cs-author-portrait {
+      width: 36px;
+      height: 36px;
+    }
+
     .four-cs-divider {
-      margin-top: 2rem;
+      margin-top: 1.5rem;
     }
 
     .four-cs-copy {
@@ -2131,8 +2320,17 @@ const pageBody = pageWithFooterLogo.replaceAll(
       margin-top: 2.625rem;
     }
 
+    .four-cs-meta {
+      margin-top: 1.875rem;
+      font-size: 0.875rem;
+    }
+
+    .four-cs-listen {
+      font-size: 0.8125rem;
+    }
+
     .four-cs-divider {
-      margin-top: 2.4375rem;
+      margin-top: 1.75rem;
     }
 
     .four-cs-copy {

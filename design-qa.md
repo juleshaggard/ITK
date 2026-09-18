@@ -507,3 +507,85 @@ final result: passed
 - Standard and GitHub Pages project-path builds complete successfully.
 
 final result: passed
+
+---
+
+# Matched Hero Folder Corners QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/hero-corners-matched-desktop.png`, `.capture/hero-corners-matched-tablet.png`, and `.capture/hero-corners-matched-mobile.png`
+- Route: `http://localhost:4321/`
+- Responsive checks: `1440 × 1000`, `768 × 900`, and `390 × 844` CSS px.
+
+## Findings
+
+- The hero tab now uses a dedicated SVG whose upper shoulder curves track the folder body's shared corner-radius token.
+- The measured tab-to-body radius delta is approximately `0.01px` at desktop and remains below `0.07px` at tablet and mobile widths.
+- All four body corners resolve to the same computed radius at every tested viewport.
+- The tab continues to overlap the body cleanly with no visible seam, and the closing CTA retains its independent tab geometry.
+- No horizontal overflow was detected at any tested viewport.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Smaller Client-Fit Pills QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/client-pills-smaller-desktop.png` and `.capture/client-pills-smaller-mobile.png`
+- Route: `http://localhost:4321/#clients`
+- Responsive checks: `1280 × 720` and `390 × 844` CSS px.
+
+## Findings
+
+- Client-fit pills now resolve to `36px` tall with `14px` horizontal padding and `15px / 18px` type.
+- All eight pills remain centered on one desktop rail and preserve the established 16 px gap.
+- At 390 px, the pills wrap into four centered rows without clipping or changing order.
+- No horizontal overflow was detected at either viewport.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Four Cs Editorial Metadata QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/four-cs-metadata-desktop.png`, `.capture/four-cs-metadata-tablet.png`, and `.capture/four-cs-metadata-mobile.png`
+- Route: `http://localhost:4321/#four-cs`
+- Responsive checks: `1280 × 900`, `768 × 900`, and `390 × 844` CSS px.
+
+## Findings
+
+- “4 min read” and the outlined Listen control sit beneath the paired opening statements, with the Jon Itkin portrait and byline aligned at the opposite edge.
+- The byline reuses `public/assets/jon-itkin.avif`; its circular crop remains face-focused at desktop, tablet, and mobile sizes.
+- The Listen control exposes `aria-pressed`, switches between Listen and Stop, and reads the complete positioning editorial sequence through browser speech synthesis.
+- The metadata row remains balanced without horizontal overflow at all tested widths.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Shorter Testimonial Cards QA
+
+## Evidence
+
+- Browser-rendered implementation: `.capture/testimonial-cards-shorter-desktop.png` and `.capture/testimonial-cards-shorter-mobile.png`
+- Route: `http://localhost:4321/#testimonial-grid-heading`
+- Responsive checks: `1280 × 900` and `390 × 844` CSS px.
+
+## Findings
+
+- The Heron testimonial now ends after “we met exactly who would do the work for us.” The removed recommendation sentence is absent from the complete 11-quote rotation pool.
+- Desktop testimonial rows are reduced from `17rem` to `15rem`, trimming 32 CSS px from every perimeter card at the project’s nominal root size.
+- All 11 approved quotes and attributions fit within the shorter desktop card without clipping or overflow.
+- Tablet and mobile cards remain content-driven so longer copy can reflow naturally.
+- No horizontal overflow was detected at either tested viewport.
+- Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
