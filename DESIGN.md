@@ -123,12 +123,19 @@ components:
     textColor: "{colors.ink}"
     rounded: "{rounded.card}"
     padding: "40px 45px 45px"
+  process-panel:
+    backgroundColor: "{colors.soft-stone}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.panel}"
+    padding: "44px 44px 40px 100px"
+    rail: "12% Ink, 1px"
   testimonial-card:
     backgroundColor: "{colors.canvas}"
     textColor: "{colors.ink}"
     typography: "{typography.body-small}"
     rounded: "{rounded.card}"
-    padding: "20px"
+    padding: "16–18px"
+    height: "12.75rem from 1199px; 13.75rem from 1050–1198px; 14.75rem from 992–1049px; content-driven below 992px"
 ---
 
 # Design System: In The Kitchen
@@ -267,7 +274,7 @@ Links show no underline at rest. A 200ms underline expands to full width on hove
 
 ### Hero folder
 
-The opening field is an inset yellow folder, not a full-bleed rectangle. It uses side gutters of `clamp(16px, 1.8vw, 32px)` and a bottom gap of `clamp(24px, 2.2vw, 32px)`. The yellow body begins below the supplied `hero-yellow-tab.svg`; tab and body overlap by about 2px so no Canvas seam appears. The body's responsive corner radius must optically match the tab shoulders.
+The opening field is an inset yellow folder, not a full-bleed rectangle. It uses side gutters of `clamp(16px, 1.8vw, 32px)` and a bottom gap of `clamp(24px, 2.2vw, 32px)`. The yellow body begins below the supplied `hero-yellow-tab.svg`; tab and body overlap by about 2px so no Canvas seam appears. The absolute tab rail stays transparent so the overlapping yellow body can fill SVG anti-aliasing and fractional-pixel edges. The body's responsive corner radius must optically match the tab shoulders.
 
 Hero content begins at `clamp(24px, 8.85vw, 128px)` inside the body. Desktop padding is 228px top and 128px bottom; mobile uses 160px top and 96px bottom. The hero remains in normal flow and approximates one viewport in height. Supporting copy is 27px / 1.25 on desktop and 16px / 1.5 on mobile. The CTA sits directly below and left-aligned with the copy.
 
@@ -287,7 +294,7 @@ The Four Cs, Redpanda quote, and decision explanation form one continuous Paper 
 
 The background shifts from Positioning Lavender to Deep Positioning Lavender as the quote passes through the viewport. GSAP ScrollTrigger uses a linear tween, `0.65` scrub catch-up, `top 72%` start, and `bottom 42%` end. It reverses naturally, never pins, and becomes a discrete color switch under reduced motion.
 
-The article metadata row places “4 min read” and a compact outlined Listen/Stop control on the left, with a 40px circular crop of `jon-itkin.avif` and “By Jon Itkin” on the right. The portrait reduces to 36px on mobile. The browser speech-synthesis control hides when unsupported and exposes pressed state.
+The article metadata row places “4 min read” and a compact outlined Listen/Stop control on the left, with a centered, unscaled 40px circular crop of the approved square `jon-itkin-byline.png` headshot and “By Jon Itkin” on the right. The portrait reduces to 36px on mobile. The browser speech-synthesis control hides when unsupported and exposes pressed state.
 
 The four advantage sources use a 2 × 2 ruled grid with 24px between columns; below 768px they become one column. The dark quote is inset inside the Paper card, uses Deep Ink, upright DM Sans up to 24px, content-driven height, and responsive padding. It has no decorative quotation marks. The attribution is Paper-colored, approximately 24px below the quote, and never pinned to the bottom.
 
@@ -295,11 +302,11 @@ The decision module continues on Paper beneath the quote. It ends with eight com
 
 ### Process list
 
-The process section is a quiet two-column editorial spread: light-Fraunces thesis and DM Sans method copy on the left, five ruled DM Sans steps on the right, and a centered outcome beneath. Use only 14%-Ink horizontal rules. Do not add numbers, timeline nodes, cards, illustrations, or alternating offsets. Below 992px, the section becomes one linear flow.
+The process section is a quiet two-column editorial spread capped near 1028px. The left column vertically centers a light-Fraunces thesis, DM Sans method copy, and an italic 15px outcome inset on a 14%-Ink vertical rule. The right column is a 16px-radius Soft Stone panel with five DM Sans steps connected by a 12%-Ink one-pixel arrow rail. The panel uses approximately 44px top, 44px side, 40px bottom, and 100px left padding on wide screens. Do not add step numbers, shadows, gradients, illustrations, or alternating offsets. Below 992px, the section becomes one linear flow with the panel following the complete left-hand argument; below 768px, panel padding and rail offsets tighten while the copy remains content-driven.
 
 ### Rotating testimonial grid
 
-The Testimonial Yellow field uses a 3 × 3 desktop grid. Eight equal Canvas cards occupy the perimeter and the all-Fraunces heading occupies the exact center cell. Desktop rows are 240px high with 28–44px grid gaps. Cards use 18–20px padding, a 10px radius, DM Sans 15px quote copy, and 13px attribution copy separated by a quiet top rule.
+The Testimonial Yellow field uses a 3 × 3 desktop grid. Eight equal Canvas cards occupy the perimeter and the all-Fraunces Deep Ink heading spans the full center cell with center-aligned text, rather than centering an intrinsic-width text box. Rows are `12.75rem` from 1199px up, `13.75rem` from 1050–1198px, and `14.75rem` from 992–1049px so the approved quotes can wrap without clipping as the columns narrow; below 992px the cards are content-driven. The grid uses 28–44px gaps. Cards use 16–18px padding, a 10px radius, DM Sans 15px quote copy, and 13px attribution copy separated by a quiet top rule. The footer begins 0.75rem after the quote and uses 0.5rem top padding.
 
 The approved pool contains 11 testimonials. Eight are visible; every 2.2 seconds one perimeter card crossfades and moves 8px over 220ms. Rotation pauses on hover, keyboard focus, viewport exit, and document hide. Under reduced motion, the first eight remain static. Below 992px the heading moves above a two-column grid; below 768px cards become a one-column, content-driven list.
 
@@ -309,15 +316,17 @@ The founder section uses one Canvas field with two editorial bands. The upper ba
 
 The upper composition sits slightly left of mathematical center. On desktop, the investment headline preserves the authored three-line rag: “This is an investment in / changing the trajectory / of your business.” Below 1100px it returns to natural wrapping. Below 768px portrait, biography, cost, and investment context become one reading flow.
 
+On fine-pointer devices, the founder portrait uses a restrained tvOS-style depth response: cursor position drives at most `±2deg` of 3D rotation, the frame scales to `1.008`, and the image counter-shifts by no more than 5px while scaling to `1.022`. `gsap.quickTo()` reuses transform tweens with `expo.out` easing. The effect introduces no shadow, glow, or layout movement and is completely disabled on touch devices and under `prefers-reduced-motion`.
+
 ### Closing folder
 
-The closing CTA is a centered Action Blue folder on Canvas. At the 1110 × 647 reference, its body is approximately 644 × 391px; on wide screens it caps at 56rem. The shell is `min(58%, 56rem)` on desktop, `min(86%, 40rem)` below 992px, and 92% below 768px. The mobile panel has a 26rem minimum height.
+The closing CTA is a centered Action Blue folder on Canvas. Its height is content-driven and follows the compact contact-folder proportion instead of a landscape aspect ratio. The content receives `3.15rem` vertical padding on desktop, `3.5rem` from 480–991px, and `1.625rem` below 480px. The smallest layout uses `0.75rem` side padding so the first headline line remains intact. On wide screens it caps at 56rem. The shell is `min(58%, 56rem)` on desktop, `min(86%, 40rem)` below 992px, and 92% below 768px.
 
-The body uses a 1.647:1 aspect ratio, 8px radius, and a compact tab rising 25px. The headline/action group is vertically centered within the body, with 78px desktop side padding. The first line is Fraunces Light; the second is DM Sans Regular at `0.94em`. The only action is the Decision Green pill.
+The body uses an 8px radius and a compact tab rising 25px. The headline/action group is vertically centered by balanced vertical padding, with 78px desktop side padding. The first line is Fraunces Light; the second is DM Sans Regular at `0.94em`. The only action is the Decision Green pill.
 
 ### FAQ, contact, and footer
 
-FAQ uses Canvas with Ink type and 14%-Ink row rules. The ten-item source is shared by homepage and contact page; the first item is open by default. Headers are keyboard-operable and expose expanded state. Answers animate to measured height over 300ms, and the plus rotates 45 degrees. Recalculate open heights after fonts load and on resize.
+FAQ uses Canvas with Ink type and 14%-Ink row rules. “Questions, answered.” is an all-Fraunces Light display at `62px / 64px` with `-2px` tracking on wide screens; both lines share the same face, weight, and size. The ten-item source is shared by homepage and contact page; the first item is open by default. Headers are keyboard-operable and expose expanded state. Answers animate to measured height over 300ms, and the plus rotates 45 degrees. Recalculate open heights after fonts load and on resize.
 
 The contact page keeps the shared navigation, a centered Action Blue contact folder, the shared FAQ, and the shared compact footer. Retired legacy interstitials, marquees, and alternate footers must not return.
 
@@ -326,6 +335,10 @@ The footer reuses `itk-logo.svg` at 160:20. Its descriptor is case-sensitive: **
 ### Motion and accessibility
 
 Motion is feedback, not ornament. Prefer opacity and transform. Core timings are 160–180ms for small state changes, 200–220ms for underlines and card swaps, 240–280ms for navigation movement, and 300ms for accordion height. Smooth anchor scrolling is allowed. Every hover state needs a keyboard-focus equivalent.
+
+The hero headline uses one immediate, continuous movement with no introductory delay or stepped midpoint. It begins in the compact “Take the position” state: all four letters of `lead` are hidden while `position` is translated left into their inline space. Over 320ms with `expo.out`, all four letters reveal together while `position` resolves directly to its natural inline position, producing “Take the lead position.” The supporting line and CTA remain stationary throughout.
+
+There is no letter stagger, hold, or vertical motion in the desktop animation. At mobile sizes, preserve the final inline headline and use one immediate 400ms opacity-and-y reveal with `expo.out`. Under reduced motion, render the final state immediately with no interpolation. Hero animation must use transforms and opacity only, clear its temporary inline styles after completion, and never alter document flow.
 
 Under `prefers-reduced-motion`, disable smooth scrolling, testimonial rotation, animated navigation movement, accordion transitions, and nonessential hover translations. Preserve state changes without interpolation.
 

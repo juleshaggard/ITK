@@ -151,8 +151,8 @@ export const applySiteCopy = (sourceBody) => {
   body = updateSection(body, 'home-hero-section', (section) => {
     let next = replaceMatch(
       section,
-      /(<h1 class="h1-home-hero font-weight-300">)[\s\S]*?(<\/h1>)/,
-      '$1Take the <span class="font-fraunces home-hero-span">lead position</span>$2',
+      /(<h1 class="h1-home-hero font-weight-300")>[\s\S]*?(<\/h1>)/,
+      '$1 aria-label="Take the lead position"><span class="home-hero-take">Take the</span> <span class="font-fraunces home-hero-span home-hero-sans-lockup"><span class="home-hero-lead"><span class="home-hero-lead-letter">l</span><span class="home-hero-lead-letter">e</span><span class="home-hero-lead-letter">a</span><span class="home-hero-lead-letter">d</span></span> <span class="home-hero-position">position</span></span>$2',
       'hero headline',
     );
     next = replaceMatch(

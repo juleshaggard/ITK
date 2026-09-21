@@ -133,7 +133,7 @@ const positioningStorySection = `<section id="four-cs" class="section positionin
         </div>
         <div class="four-cs-author">
           <span class="four-cs-author-portrait" aria-hidden="true">
-            <img src="${base}assets/jon-itkin.avif" alt="" width="40" height="40" />
+            <img src="${base}assets/jon-itkin-byline.png" alt="" width="40" height="40" />
           </span>
           <span>By Jon Itkin</span>
         </div>
@@ -210,6 +210,7 @@ const positioningProcessSection = `<section id="how-it-works" class="section pos
           <span>been taught to expect</span>
         </h2>
         <p>This isn’t overdressed copywriting. It’s not an over-engineered workshop. It’s a methodical process to gather the right information, have the right conversations, take full ownership of your ideas, and get them in market with full fidelity.</p>
+        <p class="positioning-process-outcome">You walk away with a set of positioning decisions your leadership team fully owns, plus the homepage, sales deck, and executive narrative that get them in market</p>
       </header>
       <ol class="positioning-process-timeline" aria-label="The In The Kitchen process">
         <li>
@@ -244,7 +245,6 @@ const positioningProcessSection = `<section id="how-it-works" class="section pos
         </li>
       </ol>
     </div>
-    <p class="positioning-process-outcome">You walk away with a set of positioning decisions your leadership team fully owns, plus the homepage, sales deck, and executive narrative that get them in market</p>
   </div>
 </section>`;
 
@@ -395,6 +395,11 @@ const pageBody = pageWithFooterLogo.replaceAll(
     <title>Take the lead position | In The Kitchen</title>
     <link rel="stylesheet" href={`${base}styles/webflow.css`} />
     <link rel="icon" href={`${base}assets/favicon-small.png`} />
+    <script is:inline>
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('hero-motion-pending');
+      }
+    </script>
   </head>
   <body class="body-new">
     <Fragment set:html={pageBody} />
@@ -712,6 +717,212 @@ const pageBody = pageWithFooterLogo.replaceAll(
       gsap.registerPlugin(ScrollTrigger);
       initDirectionalNavigation();
 
+      const heroHeadline = document.querySelector('.home-hero-section .h1-home-hero');
+
+      if (heroHeadline && heroHeadline.dataset.heroMotion !== 'ready') {
+        heroHeadline.dataset.heroMotion = 'ready';
+        const heroLead = heroHeadline.querySelector('.home-hero-lead');
+        const heroLeadLetters = [...heroHeadline.querySelectorAll('.home-hero-lead-letter')];
+        const heroPosition = heroHeadline.querySelector('.home-hero-position');
+        const heroMotion = gsap.matchMedia();
+
+        const clearHeroHeadlineMotion = (targets = [...heroLeadLetters, heroPosition]) => {
+          const activeTargets = Array.isArray(targets) ? targets.filter(Boolean) : targets;
+
+          if (Array.isArray(activeTargets) ? activeTargets.length : activeTargets) {
+            gsap.set(activeTargets, {
+              clearProps: 'opacity,transform,visibility',
+            });
+          }
+          heroHeadline.classList.remove('is-animating');
+          document.documentElement.classList.remove('hero-motion-pending');
+        };
+
+        const initHeroHeadlineMotion = () => {
+          heroMotion.add(
+            {
+              desktop: '(min-width: 768px)',
+              mobile: '(max-width: 767px)',
+              reduceMotion: '(prefers-reduced-motion: reduce)',
+            },
+            ({ conditions }) => {
+              if (
+                !heroLead ||
+                !heroPosition ||
+                heroLeadLetters.length !== 4 ||
+                conditions?.reduceMotion
+              ) {
+                clearHeroHeadlineMotion([...heroLeadLetters, heroPosition, heroHeadline]);
+                return;
+              }
+
+              heroHeadline.classList.add('is-animating');
+
+              if (conditions?.mobile) {
+                gsap.set(heroHeadline, { autoAlpha: 0, y: 16 });
+                document.documentElement.classList.remove('hero-motion-pending');
+
+                const mobileTimeline = gsap.timeline({
+                  defaults: { ease: 'expo.out' },
+                  onComplete: () => clearHeroHeadlineMotion([heroHeadline]),
+                });
+
+                mobileTimeline.to(heroHeadline, {
+                  autoAlpha: 1,
+                  y: 0,
+                  duration: 0.4,
+                });
+
+                return () => {
+                  mobileTimeline.kill();
+                  clearHeroHeadlineMotion([heroHeadline]);
+                };
+              }
+
+              const compactPositionX = heroLead.offsetLeft - heroPosition.offsetLeft;
+
+              gsap.set(heroLeadLetters, { autoAlpha: 0 });
+              gsap.set(heroPosition, { x: compactPositionX });
+              document.documentElement.classList.remove('hero-motion-pending');
+
+              const desktopTween = gsap.to([heroPosition, ...heroLeadLetters], {
+                x: 0,
+                autoAlpha: 1,
+                duration: 0.32,
+                overwrite: 'auto',
+                ease: 'expo.out',
+                onComplete: () => clearHeroHeadlineMotion(),
+              });
+
+              return () => {
+                desktopTween.kill();
+                clearHeroHeadlineMotion();
+              };
+            },
+            heroHeadline,
+          );
+        };
+
+        requestAnimationFrame(initHeroHeadlineMotion);
+        window.addEventListener('pagehide', () => heroMotion.revert(), { once: true });
+      }
+
+      const founderPortrait = document.querySelector('.founder-profile-portrait');
+      const founderPortraitImage = founderPortrait?.querySelector('img');
+
+      if (founderPortrait && founderPortraitImage) {
+        const founderHoverMotion = gsap.matchMedia();
+
+        founderHoverMotion.add(
+          '(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)',
+          () => {
+            let portraitBounds;
+            const rotateXTo = gsap.quickTo(founderPortrait, 'rotationX', {
+              duration: 0.45,
+              ease: 'expo.out',
+            });
+            const rotateYTo = gsap.quickTo(founderPortrait, 'rotationY', {
+              duration: 0.45,
+              ease: 'expo.out',
+            });
+            const portraitScaleXTo = gsap.quickTo(founderPortrait, 'scaleX', {
+              duration: 0.36,
+              ease: 'expo.out',
+            });
+            const portraitScaleYTo = gsap.quickTo(founderPortrait, 'scaleY', {
+              duration: 0.36,
+              ease: 'expo.out',
+            });
+            const imageXTo = gsap.quickTo(founderPortraitImage, 'x', {
+              duration: 0.45,
+              ease: 'expo.out',
+            });
+            const imageYTo = gsap.quickTo(founderPortraitImage, 'y', {
+              duration: 0.45,
+              ease: 'expo.out',
+            });
+            const imageScaleXTo = gsap.quickTo(founderPortraitImage, 'scaleX', {
+              duration: 0.36,
+              ease: 'expo.out',
+            });
+            const imageScaleYTo = gsap.quickTo(founderPortraitImage, 'scaleY', {
+              duration: 0.36,
+              ease: 'expo.out',
+            });
+
+            gsap.set(founderPortrait, {
+              transformPerspective: 900,
+              transformOrigin: '50% 50%',
+              willChange: 'transform',
+            });
+            gsap.set(founderPortraitImage, {
+              transformOrigin: '50% 50%',
+              willChange: 'transform',
+            });
+
+            const resetPortrait = () => {
+              rotateXTo(0);
+              rotateYTo(0);
+              portraitScaleXTo(1);
+              portraitScaleYTo(1);
+              imageXTo(0);
+              imageYTo(0);
+              imageScaleXTo(1);
+              imageScaleYTo(1);
+            };
+
+            const handlePointerEnter = () => {
+              portraitBounds = founderPortrait.getBoundingClientRect();
+              portraitScaleXTo(1.008);
+              portraitScaleYTo(1.008);
+              imageScaleXTo(1.022);
+              imageScaleYTo(1.022);
+            };
+
+            const handlePointerMove = ({ clientX, clientY }) => {
+              if (!portraitBounds) {
+                portraitBounds = founderPortrait.getBoundingClientRect();
+              }
+
+              const normalizedX = Math.max(
+                -0.5,
+                Math.min(0.5, (clientX - portraitBounds.left) / portraitBounds.width - 0.5),
+              );
+              const normalizedY = Math.max(
+                -0.5,
+                Math.min(0.5, (clientY - portraitBounds.top) / portraitBounds.height - 0.5),
+              );
+
+              rotateXTo(normalizedY * -4);
+              rotateYTo(normalizedX * 4);
+              imageXTo(normalizedX * -5);
+              imageYTo(normalizedY * -4);
+            };
+
+            const handlePointerLeave = () => {
+              portraitBounds = undefined;
+              resetPortrait();
+            };
+
+            founderPortrait.addEventListener('pointerenter', handlePointerEnter);
+            founderPortrait.addEventListener('pointermove', handlePointerMove);
+            founderPortrait.addEventListener('pointerleave', handlePointerLeave);
+
+            return () => {
+              founderPortrait.removeEventListener('pointerenter', handlePointerEnter);
+              founderPortrait.removeEventListener('pointermove', handlePointerMove);
+              founderPortrait.removeEventListener('pointerleave', handlePointerLeave);
+              gsap.killTweensOf([founderPortrait, founderPortraitImage]);
+              gsap.set([founderPortrait, founderPortraitImage], {
+                clearProps: 'transform,transformOrigin,willChange',
+              });
+            };
+          },
+        );
+
+        window.addEventListener('pagehide', () => founderHoverMotion.revert(), { once: true });
+      }
+
       const storySection = document.querySelector('.positioning-story-section');
       const quotePanel = document.querySelector('.positioning-quote-panel');
 
@@ -814,9 +1025,8 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   .page-wrapper .faq-sticky-column h2 .h2-span {
-    font-family: Dmsans, Impact, sans-serif;
-    font-size: 0.94em;
-    font-weight: 400;
+    font: inherit;
+    letter-spacing: inherit;
   }
 
   .faq-section .faq-header-new {
@@ -1168,9 +1378,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 53% 27%;
-    transform: scale(2.2);
-    transform-origin: 53% 29%;
+    object-position: center;
   }
 
   .four-cs-divider {
@@ -1362,34 +1570,33 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
   .positioning-process-section {
     box-sizing: border-box;
-    padding: clamp(7rem, 12.5vw, 11.75rem) clamp(2rem, 4.25vw, 4.5rem)
-      clamp(8rem, 13.35vw, 12.5rem);
+    padding: clamp(6rem, 9.5vw, 8.75rem) clamp(2rem, 7vw, 7rem)
+      clamp(6.5rem, 11vw, 10rem);
     background-color: #fdfcfa;
     scroll-margin-top: 6rem;
   }
 
   .positioning-process-inner {
-    width: min(100%, 69.625rem);
+    width: min(100%, 64.25rem);
     margin: 0 auto;
   }
 
   .positioning-process-layout {
     display: grid;
-    grid-template-columns: minmax(0, 26.875rem) minmax(0, 27.5625rem);
-    align-items: start;
-    justify-content: start;
-    gap: 12.3125rem;
+    grid-template-columns: minmax(0, 27rem) minmax(0, 31.75rem);
+    align-items: center;
+    gap: clamp(4rem, 7vw, 5.5rem);
   }
 
   .positioning-process-intro {
-    padding-top: 6.25rem;
+    min-width: 0;
   }
 
   .page-wrapper h2.positioning-process-heading {
     max-width: none;
     margin: 0;
     font-family: Fraunces, Arial, sans-serif;
-    font-size: clamp(2.65rem, 2.95vw, 2.75rem);
+    font-size: clamp(2.65rem, 3.1vw, 2.9rem);
     font-weight: 300 !important;
     line-height: 0.92;
     letter-spacing: -0.04em;
@@ -1402,7 +1609,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
   .positioning-process-intro > p {
     max-width: 26rem;
-    margin: 2rem 0 0;
+    margin: 1.75rem 0 0;
     font-family: Dmsans, Impact, sans-serif;
     font-size: 1.125rem;
     font-weight: 400;
@@ -1411,20 +1618,62 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   .positioning-process-timeline {
+    --timeline-rail-offset: -3rem;
+    position: relative;
     margin: 0;
-    padding: 0;
-    border-bottom: 1px solid rgba(34, 34, 34, 0.14);
+    padding: 2.75rem 2.75rem 2.5rem 6.25rem;
+    border: 0;
+    border-radius: 1rem;
+    background-color: #f6f4f1;
     list-style: none;
   }
 
   .positioning-process-timeline li {
+    position: relative;
     min-width: 0;
-    padding: 1.125rem 0 0.9375rem;
-    border-top: 1px solid rgba(34, 34, 34, 0.14);
+    padding: 0;
+    border: 0;
+  }
+
+  .positioning-process-timeline li + li {
+    margin-top: 2rem;
+  }
+
+  .positioning-process-timeline li::before {
+    content: "";
+    position: absolute;
+    top: 0.75rem;
+    left: var(--timeline-rail-offset);
+    width: 1.5rem;
+    height: 1px;
+    background-color: rgba(34, 34, 34, 0.12);
+  }
+
+  .positioning-process-timeline li::after {
+    content: "";
+    position: absolute;
+    top: 0.5625rem;
+    left: -1.75rem;
+    width: 0.375rem;
+    height: 0.375rem;
+    border-top: 1px solid rgba(34, 34, 34, 0.16);
+    border-right: 1px solid rgba(34, 34, 34, 0.16);
+    transform: rotate(45deg);
   }
 
   .positioning-process-step {
+    position: relative;
     margin: 0;
+  }
+
+  .positioning-process-timeline li:not(:last-child) .positioning-process-step::before {
+    content: "";
+    position: absolute;
+    top: 0.75rem;
+    left: var(--timeline-rail-offset);
+    width: 1px;
+    height: calc(100% + 2rem);
+    background-color: rgba(34, 34, 34, 0.12);
   }
 
   .page-wrapper .positioning-process-step h3 {
@@ -1447,16 +1696,18 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   .positioning-process-outcome {
-    max-width: 48rem;
-    margin: 4.75rem auto 0;
-    padding: 0;
+    max-width: 24rem !important;
+    margin: 3.5rem 0 0 !important;
+    padding: 0.25rem 0 0.25rem 1.5rem;
     border: 0;
+    border-left: 1px solid rgba(34, 34, 34, 0.14);
     font-family: Dmsans, Impact, sans-serif;
-    font-size: 1.125rem;
+    font-size: 0.9375rem !important;
+    font-style: italic;
     font-weight: 400 !important;
-    line-height: 1.25;
-    letter-spacing: -0.012em;
-    text-align: center;
+    line-height: 1.22 !important;
+    letter-spacing: -0.01em;
+    text-align: left;
   }
 
   .founder-profile-section {
@@ -1487,6 +1738,8 @@ const pageBody = pageWithFooterLogo.replaceAll(
     aspect-ratio: 4 / 5;
     margin: 0;
     border-radius: 0.625rem;
+    backface-visibility: hidden;
+    transform-origin: center;
   }
 
   .founder-profile-portrait img {
@@ -1495,6 +1748,8 @@ const pageBody = pageWithFooterLogo.replaceAll(
     height: 100%;
     object-fit: cover;
     object-position: center;
+    backface-visibility: hidden;
+    transform-origin: center;
   }
 
   .page-wrapper .founder-profile-bio h2,
@@ -1606,7 +1861,6 @@ const pageBody = pageWithFooterLogo.replaceAll(
     align-items: center;
     box-sizing: border-box;
     width: 100%;
-    aspect-ratio: 1.647 / 1;
     overflow: hidden;
     border-radius: 0.5rem;
     background-color: #2800e8;
@@ -1616,7 +1870,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
   .closing-folder-content {
     box-sizing: border-box;
     width: 100%;
-    padding: 0 78px;
+    padding: 3.15rem 78px;
   }
 
   .page-wrapper .closing-folder-heading {
@@ -1677,7 +1931,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
   .b2b-ceos-section {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: repeat(3, 15rem);
+    grid-template-rows: repeat(3, 12.75rem);
     align-items: stretch;
     gap: clamp(1.75rem, 2.75vw, 2.75rem) clamp(2rem, 4.25vw, 4.25rem);
     box-sizing: border-box;
@@ -1698,15 +1952,17 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
   .page-wrapper .b2b-testimonial-heading {
     grid-area: 2 / 2 / 3 / 3 !important;
-    place-self: center;
-    width: fit-content;
-    max-width: 100%;
-    margin: 0 auto;
+    align-self: center;
+    justify-self: stretch;
+    width: 100%;
+    max-width: none;
+    margin: 0;
     font-family: Fraunces, Arial, sans-serif !important;
     font-size: clamp(2.5rem, 3.45vw, 3.5rem);
     font-weight: 300 !important;
     line-height: 0.94;
     letter-spacing: -0.045em;
+    color: #1a1a1a;
     text-align: center !important;
     font-synthesis: none;
   }
@@ -1723,7 +1979,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
     min-width: 0;
     min-height: 0;
     height: 100%;
-    padding: clamp(1.125rem, 1.4vw, 1.25rem);
+    padding: clamp(1rem, 1.25vw, 1.125rem);
     border-radius: 0.625rem;
     background-color: #fdfcfa;
     opacity: 1;
@@ -1789,8 +2045,8 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
   .b2b-ceos-section .b2b-card-footer {
     width: 100%;
-    margin-top: 1.125rem;
-    padding-top: 0.75rem;
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
     border-top: 1px solid rgba(34, 34, 34, 0.18);
   }
 
@@ -1806,6 +2062,43 @@ const pageBody = pageWithFooterLogo.replaceAll(
   .home-hero-section .h1-home-hero {
     font-size: var(--type-hero-size);
     line-height: 0.92;
+  }
+
+  .home-hero-take,
+  .home-hero-sans-lockup,
+  .home-hero-lead,
+  .home-hero-position,
+  .home-hero-lead-letter {
+    display: inline-block;
+  }
+
+  .font-fraunces.home-hero-sans-lockup {
+    overflow: visible;
+    white-space: nowrap;
+  }
+
+  .home-hero-section .h1-home-hero.is-animating .home-hero-lead-letter,
+  .home-hero-section .h1-home-hero.is-animating .home-hero-position {
+    will-change: transform, opacity;
+  }
+
+  @media (min-width: 768px) {
+    html.hero-motion-pending .home-hero-lead-letter {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    html.hero-motion-pending .home-hero-position {
+      transform: translate3d(-1.885em, 0, 0);
+    }
+  }
+
+  @media (max-width: 767px) {
+    html.hero-motion-pending .home-hero-section .h1-home-hero {
+      visibility: hidden;
+      opacity: 0;
+      transform: translate3d(0, 1rem, 0);
+    }
   }
 
   .section.home-hero-section {
@@ -1832,6 +2125,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   .home-hero-absolute-nav-bg {
+    background-color: transparent;
     padding-top: var(--hero-tab-top);
   }
 
@@ -2434,6 +2728,18 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
   }
 
+  @media (min-width: 992px) and (max-width: 1049px) {
+    .b2b-ceos-section {
+      grid-template-rows: repeat(3, 14.75rem);
+    }
+  }
+
+  @media (min-width: 1050px) and (max-width: 1198px) {
+    .b2b-ceos-section {
+      grid-template-rows: repeat(3, 13.75rem);
+    }
+  }
+
   @media (max-width: 991px) {
     .founder-profile-section {
       padding: 6rem 2rem 5rem;
@@ -2464,7 +2770,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
     }
 
     .closing-folder-content {
-      padding: 0 3.5rem;
+      padding: 3.5rem;
     }
 
     .b2b-ceos-section {
@@ -2481,9 +2787,11 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
     .page-wrapper .b2b-testimonial-heading {
       grid-column: 1 / -1 !important;
-      width: fit-content;
+      width: 100%;
       max-width: 100%;
+      margin-right: 0;
       margin-bottom: 2.5rem;
+      margin-left: 0;
       font-size: clamp(3rem, 6vw, 3.75rem);
     }
 
@@ -2493,11 +2801,11 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
     .positioning-process-layout {
       grid-template-columns: 1fr;
-      gap: 4rem;
+      gap: 3.5rem;
     }
 
-    .positioning-process-intro {
-      padding-top: 0;
+    .positioning-process-inner {
+      width: min(100%, 45rem);
     }
 
     .page-wrapper h2.positioning-process-heading {
@@ -2505,25 +2813,25 @@ const pageBody = pageWithFooterLogo.replaceAll(
     }
 
     .positioning-process-timeline {
+      --timeline-rail-offset: -2.75rem;
       margin: 0;
-      padding: 0;
-      border-left: 0;
+      padding: 2.75rem 2.5rem 2.5rem 5.5rem;
     }
 
     .positioning-process-timeline li {
-      padding: 1.25rem 0 1.5rem;
+      padding: 0;
     }
 
-    .positioning-process-step {
-      margin: 0;
+    .positioning-process-timeline li + li {
+      margin-top: 1.75rem;
+    }
+
+    .positioning-process-timeline li:not(:last-child) .positioning-process-step::before {
+      height: calc(100% + 1.75rem);
     }
 
     .positioning-process-step p {
       max-width: 34rem;
-    }
-
-    .positioning-process-outcome {
-      max-width: 40rem;
     }
 
     .investor-trust-layout {
@@ -2565,6 +2873,33 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   @media (max-width: 767px) {
+    .positioning-process-layout {
+      gap: 3.25rem;
+    }
+
+    .positioning-process-timeline {
+      --timeline-rail-offset: -2.5rem;
+      padding: 2rem 1.25rem 2rem 4rem;
+      border-radius: 0.875rem;
+    }
+
+    .positioning-process-timeline li::before {
+      width: 1.25rem;
+    }
+
+    .positioning-process-timeline li::after {
+      left: -1.5rem;
+    }
+
+    .page-wrapper .positioning-process-step h3 {
+      font-size: 1.375rem;
+    }
+
+    .positioning-process-outcome {
+      margin-top: 3rem !important;
+      padding: 0.25rem 0 0.25rem 1.25rem;
+    }
+
     .founder-profile-section {
       padding: 5rem 1rem 4.5rem;
     }
@@ -2619,13 +2954,8 @@ const pageBody = pageWithFooterLogo.replaceAll(
       height: 1.625rem;
     }
 
-    .closing-folder-panel {
-      min-height: 26rem;
-      aspect-ratio: auto;
-    }
-
     .closing-folder-content {
-      padding: 0 1.5rem;
+      padding: 3.5rem 1.5rem;
     }
 
     .page-wrapper .closing-folder-heading {
@@ -2665,6 +2995,15 @@ const pageBody = pageWithFooterLogo.replaceAll(
     .b2b-ceos-section .b2b-card-home > p {
       font-size: 0.9375rem;
       line-height: 1.4;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .closing-folder-content {
+      padding-top: 1.625rem;
+      padding-right: 0.75rem;
+      padding-bottom: 1.625rem;
+      padding-left: 0.75rem;
     }
   }
 

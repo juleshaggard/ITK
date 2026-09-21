@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-18T23:28:53Z",
+  "generatedAt": "2026-09-19T02:54:08Z",
   "title": "Design System: In The Kitchen",
   "extensions": {
     "colorMeta": {
@@ -95,6 +95,13 @@
         "tonalRamp": ["#232323", "#474747", "#6C6C6C", "#919191", "#B7B7B7", "#D0D0D0", "#E3E3E3", "#F6F6F6"]
       }
     },
+    "assetMeta": {
+      "byline-portrait": {
+        "displayName": "Jon Itkin Byline Portrait",
+        "path": "public/assets/jon-itkin-byline.png",
+        "treatment": "Centered, unscaled 40px circular crop on desktop and tablet; 36px on mobile."
+      }
+    },
     "typographyMeta": {
       "display-hero": {
         "displayName": "Hero Display",
@@ -111,6 +118,14 @@
       "headline-statement": {
         "displayName": "Positioning Statement",
         "purpose": "Centered intrinsic-width statement with left-aligned lines."
+      },
+      "faq-display": {
+        "displayName": "FAQ Display",
+        "purpose": "All-Fraunces Light Questions, answered. heading; both lines share the 62px / 64px scale and -2px tracking."
+      },
+      "testimonial-display": {
+        "displayName": "Testimonial Grid Display",
+        "purpose": "All-Fraunces Deep Ink heading stretched across and center-aligned within the exact middle testimonial-grid cell."
       },
       "title": {
         "displayName": "Working Title",
@@ -166,9 +181,24 @@
         "purpose": "Directional navigation hide and reveal."
       },
       {
+        "name": "hero-headline",
+        "value": "320ms expo.out",
+        "purpose": "Reveal lead and resolve position in one continuous desktop movement with no intermediate hold."
+      },
+      {
+        "name": "hero-mobile",
+        "value": "400ms expo.out",
+        "purpose": "Immediate whole-headline reveal below the desktop storyboard breakpoint."
+      },
+      {
         "name": "accordion",
         "value": "300ms ease",
         "purpose": "Measured FAQ answer height and plus rotation."
+      },
+      {
+        "name": "founder-hover",
+        "value": "360–450ms expo.out; max ±2deg rotation, 1.008 frame scale, 1.022 image scale",
+        "purpose": "Subtle fine-pointer tvOS depth response for the founder portrait; disabled for touch and reduced motion."
       }
     ],
     "breakpoints": [
@@ -221,12 +251,20 @@
       "css": ".ds-editorial-card{max-width:640px;padding:40px 45px 45px;border-radius:10px;background:#FFFFFF;color:#222222}.ds-editorial-card h3{margin:0;font:300 40px/1.05 Fraunces,Georgia,serif;letter-spacing:-.025em}.ds-editorial-card p{max-width:55ch;margin:28px 0 0;font:400 16px/1.45 'DM Sans',Arial,sans-serif}"
     },
     {
+      "name": "Process Panel",
+      "kind": "custom",
+      "refersTo": "process-panel",
+      "description": "Soft Stone process panel with a quiet connected arrow rail.",
+      "html": "<ol class=\"ds-process-panel\"><li><h3>First we learn</h3><p>The underlying truths that matter about your company, category, and buyers.</p></li><li><h3>Then we talk</h3><p>Genuine working conversations with the people who hold a stake in positioning.</p></li></ol>",
+      "css": ".ds-process-panel{margin:0;padding:44px 44px 40px 100px;border-radius:16px;background:#F6F4F1;color:#222222;list-style:none}.ds-process-panel li{position:relative}.ds-process-panel li+li{margin-top:32px}.ds-process-panel h3{margin:0;font:400 22px/1.15 'DM Sans',Arial,sans-serif;letter-spacing:-.025em}.ds-process-panel p{margin:12px 0 0;font:400 16px/1.35 'DM Sans',Arial,sans-serif;letter-spacing:-.01em}"
+    },
+    {
       "name": "Testimonial Card",
       "kind": "card",
       "refersTo": "testimonial-card",
       "description": "Compact flat quote card for the rotating perimeter grid.",
       "html": "<figure class=\"ds-testimonial-card\"><blockquote>“The ideas and language we co-created are pulling the company forward.”</blockquote><figcaption>Alex Gallego, CEO, Redpanda</figcaption></figure>",
-      "css": ".ds-testimonial-card{display:flex;flex-direction:column;justify-content:space-between;min-height:200px;margin:0;padding:20px;border-radius:10px;background:#FDFCFA;color:#222222}.ds-testimonial-card blockquote{margin:0;font:400 15px/1.38 'DM Sans',Arial,sans-serif;letter-spacing:-.012em}.ds-testimonial-card figcaption{margin-top:18px;padding-top:12px;border-top:1px solid rgba(34,34,34,.18);font:400 13px/1.35 'DM Sans',Arial,sans-serif}"
+      "css": ".ds-testimonial-card{display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box;height:12.75rem;margin:0;padding:16px 18px;border-radius:10px;background:#FDFCFA;color:#222222}.ds-testimonial-card blockquote{margin:0;font:400 15px/1.38 'DM Sans',Arial,sans-serif;letter-spacing:-.012em}.ds-testimonial-card figcaption{margin-top:12px;padding-top:8px;border-top:1px solid rgba(34,34,34,.18);font:400 13px/1.35 'DM Sans',Arial,sans-serif}"
     },
     {
       "name": "Listen Control",
@@ -243,11 +281,18 @@
       "css": ".ds-faq-row{display:flex;align-items:center;justify-content:space-between;width:100%;padding:24px 0;border:0;border-top:1px solid rgba(34,34,34,.14);background:#FDFCFA;color:#222222;font:400 22px/1.25 'DM Sans',Arial,sans-serif;text-align:left}.ds-faq-plus{transition:transform 300ms ease}.ds-faq-row:hover .ds-faq-plus{transform:rotate(45deg)}.ds-faq-row:focus-visible{outline:2px solid currentColor;outline-offset:4px}"
     },
     {
+      "name": "Hero Folder",
+      "kind": "custom",
+      "description": "Inset Hero Yellow folder whose SVG tab overlaps the body without a raster seam.",
+      "html": "<section class=\"ds-hero-folder\"><div class=\"ds-hero-tab-rail\"><img src=\"hero-yellow-tab.svg\" alt=\"\"></div><div class=\"ds-hero-folder-body\"></div></section>",
+      "css": ".ds-hero-folder{position:relative;margin-inline:clamp(16px,1.8vw,32px)}.ds-hero-tab-rail{position:absolute;z-index:1;top:0;left:clamp(10px,.85vw,14px);width:clamp(224px,20.6vw,352px);background:transparent}.ds-hero-tab-rail img{display:block;width:100%}.ds-hero-folder-body{position:absolute;inset:calc(clamp(24px,2.75vw,40px) + clamp(47px,4.327vw,74px) - 2.4px) 0 0;border-radius:clamp(10px,.95vw,16px);background:#FCF387}"
+    },
+    {
       "name": "Closing Folder",
       "kind": "custom",
-      "description": "Signature centered Action Blue conversion surface.",
+      "description": "Signature centered Action Blue conversion surface with the compact contact-folder height.",
       "html": "<section class=\"ds-folder\"><span class=\"ds-folder-tab\" aria-hidden=\"true\"></span><div class=\"ds-folder-body\"><div><h2>It’s time to take<br><span>a position.</span></h2><a href=\"#\">Get In The Kitchen →</a></div></div></section>",
-      "css": ".ds-folder{position:relative;width:min(58%,896px);padding-top:25px}.ds-folder-tab{position:absolute;top:0;left:.41%;width:24.56%;height:28px;border-radius:8px 8px 0 0;background:#2800E8}.ds-folder-body{display:flex;align-items:center;aspect-ratio:1.647/1;padding:0 78px;border-radius:8px;background:#2800E8;color:#FFFFFF}.ds-folder h2{margin:0;font:300 64px/.92 Fraunces,Georgia,serif;letter-spacing:-.055em}.ds-folder h2 span{font-family:'DM Sans',Arial,sans-serif;font-size:.94em;font-weight:400;letter-spacing:-.02em}.ds-folder a{display:inline-flex;align-items:center;min-height:43px;margin-top:33px;padding:0 24px;border-radius:999px;background:#CFFD93;color:#1A1A1A;font:600 14px/1 'DM Sans',Arial,sans-serif;text-decoration:none}.ds-folder a:focus-visible{outline:2px solid currentColor;outline-offset:4px}"
+      "css": ".ds-folder{position:relative;width:min(58%,896px);padding-top:25px}.ds-folder-tab{position:absolute;top:0;left:.41%;width:24.56%;height:28px;border-radius:8px 8px 0 0;background:#2800E8}.ds-folder-body{display:flex;align-items:center;padding:3.15rem 78px;border-radius:8px;background:#2800E8;color:#FFFFFF}.ds-folder h2{margin:0;font:300 64px/.92 Fraunces,Georgia,serif;letter-spacing:-.055em}.ds-folder h2 span{font-family:'DM Sans',Arial,sans-serif;font-size:.94em;font-weight:400;letter-spacing:-.02em}.ds-folder a{display:inline-flex;align-items:center;min-height:43px;margin-top:33px;padding:0 24px;border-radius:999px;background:#CFFD93;color:#1A1A1A;font:600 14px/1 'DM Sans',Arial,sans-serif;text-decoration:none}.ds-folder a:focus-visible{outline:2px solid currentColor;outline-offset:4px}"
     }
   ],
   "narrative": {

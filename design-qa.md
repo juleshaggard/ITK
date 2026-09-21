@@ -81,6 +81,22 @@ final result: passed
 
 ---
 
+# All-Fraunces FAQ Display QA
+
+## Evidence
+
+- Browser-rendered checks on `http://localhost:4321/#faq` and `http://localhost:4321/contact-us/#faq`.
+- Responsive checks: `1280 × 900` and `390 × 844` CSS px.
+
+## Findings
+
+- “Questions,” and “answered.” now both resolve to Fraunces Light 300 with identical type metrics on the homepage and contact page.
+- Desktop uses `62px / 64px` with `-2px` tracking; mobile uses the existing responsive `48px / 50px` scale with the same tracking.
+- The legacy global `.h2-span` styling is neutralized by explicitly inheriting the heading font shorthand and tracking.
+- No horizontal overflow was detected, and browser console checks returned no warnings or errors.
+
+final result: passed
+
 # Centered Testimonial Heading QA
 
 ## Evidence
@@ -562,7 +578,7 @@ final result: passed
 ## Findings
 
 - “4 min read” and the outlined Listen control sit beneath the paired opening statements, with the Jon Itkin portrait and byline aligned at the opposite edge.
-- The byline reuses `public/assets/jon-itkin.avif`; its circular crop remains face-focused at desktop, tablet, and mobile sizes.
+- The byline uses the approved square `public/assets/jon-itkin-byline.png` headshot; it is center-cropped without additional image scaling and remains face-focused at desktop, tablet, and mobile sizes.
 - The Listen control exposes `aria-pressed`, switches between Listen and Stop, and reads the complete positioning editorial sequence through browser speech synthesis.
 - The metadata row remains balanced without horizontal overflow at all tested widths.
 - Standard and GitHub Pages project-path builds complete successfully.
@@ -626,5 +642,250 @@ final result: passed
 - The headline and CTA remain vertically centered inside the folder body, and the tab remains attached without a visible seam.
 - No horizontal overflow was detected at any tested viewport.
 - Standard and GitHub Pages project-path builds complete successfully.
+
+final result: passed
+
+---
+
+# Further-Reduced Testimonial Cards QA
+
+## Evidence
+
+- Browser-rendered implementation at `http://localhost:4321/#testimonial-grid-heading`.
+- Responsive checks: `1280 × 900`, `1150 × 900`, `1050 × 900`, `1049 × 900`, `992 × 900`, `768 × 900`, and `390 × 900` CSS px.
+- The complete 11-quote rotation pool was sampled while the section was visible.
+
+## Findings
+
+- Standard desktop rows are reduced from `15rem` to `14rem`; at 1280 px wide, each card now renders at approximately 207 px high.
+- Quote-to-attribution spacing is tightened to `1rem`, with `0.625rem` above the attribution rule.
+- A scoped `15.5rem` safety row applies only from 992–1049 px, where the three-column layout produces additional wrapping. Below 992 px, cards continue to use natural content height.
+- Every approved quote and attribution fits without card overflow. No horizontal page overflow was detected at any tested width.
+- The centered heading, equal perimeter grid, card radius, type scale, rotation timing, and reduced-motion behavior remain unchanged.
+
+final result: passed
+
+---
+
+# Superseded Light-Grey Testimonial Heading QA
+
+## Evidence
+
+- Browser-rendered implementation at `http://localhost:4321/`.
+- Computed heading color: `rgb(138, 134, 125)` / `#8A867D`.
+
+## Findings
+
+- The centered testimonial-grid heading now uses a warm light grey instead of Ink.
+- The color maintains a `3.15:1` contrast ratio against Testimonial Yellow, meeting WCAG AA for the approved large display size.
+- Typography, layout, card rotation, and responsive behavior remain unchanged.
+
+final result: superseded by the Deep Ink testimonial heading treatment
+
+---
+
+# Immediate Hero Headline Storyboard QA
+
+## Evidence
+
+- Browser-rendered implementation at `http://localhost:4321/`.
+- Desktop frame checks at `1280 × 900` CSS px and mobile check at `390 × 844` CSS px.
+- Storyboard states inspected at load, during the opening split, during resolve, and after cleanup.
+
+## Findings
+
+- The desktop headline follows the supplied three-frame story: compact “Take the position,” elevated “lead” with separated “position,” then the final inline “Take the lead position.”
+- The existing headline lockup overflow is explicitly opened for the animated state so the elevated word is visible rather than clipped.
+- The sequence begins on the first animation frame with no introductory hold or font-loading wait. `position` opens over 480ms with `expo.out`, `lead` fades over 340ms with `expo.out`, the elevated frame reads for 100ms, and `lead` resolves over 420ms with `expo.inOut`. Total runtime is 1 second.
+- Supporting copy and CTA remain fixed. Motion is limited to transform and opacity, and all temporary inline properties are removed after completion.
+- Mobile uses the final authored line break with one immediate 400ms `expo.out` reveal. At 390 px, the animation completed with no horizontal overflow.
+- Reduced-motion users receive the final static headline immediately. Browser console checks returned no warnings or errors.
+
+final result: passed
+
+This QA record is historical and has been superseded by the progressive-type storyboard documented below.
+
+---
+
+# Hero Tab Seam QA
+
+## Evidence
+
+- Browser-rendered implementation at `http://localhost:4321/`.
+- Desktop check at `1364 × 913` CSS px and mobile check at `390 × 844` CSS px.
+
+## Findings
+
+- The white subpixel seam beneath the Hero Yellow SVG tab is removed by making its absolute rail transparent, allowing the overlapping yellow body to fill fractional SVG edge pixels.
+- The existing tab-to-body overlap remains approximately 2.25px on desktop and 2.39px on mobile.
+- The Canvas area surrounding the tab remains visually unchanged because the hero section itself stays transparent above the body.
+- No horizontal overflow was detected at the mobile viewport.
+
+final result: passed
+
+---
+
+# Contact-Height Closing Folder QA
+
+## Evidence
+
+- Browser-rendered comparison between `http://localhost:4321/#contact` and `http://localhost:4321/contact-us/`.
+- Responsive checks: `1280 × 900`, `768 × 900`, and `390 × 844` CSS px.
+
+## Findings
+
+- The closing folder no longer derives its height from a landscape aspect ratio; balanced vertical padding now keeps the body content-driven.
+- Its rendered height stays within 5 CSS px of the contact folder at every tested breakpoint: `283.13px` versus `286.94px` on desktop, `302.22px` versus `306.38px` on tablet, and `233.22px` versus `237.59px` on mobile.
+- The headline and Decision Green action remain vertically balanced. At the smallest breakpoint, reduced side padding preserves the intended two-line headline instead of forcing a third line.
+- Content fits without clipping, no horizontal overflow is present, and browser console checks returned no warnings or errors.
+
+final result: passed
+
+---
+
+# Founder Portrait tvOS Hover QA
+
+## Evidence
+
+- Browser-rendered implementation at `http://localhost:4321/#founder`.
+- Desktop check at `1280 × 900` CSS px with the fine-pointer/no-reduced-motion query active.
+
+## Findings
+
+- The founder portrait now responds to pointer position with a maximum `±2deg` 3D tilt, a `1.008` frame scale, and a restrained counter-shift/`1.022` scale on the image.
+- Motion uses reusable `gsap.quickTo()` transform tweens with `expo.out`; no layout properties, shadows, gradients, or glows are introduced.
+- The rest-state portrait and image remain exactly `362 × 452.5px`, with no horizontal overflow or layout displacement.
+- The effect is restricted to fine hover pointers and `prefers-reduced-motion: no-preference`; touch and reduced-motion environments retain the static portrait.
+- Setup and page-exit teardown completed without new browser warnings or errors.
+
+final result: passed
+
+---
+
+# Even-Shorter Testimonial Cards QA
+
+## Evidence
+
+- Browser-rendered implementation at `http://localhost:4321/#testimonial-grid-heading`.
+- Desktop checks at `1280 × 900`, `1199 × 900`, `1050 × 900`, `1049 × 900`, and `992 × 900` CSS px.
+- Responsive checks at `991 × 900`, `768 × 900`, `767 × 900`, and `390 × 900` CSS px.
+- Complete 11-quote rotation pool sampled at the standard desktop and narrow three-column sizes.
+
+## Findings
+
+- Standard desktop rows are reduced from `14rem` to `12.75rem`; at 1280px wide, every perimeter card now renders at approximately 188px high instead of 211px.
+- Card padding is tightened to 16–18px, while footer separation is reduced to 0.75rem plus 0.5rem rule padding. Quote and attribution type sizes remain unchanged.
+- The three-column safety rows are `13.75rem` from 1050–1198px and `14.75rem` from 992–1049px, preventing the longest approved quotes from clipping as columns narrow.
+- All 11 rotating testimonials fit without vertical overflow at both the standard desktop and narrow three-column checks. No horizontal overflow was detected at any tested breakpoint.
+- Below 992px, cards remain content-driven and continue to expand naturally for wrapped copy.
+
+final result: passed
+
+---
+
+# Editorial Process Panel Rebuild QA
+
+## Evidence
+
+- Browser-rendered implementation at `http://localhost:4321/#how-it-works`.
+- Desktop comparison at `1404 × 900` CSS px against the supplied reference composition.
+- Responsive checks at `1280`, `992`, `991`, `768`, `767`, `479`, and `390` CSS px wide.
+
+## Findings
+
+- The process section is rebuilt as a centered two-column editorial composition: thesis, method copy, and inset outcome on the left; five connected steps inside a Soft Stone panel on the right.
+- At the desktop reference, the panel renders approximately 480px wide and 560px tall, while the left column begins about 67px below the panel top to reproduce the supplied vertical balance.
+- The outcome now belongs to the left reading flow and uses a quiet vertical rule, italic DM Sans, and a compact 24rem measure.
+- A one-pixel 12%-Ink rail and small arrowheads connect the five steps without adding numbers, shadows, or decorative graphics.
+- The layout stacks below 992px. At 390px, the panel remains fully contained at approximately 335px wide, all step copy remains visible, and the rail adapts to the tighter inset.
+- No horizontal or step-content overflow was detected at any tested breakpoint.
+
+final result: passed
+
+---
+
+# Deep-Ink Testimonial Heading QA
+
+## Evidence
+
+- Browser-rendered implementation at `http://localhost:4321/#testimonial-grid-heading`.
+- Computed heading color: `rgb(26, 26, 26)` / `#1A1A1A`.
+
+## Findings
+
+- The centered testimonial-grid statement now uses the approved Deep Ink token rather than the superseded warm-grey treatment.
+- Deep Ink maintains a `15.12:1` contrast ratio against Testimonial Yellow.
+- The heading spans the full middle grid cell and centers its two authored lines within that cell, preventing intrinsic text width from introducing optical drift.
+- Typography, centering, card rotation, and responsive behavior remain unchanged, with no horizontal overflow detected.
+
+final result: passed
+
+---
+
+# Progressive-Lead Hero Storyboard QA
+
+## Evidence
+
+- Source visual truth: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-848b9e51-9a34-40b2-a788-e348ca63dccf.png` (`3232 × 778` px).
+- Browser-rendered implementation: `http://localhost:4321/?storyboard=lead-type-a11y`.
+- Implementation captures: `/tmp/itk-hero-midpoint.png` and `/tmp/itk-hero-final-v2.png` (`1265 × 889` px each).
+- Normalized comparison: `/tmp/itk-hero-storyboard-comparison-normalized.png` (`2048 × 1440` px), with reference midpoint/final on the top row and implementation midpoint/final on the bottom row.
+- Desktop viewport requested at `1280 × 900` CSS px; browser content captured at `1265 × 889` px with device scale factor 1. Mobile viewport requested at `390 × 844` CSS px and captured at `375 × 812` px with device scale factor 1.
+- States inspected: compact load state, `le` midpoint at approximately 170ms, resolved final state after 430ms, mobile final state, and post-animation inline-style cleanup.
+
+## Full-view comparison evidence
+
+- The implementation preserves the existing inset yellow folder, navigation, headline scale, supporting copy, CTA, and vertical composition while adopting the supplied progressive-letter sequence.
+- The normalized reference/implementation comparison confirms that the midpoint and final states keep the same baseline and left anchor. The reference is a motion storyboard rather than a new sizing/layout specification, so the current production hero proportions remain intentionally unchanged.
+
+## Focused region comparison evidence
+
+- At the midpoint, only `l` and `e` are visible and the gap between the rendered `e` and `position` is `16.36px`, producing “Take the le position” without collision.
+- At completion, all four letters are fully opaque and `position` has no remaining transform.
+- The headline, supporting line, and CTA retain identical geometry between midpoint and final: headline `top 378.02px`; supporting line `top 466.41px`; CTA `top 538.08px`. No document-flow shift occurs.
+
+## Findings
+
+- Fonts and typography: the existing Fraunces Light / DM Sans Regular lockup, size, line height, and tracking remain unchanged. The animated letters inherit the approved DM Sans emphasis styling.
+- Spacing and layout rhythm: the three states use transform-only horizontal movement. No horizontal overflow occurs on desktop or mobile, and the surrounding content remains fixed.
+- Colors and visual tokens: Hero Yellow, Ink, Canvas, and CTA styling remain unchanged from the design system.
+- Image quality and asset fidelity: no image assets are introduced or modified by this motion change.
+- Copy and content: the visual sequence reads “Take the position” → “Take the le position” → “Take the lead position.” An explicit `aria-label="Take the lead position"` keeps the heading’s accessible name intact despite per-letter spans.
+- Interaction and accessibility: desktop resolves in about 430ms with `expo.out` curves and a readable midpoint hold. Mobile retains the single 400ms final-headline reveal. Reduced-motion logic continues to render the final static state without interpolation.
+- Production build completes successfully. Browser navigation and state inspection completed without an error overlay or runtime interruption.
+
+## Comparison history
+
+- Initial pass: the visual states matched, but the accessibility snapshot announced `lead` as separated letters because of the animated spans. This was a P2 semantic regression.
+- Fix: added the full authored headline as an explicit accessible label while preserving the visible letter spans.
+- Post-fix evidence: the browser accessibility snapshot now reports one level-one heading named “Take the lead position.” No P0, P1, or P2 findings remain.
+
+This QA record is historical and has been superseded by the single-movement hero treatment documented below.
+
+---
+
+# Single-Movement Hero Headline QA
+
+## Evidence
+
+- Browser-rendered implementation: `http://localhost:4321/?hero-motion=single`.
+- Desktop state inspected during the tween at approximately 90ms and again after completion.
+- Production build: `npm run build`.
+
+## Findings
+
+- The stepped `le` midpoint and its hold have been removed. The headline now moves directly from “Take the position” to “Take the lead position” in one 320ms `expo.out` phase.
+- All four `lead` letters reveal together. At the inspected in-progress state, each letter had the same computed opacity (`0.9007`) while `position` was simultaneously translating toward its final location.
+- The motion remains transform-and-opacity only. On completion, GSAP clears every temporary inline style and the final `position` transform returns to `none`.
+- The headline, supporting line, and CTA retain identical bounding boxes during and after the animation. No document-flow shift or horizontal overflow was detected.
+- Mobile keeps the existing immediate single-pass reveal. Reduced-motion users continue to receive the final static headline without interpolation.
+- The design system motion token and `DESIGN.md` now describe the single-movement treatment.
+
+## Implementation checklist
+
+- Progressive letter markup and semantic label: complete.
+- One synchronized GSAP tween with Expo easing: complete.
+- Stable supporting copy and CTA geometry: verified.
+- Desktop, mobile, overflow, and build checks: passed.
 
 final result: passed
