@@ -20,12 +20,14 @@ const bodyWithHeroTab = copiedBody.replace(
 const clientSectionPattern = /<section id="clients"[\s\S]*?<\/section><section class="section light-bg">[\s\S]*?<\/section>/;
 const clientSection = `<section id="clients" class="section light-bg positioning-clients-section">
   <div class="container positioning-clients-container">
-    <h2 class="positioning-clients-heading">
-      <span>In The Kitchen is a positioning consultancy</span>
-      <span>built to help B2B technology leadership</span>
-      <span>teams build, defend, and expand authentic</span>
-      <span>category leadership.</span>
-    </h2>
+    <div class="positioning-clients-statement-stage">
+      <h2 class="positioning-clients-heading">
+        <span>In The Kitchen is a positioning consultancy</span>
+        <span>built to help B2B technology leadership</span>
+        <span>teams build, defend, and expand authentic</span>
+        <span>category leadership.</span>
+      </h2>
+    </div>
     <p class="positioning-clients-intro">Positioning support for founders and executives making the next big bet.</p>
     <div class="best-fit-clients-tags positioning-clients-tags" aria-label="Best-fit client qualities">
       <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Ready to change</p></div>
@@ -105,146 +107,144 @@ const howItWorksLinkPattern =
   /(<a[^>]*href=")#("[^>]*class="nav-link-new w-inline-block"[^>]*><div>How it works<\/div>)/;
 const navigationLogo = `<img src="${base}assets/itk-logo.svg" alt="" class="contain-image nav-brand-logo" width="160" height="20" />`;
 const footerLogo = `<img src="${base}assets/itk-logo.svg" alt="" class="contain-image footer-brand-logo" width="160" height="20" style="display:block;width:100%;height:auto;aspect-ratio:8 / 1" />`;
+const categoryLeadershipArticleUrl = `${base}articles/category-leadership/`;
 const positioningStorySection = `<section id="four-cs" class="section positioning-story-section">
   <div class="positioning-story-stack">
-  <article class="four-cs-card positioning-story-card">
-    <div class="four-cs-inner">
-      <div class="four-cs-headlines">
-        <h2>
-          <span>You don’t create category</span>
-          <span>leadership by being a little bit better.</span>
-        </h2>
-        <h2>
-          <span>You do it by being</span>
-          <span>fundamentally different.</span>
-        </h2>
-      </div>
-      <div class="four-cs-meta" aria-label="Article details">
-        <div class="four-cs-reading-meta">
-          <span>4 min read</span>
-          <button class="four-cs-listen" type="button" aria-pressed="false">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
-              <path d="M4 14h2v5H4a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2Z" />
-              <path d="M20 14h-2v5h2a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2Z" />
-            </svg>
-            <span class="four-cs-listen-label">Listen</span>
-          </button>
+    <article class="four-cs-card positioning-story-card positioning-story-preview-card">
+      <div class="four-cs-inner">
+        <div class="four-cs-headlines">
+          <h2>
+            <span>You don’t create category</span>
+            <span>leadership by being a little bit better.</span>
+          </h2>
+          <h2>
+            <span>You do it by being</span>
+            <span>fundamentally different.</span>
+          </h2>
         </div>
-        <div class="four-cs-author">
-          <span class="four-cs-author-portrait" aria-hidden="true">
-            <img src="${base}assets/jon-itkin-byline.png" alt="" width="40" height="40" />
-          </span>
-          <span>By Jon Itkin</span>
+        <div class="four-cs-meta" aria-label="Article details">
+          <div class="four-cs-reading-meta">
+            <span>4 min read</span>
+            <button class="four-cs-listen" type="button" aria-pressed="false">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
+                <path d="M4 14h2v5H4a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2Z" />
+                <path d="M20 14h-2v5h2a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2Z" />
+              </svg>
+              <span class="four-cs-listen-label">Listen</span>
+            </button>
+          </div>
+          <div class="four-cs-author">
+            <span class="four-cs-author-portrait" aria-hidden="true">
+              <img src="${base}assets/jon-itkin-byline.png" alt="" width="40" height="40" />
+            </span>
+            <span>By Jon Itkin</span>
+          </div>
+        </div>
+        <div class="four-cs-divider" aria-hidden="true"></div>
+        <div class="four-cs-copy">
+          <p>People will tell you positioning is a game of inches. Category leaders disagree. They drive compounding advantages across four dimensions, and product capabilities are only one.</p>
+          <p>We use the Four Cs heuristic to deeply understand why you win. Then we channel our learnings into positioning and messaging that hits the market like a pile driver.</p>
+          <p class="four-cs-label">The four sources of competitive advantage:</p>
+        </div>
+        <div class="four-cs-grid">
+          <article class="four-cs-item">
+            <h3>Capability</h3>
+            <p>What your buyers can do (and not do) as a result of your product.</p>
+          </article>
+          <article class="four-cs-item">
+            <h3>Credibility</h3>
+            <p>What makes you exceptionally trustworthy.</p>
+          </article>
+          <article class="four-cs-item">
+            <h3>Convenience</h3>
+            <p>Why it’s easier to buy from you</p>
+          </article>
+          <article class="four-cs-item">
+            <h3>Cost</h3>
+            <p>Why you deliver outstanding value relative to investment.</p>
+          </article>
         </div>
       </div>
-      <div class="four-cs-divider" aria-hidden="true"></div>
-      <div class="four-cs-copy">
-        <p>People will tell you positioning is a game of inches. Category leaders disagree. They drive compounding advantages across four dimensions, and product capabilities are only one.</p>
-        <p>We use the Four Cs heuristic to deeply understand why you win. Then we channel our learnings into positioning and messaging that hits the market like a pile driver.</p>
-        <p class="four-cs-label">The four sources of competitive advantage:</p>
-      </div>
-      <div class="four-cs-grid">
-        <article class="four-cs-item">
-          <h3>Capability</h3>
-          <p>What your buyers can do (and not do) as a result of your product.</p>
-        </article>
-        <article class="four-cs-item">
-          <h3>Credibility</h3>
-          <p>What makes you exceptionally trustworthy.</p>
-        </article>
-        <article class="four-cs-item">
-          <h3>Convenience</h3>
-          <p>Why it’s easier to buy from you</p>
-        </article>
-        <article class="four-cs-item">
-          <h3>Cost</h3>
-          <p>Why you deliver outstanding value relative to investment.</p>
-        </article>
-      </div>
+      <div class="positioning-story-preview-fade" aria-hidden="true"></div>
+      <a class="four-cs-read-more" href="${categoryLeadershipArticleUrl}">Read More <span aria-hidden="true">→</span></a>
+    </article>
+  </div>
+</section>
+<section id="positioning-quote" class="section positioning-pull-quote-section" aria-label="Client testimonial">
+  <figure class="positioning-pull-quote-inner">
+    <blockquote>
+      <p>“Jon helped us execute a crucial strategic repositioning and build a message that we fully own. Within weeks of launching, we closed our first enterprise deal and built a deep pipeline. The ideas and language we co-created are pulling the company forward.”</p>
+    </blockquote>
+    <figcaption>Alex Gallego, CEO, Redpanda</figcaption>
+  </figure>
+</section>`;
+
+const decisionBookSection = `<section id="decision-book" class="section decision-book-section" aria-labelledby="decision-book-heading">
+  <div class="decision-book-inner">
+    <div class="decision-book-copy">
+      <h2 id="decision-book-heading">
+        <span>Marketing copy doesn’t</span>
+        <span>make you a category leader.</span>
+        <span>Decisions do.</span>
+      </h2>
+      <p>A field guide for executive teams ready to build, defend, and expand authentic category leadership.</p>
+      <a class="decision-book-cta" href="${base}contact-us/">
+        <span>Get the book</span>
+        <span aria-hidden="true">→</span>
+      </a>
     </div>
-    <figure id="positioning-quote" class="positioning-quote-panel">
-      <blockquote>
-        <p>“Jon helped us execute a crucial strategic repositioning and build a message that we fully own. Within weeks of launching, we closed our first enterprise deal and built a deep pipeline. The ideas and language we co-created are pulling the company forward.”</p>
-      </blockquote>
-      <figcaption>Alex Gallego, CEO, Redpanda</figcaption>
-    </figure>
-    <section class="positioning-decisions-panel" aria-labelledby="positioning-decisions-heading">
-      <div class="positioning-decisions-headlines">
-        <h2 id="positioning-decisions-heading">
-          <span>Marketing copy doesn’t</span>
-          <span>make you a category leader.</span>
-        </h2>
-        <h2>Decisions do.</h2>
-      </div>
-      <div class="positioning-decisions-divider" aria-hidden="true"></div>
-      <div class="positioning-decisions-copy">
-        <p>After more than 45 deep-dive positioning exercises, we’ve learned that the most important factor behind positioning success is the integrity of the decisions beneath it.</p>
-        <p>So we developed Decision-Based Positioning: a methodology that treats decisions as a first-class deliverable of the positioning process.</p>
-        <p>With us, executives spend time debating crucial decisions, not splitting hairs over headlines. You leave with conviction about the path you’re taking, not just what you will say.</p>
-      </div>
-      <h3 class="positioning-decisions-label">Decisions to win:</h3>
-      <ul class="positioning-decisions-list">
-        <li><span>Intentions</span><span class="positioning-decision-count">7 decisions</span></li>
-        <li><span>Playing Field</span><span class="positioning-decision-count">4 decisions</span></li>
-        <li><span>Market Segment</span><span class="positioning-decision-count">3 decisions</span></li>
-        <li><span>Buyer</span><span class="positioning-decision-count">4 decisions</span></li>
-        <li><span>Problem</span><span class="positioning-decision-count">3 decisions</span></li>
-        <li><span>Alternatives</span><span class="positioning-decision-count">3 decisions</span></li>
-        <li><span>Advantages</span><span class="positioning-decision-count">5 decisions</span></li>
-        <li><span>How You Win</span><span class="positioning-decision-count">2 decisions</span></li>
-      </ul>
-    </section>
-  </article>
+    <a class="decision-book-stack" href="${base}contact-us/" aria-label="Get the Decision-Based Positioning book">
+      <span class="decision-book-page decision-book-page-back" aria-hidden="true"></span>
+      <img class="decision-book-page decision-book-page-peek" src="${base}assets/decision-book-background-page.svg" alt="" width="663" height="535" loading="lazy" aria-hidden="true" />
+      <article class="decision-book-cover" aria-hidden="true">
+        <img class="decision-book-cover-image" src="${base}assets/decision-book-cover-photo.png" alt="" width="1326" height="1070" loading="lazy" />
+      </article>
+    </a>
   </div>
 </section>`;
 
 const positioningProcessSection = `<section id="how-it-works" class="section positioning-process-section">
   <div class="positioning-process-inner">
-    <div class="positioning-process-layout">
-      <header class="positioning-process-intro">
-        <h2 class="positioning-process-heading">
-          <span>In The Kitchen does more</span>
-          <span>thinking and deeper</span>
-          <span>creative work than you’ve</span>
-          <span>been taught to expect</span>
-        </h2>
-        <p>This isn’t overdressed copywriting. It’s not an over-engineered workshop. It’s a methodical process to gather the right information, have the right conversations, take full ownership of your ideas, and get them in market with full fidelity.</p>
-        <p class="positioning-process-outcome">You walk away with a set of positioning decisions your leadership team fully owns, plus the homepage, sales deck, and executive narrative that get them in market</p>
-      </header>
-      <ol class="positioning-process-timeline" aria-label="The In The Kitchen process">
-        <li>
-          <div class="positioning-process-step">
-            <h3>First we learn</h3>
-            <p>The underlying truths that matter about your company, category, and buyers.</p>
-          </div>
-        </li>
-        <li>
-          <div class="positioning-process-step">
-            <h3>Then we talk</h3>
-            <p>Genuine working conversations with the people who hold a stake in positioning.</p>
-          </div>
-        </li>
-        <li>
-          <div class="positioning-process-step">
-            <h3>Then we craft</h3>
-            <p>Simply expressed, unadorned definition of your positioning.</p>
-          </div>
-        </li>
-        <li>
-          <div class="positioning-process-step">
-            <h3>Then we build</h3>
-            <p>Core GTM assets that make positioning shippable.</p>
-          </div>
-        </li>
-        <li>
-          <div class="positioning-process-step">
-            <h3>Then we scale</h3>
-            <p>For select clients, we take on limited brand-level creative work.</p>
-          </div>
-        </li>
-      </ol>
-    </div>
+    <h2 class="positioning-process-heading">Our process</h2>
+    <ol class="positioning-process-timeline" aria-label="The In The Kitchen process">
+      <li>
+        <div class="positioning-process-step">
+          <h3>First we learn</h3>
+          <p>The underlying truths that matter about your company, category, and buyers.</p>
+        </div>
+      </li>
+      <li>
+        <div class="positioning-process-step">
+          <h3>Then we talk</h3>
+          <p>Genuine working conversations with the people who hold a stake in positioning.</p>
+        </div>
+      </li>
+      <li>
+        <div class="positioning-process-step">
+          <h3>Then we craft</h3>
+          <p>Simply expressed, unadorned definition of your positioning.</p>
+        </div>
+      </li>
+      <li>
+        <div class="positioning-process-step">
+          <h3>Then we build</h3>
+          <p>Core GTM assets that make positioning shippable.</p>
+        </div>
+      </li>
+      <li>
+        <div class="positioning-process-step">
+          <h3>Then we scale</h3>
+          <p>For select clients, we take on limited brand-level creative work.</p>
+        </div>
+      </li>
+    </ol>
+    <p class="positioning-process-outcome">
+      <span>You walk away with a set of positioning decisions</span>
+      <span>your leadership team fully owns, plus the</span>
+      <span>homepage, sales deck, and executive narrative</span>
+      <span>that get them in market</span>
+    </p>
   </div>
 </section>`;
 
@@ -312,7 +312,7 @@ if (!positioningStoryPattern.test(investorComposedBody)) {
 
 const positioningStoryComposedBody = investorComposedBody.replace(
   positioningStoryPattern,
-  `${positioningStorySection}${positioningProcessSection}`,
+  `${positioningStorySection}${decisionBookSection}${positioningProcessSection}`,
 );
 
 if (!duplicateDecisionProcessPattern.test(positioningStoryComposedBody)) {
@@ -711,10 +711,8 @@ const pageBody = pageWithFooterLogo.replaceAll(
     </script>
     <script>
       import { gsap } from 'gsap';
-      import { ScrollTrigger } from 'gsap/ScrollTrigger';
       import { initDirectionalNavigation } from '../scripts/directional-navigation.js';
 
-      gsap.registerPlugin(ScrollTrigger);
       initDirectionalNavigation();
 
       const heroHeadline = document.querySelector('.home-hero-section .h1-home-hero');
@@ -923,47 +921,6 @@ const pageBody = pageWithFooterLogo.replaceAll(
         window.addEventListener('pagehide', () => founderHoverMotion.revert(), { once: true });
       }
 
-      const storySection = document.querySelector('.positioning-story-section');
-      const quotePanel = document.querySelector('.positioning-quote-panel');
-
-      if (storySection && quotePanel) {
-        const storyMotion = gsap.matchMedia();
-
-        storyMotion.add(
-          {
-            reduceMotion: '(prefers-reduced-motion: reduce)',
-            allowMotion: '(prefers-reduced-motion: no-preference)',
-          },
-          ({ conditions }) => {
-            if (conditions?.reduceMotion) {
-              const reducedTrigger = ScrollTrigger.create({
-                trigger: quotePanel,
-                start: 'top 60%',
-                onEnter: () => gsap.set(storySection, { backgroundColor: '#afa4e0' }),
-                onLeaveBack: () => gsap.set(storySection, { backgroundColor: '#e1dbfc' }),
-              });
-
-              return () => reducedTrigger.kill();
-            }
-
-            const colorTween = gsap.to(storySection, {
-              backgroundColor: '#afa4e0',
-              ease: 'none',
-              scrollTrigger: {
-                id: 'positioning-story-color-shift',
-                trigger: quotePanel,
-                start: 'top 72%',
-                end: 'bottom 42%',
-                scrub: 0.65,
-              },
-            });
-
-            return () => colorTween.scrollTrigger?.kill();
-          },
-        );
-
-        document.fonts?.ready.then(() => ScrollTrigger.refresh());
-      }
     </script>
   </body>
 </html>
@@ -1074,8 +1031,8 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   .positioning-clients-section {
-    min-height: 55.8125rem;
-    padding-top: 6rem;
+    min-height: 0;
+    padding-top: 0;
     padding-bottom: 5.375rem;
   }
 
@@ -1088,16 +1045,24 @@ const pageBody = pageWithFooterLogo.replaceAll(
     padding-left: 0;
   }
 
+  .positioning-clients-statement-stage {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-height: clamp(36rem, 80svh, 52rem);
+    padding: clamp(5rem, 9vh, 8rem) clamp(2rem, 6vw, 7rem);
+  }
+
   .page-wrapper h2.positioning-clients-heading {
     width: fit-content;
-    max-width: 52rem;
+    max-width: 100%;
     margin: 0 auto;
     font-family: Fraunces, Arial, sans-serif !important;
-    font-size: 36px;
+    font-size: clamp(2.75rem, 4vw, 4.5rem);
     font-style: normal;
     font-weight: 300 !important;
-    line-height: 48px;
-    letter-spacing: -1.41px;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
     text-align: left;
     font-synthesis: none;
   }
@@ -1108,7 +1073,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   .positioning-clients-intro {
-    margin-top: 7rem;
+    margin-top: 0;
     font-size: 1.3125rem;
     font-weight: 400;
     line-height: 1.3;
@@ -1442,6 +1407,344 @@ const pageBody = pageWithFooterLogo.replaceAll(
     line-height: 1.5;
   }
 
+  .positioning-story-preview-card {
+    position: relative;
+    height: min(44.7vw, 40.75rem);
+    min-height: 26rem;
+    padding-bottom: 0;
+    overflow: hidden;
+  }
+
+  .positioning-story-preview-fade {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: min(11vw, 10rem);
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgb(255 255 255 / 0%), #fff 56%);
+  }
+
+  .four-cs-read-more {
+    position: absolute;
+    z-index: 2;
+    bottom: min(1.645vw, 1.5rem);
+    left: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    min-height: 3.25rem;
+    padding: 0 1.5rem;
+    border-radius: 999px;
+    color: #fff;
+    background: #1a1a1a;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    transform: translateX(-50%);
+    transition:
+      color 180ms ease,
+      background-color 180ms ease,
+      transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .four-cs-read-more:hover {
+    color: #1a1a1a;
+    background: #cffd93;
+    transform: translate(-50%, -2px);
+  }
+
+  .four-cs-read-more:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
+
+  .positioning-pull-quote-section {
+    display: grid;
+    place-items: center;
+    min-height: clamp(36rem, 72vh, 46rem);
+    padding: clamp(6rem, 10vh, 9rem) 2rem;
+    color: #fff;
+    background: #1a1a1a;
+    scroll-margin-top: 6rem;
+  }
+
+  .positioning-pull-quote-inner {
+    width: min(100%, 34rem);
+    margin: 0;
+  }
+
+  .positioning-pull-quote-inner blockquote {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .positioning-pull-quote-inner blockquote p {
+    margin: 0;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: clamp(1.75rem, 2.2vw, 2.25rem);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.13;
+    letter-spacing: -0.025em;
+  }
+
+  .positioning-pull-quote-inner figcaption {
+    margin-top: 4rem;
+    color: #fdfcfa;
+    font-family: Dmsans, Impact, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .decision-book-section {
+    box-sizing: border-box;
+    display: grid;
+    width: 100vw;
+    place-items: center;
+    justify-content: center;
+    min-height: clamp(42rem, 78vh, 48rem);
+    margin-right: calc(50% - 50vw);
+    margin-left: calc(50% - 50vw);
+    padding: clamp(5rem, 8vw, 7.5rem) clamp(1.5rem, 4vw, 4rem);
+    color: #1a1a1a;
+    background: #cffd93;
+    overflow: clip;
+  }
+
+  .decision-book-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 20.5rem) minmax(24rem, 32rem);
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    gap: clamp(4rem, 7.6vw, 7rem);
+    width: fit-content;
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .decision-book-copy {
+    align-self: center;
+  }
+
+  .page-wrapper .decision-book-copy h2 {
+    margin: 0;
+    font-family: Fraunces, Georgia, serif;
+    font-size: clamp(2.375rem, 3.05vw, 2.75rem);
+    font-weight: 300 !important;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    font-synthesis: none;
+  }
+
+  .decision-book-copy h2 > span {
+    display: block;
+  }
+
+  .decision-book-copy p {
+    max-width: 32rem;
+    margin: 1.25rem 0 0;
+    font-family: Dmsans, Arial, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+  }
+
+  .decision-book-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-height: 3.25rem;
+    margin-top: 2.5rem;
+    padding: 0 1.7rem;
+    border-radius: 999px;
+    color: #fff;
+    background: #1a1a1a;
+    font-family: Dmsans, Arial, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+      color 180ms ease,
+      background-color 180ms ease,
+      transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .decision-book-cta:hover {
+    color: #1a1a1a;
+    background: #fff27b;
+    transform: translateY(-2px);
+  }
+
+  .decision-book-stack {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 663 / 535;
+    color: #1a1a1a;
+    text-decoration: none;
+    isolation: isolate;
+  }
+
+  .decision-book-stack:focus-visible {
+    outline: 2px solid #1a1a1a;
+    outline-offset: 0.75rem;
+  }
+
+  .decision-book-page,
+  .decision-book-cover {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px solid #cffd93;
+    border-radius: 0.35rem;
+  }
+
+  .decision-book-page {
+    object-fit: cover;
+    background: #fff;
+    transform-origin: 50% 90%;
+    transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .decision-book-page-back {
+    z-index: 0;
+    transform: translate(1.7rem, 1.1rem) rotate(-4deg);
+  }
+
+  .decision-book-page-peek {
+    z-index: 1;
+    transform: translate(0.9rem, 0.6rem) rotate(-2deg);
+  }
+
+  .decision-book-cover {
+    z-index: 2;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: #fff;
+    transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .decision-book-cover-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .decision-book-stack:hover .decision-book-page-back {
+      transform: translate(1.1rem, 1.25rem) rotate(5deg);
+    }
+
+    .decision-book-stack:hover .decision-book-page-peek {
+      transform: translate(-3.1rem, -0.15rem) rotate(-2.5deg);
+    }
+
+    .decision-book-stack:hover .decision-book-cover {
+      transform: translateY(-0.2rem);
+    }
+  }
+
+  .decision-book-stack:focus-visible .decision-book-page-back {
+    transform: translate(1.1rem, 1.25rem) rotate(5deg);
+  }
+
+  .decision-book-stack:focus-visible .decision-book-page-peek {
+    transform: translate(-3.1rem, -0.15rem) rotate(-2.5deg);
+  }
+
+  .decision-book-stack:focus-visible .decision-book-cover {
+    transform: translateY(-0.2rem);
+  }
+
+  @media (max-width: 991px) {
+    .decision-book-section {
+      min-height: 0;
+      padding: 6rem 2rem 7rem;
+    }
+
+    .decision-book-inner {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 4.5rem;
+      width: min(100%, 36rem);
+    }
+
+    .decision-book-copy {
+      width: min(100%, 31rem);
+      justify-self: start;
+    }
+
+    .page-wrapper .decision-book-copy h2 {
+      font-size: 2.75rem;
+    }
+
+    .decision-book-stack {
+      width: min(100%, 32rem);
+      justify-self: center;
+    }
+
+    .decision-book-stack:hover .decision-book-page-peek,
+    .decision-book-stack:focus-visible .decision-book-page-peek {
+      transform: translate(2rem, -0.1rem) rotate(2deg);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .decision-book-section {
+      padding: 4.5rem 1.5rem 5.75rem;
+    }
+
+    .decision-book-inner {
+      gap: 3.75rem;
+    }
+
+    .page-wrapper .decision-book-copy h2 {
+      font-size: clamp(2.35rem, 11vw, 2.75rem);
+      line-height: 1;
+    }
+
+    .decision-book-copy p {
+      margin-top: 1.125rem;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    .decision-book-cta {
+      min-height: 3rem;
+      margin-top: 2rem;
+      padding: 0 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .decision-book-stack {
+      width: min(100%, 30rem);
+    }
+
+  }
+
+  @media (max-width: 479px) {
+    .decision-book-stack {
+      width: 100%;
+    }
+
+  }
+
   .positioning-quote-panel {
     position: relative;
     display: flex;
@@ -1570,110 +1873,92 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
   .positioning-process-section {
     box-sizing: border-box;
-    padding: clamp(6rem, 9.5vw, 8.75rem) clamp(2rem, 7vw, 7rem)
-      clamp(6.5rem, 11vw, 10rem);
+    display: grid;
+    width: 100vw;
+    min-height: clamp(64rem, 82vw, 74rem);
+    margin-right: calc(50% - 50vw);
+    margin-left: calc(50% - 50vw);
+    place-items: center;
+    justify-content: center;
+    padding: clamp(7rem, 10vw, 10rem) clamp(1.5rem, 5vw, 4rem);
     background-color: #fdfcfa;
     scroll-margin-top: 6rem;
   }
 
   .positioning-process-inner {
-    width: min(100%, 64.25rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    width: min(100%, 74rem);
     margin: 0 auto;
   }
 
-  .positioning-process-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 27rem) minmax(0, 31.75rem);
-    align-items: center;
-    gap: clamp(4rem, 7vw, 5.5rem);
-  }
-
-  .positioning-process-intro {
-    min-width: 0;
-  }
-
   .page-wrapper h2.positioning-process-heading {
-    max-width: none;
+    width: fit-content;
     margin: 0;
-    font-family: Fraunces, Arial, sans-serif;
-    font-size: clamp(2.65rem, 3.1vw, 2.9rem);
-    font-weight: 300 !important;
-    line-height: 0.92;
-    letter-spacing: -0.04em;
-  }
-
-  .positioning-process-heading > span {
-    display: block;
-    white-space: nowrap;
-  }
-
-  .positioning-process-intro > p {
-    max-width: 26rem;
-    margin: 1.75rem 0 0;
-    font-family: Dmsans, Impact, sans-serif;
-    font-size: 1.125rem;
-    font-weight: 400;
-    line-height: 1.35;
-    letter-spacing: -0.015em;
+    font-family: Dmsans, Arial, sans-serif;
+    font-size: 1.375rem;
+    font-weight: 600 !important;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    text-align: center;
   }
 
   .positioning-process-timeline {
-    --timeline-rail-offset: -3rem;
     position: relative;
-    margin: 0;
-    padding: 2.75rem 2.75rem 2.5rem 6.25rem;
+    box-sizing: border-box;
+    width: min(calc(100% - 4rem), 26.875rem);
+    margin: 1.125rem auto 0;
+    padding: 0;
     border: 0;
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     background-color: #f6f4f1;
+    counter-reset: process-step;
     list-style: none;
   }
 
   .positioning-process-timeline li {
     position: relative;
+    box-sizing: border-box;
     min-width: 0;
-    padding: 0;
-    border: 0;
+    padding: 1.25rem 1.5rem 1.125rem;
+    border-bottom: 2px solid #fdfcfa;
+    counter-increment: process-step;
   }
 
-  .positioning-process-timeline li + li {
-    margin-top: 2rem;
+  .positioning-process-timeline li:last-child {
+    border-bottom: 0;
   }
 
   .positioning-process-timeline li::before {
-    content: "";
+    content: counter(process-step, decimal-leading-zero);
     position: absolute;
-    top: 0.75rem;
-    left: var(--timeline-rail-offset);
-    width: 1.5rem;
-    height: 1px;
-    background-color: rgba(34, 34, 34, 0.12);
+    top: 50%;
+    left: -3.75rem;
+    width: 2rem;
+    color: #222;
+    font-family: Dmsans, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+    transform: translateY(-50%);
   }
 
-  .positioning-process-timeline li::after {
+  .positioning-process-timeline li:not(:last-child)::after {
     content: "";
     position: absolute;
-    top: 0.5625rem;
-    left: -1.75rem;
-    width: 0.375rem;
-    height: 0.375rem;
-    border-top: 1px solid rgba(34, 34, 34, 0.16);
-    border-right: 1px solid rgba(34, 34, 34, 0.16);
-    transform: rotate(45deg);
+    top: calc(50% + 1.25rem);
+    left: -2.75rem;
+    width: 1px;
+    height: calc(50% + 1rem);
+    background-color: rgba(34, 34, 34, 0.08);
   }
 
   .positioning-process-step {
     position: relative;
     margin: 0;
-  }
-
-  .positioning-process-timeline li:not(:last-child) .positioning-process-step::before {
-    content: "";
-    position: absolute;
-    top: 0.75rem;
-    left: var(--timeline-rail-offset);
-    width: 1px;
-    height: calc(100% + 2rem);
-    background-color: rgba(34, 34, 34, 0.12);
   }
 
   .page-wrapper .positioning-process-step h3 {
@@ -1682,32 +1967,36 @@ const pageBody = pageWithFooterLogo.replaceAll(
     font-size: 1.375rem;
     font-weight: 400;
     line-height: 1.15;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
   }
 
   .positioning-process-step p {
-    max-width: 26rem;
-    margin: 0.75rem 0 0;
+    max-width: none;
+    margin: 0.625rem 0 0;
     font-family: Dmsans, Impact, sans-serif;
     font-size: 1rem;
     font-weight: 400;
-    line-height: 1.35;
+    line-height: 1.4;
     letter-spacing: -0.01em;
   }
 
   .positioning-process-outcome {
-    max-width: 24rem !important;
-    margin: 3.5rem 0 0 !important;
-    padding: 0.25rem 0 0.25rem 1.5rem;
+    max-width: 62rem !important;
+    margin: 2.125rem auto 0 !important;
+    padding: 0;
     border: 0;
-    border-left: 1px solid rgba(34, 34, 34, 0.14);
-    font-family: Dmsans, Impact, sans-serif;
-    font-size: 0.9375rem !important;
-    font-style: italic;
-    font-weight: 400 !important;
-    line-height: 1.22 !important;
-    letter-spacing: -0.01em;
-    text-align: left;
+    font-family: Fraunces, Arial, sans-serif;
+    font-size: clamp(3rem, 3.55vw, 3.25rem) !important;
+    font-style: normal;
+    font-weight: 300 !important;
+    line-height: 1.14 !important;
+    letter-spacing: -0.045em;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .positioning-process-outcome > span {
+    display: block;
   }
 
   .founder-profile-section {
@@ -1796,9 +2085,10 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
   .founder-profile-details {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(4rem, 10.8vw, 9.5rem);
-    width: min(100%, 1153px);
+    grid-template-columns: minmax(0, 40rem);
+    justify-content: center;
+    gap: clamp(4.5rem, 8vw, 7rem);
+    width: min(100%, 40rem);
     margin-top: clamp(7rem, 9.95vw, 9.25rem);
     margin-right: auto;
     margin-left: auto;
@@ -1870,11 +2160,12 @@ const pageBody = pageWithFooterLogo.replaceAll(
   .closing-folder-content {
     box-sizing: border-box;
     width: 100%;
-    padding: 3.15rem 78px;
+    padding: 3.65rem 78px 3.15rem;
   }
 
   .page-wrapper .closing-folder-heading {
-    width: min(100%, 400px);
+    width: max-content;
+    max-width: 100%;
     margin: 0;
     color: inherit;
     font-family: Fraunces, Arial, sans-serif !important;
@@ -1882,11 +2173,12 @@ const pageBody = pageWithFooterLogo.replaceAll(
     font-weight: 300 !important;
     line-height: 0.92;
     letter-spacing: -0.055em;
+    white-space: nowrap;
     font-synthesis: none;
   }
 
   .closing-folder-heading > span {
-    display: block;
+    display: inline;
   }
 
   .page-wrapper .closing-folder-emphasis {
@@ -2249,45 +2541,6 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   @media (max-width: 767px) {
-    .positioning-process-section {
-      padding: 5rem 1.25rem 5.5rem;
-    }
-
-    .page-wrapper h2.positioning-process-heading {
-      font-size: 2.65rem;
-      line-height: 1;
-    }
-
-    .positioning-process-heading > span {
-      display: inline;
-      white-space: normal;
-    }
-
-    .positioning-process-intro > p {
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-
-    .positioning-process-timeline li {
-      padding: 1.25rem 0 1.5rem;
-    }
-
-    .page-wrapper .positioning-process-step h3 {
-      font-size: 1.5rem;
-    }
-
-    .positioning-process-step p {
-      font-size: 1rem;
-    }
-
-    .positioning-process-outcome {
-      max-width: 32rem;
-      margin-top: 4rem;
-      padding: 0;
-      font-size: 1rem;
-      line-height: 1.4;
-    }
-
     .positioning-clients-container {
       padding-right: 1.5rem;
       padding-left: 1.5rem;
@@ -2295,16 +2548,21 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
     .positioning-clients-section {
       min-height: 0;
-      padding-top: 4rem;
+      padding-top: 0;
       padding-bottom: 4rem;
+    }
+
+    .positioning-clients-statement-stage {
+      min-height: clamp(30rem, 72svh, 38rem);
+      padding: 4rem 0;
     }
 
     .page-wrapper h2.positioning-clients-heading {
       width: 100%;
       max-width: 33rem;
-      font-size: 2rem;
-      line-height: 1.25;
-      letter-spacing: -1.25px;
+      font-size: 2.5rem;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
     }
 
     .positioning-clients-heading > span {
@@ -2313,7 +2571,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
     }
 
     .positioning-clients-intro {
-      margin-top: 3rem;
+      margin-top: 0;
       font-size: 1.125rem;
       line-height: 1.35;
       text-align: left;
@@ -2481,6 +2739,37 @@ const pageBody = pageWithFooterLogo.replaceAll(
       line-height: 1.45;
     }
 
+    .positioning-story-preview-card {
+      height: 38rem;
+      min-height: 0;
+      padding-bottom: 0;
+    }
+
+    .positioning-story-preview-fade {
+      height: 10rem;
+    }
+
+    .four-cs-read-more {
+      bottom: 1.5rem;
+    }
+
+    .positioning-pull-quote-section {
+      min-height: 34rem;
+      padding: 6rem 1.5rem;
+    }
+
+    .positioning-pull-quote-inner {
+      max-width: 30rem;
+    }
+
+    .positioning-pull-quote-inner blockquote p {
+      font-size: 1.75rem;
+    }
+
+    .positioning-pull-quote-inner figcaption {
+      margin-top: 3rem;
+    }
+
     .positioning-quote-panel {
       min-height: 0;
       margin-top: 3.5rem;
@@ -2587,6 +2876,22 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   @media (min-width: 768px) and (max-width: 991px) {
+    .positioning-clients-statement-stage {
+      min-height: clamp(34rem, 76svh, 44rem);
+      padding-right: 2.5rem;
+      padding-left: 2.5rem;
+    }
+
+    .page-wrapper h2.positioning-clients-heading {
+      width: min(100%, 42rem);
+      font-size: 3rem;
+    }
+
+    .positioning-clients-heading > span {
+      display: inline;
+      white-space: normal;
+    }
+
     .positioning-story-section {
       padding: 3rem 2rem;
     }
@@ -2662,6 +2967,12 @@ const pageBody = pageWithFooterLogo.replaceAll(
       margin-top: 0.8125rem;
     }
 
+    .positioning-story-preview-card {
+      height: 38rem;
+      min-height: 0;
+      padding-bottom: 0;
+    }
+
     .positioning-quote-panel {
       min-height: 0;
       margin-top: 3rem;
@@ -2728,6 +3039,17 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
   }
 
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .page-wrapper h2.positioning-clients-heading {
+      width: min(100%, 55rem);
+    }
+
+    .positioning-clients-heading > span {
+      display: inline;
+      white-space: normal;
+    }
+  }
+
   @media (min-width: 992px) and (max-width: 1049px) {
     .b2b-ceos-section {
       grid-template-rows: repeat(3, 14.75rem);
@@ -2773,6 +3095,11 @@ const pageBody = pageWithFooterLogo.replaceAll(
       padding: 3.5rem;
     }
 
+    .page-wrapper .closing-folder-heading {
+      width: auto;
+      white-space: normal;
+    }
+
     .b2b-ceos-section {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-template-rows: auto;
@@ -2797,41 +3124,6 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
     .b2b-ceos-section .b2b-card-home {
       min-height: 0;
-    }
-
-    .positioning-process-layout {
-      grid-template-columns: 1fr;
-      gap: 3.5rem;
-    }
-
-    .positioning-process-inner {
-      width: min(100%, 45rem);
-    }
-
-    .page-wrapper h2.positioning-process-heading {
-      max-width: 15ch;
-    }
-
-    .positioning-process-timeline {
-      --timeline-rail-offset: -2.75rem;
-      margin: 0;
-      padding: 2.75rem 2.5rem 2.5rem 5.5rem;
-    }
-
-    .positioning-process-timeline li {
-      padding: 0;
-    }
-
-    .positioning-process-timeline li + li {
-      margin-top: 1.75rem;
-    }
-
-    .positioning-process-timeline li:not(:last-child) .positioning-process-step::before {
-      height: calc(100% + 1.75rem);
-    }
-
-    .positioning-process-step p {
-      max-width: 34rem;
     }
 
     .investor-trust-layout {
@@ -2873,31 +3165,45 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   @media (max-width: 767px) {
-    .positioning-process-layout {
-      gap: 3.25rem;
+    .positioning-process-section {
+      min-height: 0;
+      padding: 6rem 1rem 6.5rem;
+    }
+
+    .page-wrapper h2.positioning-process-heading {
+      font-size: 1.25rem;
     }
 
     .positioning-process-timeline {
-      --timeline-rail-offset: -2.5rem;
-      padding: 2rem 1.25rem 2rem 4rem;
-      border-radius: 0.875rem;
+      margin-top: 1rem;
+      width: min(calc(100% - 3rem), 26.875rem);
+    }
+
+    .positioning-process-timeline li {
+      padding: 1.125rem 1.25rem 1rem;
     }
 
     .positioning-process-timeline li::before {
-      width: 1.25rem;
+      left: -2.85rem;
     }
 
-    .positioning-process-timeline li::after {
-      left: -1.5rem;
+    .positioning-process-timeline li:not(:last-child)::after {
+      left: -1.85rem;
     }
 
     .page-wrapper .positioning-process-step h3 {
-      font-size: 1.375rem;
+      font-size: 1.25rem;
     }
 
     .positioning-process-outcome {
-      margin-top: 3rem !important;
-      padding: 0.25rem 0 0.25rem 1.25rem;
+      max-width: 15ch !important;
+      margin-top: 3.5rem !important;
+      font-size: clamp(2.25rem, 10vw, 3rem) !important;
+      line-height: 1.05 !important;
+    }
+
+    .positioning-process-outcome > span {
+      display: inline;
     }
 
     .founder-profile-section {
@@ -3028,6 +3334,12 @@ const pageBody = pageWithFooterLogo.replaceAll(
     }
 
     .closing-folder-cta {
+      transition: none;
+    }
+
+    .decision-book-cta,
+    .decision-book-page,
+    .decision-book-cover {
       transition: none;
     }
   }

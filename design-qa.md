@@ -81,6 +81,227 @@ final result: passed
 
 ---
 
+# Decision Book Promotion QA
+
+## Evidence
+
+- Source visual truth: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-237ae60b-292c-4062-9453-988417ca0954.png` (`1302 × 780` px).
+- User-provided pre-fix implementation capture: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-72bd95dd-9bda-4623-85ae-da3693e421c3.png` (`1003 × 749` px).
+- Final supplied photographic cover mockup: `public/assets/decision-book-cover-mockup.webp` (`1600 × 1294` px, optimized from the supplied `3670 × 2966` PNG).
+- Supplied interior artwork: `public/assets/decision-book-interior.svg` (`464 × 612` view box).
+- Static builds run for both `/` and the GitHub Pages base path `/ITK/`.
+- A browser-rendered comparison could not be captured because the in-app Browser security policy blocks automated inspection of this local URL.
+
+## Findings
+
+- The new Decision Green chapter follows the full-width Redpanda pull quote and precedes the process section.
+- Desktop composition uses a compact Fraunces argument and Deep Ink CTA beside a native-proportion `1600:1294` photographic cover frame. The layout becomes a single reading column below 992px.
+- The final supplied book photograph is used as one intact artwork; its embedded title, portrait, tabletop, and physical-book detail are not rebuilt or cropped by HTML.
+- The supplied SVG is used for both physical backing pages, rather than approximated with decorative rectangles.
+- Fine-pointer hover and keyboard focus expose a narrow SVG page preview behind the cover using transform-only motion and the approved 420ms expo curve. Reduced-motion users receive the same composition without interpolation.
+- Both builds complete successfully; the final cover mockup and supplied interior SVG are present in the output, and the GitHub Pages HTML uses `/ITK/assets/...` and `/ITK/contact-us/` paths.
+
+## Visual verification status
+
+- Desktop and mobile image comparisons: blocked by local-browser security policy.
+- Hover-state screenshot: blocked by local-browser security policy.
+- Static structure, responsive CSS, accessible link labels, asset paths, JSON validity, and production builds: passed.
+
+## Comparison history
+
+- The user requested a centering correction after reviewing the implementation capture.
+- Fix applied: the Decision Green section now spans the viewport explicitly with symmetric viewport-relative margins; its 70rem copy-and-book grid uses automatic inline margins so parent-container width cannot bias its centerline.
+- Asset replacement: the earlier constructed cover was replaced with the user-supplied photographic mockup and the frame was changed from portrait to the mockup’s native landscape proportion so the artwork remains intact.
+- Post-fix browser capture remains unavailable through the permitted browser surface.
+
+final result: blocked
+
+---
+
+# Decision Book Page Stack QA
+
+## Evidence
+
+- Source visual truth:
+  - `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-4c9aa0a8-e710-42f6-aa3e-ee912a674d01.png` (`1326 × 1070` px).
+  - `/Users/haggylap/.codex/attachments/3f4c3c3b-0e45-4a50-8150-302852b1c908/pasted-text.txt` (supplied `663 × 535` SVG page).
+- Browser-rendered implementation:
+  - `design-qa-book-stack-default.png` (`2015 × 1064` px).
+  - `design-qa-book-stack-hover.png` (`2015 × 1064` px).
+- Focused source/implementation comparison: `design-qa-book-cover-comparison.png` (`1182 × 477` px; source left, implementation right).
+- Route: `http://localhost:4321/?logo-diagnosis=1`.
+- Browser viewport: approximately `2030 × 1072` CSS px; the stack rendered at approximately `591 × 477` CSS px.
+- States inspected: default and fine-pointer hover.
+
+## Full-view comparison evidence
+
+- The approved photographic cover replaces the former book mockup and fills the front `663:535` page without exposing an internal white gutter.
+- The middle layer uses the supplied SVG artwork; the furthest layer is intentionally blank Paper.
+- Both page edges remain visible at rest and fan to opposite sides on hover, preserving the intended physical-page hierarchy.
+- Every page uses a one-pixel `#CFFD93` border, matching the Decision Green section background exactly.
+
+## Focused region comparison evidence
+
+- The side-by-side focused comparison confirms that the photographed cover content, orientation, crop, and color are preserved in the implementation.
+- Hover inspection confirms the SVG page is the only illustrated background layer and that the third page remains blank.
+- Runtime console inspection returned no warnings or errors.
+
+## Required fidelity surfaces
+
+- Fonts and typography: passed. This asset change does not synthesize or alter the photographed cover typography; adjacent Fraunces and DM Sans treatments remain unchanged.
+- Spacing and layout rhythm: passed. The stack retains the centered two-column composition and uses the supplied SVG aspect ratio for consistent page alignment.
+- Colors and visual tokens: passed. Page strokes match Decision Green `#CFFD93`; Paper remains the backing-page color.
+- Image quality and asset fidelity: passed. The supplied PNG and SVG are served directly as local assets with explicit intrinsic dimensions.
+- Copy and content: passed. No section copy or action labels changed.
+- Responsiveness and accessibility: passed. The stack remains a single labeled link, decorative layers remain hidden from assistive technology, keyboard focus reveals the same state, and reduced-motion behavior is preserved.
+
+## Findings
+
+- No actionable P0, P1, or P2 findings remain.
+
+## Comparison history
+
+1. Replaced the front artwork with the approved `decision-book-cover-photo.png`.
+2. Replaced the illustrated backing layer with `decision-book-background-page.svg` and left the third layer blank.
+3. Added the matching Decision Green stroke to all three page layers.
+4. Verified default and hover states in the live browser; no correction loop was required.
+
+## Primary interaction tested
+
+- Pointer hover fans the blank page left, the supplied SVG page right, and lifts the photographic cover slightly without layout shift.
+- Keyboard focus exposes the same page arrangement.
+
+final result: passed
+
+---
+
+# Numbered Process Chapter QA
+
+## Evidence
+
+- Source visual truth: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-3ebefb64-122d-4abf-9797-fd5a772c5124.png` (`1454 × 1190` px).
+- Target state: the centered process chapter between the book promotion and testimonial grid.
+- Implementation screenshot: unavailable because the in-app Browser security policy blocks automated inspection of this local URL.
+
+## Full-view and focused comparison evidence
+
+- Browser-rendered comparison is blocked without an implementation capture.
+- Static implementation matches the source hierarchy: compact centered label, 430px five-row panel with external numbering, and oversized four-line outcome statement.
+- No image, logo, illustration, or non-standard icon asset appears in the reference.
+
+## Findings
+
+- Fonts and typography: the label is DM Sans Semibold, rows use DM Sans Regular at 22px/16px, and the outcome uses Fraunces Light at 48–52px. No serif bold is introduced.
+- Spacing and layout rhythm: the panel uses 20px/24px/18px row insets, 2px Canvas separators, a 12px radius, and 34px separation before the outcome.
+- Colors and tokens: Canvas, Soft Stone, Ink, and 8%-Ink connectors use existing system colors.
+- Copy and content: all five approved steps and the full outcome statement remain unchanged; authored desktop outcome line breaks are explicit and return to natural wrapping on mobile.
+- Responsiveness and accessibility: semantic `ol`/`li` structure is preserved; CSS counters generate `01–05`, and the number/connector offsets tighten below 768px.
+- Local and `/ITK/` GitHub Pages production builds pass, the design JSON parses, and `git diff --check` reports no whitespace errors.
+
+final result: blocked
+
+---
+
+# Founder Commercial Column QA
+
+## Evidence
+
+- Source visual truth: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-e58c5af1-79bd-4b66-8014-624d97e55daa.png` (`1402 × 522` px).
+- Target state: the cost and investment entries beneath the founder portrait and biography.
+- Implementation screenshot: unavailable because the in-app Browser security policy blocks automated inspection of this local URL.
+
+## Findings
+
+- Layout: the former two-track desktop grid is replaced with one centered 40rem track at every breakpoint.
+- Spacing: the two entries retain independent hairline dividers and use a responsive 4.5–7rem vertical gap.
+- Typography and copy: existing Fraunces Light commercial titles, authored line breaks, DM Sans body copy, and link styling are unchanged.
+- Colors and imagery: Canvas, Ink, and existing founder imagery remain unchanged.
+- Responsiveness: the commercial entries no longer switch structures by breakpoint; only the surrounding portrait and biography layout changes on smaller screens.
+- Browser-rendered comparison remains blocked; static structure and production builds are verified separately.
+
+final result: blocked
+
+---
+
+# Article Preview and Full-width Pull Quote QA
+
+## Evidence
+
+- Source visual truth: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-6e2f966b-a988-44dc-b159-83b052b608ab.png` (`942 × 1144` px).
+- Homepage target: `http://localhost:4321/#four-cs`.
+- Full article target: `http://localhost:4321/articles/category-leadership/`.
+- Implementation screenshots: unavailable because the in-app browser previously rejected the local route under its URL security policy.
+- Static implementation checks: root and `/ITK/` production builds both generated three routes successfully, including `/articles/category-leadership/`.
+
+## Full-view comparison evidence
+
+- Blocked. The required rendered source/implementation composite could not be captured from the local preview.
+
+## Focused region comparison evidence
+
+- The homepage Paper article card is now height-capped and overflow-clipped, with a neutral Paper fade and centered Deep Ink `Read More →` pill at the bottom edge.
+- The Redpanda testimonial has moved out of the Paper card into a full-width Deep Ink section with a centered 34rem reading measure and viewport-scale vertical spacing.
+- The complete Four Cs and decision-based positioning content is available on a dedicated article route that reuses the site navigation, footer, metadata, Listen control, byline portrait, and responsive reading measure.
+
+## Findings
+
+- Fonts and typography: Fraunces Light remains the editorial headline face; DM Sans remains the body, metadata, action, and pull-quote face. No serif bold was introduced.
+- Spacing and layout rhythm: the homepage preview matches the reference sequence of Lavender preview, clear continuation action, then a full-width dark quote chapter.
+- Colors and visual tokens: Positioning Lavender, Paper, Deep Ink, Canvas, and Decision Green hover remain within the documented palette.
+- Image quality and asset fidelity: the approved `jon-itkin-byline.png` portrait and SVG lockup are reused without modification.
+- Copy and content: no article or testimonial copy was removed; the homepage now previews the content while the article route carries the complete reading experience.
+- Interaction and accessibility: Read More is a semantic link with visible focus; both Listen controls expose pressed state and hide when speech synthesis is unavailable; the pull quote uses semantic figure, blockquote, and figcaption elements.
+- Base-path integrity: the generated GitHub Pages build links to `/ITK/articles/category-leadership/` and resolves article assets under `/ITK/assets/`.
+- Build integrity: Astro produced the homepage, contact page, and full article route without errors; `design.json` parses and `git diff --check` passes.
+
+## Comparison history
+
+- Initial pass separated the homepage preview from the pull quote, added the dedicated article route, and removed the obsolete scroll-driven lavender color tween.
+- Automated visual comparison remains blocked by the local URL security policy; no alternate browser-control surface was used.
+
+final result: blocked — rendered desktop and mobile comparison still requires a user-visible preview check.
+
+---
+
+# Immersive Positioning Statement QA
+
+## Evidence
+
+- Source visual truth: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-558a47b9-8a39-492c-9049-85bdb3c4666e.png` (`1700 × 355` px).
+- Intended implementation route: `http://localhost:4321/#clients`.
+- Implementation screenshot: unavailable because the in-app browser rejected the local route under its URL security policy.
+- Static implementation checks: root build and `/ITK/` GitHub Pages base-path build both completed successfully; the generated HTML includes the dedicated `positioning-clients-statement-stage` wrapper.
+
+## Full-view comparison evidence
+
+- Blocked. The required rendered after-state could not be captured from the local route, so no viewport-level source/implementation composite was produced.
+
+## Focused region comparison evidence
+
+- The supplied reference establishes a centered, left-aligned Fraunces statement with generous Canvas around it.
+- The implementation expands that treatment into a normal-flow `clamp(36rem, 80svh, 52rem)` desktop stage and a `clamp(30rem, 72svh, 38rem)` mobile stage, with the statement centered in both axes.
+- Desktop type now scales from 44–72px at `1.08` line height and `-0.03em` tracking; tablet uses 48px with natural wrapping and mobile uses 40px with natural wrapping.
+
+## Findings
+
+- Typography: the approved Fraunces Light 300 face remains in use, with no bold or synthetic treatment.
+- Spacing and layout rhythm: the statement now owns a near-viewport editorial pause; intro copy, fit chips, and logos remain in normal document flow below it.
+- Colors and visual tokens: Canvas and Ink remain unchanged.
+- Image quality and asset fidelity: no image or logo assets were modified.
+- Copy and content: all authored statement lines and supporting client-proof copy remain unchanged.
+- Responsive behavior: authored line breaks are retained from 1200px upward; 992–1199px, tablet, and mobile use natural wrapping to prevent horizontal overflow at the larger scale.
+- Build integrity: both required production builds passed, `design.json` parses successfully, and `git diff --check` reports no whitespace errors.
+
+## Comparison history
+
+- Initial implementation created a dedicated viewport-scale stage, enlarged the statement type, and removed the former fixed top gap before the supporting proof content.
+- Follow-up scale pass increased the statement to 44–72px on desktop, 48px on tablet, and 40px on mobile, with a new natural-wrap safety range from 992–1199px.
+- Automated visual comparison could not proceed because the local preview URL was blocked by the browser security policy. No alternate browser-control surface was used.
+
+final result: blocked — rendered visual comparison requires a user-visible preview check because the local route could not be captured automatically.
+
+---
+
 # All-Fraunces FAQ Display QA
 
 ## Evidence
@@ -887,5 +1108,97 @@ This QA record is historical and has been superseded by the single-movement hero
 - One synchronized GSAP tween with Expo easing: complete.
 - Stable supporting copy and CTA geometry: verified.
 - Desktop, mobile, overflow, and build checks: passed.
+
+final result: passed
+
+---
+
+# Centered Process Chapter QA
+
+## Evidence
+
+- Source visual truth: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-4d3f8c5f-f713-48fc-a0b0-d714fa9b86a7.png` (`982 × 762` px).
+- Target state: the process chapter immediately beneath the Decision-Based Positioning book promotion.
+- Reference viewport and density: `982 × 762` source pixels; CSS viewport and device scale factor are not encoded in the supplied image.
+- Implementation screenshot: unavailable because the in-app Browser security policy blocks automated inspection of this local URL.
+
+## Full-view comparison evidence
+
+- Visual comparison is blocked without a browser-rendered implementation capture.
+- Static implementation follows the reference hierarchy: centered **Our process** title, compact Soft Stone process panel, and wide centered Fraunces outcome statement.
+
+## Focused region comparison evidence
+
+- Focused comparison is blocked without an implementation capture.
+- The code retains the five approved steps and their one-pixel connected arrow rail, using the reference’s compact DM Sans scale and 356px maximum panel width.
+
+## Findings
+
+- Fonts and typography: Fraunces Light is assigned to the title and outcome; DM Sans Regular is assigned to all step content. No serif bold is introduced.
+- Spacing and layout rhythm: the former two-column thesis/method composition is removed. The chapter is centered, near-screen-height, and uses the reference’s tight title-to-panel and panel-to-outcome spacing.
+- Colors and visual tokens: Canvas, Soft Stone, Ink, and 12%-Ink rules use existing design-system values.
+- Image quality and asset fidelity: the reference contains no raster, logo, illustration, or icon asset.
+- Copy and content: all five process steps and the complete approved outcome statement are preserved. The superseded thesis and method paragraphs are intentionally absent to match the supplied design.
+- Responsiveness and accessibility: the ordered list and heading semantics remain intact; below 768px, the panel fills the available measure and the centered outcome narrows to a balanced mobile line length.
+- Local and `/ITK/` GitHub Pages production builds pass, the design JSON parses, and `git diff --check` reports no whitespace errors.
+
+## Comparison history
+
+- User-provided implementation evidence showed the complete title/card/outcome group centered about 45px left of the screenshot viewport midpoint.
+- Fix applied: the chapter now uses full-viewport width with symmetric viewport-relative margins, while the title, card, and outcome each use explicit automatic inline centering.
+- Post-fix visual capture remains blocked because an implementation screenshot cannot be captured through the permitted browser surface.
+
+final result: blocked
+
+---
+
+# Latest QA Result
+
+The Decision Book Page Stack QA documented above is the current release check. Its default and hover captures, focused source comparison, console inspection, local production build, and `/ITK/` GitHub Pages build all passed with no remaining P0, P1, or P2 findings.
+
+final result: passed
+
+---
+
+# Left-Side Second-Page Reveal QA
+
+## Evidence
+
+- Source visual truth: the approved three-page book stack documented in **Decision Book Page Stack QA**, plus the current direction to expose the left side of the illustrated second page on hover.
+- Browser-rendered implementation:
+  - `design-qa-book-stack-left-default.png` (`2015 × 1064` px).
+  - `design-qa-book-stack-left-hover.png` (`2015 × 1064` px).
+- Route: `http://localhost:4321/?logo-diagnosis=1#decision-book`.
+- Viewport: approximately `2030 × 1072` CSS px at browser density 1.
+- States inspected: default and the exact hover transform state.
+
+## Full-view comparison evidence
+
+- The default stack retains the approved front cover, illustrated middle page, blank back page, scale, alignment, and Decision Green field.
+- In the revealed state, the illustrated SVG page now fans to the left, exposing its left-side decision list. The blank page fans right so all three layers remain legible.
+
+## Focused region comparison evidence
+
+- The revealed-state capture clearly shows the illustrated page’s left edge behind the cover while the white blank page remains visible on the opposite side.
+- The cover remains frontmost and lifts by the same three-pixel amount; no content reflow or clipping was introduced.
+
+## Required fidelity surfaces
+
+- Fonts and typography: passed; no type rules changed.
+- Spacing and layout rhythm: passed; only transform directions changed and the stack remains centered.
+- Colors and visual tokens: passed; the `#CFFD93` page strokes and section field are unchanged.
+- Image quality and asset fidelity: passed; both approved source assets remain unmodified.
+- Copy and content: passed; no copy changed.
+- Interaction and accessibility: passed; pointer hover and keyboard focus share the same left-side reveal, and reduced-motion behavior is preserved.
+
+## Findings
+
+- No actionable P0, P1, or P2 findings remain.
+
+## Comparison history
+
+1. Previous hover direction exposed the illustrated page on the right.
+2. Reversed the illustrated page transform to `translateX(-3.1rem) rotate(-2.5deg)` and moved the blank page right.
+3. Captured the revised state in the browser and confirmed the requested left-side content is visible.
 
 final result: passed
