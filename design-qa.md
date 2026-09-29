@@ -1811,3 +1811,18 @@ final result: passed
 final result: passed
 
 ---
+
+## Homepage hero open tracking QA — 2026-09-29
+
+- Scope: the homepage Fraunces hero headline, “Own the positioning / that scales everything.”
+- Change: relaxed headline tracking from `-0.03em` to `-0.01em` while preserving the authored two-line desktop composition and natural mobile wrapping.
+- Desktop visual evidence: `.capture/home-hero-open-tracking/desktop.png` at `1280 × 720`.
+- Desktop verification: computed tracking is approximately `-0.896px` at the active fluid size; both authored lines remain intact and the page reports no horizontal overflow.
+- Mobile visual evidence: `.capture/home-hero-open-tracking/mobile.png` at `390 × 844`.
+- Mobile verification: computed tracking is approximately `-0.48px`; the headline remains contained inside the folder and the page reports no horizontal overflow.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` record the relaxed hero tracking.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---

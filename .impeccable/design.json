@@ -120,7 +120,7 @@
     "typographyMeta": {
       "display-hero": {
         "displayName": "Hero Display",
-        "purpose": "Two authored all-Fraunces Light lines in the opening folder: 48–120px, 0.86 desktop line height, 1.0 mobile line height, and -0.03em tracking."
+        "purpose": "Two authored all-Fraunces Light lines in the opening folder: 48–120px, 0.86 desktop line height, 1.0 mobile line height, and relaxed -0.01em tracking."
       },
       "hero-support": {
         "displayName": "Hero Support",

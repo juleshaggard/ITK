@@ -232,7 +232,7 @@ The palette combines warm editorial neutrals with highly committed single-color 
 
 | Role | Family / weight | Size | Line height | Tracking | Primary use |
 | --- | --- | --- | --- | --- | --- |
-| Hero display | Fraunces Light 300 | `clamp(48px, 7vw, 120px)` | `0.78` desktop, `1` mobile | `-0.03em` | Two-line hero H1 only |
+| Hero display | Fraunces Light 300 | `clamp(48px, 7vw, 120px)` | `0.78` desktop, `1` mobile | `-0.01em` | Two-line hero H1 only |
 | Hero support | DM Sans Regular 400 | `clamp(24px, 2vw, 34px)` desktop; `16px` mobile | `1.25` desktop, `1.5` mobile | normal | Three-line positioning consultancy description |
 | Section display | Fraunces Light 300 | `clamp(48px, 4vw, 72px)` | `1.08` | `-0.02em` | Investor proof headline |
 | Editorial headline | Fraunces Light 300 | `40px` | `1.05` | `-0.025em` | Four Cs and decisions statements |
@@ -310,7 +310,7 @@ The generated content snapshot is `src/content/deep-reads.generated.json`. `scri
 
 The opening field is an inset yellow folder, not a full-bleed rectangle. It uses side gutters of `clamp(16px, 1.8vw, 32px)` and a bottom gap of `clamp(24px, 2.2vw, 32px)`. The yellow body begins below the supplied `hero-yellow-tab.svg`; tab and body overlap by about 2px so no Canvas seam appears. The absolute tab rail stays transparent so the overlapping yellow body can fill SVG anti-aliasing and fractional-pixel edges. The body's responsive corner radius must optically match the tab shoulders.
 
-Hero content begins at `clamp(24px, 8.85vw, 160px)` inside the body. Desktop padding is 237px top and 119px bottom; mobile uses 160px top and 96px bottom. The hero remains in normal flow and approximates one viewport in height. The authored headline is two all-Fraunces Light lines—“Own the positioning” / “that scales everything.”—at `clamp(48px, 7vw, 120px)`, `0.86` line height, and `-0.03em` tracking. Supporting copy is `clamp(24px, 2vw, 34px)` / `1.25` on desktop within a 47.5rem measure and 16px / 1.5 on mobile. The desktop CTA is approximately 190×64px at the reference viewport, reads **Book a call →**, and sits directly below and left-aligned with the copy; mobile returns to the compact 48px action.
+Hero content begins at `clamp(24px, 8.85vw, 160px)` inside the body. Desktop padding is 237px top and 119px bottom; mobile uses 160px top and 96px bottom. The hero remains in normal flow and approximates one viewport in height. The authored headline is two all-Fraunces Light lines—“Own the positioning” / “that scales everything.”—at `clamp(48px, 7vw, 120px)`, `0.86` line height, and relaxed `-0.01em` tracking. Supporting copy is `clamp(24px, 2vw, 34px)` / `1.25` on desktop within a 47.5rem measure and 16px / 1.5 on mobile. The desktop CTA is approximately 190×64px at the reference viewport, reads **Book a call →**, and sits directly below and left-aligned with the copy; mobile returns to the compact 48px action.
 
 ### Best-fit statement and chips
 
