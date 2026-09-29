@@ -152,13 +152,13 @@ export const applySiteCopy = (sourceBody) => {
     let next = replaceMatch(
       section,
       /(<h1 class="h1-home-hero font-weight-300")>[\s\S]*?(<\/h1>)/,
-      '$1 aria-label="Take the lead position"><span class="home-hero-take">Take the</span> <span class="font-fraunces home-hero-span home-hero-sans-lockup"><span class="home-hero-lead"><span class="home-hero-lead-letter">l</span><span class="home-hero-lead-letter">e</span><span class="home-hero-lead-letter">a</span><span class="home-hero-lead-letter">d</span></span> <span class="home-hero-position">position</span></span>$2',
+      '$1 aria-label="Own the positioning that scales everything."><span>Own the positioning</span><span>that scales everything.</span>$2',
       'hero headline',
     );
     next = replaceMatch(
       next,
       /(<p class="paragraph-s line-height-150 letter-spacing-0 text-wrap-balance">)[\s\S]*?(<\/p>)/,
-      '$1Only one company will be the leader in your category. Let’s make it you.$2',
+      '$1In The Kitchen is a positioning consultancy designed to help B2B technology leaders land the decisions and ideas that create authentic category leadership.$2',
       'hero description',
     );
     return next;
@@ -168,7 +168,7 @@ export const applySiteCopy = (sourceBody) => {
     let next = replaceMatch(
       section,
       /(<h2 class="font-weight-300 margin-48 letter-spacing-0">)[\s\S]*?(<\/h2>)/,
-      '$1Ready to <span class="font-fraunces h2-span">change</span>$2',
+      '$1Ready to <span class="h2-span">change</span>$2',
       'client fit headline',
     );
     next = replaceOnce(next, 'Sales led', 'Sales-led');
@@ -180,7 +180,7 @@ export const applySiteCopy = (sourceBody) => {
     let next = replaceMatch(
       section,
       /(<h2 class="h2-smaller font-weight-300">)[\s\S]*?(<\/h2>)/,
-      '$1Investor <span class="font-fraunces h2-smaller-span">partnerships</span>$2',
+      '$1Investor <span class="h2-smaller-span">partnerships</span>$2',
       'investor headline',
     );
     next = replaceOnce(next, 'Investor partnerships', 'First Round · Norwest');
@@ -191,7 +191,7 @@ export const applySiteCopy = (sourceBody) => {
     let next = replaceMatch(
       section,
       /(<h2 class="h2-smaller font-weight-400">)[\s\S]*?(<\/h2>)/,
-      '$1People will tell you positioning is a game of inches. <span class="font-fraunces h2-smaller-span font-weight-300">Category leaders disagree</span>.$2',
+      '$1People will tell you positioning is a game of inches. <span class="h2-smaller-span font-weight-300">Category leaders disagree</span>.$2',
       'Four Cs headline',
     );
 
@@ -214,7 +214,7 @@ export const applySiteCopy = (sourceBody) => {
     let next = replaceMatch(
       section,
       /(<h2 class="h2-smaller font-weight-400">)[\s\S]*?(<\/h2>)/,
-      '$1Decision-Based <span class="font-fraunces h2-smaller-span">Positioning</span>$2',
+      '$1Decision-Based <span class="h2-smaller-span">Positioning</span>$2',
       'Decision-Based Positioning headline',
     );
     next = replaceOnce(
@@ -283,7 +283,7 @@ export const applySiteCopy = (sourceBody) => {
     next = replaceMatch(
       next,
       /(<h2 class="h2-jumbo font-weight-400">)One\.[\s\S]*?(<\/h2>)/,
-      '$1First <span class="font-fraunces h2-jumbo-span">we learn</span>$2',
+      '$1First <span class="h2-jumbo-span">we learn</span>$2',
       'first process heading',
     );
     next = replaceOnce(
@@ -299,7 +299,7 @@ export const applySiteCopy = (sourceBody) => {
     next = replaceMatch(
       next,
       /(<h2 class="h2-jumbo font-weight-400">)Two:[\s\S]*?(<\/h2>)/,
-      '$1Then <span class="font-fraunces">we build</span>$2',
+      '$1Then <span>we build</span>$2',
       'second process heading',
     );
     next = replaceOnce(
@@ -349,7 +349,7 @@ export const applySiteCopy = (sourceBody) => {
     let next = replaceMatch(
       section,
       /(<h1 class="h1-home-hero font-weight-300">)[\s\S]*?(<\/h1>)/,
-      '$1It’s time to<br/>take a position.<br/><span class="font-fraunces home-hero-span smaller-span">Get In The Kitchen</span>.$2',
+      '$1It’s time to<br/>take a position.<br/><span class="home-hero-span smaller-span">Get In The Kitchen</span>.$2',
       'closing headline',
     );
     next = replaceMatch(
@@ -385,6 +385,11 @@ export const applySiteCopy = (sourceBody) => {
     }
 
     next = next.replace(lastSourceItemEnd, `${lastSourceItemEnd}${additionalItems}`);
+    next = replaceOnce(
+      next,
+      '<span class="font-fraunces h2-span">answered</span>',
+      '<span class="h2-span">answered</span>',
+    );
     return next;
   });
 

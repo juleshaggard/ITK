@@ -1,6 +1,7 @@
 ---
 import sourceBody from '../../content/source-body.html?raw';
 import { applySiteCopy } from '../../content/site-copy.mjs';
+import { applyPrimaryNavigation } from '../../content/navigation.mjs';
 import '../../styles/directional-navigation.css';
 
 const base = import.meta.env.BASE_URL.endsWith('/')
@@ -13,11 +14,16 @@ const copiedBody = applySiteCopy(sourceBody);
 const navStartMarker = '<div data-animation="default" class="navbar-new w-nav"';
 const navStart = copiedBody.indexOf(navStartMarker);
 const navEnd = copiedBody.indexOf('<div class="page-wrapper">', navStart);
-const footerStart = copiedBody.indexOf('<section class="section footer-new">');
+const faqStart = copiedBody.indexOf('<section id="faqs"');
+const footerStart = copiedBody.indexOf('<section class="section footer-new">', faqStart);
 const pageWrapperEnd = copiedBody.lastIndexOf('</div>');
 
-if (navStart < 0 || navEnd < 0 || footerStart < 0 || pageWrapperEnd < 0) {
-  throw new Error('Unable to extract the shared article-page shell.');
+if (navStart < 0 || navEnd < 0) {
+  throw new Error('Unable to extract the shared homepage navigation.');
+}
+
+if (faqStart < 0 || footerStart < 0 || pageWrapperEnd < 0) {
+  throw new Error('Unable to extract the shared homepage FAQ and footer.');
 }
 
 const navigationLogoPattern =
@@ -33,11 +39,10 @@ navigation = navigation
   .replace('class="navbar-new w-nav"', 'class="navbar-new is-away-from-hero w-nav"')
   .replace(navigationLogoPattern, `$1${navigationLogo}$2`)
   .replace('href="./" class="brand-new-inner', `href="${homeUrl}" class="brand-new-inner`)
-  .replace('href="#" class="nav-link-new', `href="${homeUrl}#how-it-works" class="nav-link-new`)
-  .replace('href="#clients" class="nav-link-new', `href="${homeUrl}#clients" class="nav-link-new`)
-  .replace('href="#faqs" class="nav-link-new', `href="${homeUrl}#faqs" class="nav-link-new`)
   .replace('href="https://in-the-kitchen.webflow.io/contact-us"', `href="${contactUrl}"`);
+navigation = applyPrimaryNavigation(navigation, `${base}deep-reads/`);
 
+const faq = copiedBody.slice(faqStart, footerStart);
 const rawFooter = copiedBody
   .slice(footerStart, pageWrapperEnd)
   .replace('href="./" class="footer-link-logo', `href="${homeUrl}" class="footer-link-logo`);
@@ -166,6 +171,7 @@ const footer = rawFooter.replace(footerLogoPattern, `$1${footerLogo}$2`);
         </section>
       </main>
 
+      <Fragment set:html={faq} />
       <Fragment set:html={footer} />
     </div>
 
@@ -207,6 +213,51 @@ const footer = rawFooter.replace(footerLogoPattern, `$1${footerLogo}$2`);
             if (window.innerWidth > 991) setMenu(false);
           });
         }
+
+        const faqItems = [...document.querySelectorAll('.faq-item')];
+
+        const setFaq = (item, open) => {
+          const header = item.querySelector('.faq-header-new');
+          const answer = item.querySelector('.faq-answer-wrapper');
+          const plus = item.querySelector('.plus-icon-faq');
+          if (!header || !answer || !plus) return;
+
+          item.classList.toggle('is-open', open);
+          header.setAttribute('aria-expanded', String(open));
+          answer.style.height = open ? `${answer.scrollHeight}px` : '0px';
+          plus.style.transform = open ? 'rotate(45deg)' : 'rotate(0deg)';
+        };
+
+        faqItems.forEach((item, index) => {
+          const header = item.querySelector('.faq-header-new');
+          const answer = item.querySelector('.faq-answer-wrapper');
+          if (!header || !answer) return;
+
+          header.setAttribute('role', 'button');
+          header.setAttribute('tabindex', '0');
+          header.setAttribute('aria-controls', `article-faq-answer-${index}`);
+          answer.id = `article-faq-answer-${index}`;
+
+          const toggle = () => setFaq(item, !item.classList.contains('is-open'));
+          header.addEventListener('click', toggle);
+          header.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              toggle();
+            }
+          });
+        });
+
+        if (faqItems[0]) setFaq(faqItems[0], true);
+
+        const syncOpenFaqs = () => {
+          faqItems.forEach((item) => {
+            if (item.classList.contains('is-open')) setFaq(item, true);
+          });
+        };
+
+        document.fonts?.ready.then(syncOpenFaqs);
+        window.addEventListener('resize', syncOpenFaqs);
 
         const listenButton = document.querySelector('.category-article-listen');
 
@@ -292,6 +343,7 @@ const footer = rawFooter.replace(footerLogoPattern, `$1${footerLogo}$2`);
 
   .category-article-page a:focus-visible,
   .category-article-page button:focus-visible,
+  .category-article-page .faq-header-new:focus-visible,
   .category-article-page .menu-button-new:focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 4px;
@@ -344,6 +396,43 @@ const footer = rawFooter.replace(footerLogoPattern, `$1${footerLogo}$2`);
     aspect-ratio: 8 / 1;
   }
 
+  .category-article-page .section.faq-section {
+    background: var(--article-canvas);
+    color: var(--article-ink);
+  }
+
+  .category-article-page .faq-section h2 {
+    font-family: Fraunces, Georgia, serif;
+    font-size: clamp(48px, 4.85vw, 62px);
+    font-weight: 300 !important;
+    line-height: clamp(50px, 5vw, 64px);
+    letter-spacing: -2px;
+    font-synthesis: none;
+  }
+
+  .category-article-page .faq-section h2 .h2-span {
+    font: inherit;
+    letter-spacing: inherit;
+  }
+
+  .category-article-page .faq-header-new {
+    border-top-color: rgb(34 34 34 / 14%);
+  }
+
+  .category-article-page .faq-list-new {
+    border-bottom-color: rgb(34 34 34 / 14%);
+  }
+
+  .category-article-page .faq-answer-wrapper {
+    overflow: hidden;
+    transition: height 300ms ease;
+  }
+
+  .category-article-page .plus-icon-faq {
+    color: var(--article-ink);
+    transition: transform 300ms ease;
+  }
+
   .category-article-page .nav-link-underline {
     width: 0;
     transition: width 200ms ease;
@@ -379,7 +468,7 @@ const footer = rawFooter.replace(footerLogoPattern, `$1${footerLogo}$2`);
   .category-article-header h1,
   .category-decisions-headlines h2 {
     margin: 0;
-    font-family: Fraunces, Arial, sans-serif;
+    font-family: Fraunces, Georgia, serif;
     font-size: clamp(2.5rem, 3.2vw, 3rem);
     font-weight: 300;
     line-height: 1.05;
@@ -478,12 +567,23 @@ const footer = rawFooter.replace(footerLogoPattern, `$1${footerLogo}$2`);
   }
 
   .category-article-copy p,
+  .category-article-copy ul,
+  .category-article-copy ol,
+  .category-article-copy li,
   .category-article-four-cs p,
   .category-decisions-list {
     font-family: Dmsans, Impact, sans-serif;
     font-size: 1.125rem;
     font-weight: 400;
     line-height: 1.45;
+  }
+
+  .category-article-copy p,
+  .category-article-copy ul,
+  .category-article-copy ol,
+  .category-article-copy li,
+  .category-article-four-cs p {
+    line-height: 1.6;
   }
 
   .category-article-copy p {
@@ -496,10 +596,12 @@ const footer = rawFooter.replace(footerLogoPattern, `$1${footerLogo}$2`);
 
   .category-article-copy h2 {
     margin: 2.75rem 0 0;
-    font-family: Dmsans, Impact, sans-serif;
+    font-family: Fraunces, Georgia, serif;
     font-size: 1.125rem;
-    font-weight: 700;
+    font-weight: 300;
     line-height: 1.3;
+    letter-spacing: -0.015em;
+    font-synthesis: none;
   }
 
   .category-article-four-cs {
@@ -517,7 +619,7 @@ const footer = rawFooter.replace(footerLogoPattern, `$1${footerLogo}$2`);
 
   .category-article-four-cs h3 {
     margin: 0;
-    font-family: Fraunces, Arial, sans-serif;
+    font-family: Fraunces, Georgia, serif;
     font-size: 2.25rem;
     font-weight: 300;
     line-height: 1;
@@ -555,7 +657,7 @@ const footer = rawFooter.replace(footerLogoPattern, `$1${footerLogo}$2`);
     font-size: clamp(1.75rem, 2.2vw, 2.25rem);
     font-weight: 400;
     line-height: 1.13;
-    letter-spacing: -0.025em;
+    letter-spacing: normal;
   }
 
   .category-article-quote figcaption {
@@ -671,6 +773,9 @@ const footer = rawFooter.replace(footerLogoPattern, `$1${footerLogo}$2`);
     }
 
     .category-article-copy p,
+    .category-article-copy ul,
+    .category-article-copy ol,
+    .category-article-copy li,
     .category-article-four-cs p,
     .category-decisions-list {
       font-size: 1rem;
@@ -706,8 +811,9 @@ const footer = rawFooter.replace(footerLogoPattern, `$1${footerLogo}$2`);
     }
 
     .category-article-page .navbar-new .brand-new-inner {
-      width: 62%;
-      height: 7vw;
+      width: 56%;
+      height: auto;
+      aspect-ratio: 8 / 1;
     }
 
     .category-article-card {
@@ -733,6 +839,8 @@ const footer = rawFooter.replace(footerLogoPattern, `$1${footerLogo}$2`);
       scroll-behavior: auto;
     }
 
+    .category-article-page .faq-answer-wrapper,
+    .category-article-page .plus-icon-faq,
     .category-article-page .burger-line,
     .category-article-page .navigation-new,
     .category-article-page .nav-link-underline {

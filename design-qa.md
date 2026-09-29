@@ -77,6 +77,247 @@
 - [x] Desktop and mobile browser QA completed.
 - [x] Production build completed successfully.
 
+# Best-fit Chapter QA
+
+## Evidence
+
+- Source visual truth: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-be3ab8aa-ac47-4475-97e6-06888fe957e3.png` (`1705 × 959` px).
+- Browser-rendered desktop implementation: `.capture/fit-section-qa-desktop.png` (`1690 × 958` px).
+- Browser-rendered mobile implementation: `.capture/fit-section-qa-mobile.png` (`374 × 880` px section crop).
+- Normalized side-by-side comparison: `.capture/fit-section-qa-comparison.png` (`3380 × 958` px; source left, implementation right).
+- Focused comparison: `.capture/fit-section-qa-focus.png` (`3380 × 620` px; source left, implementation right).
+- Route: `http://localhost:4321/?fit-section=qa`.
+- Desktop viewport: `1705 × 959` CSS px at browser density 1; the visible client area is `1690px` wide after the scrollbar. The `1705 × 959` source was normalized to the `1690 × 958` implementation crop before comparison.
+- Mobile viewport: `390 × 844` CSS px at browser density 1; the full `881px`-tall section was checked as a `374 × 880` crop after the mobile scrollbar was excluded.
+- State: static best-fit chapter directly after the hero. The small dark annotation toolbar visible at the edge of browser captures is browser chrome and not part of the document.
+
+## Full-view comparison evidence
+
+- The Canvas chapter fills the reference-height desktop viewport and preserves the source's large uninterrupted whitespace field.
+- The two authored Fraunces lines begin at the same vertical position and share the source's centered line lengths and optical scale.
+- The bold qualifier and both chip rows land at the same vertical coordinates as the reference.
+- Client logos are absent, matching the supplied target.
+
+## Focused region comparison evidence
+
+- The focused side-by-side comparison confirms the headline family, Light weight, 64px upper bound, `1.34` leading, and `-0.03em` tracking.
+- The qualifier uses DM Sans Bold at approximately `29px / 35px`, centered on the same axis as the headline.
+- The pills preserve content-driven widths: desktop rows measure approximately `876px` and `749px`, both centered at the section midpoint with `20px` gaps.
+- Signal Pink, Canvas, and Ink map directly to the documented tokens; no shadow, border, card, logo wall, or decorative substitute was introduced.
+
+## Required fidelity surfaces
+
+- Fonts and typography: passed. Fraunces remains Light 300 and unsynthesized; DM Sans handles the qualifier and chip labels. No serif bold was introduced.
+- Spacing and layout rhythm: passed after one correction. Headline, qualifier, chip rows, whitespace, and the two-row composition match the reference geometry.
+- Colors and visual tokens: passed. Canvas `#FDFCFA`, Ink `#222222`, and Signal Pink `#F2ACD7` are used without gradients or effects.
+- Image quality and asset fidelity: passed. The reference contains no image assets; no placeholders, CSS drawings, or generated assets were added.
+- Copy and content: passed. The two-line crossroads statement, qualifier, and all eight chip labels match the supplied screenshot.
+- Responsiveness and accessibility: passed. No horizontal overflow was detected at 768px, 479px, 390px, or 320px; semantic section and heading structure are retained, and the static chips remain readable as copy rather than false controls.
+
+## Findings
+
+- No actionable P0, P1, or P2 findings remain.
+
+## Comparison history
+
+1. Initial implementation used equal grid tracks inherited from the prior logo-and-chip section, making the two chip rows too rigid and producing an off-center visual axis.
+2. Rebuilt the chips as two independent content-width rows and removed the old client-logo grid.
+3. The first browser check exposed a legacy `max-width` on the chip container that shifted overflowing rows about `94px` right of center; evidence: `.capture/fit-section-desktop.png`.
+4. Removed the inherited width cap, added non-wrapping chip labels, and re-captured the normalized full and focused comparisons.
+5. Post-fix evidence confirms both rows share the exact `845px` desktop centerline and no P0/P1/P2 mismatch remains.
+
+## Implementation checklist
+
+- [x] Replaced the first post-hero statement and qualifier copy.
+- [x] Removed the client-logo grid from this chapter.
+- [x] Rebuilt the eight pills as two centered four-chip rows.
+- [x] Added tablet and mobile wrapping without horizontal overflow.
+- [x] Updated `DESIGN.md` and `.impeccable/design.json`.
+- [x] Completed desktop, focused, tablet, mobile, and narrow-mobile visual checks.
+
+final result: passed
+
+---
+
+## Compact Deep Reads prologue QA — 2026-09-28
+
+- Scope: the Positioning Lavender introduction and transition into the article archive on `/deep-reads/`.
+- Change: capped the desktop intro near 31rem, reduced the headline to `clamp(56px, 5.4vw, 96px)`, tightened its surrounding padding, and reduced the gap before the archive so the articles carry the page hierarchy.
+- Desktop visual evidence: `.capture/deep-reads-compact-prologue/desktop.png` at `1440 × 1000` shows the first three article folders entering the opening viewport.
+- Desktop geometry: the intro is approximately `478px` tall and the first article card begins at approximately `778px`; the page reports no horizontal overflow.
+- Mobile visual evidence: `.capture/deep-reads-compact-prologue/mobile.png` at `390 × 844` shows the compact intro, “The latest” heading, and the opening of the first folder card.
+- Mobile geometry: the intro is approximately `421px` tall, the first card begins at approximately `643px`, and the page reports no horizontal overflow.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` record the compact prologue scale and its responsive behavior.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Left-aligned mobile navigation logo QA — 2026-09-28
+
+- Scope: shared navigation on the homepage, contact page, and local Deep Read pages below `480px`.
+- Change: the folder-tab brand container now starts at the container's left edge and the logo aligns left inside it, producing the standard `16px` mobile page inset.
+- Visual evidence: `.capture/mobile-nav-left-logo/homepage.png` at `390 × 844` shows the homepage navigation and `#decision-book` section.
+- Homepage metrics: logo left edge `16px`; menu left/right edges `311px` / `359px`; no horizontal overflow.
+- Shared article metrics: logo left edge `16px`; menu left/right edges `311px` / `359px`; no horizontal overflow.
+- Responsive containment: the existing `56%` logo width and native `160:20` logo ratio are unchanged; the desktop navigation is unaffected because the rule is limited to `max-width: 479px`.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` document the mobile logo alignment.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Deep Reads folder grid and homepage hero leading QA — 2026-09-28
+
+### Evidence
+
+- Folder-grid references: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-1958273a-5c13-40f5-98f0-80a35aa4948b.png` and `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-2b221f0b-7f76-42c2-b67c-1040e28b0d9c.png`.
+- Hero-leading reference: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-3d7cf404-5fa0-4fec-a60a-3c1e22691c12.png` (`830 × 207`).
+- Browser-rendered implementation reviewed in the Codex in-app browser at `http://127.0.0.1:4321/` and `http://127.0.0.1:4321/deep-reads/`.
+
+### Comparison and verification
+
+- The Deep Reads archive restores the supplied transparent folder thumbnails at their native aspect ratios. No rectangular crop, outer Paper card, or metadata rail obscures the folder silhouette.
+- The archive resolves to three equal columns at the inspected desktop viewport, matching the reference motif and card rhythm. It steps down to two columns below `992px` and one below `768px`.
+- Card titles remain Fraunces Light to preserve the current site-wide headline system; descriptions stay DM Sans, and the underlined **Read More** action returns the simpler archive hierarchy shown in the reference.
+- Every card link and thumbnail resolves locally through Astro's base path. The `/ITK/` build output contains `/ITK/deep-reads/{slug}/` links and `/ITK/assets/deep-reads/` image URLs.
+- The homepage hero headline leading increases from `0.78` to `0.86`. Browser comparison shows clearer separation between the two authored lines without changing their wrap, size, weight, or alignment; mobile retains its existing `1.0` leading.
+- Browser inspection found no visible crop, broken image, horizontal overflow, or hierarchy regression at the desktop target. The running Astro server reported no page errors.
+- Default and `BASE_PATH=/ITK/` production builds pass. JSON validation and `git diff --check` pass.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` now document the folder-grid breakpoints and `0.86` hero leading.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Global Fraunces Light headline QA — 2026-09-25
+
+- Scope: all rendered `h1`–`h6` elements using Fraunces across the homepage, contact page, category-leadership article, Deep Reads archive, and all six imported Deep Read articles.
+- Change: the homepage’s broad headline rule and the category-leadership article’s compact subheads now use Fraunces Light 300; the design-system contract now requires Light 300 for every Fraunces headline.
+- Computed-style verification: 120 Fraunces headings across ten local routes resolve to `font-weight: 300`; zero Regular 400 or synthetic-weight exceptions remain.
+- Browser console: the route audit produced no warnings or errors beyond Vite connection debug messages.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` now document Fraunces Light 300 as the only approved headline weight.
+- Build verification: the default Astro production build and GitHub Pages build with `BASE_PATH=/ITK/` both pass. JSON validation and `git diff --check` pass.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Local Deep Reads routing and archive QA — 2026-09-24
+
+- Scope: the global Deep Reads navigation action, local archive, six current article routes, imported article media, shared FAQ, and shared footer.
+- Navigation: passed; homepage, contact, category-leadership article, archive, and Deep Read article pages all resolve Deep Reads to the local `${BASE_URL}deep-reads/` route. No primary-navigation link targets the production Webflow archive.
+- Archive: passed; six current entries render from `src/content/deep-reads.generated.json`, with base-path-safe card links and local files in `public/assets/deep-reads/`.
+- Articles: passed; each slug is statically generated, internal article links and images honor `BASE_URL`, semantic headings use Fraunces, and paragraphs/lists share DM Sans sizing with `1.72` leading.
+- Shared chrome: passed; local editorial routes reuse the homepage navigation, ten-item FAQ, and compact footer through `SiteChrome.astro`.
+- Browser verification: passed on the local development server at mobile and desktop sizes; the hamburger exposed the local Deep Reads URL, archive navigation stayed on localhost, and the first full article rendered with its imported content and shared ending modules.
+- GitHub Pages verification: the default Astro production build and the `BASE_PATH=/ITK/` build both emit all six article routes and `/ITK/deep-reads/` links.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` document local ownership, routes, typography, imagery, and refresh workflow.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+## Article body leading QA — 2026-09-24
+
+- Scope: homepage Four Cs article preview and `/articles/category-leadership/` long-form article body.
+- Typography: homepage excerpt increased from `1.18` to `1.5` line height (`1.55` at the small-screen breakpoint); full-article paragraphs and Four Cs descriptions increased from `1.45` to `1.6`.
+- Containment: decision-list rows, headlines, metadata, buttons, pull quotes, and surrounding section spacing were left unchanged.
+- Browser verification: computed desktop ratios matched `1.5` for the preview and `1.6` for the full article; neither route produced horizontal overflow at the checked viewport.
+- Responsive verification: the article keeps the `1.6` ratio when body type reduces to 16px, while the preview uses its explicit `1.55` small-screen override.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` document the new article reading specification.
+- Build verification: default Astro production build and GitHub Pages build with `BASE_PATH=/ITK/` both pass. JSON validation and `git diff --check` pass.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+## Global navigation simplification QA — 2026-09-24
+
+- Global information architecture: passed; homepage, contact, and category-leadership article navigation now contain only **Deep Reads** and **Book a call**.
+- Destination verification: superseded; Deep Reads now routes to the base-path-safe local `${BASE_URL}deep-reads/` archive, while Book a call preserves the local contact route.
+- Mobile verification: passed at 390 × 844; the hamburger opens a menu containing the same two actions with no stale homepage section links.
+- Shared implementation: passed; one navigation transformer now owns the link set for all local routes.
+- Build verification: default Astro production build and GitHub Pages build with `BASE_PATH=/ITK/` both pass. `git diff --check` and design-token JSON validation pass.
+- Console verification: no browser console errors were present across the homepage, contact page, or category-leadership article.
+- Design-system documentation: updated in `DESIGN.md` and `.impeccable/design.json` to lock the two-action global navigation rule.
+
+final result: passed
+
+---
+
+# Hero Copy and Typography QA
+
+## Evidence
+
+- Source visual truth: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-ac5b8c44-fa87-4f98-81b8-b2575f2cece6.png` (`1702 × 1082` px).
+- Browser-rendered desktop implementation: `.capture/hero-copy-type-desktop.png` (`1687 × 1072` px; browser chrome excluded from the nominal `1702 × 1082` viewport).
+- Browser-rendered mobile implementation: `.capture/hero-copy-type-mobile.png` (`375 × 812` px from the nominal `390 × 844` viewport).
+- Normalized side-by-side source/implementation comparison: `.capture/hero-copy-type-comparison.png` (`3404 × 1082` px).
+- Route: `http://localhost:4321/?hero=copy-type-final`.
+
+## Full-view comparison evidence
+
+- The existing white navigation and inset yellow folder shell are preserved.
+- The desktop content rail resolves at `181px`, matching the source reference's approximately `180px` inset.
+- The headline, support copy, and CTA reproduce the reference vertical rhythm at approximately `364px`, `574px`, and `743px` respectively.
+
+## Focused region comparison evidence
+
+- The headline is authored as two explicit Fraunces Light lines: **Own the positioning** / **that scales everything.**
+- Desktop headline metrics are approximately `119px` with a `93px` line box and `-0.03em` tracking, preserving the reference's tight editorial lockup without bold serif rendering.
+- The DM Sans support paragraph is approximately `34px / 42.5px` and wraps after **to** and **and**, matching the three-line source composition.
+- The black CTA is approximately `190 × 64px`, includes the requested arrow spacing, and remains aligned with the copy rail.
+
+## Required fidelity surfaces
+
+- Fonts and typography: passed; Fraunces is Light 300 and DM Sans is Regular 400.
+- Spacing and layout rhythm: passed; desktop rail, line breaks, headline rhythm, copy gap, and CTA position match the supplied composition.
+- Colors and visual tokens: passed; the existing Canvas, Folder Yellow, and Ink values are unchanged.
+- Image quality and asset fidelity: passed; no raster assets were introduced or altered.
+- Copy and content: passed; the new headline and complete consultancy description are present, and document metadata reflects the new positioning.
+- Motion and accessibility: passed; the complete headline uses one immediate 320ms opacity/translate reveal, exposes a verifiable `ready` state, respects reduced motion, and has a 1.2-second fail-open guard.
+- Responsive behavior: passed; at the mobile viewport the headline wraps naturally, the paragraph and CTA remain within the folder, and no horizontal content overflow is introduced.
+
+## Findings
+
+- No actionable P0, P1, or P2 findings remain.
+
+## Comparison history
+
+1. Removed the superseded mixed-font `lead`/`position` word assembly and replaced it with the new all-serif statement.
+2. Removed the old 128px desktop gutter cap, tuned Fraunces size/leading/tracking, and restored the authored paragraph line breaks.
+3. Corrected the mobile grid span and CTA white-space behavior after the responsive capture exposed clipping.
+4. Re-captured desktop and mobile states and completed the source/implementation side-by-side review.
+
+final result: passed
+
+---
+
+# Hero Trigger Reliability QA
+
+## Evidence
+
+- Route: `http://localhost:4321/?hero-trigger=verified`.
+- Browser-rendered implementation: `.capture/hero-trigger-running.png` and `.capture/hero-trigger-ready.png` at approximately `2030 × 1072` CSS px.
+- Runtime states inspected immediately after navigation and again after 450ms.
+
+## Findings
+
+- The hero now enters `data-hero-motion="running"` immediately on navigation; during the captured movement all four `lead` letters share the same interpolated opacity while `position` has a single in-progress x transform.
+- At 450ms the hero resolves to `data-hero-motion="ready"`, every letter has opacity `1`, the `position` transform is `none`, and the pending root class is absent.
+- The trigger no longer depends on the larger GSAP/navigation module, preventing a delayed or stale interaction chunk from freezing the compact “Take the position” pose.
+- A 1.2-second fail-open guard removes the pending pose if any unexpected runtime error occurs. Reduced-motion users still receive the final static headline immediately.
+- The final headline, supporting line, CTA, folder geometry, and navigation remain visually unchanged.
+
+## Verification
+
+- Local browser transition-state and final-state checks passed.
+- Root and GitHub Pages base-path production builds passed.
+- Design JSON parsing and `git diff --check` passed.
+
 final result: passed
 
 ---
@@ -1202,3 +1443,371 @@ final result: passed
 3. Captured the revised state in the browser and confirmed the requested left-side content is visible.
 
 final result: passed
+
+---
+
+## Homepage article preview QA — 2026-09-24
+
+- Source reference: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-fad59274-9cdf-4b68-b52c-3aaf89996a34.png` (1698 × 1022).
+- Implementation capture: `/Users/haggylap/Library/CloudStorage/Dropbox/!Projects/ITK/.capture/article-preview-final.png` (1690 × 1013 browser content viewport).
+- State reviewed: default homepage article preview at `#four-cs`; sticky navigation is application chrome and was excluded from section-level comparison.
+- Full-view comparison: the lavender chapter, centered 846px Paper card, 10px radius, 282 × 64px lavender CTA, and vertical card/action rhythm match the supplied composition.
+- Focused comparison: title line breaks, 4-minute metadata, Listen control, approved Jon portrait, byline, divider, and the new single-paragraph excerpt were checked against the reference. The four dimensions are bolded as shown.
+- Interaction verification: the Listen control toggles its pressed state and the CTA opens `/articles/category-leadership/`.
+- Responsive verification: 768px, 390px, and 320px widths render without horizontal overflow. The metadata row wraps cleanly at the narrowest breakpoint.
+- Build verification: default Astro production build and GitHub Pages build with `BASE_PATH=/ITK/` both pass. `git diff --check` passes.
+- Console verification: no browser console errors were present during interaction checks.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Mobile navigation logo scale QA — 2026-09-24
+
+- Scope: homepage, article, and contact navigation below 480px.
+- Change: reduced the native-ratio logo from 62% to 56% of the folder-tab container.
+- Containment: the tab geometry, hamburger position, desktop logo size, and footer lockup are unchanged.
+- Responsive implementation: width is percentage-based and height is automatic with an explicit `8 / 1` aspect ratio, preventing distortion across narrow mobile widths.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` document the mobile scale.
+- Build verification: default Astro production build and GitHub Pages build with `BASE_PATH=/ITK/` both pass. JSON validation and `git diff --check` pass.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Pull quote tracking QA — 2026-09-24
+
+- Scope: the full-width Redpanda testimonial on the homepage and the dedicated category-leadership article, plus the retained in-card quote style.
+- Change: replaced the tightened negative tracking with CSS `letter-spacing: normal` while preserving DM Sans Regular, responsive size, 1.13 leading, centered measure, and attribution spacing.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` now define normal tracking for the pull-quote role.
+- Build verification: default Astro production build and GitHub Pages build with `BASE_PATH=/ITK/` both pass. JSON validation and `git diff --check` pass.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Homepage article preview width QA — 2026-09-24
+
+- Scope: the centered white Four Cs article-preview module and its separate lavender CTA.
+- Change: reduced the desktop card and stack cap from 846px to 800px while preserving the existing interior spacing, typography, vertical rhythm, and full-viewport lavender chapter.
+- Desktop verification: at a 1440px viewport, the card renders at 800px and remains centered with its CTA on the same axis; the authored headline wrap remains intact.
+- Responsive verification: at a 390px viewport, the module remains fluid at the available column width with no horizontal overflow.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` now specify the 800px maximum width.
+- Build verification: default Astro production build and GitHub Pages build with `BASE_PATH=/ITK/` both pass. JSON validation and `git diff --check` pass.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Hero support tracking QA — 2026-09-24
+
+- Scope: the DM Sans positioning-consultancy paragraph in the yellow hero folder.
+- Change: increased tracking from `-0.025em` to the font's normal letter spacing while preserving type size, line height, measure, copy, and layout.
+- Desktop verification: computed letter spacing resolves to `normal`; the paragraph retains a clean three-line measure without clipping or horizontal overflow.
+- Mobile verification: the normal tracking carries through at 16px / 24px and remains contained within the hero column without horizontal overflow.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` now document normal tracking for the hero-support role.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Closing folder all-Fraunces QA — 2026-09-24
+
+- Scope: “It’s time to take a position.” in the Action Blue closing folder.
+- Change: removed the DM Sans emphasis treatment from “a position.” so the complete headline uses Fraunces Light 300.
+- Desktop verification: both authored spans compute to Fraunces Light at 64px, remain on one line, and introduce no horizontal overflow.
+- Mobile verification: the complete headline remains Fraunces Light and wraps naturally inside the folder without horizontal overflow.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` now define the closing headline as an all-Fraunces treatment.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Global all-Fraunces headline QA — 2026-09-24
+
+- Scope: every display or narrative headline that previously combined Fraunces and DM Sans across the homepage, contact page, and category-leadership article.
+- Change: removed the legacy paired-emphasis scale and family override; nested emphasis and authored line-break spans now inherit the parent headline’s Fraunces family, size, weight, line height, tracking, and style.
+- Rendered verification: computed-style audits of all three routes report zero nested font-family mismatches inside `h1`–`h6` elements. Hero, best-fit, article, founder, FAQ display, testimonial display, and closing headlines retain their authored wrapping while resolving as a single Fraunces face where designed.
+- Containment: DM Sans remains unchanged for body copy, navigation, controls, labels, metadata, FAQ questions, process rows, and other approved wholly sans-serif utility headings.
+- Responsive verification: the inheritance rule is breakpoint-independent; existing mobile and tablet wrapping rules remain intact, and the rendered desktop routes show no horizontal overflow.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` now define the all-Fraunces headline rule.
+- Build verification: default Astro production build and GitHub Pages build with `BASE_PATH=/ITK/` both pass. JSON validation and `git diff --check` pass.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Dedicated article all-Fraunces heading QA — 2026-09-24
+
+- Scope: every `h1`, `h2`, and `h3` inside the dedicated category-leadership article content.
+- Change: converted “The four sources of competitive advantage” and “Decisions to win” from bold DM Sans to Fraunces Regular 400; the article title, decision statements, and four advantage titles remain Fraunces Light 300.
+- Type verification: all eight semantic article headings now resolve through the local Fraunces family with Georgia/serif fallbacks and `font-synthesis: none`; no serif heading exceeds the approved Regular 400 weight.
+- Containment: article paragraphs, Four Cs descriptions, metadata, Listen control, decision rows, quote, and attribution remain DM Sans.
+- Responsive verification: the family and weight rules are breakpoint-independent, while the existing desktop and mobile size and wrap behavior remain unchanged.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` now document the dedicated article heading treatment.
+- Build verification: default Astro production build and GitHub Pages build with `BASE_PATH=/ITK/` both pass.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Article list/body type parity QA — 2026-09-24
+
+- Scope: ordered and unordered lists inside the dedicated category-leadership article body.
+- Change: list containers and list items now share the paragraph family, weight, size, and leading instead of falling back to the smaller global body style.
+- Desktop verification: article paragraphs and list copy both resolve to DM Sans Regular 18px with `1.6` line height.
+- Mobile verification: article paragraphs and list copy both reduce to DM Sans Regular 16px while retaining `1.6` line height.
+- Containment: list markers and native indentation remain unchanged; the compact decision-count list keeps its purpose-built row sizing and layout.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` now define list copy as part of the Article Body role.
+- Build verification: default Astro production build and GitHub Pages build with `BASE_PATH=/ITK/` both pass. JSON validation and `git diff --check` pass.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Dedicated article FAQ/footer parity QA — 2026-09-24
+
+- Scope: `/articles/category-leadership/` ending sequence.
+- Structure: the article now renders the same ten-item FAQ source directly above the same compact footer extracted from the homepage source.
+- Interaction: the first item opens by default; mouse, Enter, and Space toggles expose `aria-expanded`; measured heights resync after fonts load and on resize.
+- Visual parity: the article FAQ uses Canvas, Ink, 14%-Ink rules, and the same all-Fraunces Light display treatment as the homepage.
+- Containment: the FAQ sits outside the article `main` so Listen reads article content only; the footer logo retains the approved 160:20 asset ratio.
+- Accessibility: visible focus states remain; reduced motion removes accordion and plus transitions.
+- Build verification: the default Astro production build and GitHub Pages build with `BASE_PATH=/ITK/` both pass. JSON validation and `git diff --check` pass.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Process copy and type hierarchy QA — 2026-09-25
+
+### Evidence
+
+- Reference: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-06688faf-0e01-4ac9-be09-0e8a7b6e12c4.png` at `1559 × 1290`.
+- Desktop implementation: `.capture/process-hierarchy/implementation-desktop.png` at `1559 × 1290`.
+- Side-by-side comparison: `.capture/process-hierarchy/comparison-desktop.png`.
+- Mobile implementation: `.capture/process-hierarchy/implementation-mobile.png` at `390 × 844`.
+- Local route: `http://localhost:4321/?process-hierarchy=2#how-it-works`.
+
+### Comparison history
+
+- First pass placed the process group too high and kept the previous narrow-panel rhythm.
+- Final pass increased the Canvas chapter padding, matched the reference's two-line Fraunces thesis, widened the Soft Stone panel to `29rem`, and changed the closing statement to the compact three-line DM Sans hierarchy.
+- Responsive QA revealed that the external number rail could clip at narrow widths. Below `768px`, the rail now moves inside the panel with dedicated left padding.
+
+### Required surface checks
+
+- Typography: thesis uses local Fraunces Light 300 at `clamp(44px, 3.55vw, 56px)` with `1.18` leading and `-0.035em` tracking. The conclusion uses DM Sans Semibold 600 at `clamp(20px, 1.55vw, 24px)` with `1.27` leading.
+- Layout and spacing: the desktop section mirrors the reference's centered hierarchy, `32px` thesis-to-panel gap, `29rem` panel width, and `36px` panel-to-conclusion gap.
+- Copy: thesis, all five process rows, the revised “Core sales and marketing assets…” line, and the three-line conclusion match the supplied reference.
+- Color: Canvas, Soft Stone, Ink, and quiet connector rules remain on the approved palette.
+- Imagery and icons: not applicable; the section intentionally contains no decorative imagery.
+- Responsive containment: at `390px`, document `scrollWidth` equals `clientWidth`; the timeline, number rail, thesis, and conclusion remain fully contained.
+- Browser console: no warnings or errors on a fresh local route load.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` document the new process hierarchy and mobile rail behavior.
+
+final result: passed
+
+---
+
+## Deep Reads hero tracking QA — 2026-09-25
+
+- Scope: the oversized “Go a little deeper. If you dare.” headline on `/deep-reads/`.
+- Change: increased Fraunces Light tracking from `-0.055em` to `-0.02em` so the large display reads with more open spacing while retaining the editorial lockup.
+- Computed-style verification: the local archive resolves to Fraunces Light 300 with `-0.02em` tracking and no synthetic weight.
+- Responsive containment: the inspected route has equal document and viewport widths; no horizontal overflow was introduced.
+- Visual verification: the two authored lines retain their intended wrap and show visibly more separation between letterforms.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` record the archive-specific `-0.02em` tracking.
+
+final result: passed
+
+---
+
+## Deep Read article-title tracking QA — 2026-09-25
+
+- Scope: the primary article title on all six local `/deep-reads/{slug}/` routes.
+- Change: increased Fraunces Light title tracking from `-0.055em` to `-0.02em`, matching the relaxed Deep Reads archive display.
+- Computed-style verification: all six article titles resolve to Fraunces Light 300 with `-0.02em` tracking.
+- Responsive containment: every audited article reports zero horizontal overflow after the tracking change.
+- Visual verification: “The Elephant In The Room” retains its intended two-line wrap with more open spacing between letterforms.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` record the shared article-title tracking.
+
+final result: passed
+
+---
+
+## Deep Read callout scale QA — 2026-09-25
+
+- Scope: yellow bottom-line statements and dark editorial pull quotes on all local Deep Read articles.
+- Change: reduced bottom-line statements to `clamp(28px, 3.2vw, 52px)` and reduced pull quotes substantially to `clamp(24px, 2.25vw, 40px)`, with a fixed `24px` mobile size.
+- Computed-style verification: at the inspected desktop viewport, the bottom-line statement resolves to `40.96px` and the pull quote to `28.8px` with `30.24px` leading.
+- Visual verification: the pull quote now reads as editorial content rather than an oversized display headline while retaining the full dark panel composition.
+- Responsive containment: the article retains zero horizontal overflow.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` record both shared article-callout scales.
+
+final result: passed
+## Deep Read image-centering QA — 2026-09-25
+
+- Scope: every imported `figure` and `img` inside the six local Deep Read article routes.
+- Root cause: the inherited Webflow full-width figure class capped figures at the article measure while the local rule translated them left by half their width without a matching positional offset.
+- Change: article figures now use the full centered reading measure with auto inline margins, no legacy transform, and a block-level full-width image wrapper.
+- Browser verification: all seven figures across the three image-bearing Deep Reads resolve to a `0px` center delta against their article column; the remaining three routes contain no figures.
+- Overflow verification: all six article routes report zero horizontal document overflow at the checked desktop viewport.
+- Visual verification: the first competitive-advantage diagram is centered directly below its associated article copy.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` document the shared centered-figure rule.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Centered decision-book promotion QA — 2026-09-28
+
+- Scope: the homepage `#decision-book` promotion rebuilt from the supplied reference image and transparent book-cover PNG.
+- Reference evidence: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-8e067f53-60ab-4672-b586-f550cd73ef8b.png` at `1441 × 943`.
+- Asset evidence: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-7c378282-4710-458d-9b9b-60d342186697.png` at `1468 × 1906`, preserved as `public/assets/decision-book-cover-upright.png` with its original alpha channel.
+- Implementation evidence: `.capture/book-promotion-centered/implementation-desktop-v2.png` at `1479 × 1175`; the green section was isolated and normalized to `1441 × 943` in `.capture/book-promotion-centered/implementation-desktop-v2-normalized.png` for a like-for-like comparison.
+- Comparison evidence: `.capture/book-promotion-centered/comparison-desktop-v2.png` places the supplied reference and normalized implementation side by side at the same `1441 × 943` frame. The full view keeps the book, headline, paragraph, and CTA legible, so no additional focused crop was required.
+- Route and state: `http://127.0.0.1:4321/#decision-book`, default desktop state at 1× density. The normalization excludes only the following white section and uses no content reconstruction.
+- Typography: the headline uses Fraunces Light 300; paragraph and CTA use DM Sans. Size, leading, tracking, and centered hierarchy follow the reference.
+- Layout and spacing: the supplied upright book, headline, compact paragraph, and CTA form one centered vertical stack on a full-width Decision Green field.
+- Color: section background is Decision Green `#CFFD93`; type and CTA use Ink `#1A1A1A` with white CTA text.
+- Imagery: the exact supplied transparent PNG is displayed without cropping, masking, or rebuilding the cover in CSS.
+- Copy: reference wording is preserved, including “We wrote the book on it.” and “This how we do it.”
+- Interaction: the only interactive element is the local “Get the book” CTA, which resolves to `/contact-us/` and retains the shared visible focus treatment.
+- Responsive implementation: desktop, tablet, and mobile rules keep the stack centered, preserve the full book silhouette, reduce the headline fluidly, and maintain a 48px minimum mobile CTA height.
+- Comparison history: the first pass was underscaled in the headline and CTA (P2). The book maximum increased from `412px` to `424px`, the headline maximum from `64px` to `84px`, and the CTA from `52px` to `54px` with wider horizontal padding. The second comparison cleared the P2 mismatch.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Four-across testimonial grid QA — 2026-09-28
+
+- Scope: the homepage Testimonial Yellow quote chapter.
+- Change: the eight visible rotating testimonials now form a 4 × 2 grid at `1200px` and wider, with the all-Fraunces heading centered above the cards.
+- Visual evidence: `.capture/testimonials-four-across/desktop.png` at `1479 × 1175` shows both four-card rows, the longest approved quotes, every attribution rule, and the complete section boundary.
+- Typography and color: Fraunces Light remains exclusive to the section heading; quote and attribution copy remain DM Sans on Canvas cards over Testimonial Yellow.
+- Spacing and containment: desktop cards use content-safe `17.5rem` minimum rows with 20–36px gaps. No quote or attribution clips at the inspected wide viewport.
+- Responsive implementation: from `992–1199px` the same eight cards reflow to two columns; below `768px` they become a single-column, content-driven list.
+- Interaction: the existing eight-slot rotation, hover/focus pause behavior, viewport pause, visibility pause, and reduced-motion fallback are unchanged.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` document the four-across desktop layout and revised card sizing.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Reduced Deep Read bottom-line scale QA — 2026-09-28
+
+- Scope: the yellow “The bottom line” statement shared by local Deep Read article routes.
+- Change: reduced the Fraunces Light statement from `clamp(28px, 3.2vw, 52px)` to `clamp(26px, 2.65vw, 42px)`; the small-screen override decreased from `32px` to `28px`.
+- Visual evidence: `.capture/deep-read-bottom-line-smaller/desktop.png` at `1479 × 1175` shows the complete yellow panel, label, revised statement, and transition into article body copy.
+- Hierarchy: the statement remains clearly larger than article body copy without competing with the article title.
+- Legibility and containment: the full text fits comfortably within its 34ch measure and the panel retains generous inset spacing with no clipping or horizontal overflow.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` record the revised responsive scale.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Greatly reduced Deep Read pull-quote scale QA — 2026-09-28
+
+- Scope: dark Fraunces pull-quote panels inside local Deep Read article bodies.
+- Change: reduced the quote from `clamp(24px, 2.25vw, 40px)` to `clamp(18px, 1.5vw, 26px)` and from `24px` to `18px` on small screens.
+- Supporting adjustment: opened leading from `1.05` to `1.2` and relaxed tracking from `-0.035em` to `-0.02em` so the smaller type remains comfortable to read.
+- Visual evidence: `.capture/deep-read-pull-quote-smaller/desktop.png` at `1479 × 1175` shows the full dark panel between its surrounding article paragraphs.
+- Hierarchy and containment: the quote now reads as a compact editorial interruption rather than a second headline; all text remains inside the existing 60rem panel with no clipping or horizontal overflow.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` record the revised responsive scale and leading.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Decision-book infinite-sweep shadow QA — 2026-09-28
+
+- Scope: the supplied upright book artwork in the homepage `#decision-book` promotion.
+- Change: added one separate blurred Deep Ink ellipse behind the book's lower edge, creating a soft infinite-sweep contact shadow without altering the source PNG.
+- Visual evidence: `.capture/decision-book-infinite-sweep-shadow/desktop.png` at `1479 × 1175` shows the complete book, its grounding shadow, headline, support copy, CTA, and section boundary.
+- Depth treatment: the shadow combines a low-profile oval, soft blur, and translucent fill; there is no horizon line, background gradient, reflected image, or shadow on the copy.
+- Layering and containment: the book remains above the pseudo-element through an isolated wrapper; the shadow stays contained to the book footprint and does not collide with the headline.
+- Responsive implementation: the shadow is percentage-positioned inside the same fluid wrapper as the book, so its proportion and alignment track the artwork across desktop, tablet, and mobile widths.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` document the infinite-sweep contact-shadow treatment.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Centered-perimeter testimonial layout QA — 2026-09-28
+
+- Scope: the homepage Testimonial Yellow quote chapter at `#testimonial-grid-heading`.
+- Reference evidence: `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-5a2e362b-0353-4efc-97b6-e487b5a0892a.png` supplies the approved real quote content; `/var/folders/0j/f8hz42fn3vxcrz0v7qrlggqm0000gn/T/codex-clipboard-8694a533-5f75-478b-a306-028467586318.png` supplies the centered-perimeter layout.
+- Visual evidence: `.capture/testimonials-centered-perimeter/desktop.png` at `1424 × 1078` shows the complete chapter with all ten live testimonial slots and the centered Fraunces heading.
+- Desktop geometry: four cards occupy the first row, one card flanks each side of the two-column centered heading in the middle row, and four cards occupy the last row.
+- Content behavior: ten of the eleven approved testimonials are visible; the existing 2.2-second paused-aware rotation now swaps through those ten perimeter slots, leaving the heading stationary.
+- Typography and surfaces: heading remains Fraunces Light 300; quote and attribution copy remain DM Sans on flat Canvas cards over Testimonial Yellow.
+- Responsive verification: at `768 × 900` the section resolves to two columns with the heading above ten cards; at `390 × 844` it resolves to one column. Both tested viewports report zero horizontal overflow.
+- Accessibility and motion: source order remains heading followed by testimonials, rotation still pauses for hover, keyboard focus, viewport exit, and document hide, and reduced motion keeps the first ten static.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` document the ten-card perimeter composition and its responsive fallback.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Decision-book tvOS hover QA — 2026-09-28
+
+- Scope: the supplied upright book and infinite-sweep shadow in the homepage `#decision-book` promotion.
+- Change: added a fine-pointer tvOS-style depth response with `±5deg` X tilt, `±6deg` Y tilt, a 6px lift, `1.025` scale, a silhouette-masked white specular band, and a coupled contact shadow that counter-shifts, tightens, and softens.
+- Visual evidence: `.capture/decision-book-tvos-hover/desktop-hover.png` at `1440 × 1000` captures the active hover state over the right side of the book.
+- Runtime verification: the active state reports non-identity 3D and shadow transforms, glare opacity `0.72`, shadow opacity `0.78`, and zero horizontal overflow; pointer exit restores identity transforms, glare opacity `0`, and shadow opacity `1`.
+- Responsive verification: at `390 × 844` the book remains centered at `304px` wide, the resting glare remains hidden, and the page reports zero horizontal overflow.
+- Performance: pointer updates reuse `gsap.quickTo()` transform and opacity tweens; the refined implementation produces no new console warnings or errors.
+- Accessibility: the effect is decorative, adds no focusable control, retains the original image alternative text, runs only on fine-hover pointers, and is disabled under `prefers-reduced-motion`.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` document the interaction, the moving shadow, and the single approved material-glare exception.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Closing-folder headline tracking QA — 2026-09-28
+
+- Scope: the homepage Action Blue closing-folder headline, “It’s time to take a position.”
+- Change: increased Fraunces Light tracking from `-0.055em` to `-0.02em` for a visibly more open display rhythm.
+- Visual evidence: `.capture/closing-folder-tracking/desktop.png` at `1440 × 1000` shows the complete closing folder and the revised single-line headline.
+- Desktop verification: the heading resolves to Fraunces Light 300, `-1.28px` computed tracking at 64px, and remains contained within the `826.5px` panel with no horizontal overflow.
+- Mobile verification: at `390 × 844` the heading returns to natural wrapping inside the `315.5px` panel, retains `-0.02em` tracking, and introduces no horizontal overflow.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` document the relaxed tracking.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---
+
+## Deep Reads eyebrow removal QA — 2026-09-29
+
+- Scope: the Positioning Lavender prologue on `/deep-reads/`.
+- Change: removed the uppercase “Deep Reads” eyebrow and its dedicated margin so the prologue begins directly with the Fraunces headline.
+- Runtime verification: the rendered hero contains no `.deep-reads-index-kicker` element and preserves the headline and supporting paragraph.
+- Layout verification: the desktop archive remains free of horizontal overflow and keeps the article folders visible in the opening viewport.
+- Source-of-truth verification: `DESIGN.md` and `.impeccable/design.json` record the label-free prologue hierarchy.
+- Open issues: none at P0, P1, or P2.
+
+final result: passed
+
+---

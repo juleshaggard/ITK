@@ -1,6 +1,7 @@
 ---
 import sourceBody from '../content/source-body.html?raw';
 import { applySiteCopy } from '../content/site-copy.mjs';
+import { applyPrimaryNavigation } from '../content/navigation.mjs';
 import '../styles/directional-navigation.css';
 
 const base = import.meta.env.BASE_URL.endsWith('/')
@@ -20,38 +21,24 @@ const bodyWithHeroTab = copiedBody.replace(
 const clientSectionPattern = /<section id="clients"[\s\S]*?<\/section><section class="section light-bg">[\s\S]*?<\/section>/;
 const clientSection = `<section id="clients" class="section light-bg positioning-clients-section">
   <div class="container positioning-clients-container">
-    <div class="positioning-clients-statement-stage">
-      <h2 class="positioning-clients-heading">
-        <span>In The Kitchen is a positioning consultancy</span>
-        <span>built to help B2B technology leadership</span>
-        <span>teams build, defend, and expand authentic</span>
-        <span>category leadership.</span>
-      </h2>
-    </div>
-    <p class="positioning-clients-intro">Positioning support for founders and executives making the next big bet.</p>
+    <h2 class="positioning-clients-heading">
+      <span>We work with founders and executives facing a crossroads.</span>
+      <span>Scaling, expanding, and making the next big bet.</span>
+    </h2>
+    <p class="positioning-clients-intro">If this is you, you’re a good fit for us</p>
     <div class="best-fit-clients-tags positioning-clients-tags" aria-label="Best-fit client qualities">
-      <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Ready to change</p></div>
-      <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Challenger mindset</p></div>
-      <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Facing hard decisions</p></div>
-      <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">High ACV</p></div>
-      <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Scrappy</p></div>
-      <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Sales led</p></div>
-      <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Growth stage</p></div>
-      <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Reaching for greatness</p></div>
-    </div>
-    <div class="logos-grid positioning-clients-logos" aria-label="Selected clients">
-      <img src="assets/meta.svg" loading="lazy" alt="Meta" class="logo-image bigger" />
-      <img src="assets/summation.webp" loading="lazy" alt="Summation" class="logo-image bigger" />
-      <img src="assets/moneylion.svg" loading="lazy" alt="MoneyLion" class="logo-image bigger" />
-      <img src="assets/latent.png" loading="lazy" alt="Latent" class="logo-image bigger" />
-      <img src="assets/valence.png" loading="lazy" alt="Valence" class="logo-image bigger" />
-      <img src="assets/every.png" loading="lazy" alt="Every" class="logo-image bigger" />
-      <img src="assets/thunder.svg" loading="lazy" alt="Pulley" class="logo-image bigger" />
-      <img src="assets/pulley.svg" loading="lazy" alt="Thunder" class="logo-image bigger" />
-      <img src="assets/genesys.png" loading="lazy" alt="Genesys" class="logo-image bigger" />
-      <img src="assets/crewai.png" loading="lazy" alt="CrewAI" class="logo-image bigger" />
-      <img src="assets/exclaimer.svg" loading="lazy" alt="Exclaimer" class="logo-image bigger" />
-      <img src="assets/redpanda.png" loading="lazy" alt="Redpanda" class="logo-image bigger" />
+      <div class="positioning-clients-tags-row">
+        <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Ready to change</p></div>
+        <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Challenger mindset</p></div>
+        <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Facing hard decisions</p></div>
+        <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">High ACV</p></div>
+      </div>
+      <div class="positioning-clients-tags-row">
+        <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Scrappy</p></div>
+        <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Sales led</p></div>
+        <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Growth stage</p></div>
+        <div class="best-fit-clients-tag"><p class="paragraph-s font-medium">Reaching for greatness</p></div>
+      </div>
     </div>
   </div>
 </section>`;
@@ -103,8 +90,6 @@ const navigationLogoPattern =
   /(<a[^>]*class="brand-new-inner w-inline-block"[^>]*>)<svg[\s\S]*?<\/svg>(<\/a>)/;
 const footerLogoPattern =
   /(<a[^>]*class="footer-link-logo w-inline-block"[^>]*>)<svg[\s\S]*?<\/svg>(<\/a>)/;
-const howItWorksLinkPattern =
-  /(<a[^>]*href=")#("[^>]*class="nav-link-new w-inline-block"[^>]*><div>How it works<\/div>)/;
 const navigationLogo = `<img src="${base}assets/itk-logo.svg" alt="" class="contain-image nav-brand-logo" width="160" height="20" />`;
 const footerLogo = `<img src="${base}assets/itk-logo.svg" alt="" class="contain-image footer-brand-logo" width="160" height="20" style="display:block;width:100%;height:auto;aspect-ratio:8 / 1" />`;
 const categoryLeadershipArticleUrl = `${base}articles/category-leadership/`;
@@ -143,32 +128,11 @@ const positioningStorySection = `<section id="four-cs" class="section positionin
         </div>
         <div class="four-cs-divider" aria-hidden="true"></div>
         <div class="four-cs-copy">
-          <p>People will tell you positioning is a game of inches. Category leaders disagree. They drive compounding advantages across four dimensions, and product capabilities are only one.</p>
-          <p>We use the Four Cs heuristic to deeply understand why you win. Then we channel our learnings into positioning and messaging that hits the market like a pile driver.</p>
-          <p class="four-cs-label">The four sources of competitive advantage:</p>
-        </div>
-        <div class="four-cs-grid">
-          <article class="four-cs-item">
-            <h3>Capability</h3>
-            <p>What your buyers can do (and not do) as a result of your product.</p>
-          </article>
-          <article class="four-cs-item">
-            <h3>Credibility</h3>
-            <p>What makes you exceptionally trustworthy.</p>
-          </article>
-          <article class="four-cs-item">
-            <h3>Convenience</h3>
-            <p>Why it’s easier to buy from you</p>
-          </article>
-          <article class="four-cs-item">
-            <h3>Cost</h3>
-            <p>Why you deliver outstanding value relative to investment.</p>
-          </article>
+          <p>People will tell you positioning is a game of inches. Category leaders disagree. They drive compounding advantages across four dimensions: <strong>capability, credibility, convenience and cost.</strong></p>
         </div>
       </div>
-      <div class="positioning-story-preview-fade" aria-hidden="true"></div>
-      <a class="four-cs-read-more" href="${categoryLeadershipArticleUrl}">Read More <span aria-hidden="true">→</span></a>
     </article>
+    <a class="four-cs-read-more" href="${categoryLeadershipArticleUrl}">Read The Article <span aria-hidden="true">→</span></a>
   </div>
 </section>
 <section id="positioning-quote" class="section positioning-pull-quote-section" aria-label="Client testimonial">
@@ -182,31 +146,43 @@ const positioningStorySection = `<section id="four-cs" class="section positionin
 
 const decisionBookSection = `<section id="decision-book" class="section decision-book-section" aria-labelledby="decision-book-heading">
   <div class="decision-book-inner">
+    <div class="decision-book-visual">
+      <span class="decision-book-shadow" aria-hidden="true"></span>
+      <div class="decision-book-card">
+        <img
+          class="decision-book-image"
+          src="${base}assets/decision-book-cover-upright.png"
+          alt="Decision-Based Positioning book cover"
+          width="1468"
+          height="1906"
+          loading="lazy"
+        />
+        <span
+          class="decision-book-glare"
+          aria-hidden="true"
+          style="--book-glare-mask: url('${base}assets/decision-book-cover-upright.png')"
+        >
+          <span class="decision-book-glare-sheen"></span>
+        </span>
+      </div>
+    </div>
     <div class="decision-book-copy">
-      <h2 id="decision-book-heading">
-        <span>Marketing copy doesn’t</span>
-        <span>make you a category leader.</span>
-        <span>Decisions do.</span>
-      </h2>
-      <p>A field guide for executive teams ready to build, defend, and expand authentic category leadership.</p>
+      <h2 id="decision-book-heading">We wrote the book on it.</h2>
+      <p>Typical positioning focuses on workshops or copywriting. We deliver the hardest, most important thing. Decisions. This how we do it.</p>
       <a class="decision-book-cta" href="${base}contact-us/">
         <span>Get the book</span>
         <span aria-hidden="true">→</span>
       </a>
     </div>
-    <a class="decision-book-stack" href="${base}contact-us/" aria-label="Get the Decision-Based Positioning book">
-      <span class="decision-book-page decision-book-page-back" aria-hidden="true"></span>
-      <img class="decision-book-page decision-book-page-peek" src="${base}assets/decision-book-background-page.svg" alt="" width="663" height="535" loading="lazy" aria-hidden="true" />
-      <article class="decision-book-cover" aria-hidden="true">
-        <img class="decision-book-cover-image" src="${base}assets/decision-book-cover-photo.png" alt="" width="1326" height="1070" loading="lazy" />
-      </article>
-    </a>
   </div>
 </section>`;
 
 const positioningProcessSection = `<section id="how-it-works" class="section positioning-process-section">
   <div class="positioning-process-inner">
-    <h2 class="positioning-process-heading">Our process</h2>
+    <h2 class="positioning-process-heading">
+      <span>Positioning is something you do.</span>
+      <span>Our process is built to help you actually do it.</span>
+    </h2>
     <ol class="positioning-process-timeline" aria-label="The In The Kitchen process">
       <li>
         <div class="positioning-process-step">
@@ -229,7 +205,7 @@ const positioningProcessSection = `<section id="how-it-works" class="section pos
       <li>
         <div class="positioning-process-step">
           <h3>Then we build</h3>
-          <p>Core GTM assets that make positioning shippable.</p>
+          <p>Core sales and marketing assets that make positioning shippable.</p>
         </div>
       </li>
       <li>
@@ -240,10 +216,9 @@ const positioningProcessSection = `<section id="how-it-works" class="section pos
       </li>
     </ol>
     <p class="positioning-process-outcome">
-      <span>You walk away with a set of positioning decisions</span>
-      <span>your leadership team fully owns, plus the</span>
-      <span>homepage, sales deck, and executive narrative</span>
-      <span>that get them in market</span>
+      <span>You walk away with positioning decisions you</span>
+      <span>fully own, and everything you need to hit the</span>
+      <span>market harder than ever.</span>
     </p>
   </div>
 </section>`;
@@ -283,7 +258,7 @@ const closingSection = `<section id="contact" class="section closing-folder-sect
       <div class="closing-folder-content">
         <h2 class="closing-folder-heading">
           <span>It’s time to take</span>
-          <span class="closing-folder-emphasis">a position.</span>
+          <span>a position.</span>
         </h2>
         <a class="closing-folder-cta" href="https://in-the-kitchen.webflow.io/contact-us">
           <span>Get In The Kitchen</span>
@@ -360,13 +335,9 @@ const pageWithNavigationLogo = closingComposedBody.replace(
   `$1${navigationLogo}$2`,
 );
 
-if (!howItWorksLinkPattern.test(pageWithNavigationLogo)) {
-  throw new Error('Unable to locate the How it works navigation link.');
-}
-
-const pageBodyWithAnchors = pageWithNavigationLogo.replace(
-  howItWorksLinkPattern,
-  '$1#how-it-works$2',
+const pageBodyWithAnchors = applyPrimaryNavigation(
+  pageWithNavigationLogo,
+  `${base}deep-reads/`,
 );
 
 if (!footerLogoPattern.test(pageBodyWithAnchors)) {
@@ -390,14 +361,18 @@ const pageBody = pageWithFooterLogo.replaceAll(
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Only one company will be the leader in your category. Let’s make it you."
+      content="Own the positioning that scales everything."
     />
-    <title>Take the lead position | In The Kitchen</title>
+    <title>Own the positioning | In The Kitchen</title>
     <link rel="stylesheet" href={`${base}styles/webflow.css`} />
     <link rel="icon" href={`${base}assets/favicon-small.png`} />
     <script is:inline>
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.documentElement.classList.add('hero-motion-pending');
+
+        window.setTimeout(() => {
+          document.documentElement.classList.remove('hero-motion-pending');
+        }, 1200);
       }
     </script>
   </head>
@@ -580,7 +555,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
         if (testimonialSection) {
           const heading = testimonialSection.querySelector('h2');
           const sourceCards = [...testimonialSection.querySelectorAll('.b2b-card-home')];
-          const visibleSlots = sourceCards.slice(0, 8);
+          const visibleSlots = sourceCards.slice(0, 10);
           const testimonials = sourceCards
             .map((card) => {
               const quote = card.querySelector('p');
@@ -709,101 +684,61 @@ const pageBody = pageWithFooterLogo.replaceAll(
         }
       })();
     </script>
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const heroHeadline = document.querySelector('.home-hero-section .h1-home-hero');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        const revealFinalState = () => {
+          root.classList.remove('hero-motion-pending');
+          heroHeadline?.classList.remove('is-animating');
+        };
+
+        if (!heroHeadline || reduceMotion) {
+          revealFinalState();
+          return;
+        }
+
+        heroHeadline.dataset.heroMotion = 'running';
+        heroHeadline.classList.add('is-animating');
+
+        requestAnimationFrame(() => {
+          const easing = 'cubic-bezier(0.16, 1, 0.3, 1)';
+          const animation = heroHeadline.animate(
+            [
+              { opacity: 0, transform: 'translate3d(0, 12px, 0)' },
+              { opacity: 1, transform: 'translate3d(0, 0, 0)' },
+            ],
+            { duration: 320, easing, fill: 'both' },
+          );
+          const animations = [animation];
+
+          root.classList.remove('hero-motion-pending');
+
+          Promise.allSettled(animations.map((animation) => animation.finished)).then(() => {
+            animations.forEach((animation) => animation.cancel());
+            heroHeadline.dataset.heroMotion = 'ready';
+            revealFinalState();
+          });
+
+          window.addEventListener(
+            'pagehide',
+            () => {
+              animations.forEach((animation) => animation.finish());
+              heroHeadline.dataset.heroMotion = 'ready';
+              revealFinalState();
+            },
+            { once: true },
+          );
+        });
+      })();
+    </script>
     <script>
       import { gsap } from 'gsap';
       import { initDirectionalNavigation } from '../scripts/directional-navigation.js';
 
       initDirectionalNavigation();
-
-      const heroHeadline = document.querySelector('.home-hero-section .h1-home-hero');
-
-      if (heroHeadline && heroHeadline.dataset.heroMotion !== 'ready') {
-        heroHeadline.dataset.heroMotion = 'ready';
-        const heroLead = heroHeadline.querySelector('.home-hero-lead');
-        const heroLeadLetters = [...heroHeadline.querySelectorAll('.home-hero-lead-letter')];
-        const heroPosition = heroHeadline.querySelector('.home-hero-position');
-        const heroMotion = gsap.matchMedia();
-
-        const clearHeroHeadlineMotion = (targets = [...heroLeadLetters, heroPosition]) => {
-          const activeTargets = Array.isArray(targets) ? targets.filter(Boolean) : targets;
-
-          if (Array.isArray(activeTargets) ? activeTargets.length : activeTargets) {
-            gsap.set(activeTargets, {
-              clearProps: 'opacity,transform,visibility',
-            });
-          }
-          heroHeadline.classList.remove('is-animating');
-          document.documentElement.classList.remove('hero-motion-pending');
-        };
-
-        const initHeroHeadlineMotion = () => {
-          heroMotion.add(
-            {
-              desktop: '(min-width: 768px)',
-              mobile: '(max-width: 767px)',
-              reduceMotion: '(prefers-reduced-motion: reduce)',
-            },
-            ({ conditions }) => {
-              if (
-                !heroLead ||
-                !heroPosition ||
-                heroLeadLetters.length !== 4 ||
-                conditions?.reduceMotion
-              ) {
-                clearHeroHeadlineMotion([...heroLeadLetters, heroPosition, heroHeadline]);
-                return;
-              }
-
-              heroHeadline.classList.add('is-animating');
-
-              if (conditions?.mobile) {
-                gsap.set(heroHeadline, { autoAlpha: 0, y: 16 });
-                document.documentElement.classList.remove('hero-motion-pending');
-
-                const mobileTimeline = gsap.timeline({
-                  defaults: { ease: 'expo.out' },
-                  onComplete: () => clearHeroHeadlineMotion([heroHeadline]),
-                });
-
-                mobileTimeline.to(heroHeadline, {
-                  autoAlpha: 1,
-                  y: 0,
-                  duration: 0.4,
-                });
-
-                return () => {
-                  mobileTimeline.kill();
-                  clearHeroHeadlineMotion([heroHeadline]);
-                };
-              }
-
-              const compactPositionX = heroLead.offsetLeft - heroPosition.offsetLeft;
-
-              gsap.set(heroLeadLetters, { autoAlpha: 0 });
-              gsap.set(heroPosition, { x: compactPositionX });
-              document.documentElement.classList.remove('hero-motion-pending');
-
-              const desktopTween = gsap.to([heroPosition, ...heroLeadLetters], {
-                x: 0,
-                autoAlpha: 1,
-                duration: 0.32,
-                overwrite: 'auto',
-                ease: 'expo.out',
-                onComplete: () => clearHeroHeadlineMotion(),
-              });
-
-              return () => {
-                desktopTween.kill();
-                clearHeroHeadlineMotion();
-              };
-            },
-            heroHeadline,
-          );
-        };
-
-        requestAnimationFrame(initHeroHeadlineMotion);
-        window.addEventListener('pagehide', () => heroMotion.revert(), { once: true });
-      }
 
       const founderPortrait = document.querySelector('.founder-profile-portrait');
       const founderPortraitImage = founderPortrait?.querySelector('img');
@@ -921,14 +856,203 @@ const pageBody = pageWithFooterLogo.replaceAll(
         window.addEventListener('pagehide', () => founderHoverMotion.revert(), { once: true });
       }
 
+      const decisionBookVisual = document.querySelector('.decision-book-visual');
+      const decisionBookCard = decisionBookVisual?.querySelector('.decision-book-card');
+      const decisionBookGlare = decisionBookVisual?.querySelector('.decision-book-glare');
+      const decisionBookGlareSheen = decisionBookVisual?.querySelector(
+        '.decision-book-glare-sheen',
+      );
+      const decisionBookShadow = decisionBookVisual?.querySelector('.decision-book-shadow');
+
+      if (
+        decisionBookVisual &&
+        decisionBookCard &&
+        decisionBookGlare &&
+        decisionBookGlareSheen &&
+        decisionBookShadow
+      ) {
+        const decisionBookHoverMotion = gsap.matchMedia();
+
+        decisionBookHoverMotion.add(
+          '(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)',
+          () => {
+            let bookBounds;
+            const cardRotationXTo = gsap.quickTo(decisionBookCard, 'rotationX', {
+              duration: 0.48,
+              ease: 'expo.out',
+            });
+            const cardRotationYTo = gsap.quickTo(decisionBookCard, 'rotationY', {
+              duration: 0.48,
+              ease: 'expo.out',
+            });
+            const cardXTo = gsap.quickTo(decisionBookCard, 'x', {
+              duration: 0.48,
+              ease: 'expo.out',
+            });
+            const cardYTo = gsap.quickTo(decisionBookCard, 'y', {
+              duration: 0.48,
+              ease: 'expo.out',
+            });
+            const cardScaleXTo = gsap.quickTo(decisionBookCard, 'scaleX', {
+              duration: 0.4,
+              ease: 'expo.out',
+            });
+            const cardScaleYTo = gsap.quickTo(decisionBookCard, 'scaleY', {
+              duration: 0.4,
+              ease: 'expo.out',
+            });
+            const glareOpacityTo = gsap.quickTo(decisionBookGlare, 'opacity', {
+              duration: 0.24,
+              ease: 'power2.out',
+            });
+            const glareXTo = gsap.quickTo(decisionBookGlareSheen, 'x', {
+              duration: 0.42,
+              ease: 'expo.out',
+            });
+            const glareYTo = gsap.quickTo(decisionBookGlareSheen, 'y', {
+              duration: 0.42,
+              ease: 'expo.out',
+            });
+            const shadowXTo = gsap.quickTo(decisionBookShadow, 'x', {
+              duration: 0.52,
+              ease: 'expo.out',
+            });
+            const shadowYTo = gsap.quickTo(decisionBookShadow, 'y', {
+              duration: 0.52,
+              ease: 'expo.out',
+            });
+            const shadowRotationTo = gsap.quickTo(decisionBookShadow, 'rotation', {
+              duration: 0.52,
+              ease: 'expo.out',
+            });
+            const shadowScaleXTo = gsap.quickTo(decisionBookShadow, 'scaleX', {
+              duration: 0.45,
+              ease: 'expo.out',
+            });
+            const shadowScaleYTo = gsap.quickTo(decisionBookShadow, 'scaleY', {
+              duration: 0.45,
+              ease: 'expo.out',
+            });
+            const shadowOpacityTo = gsap.quickTo(decisionBookShadow, 'opacity', {
+              duration: 0.32,
+              ease: 'power2.out',
+            });
+
+            gsap.set(decisionBookCard, {
+              transformOrigin: '50% 72%',
+              transformPerspective: 1000,
+              force3D: true,
+              willChange: 'transform',
+            });
+            gsap.set(decisionBookGlareSheen, {
+              rotation: 12,
+              transformOrigin: '50% 50%',
+              force3D: true,
+              willChange: 'transform',
+            });
+            gsap.set(decisionBookShadow, {
+              transformOrigin: '50% 50%',
+              force3D: true,
+              willChange: 'transform,opacity',
+            });
+
+            const resetBook = () => {
+              cardRotationXTo(0);
+              cardRotationYTo(0);
+              cardXTo(0);
+              cardYTo(0);
+              cardScaleXTo(1);
+              cardScaleYTo(1);
+              glareOpacityTo(0);
+              glareXTo(0);
+              glareYTo(0);
+              shadowXTo(0);
+              shadowYTo(0);
+              shadowRotationTo(0);
+              shadowScaleXTo(1);
+              shadowScaleYTo(1);
+              shadowOpacityTo(1);
+            };
+
+            const handleBookPointerEnter = () => {
+              bookBounds = decisionBookVisual.getBoundingClientRect();
+              cardYTo(-6);
+              cardScaleXTo(1.025);
+              cardScaleYTo(1.025);
+              glareOpacityTo(0.72);
+              shadowScaleXTo(0.9);
+              shadowScaleYTo(0.82);
+              shadowOpacityTo(0.78);
+            };
+
+            const handleBookPointerMove = ({ clientX, clientY }) => {
+              if (!bookBounds) {
+                bookBounds = decisionBookVisual.getBoundingClientRect();
+              }
+
+              const normalizedX = Math.max(
+                -0.5,
+                Math.min(0.5, (clientX - bookBounds.left) / bookBounds.width - 0.5),
+              );
+              const normalizedY = Math.max(
+                -0.5,
+                Math.min(0.5, (clientY - bookBounds.top) / bookBounds.height - 0.5),
+              );
+
+              cardRotationXTo(normalizedY * -10);
+              cardRotationYTo(normalizedX * 12);
+              cardXTo(normalizedX * 6);
+              cardYTo(-6 + normalizedY * 2);
+              glareXTo(normalizedX * 70);
+              glareYTo(normalizedY * 52);
+              shadowXTo(normalizedX * -18);
+              shadowYTo(normalizedY * 7);
+              shadowRotationTo(normalizedX * -6);
+              shadowScaleXTo(0.9 + Math.abs(normalizedX) * 0.12);
+              shadowScaleYTo(0.82 + Math.abs(normalizedY) * 0.08);
+            };
+
+            const handleBookPointerLeave = () => {
+              bookBounds = undefined;
+              resetBook();
+            };
+
+            decisionBookVisual.addEventListener('pointerenter', handleBookPointerEnter);
+            decisionBookVisual.addEventListener('pointermove', handleBookPointerMove);
+            decisionBookVisual.addEventListener('pointerleave', handleBookPointerLeave);
+            decisionBookVisual.addEventListener('pointercancel', handleBookPointerLeave);
+
+            return () => {
+              decisionBookVisual.removeEventListener('pointerenter', handleBookPointerEnter);
+              decisionBookVisual.removeEventListener('pointermove', handleBookPointerMove);
+              decisionBookVisual.removeEventListener('pointerleave', handleBookPointerLeave);
+              decisionBookVisual.removeEventListener('pointercancel', handleBookPointerLeave);
+              gsap.killTweensOf([
+                decisionBookCard,
+                decisionBookGlare,
+                decisionBookGlareSheen,
+                decisionBookShadow,
+              ]);
+              gsap.set(
+                [decisionBookCard, decisionBookGlare, decisionBookGlareSheen, decisionBookShadow],
+                { clearProps: 'all' },
+              );
+            };
+          },
+        );
+
+        window.addEventListener('pagehide', () => decisionBookHoverMotion.revert(), {
+          once: true,
+        });
+      }
+
     </script>
   </body>
 </html>
 
 <style is:global>
   :root {
-    --type-paired-emphasis-scale: 0.94em;
-    --type-hero-size: clamp(3.25rem, 6.79vw, 7.5rem);
+    --type-hero-size: clamp(3rem, 7vw, 7.5rem);
     --type-serif-weight-light: 300;
     --type-serif-weight-regular: 400;
     --hero-folder-gutter: clamp(1rem, 1.8vw, 2rem);
@@ -941,7 +1065,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
     --hero-tab-offset: clamp(0.625rem, 0.85vw, 0.875rem);
     --hero-tab-overlap: 0.15rem;
     --hero-nav-top: clamp(1.25rem, 1.6vw, 1.5rem);
-    --hero-content-gutter: clamp(1.5rem, 8.85vw, 8rem);
+    --hero-content-gutter: clamp(1.5rem, 8.85vw, 10rem);
     --nav-away-inline-shift: calc(
       -1 * (var(--hero-tab-offset) + var(--hero-tab-half-width) - 5.7rem)
     );
@@ -1012,12 +1136,12 @@ const pageBody = pageWithFooterLogo.replaceAll(
     transition: transform 300ms ease;
   }
 
-  /* Reverse the display-type roles: serif narrative, sans-serif emphasis. */
+  /* Headline typography is a single Fraunces voice; sans is reserved for support and utility. */
   .page-wrapper h1,
   .page-wrapper h2 {
     font-family: Fraunces, Arial, sans-serif;
     font-synthesis: none;
-    font-weight: var(--type-serif-weight-regular) !important;
+    font-weight: var(--type-serif-weight-light) !important;
   }
 
   .page-wrapper h1.font-weight-300,
@@ -1031,40 +1155,36 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   .positioning-clients-section {
-    min-height: 0;
-    padding-top: 0;
-    padding-bottom: 5.375rem;
+    display: flex;
+    min-height: min(60rem, 100svh);
+    padding: clamp(9rem, 17.5vh, 10.75rem) clamp(2rem, 5vw, 5.5rem)
+      clamp(10rem, 26vh, 17rem);
+    background-color: var(--color-canvas, #fdfcfa);
   }
 
   .positioning-clients-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
     max-width: none;
     padding-right: 0;
     padding-left: 0;
   }
 
-  .positioning-clients-statement-stage {
-    display: grid;
-    place-items: center;
-    width: 100%;
-    min-height: clamp(36rem, 80svh, 52rem);
-    padding: clamp(5rem, 9vh, 8rem) clamp(2rem, 6vw, 7rem);
-  }
-
   .page-wrapper h2.positioning-clients-heading {
-    width: fit-content;
+    width: 100%;
     max-width: 100%;
     margin: 0 auto;
     font-family: Fraunces, Arial, sans-serif !important;
-    font-size: clamp(2.75rem, 4vw, 4.5rem);
+    font-size: clamp(3rem, 3.75vw, 4rem);
     font-style: normal;
     font-weight: 300 !important;
-    line-height: 1.08;
+    line-height: 1.34;
     letter-spacing: -0.03em;
-    text-align: left;
+    text-align: center;
     font-synthesis: none;
+    text-wrap: balance;
   }
 
   .positioning-clients-heading > span {
@@ -1073,49 +1193,48 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   .positioning-clients-intro {
-    margin-top: 0;
-    font-size: 1.3125rem;
-    font-weight: 400;
-    line-height: 1.3;
-    letter-spacing: -0.02em;
+    margin-top: clamp(7rem, 14vh, 8.75rem);
+    font-size: clamp(1.5rem, 1.7vw, 1.875rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
     text-align: center;
   }
 
   .positioning-clients-tags {
-    grid-column-gap: 16px;
-    grid-row-gap: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    width: 100%;
+    max-width: none;
+    margin-top: 2rem;
+  }
+
+  .positioning-clients-tags-row {
+    display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    width: calc(100% - 40px);
-    max-width: none;
-    margin-top: 2.125rem;
+    gap: 1.25rem;
   }
 
   .positioning-clients-tags .best-fit-clients-tag {
-    flex: 0 0 auto;
-    height: 36px;
-    padding: 0 14px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 1.5rem;
+    border-radius: 999px;
+    background-color: #f2acd7;
   }
 
   .positioning-clients-tags .paragraph-s {
-    font-size: 15px;
-    line-height: 18px;
-  }
-
-  .positioning-clients-logos {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-column-gap: 80px;
-    grid-row-gap: 32px;
-    width: calc(100% - 128px);
-    margin-top: 42px;
-  }
-
-  .positioning-clients-logos .logo-image.bigger {
-    width: 192px;
-    height: 58px;
-    justify-self: center;
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
   }
 
   .investor-trust-section {
@@ -1218,23 +1337,28 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
   .positioning-story-section {
     display: flex;
+    align-items: center;
     justify-content: center;
-    min-height: 0;
-    padding: min(4.523vw, 66px) 0 calc(min(5.278vw, 77px) + 1px);
+    min-height: 100svh;
+    padding: clamp(4rem, 8vh, 7rem) 2rem;
     background-color: #e1dbfc;
     overflow: clip;
   }
 
   .positioning-story-stack {
-    position: relative;
-    width: min(49.76vw, 726px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(32px, 2.05vw, 35px);
+    width: min(100%, 800px);
   }
 
   .four-cs-card {
     box-sizing: border-box;
     width: 100%;
-    padding: min(2.742vw, 40px) min(3.084vw, 45px) min(3.084vw, 45px);
-    border-radius: min(0.685vw, 10px);
+    padding: clamp(40px, 3.285vw, 56px) clamp(40px, 3.1vw, 53px)
+      clamp(48px, 3.52vw, 60px);
+    border-radius: 0.625rem;
     background-color: #fff;
   }
 
@@ -1245,14 +1369,14 @@ const pageBody = pageWithFooterLogo.replaceAll(
   .page-wrapper .four-cs-headlines h2 {
     margin: 0;
     font-family: Fraunces, Arial, sans-serif;
-    font-size: min(2.742vw, 40px);
+    font-size: clamp(40px, 2.82vw, 48px);
     font-weight: 300 !important;
-    line-height: 1.05;
+    line-height: 1.02;
     letter-spacing: -0.025em;
   }
 
   .page-wrapper .four-cs-headlines h2 + h2 {
-    margin-top: min(2.879vw, 42px);
+    margin-top: clamp(44px, 2.875vw, 49px);
   }
 
   .four-cs-headlines h2 > span {
@@ -1265,7 +1389,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
     align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
-    margin-top: min(2.056vw, 30px);
+    margin-top: 14px;
     color: #625f5a;
     font-family: Dmsans, Impact, sans-serif;
     font-size: clamp(0.8125rem, 0.96vw, 0.875rem);
@@ -1348,25 +1472,29 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
   .four-cs-divider {
     height: 1px;
-    margin-top: min(1.919vw, 28px);
+    margin-top: 21px;
     background-color: #e3e3e3;
   }
 
   .four-cs-copy {
-    margin-top: min(2.125vw, 31px);
+    margin-top: 40px;
   }
 
   .four-cs-copy p,
   .four-cs-item p {
     margin: 0;
     font-family: Dmsans, Impact, sans-serif;
-    font-size: min(1.234vw, 18px);
+    font-size: clamp(1rem, 1.29vw, 1.375rem);
     font-weight: 400;
     letter-spacing: 0;
   }
 
   .four-cs-copy p {
-    line-height: 1.278;
+    line-height: 1.5;
+  }
+
+  .four-cs-copy strong {
+    font-weight: 700;
   }
 
   .four-cs-copy p + p {
@@ -1408,44 +1536,25 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   .positioning-story-preview-card {
-    position: relative;
-    height: min(44.7vw, 40.75rem);
-    min-height: 26rem;
-    padding-bottom: 0;
-    overflow: hidden;
-  }
-
-  .positioning-story-preview-fade {
-    position: absolute;
-    z-index: 1;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: min(11vw, 10rem);
-    pointer-events: none;
-    background: linear-gradient(to bottom, rgb(255 255 255 / 0%), #fff 56%);
+    min-height: clamp(496px, 32.55vw, 555px);
   }
 
   .four-cs-read-more {
-    position: absolute;
-    z-index: 2;
-    bottom: min(1.645vw, 1.5rem);
-    left: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.375rem;
-    min-height: 3.25rem;
-    padding: 0 1.5rem;
+    gap: 8px;
+    min-width: 282px;
+    min-height: 64px;
+    padding: 0 32px;
     border-radius: 999px;
     color: #fff;
-    background: #1a1a1a;
+    background: #8d82c9;
     font-family: Dmsans, Impact, sans-serif;
-    font-size: 0.875rem;
+    font-size: 20px;
     font-weight: 600;
     line-height: 1;
     text-decoration: none;
-    transform: translateX(-50%);
     transition:
       color 180ms ease,
       background-color 180ms ease,
@@ -1453,9 +1562,9 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   .four-cs-read-more:hover {
-    color: #1a1a1a;
-    background: #cffd93;
-    transform: translate(-50%, -2px);
+    color: #fff;
+    background: #7469b5;
+    transform: translateY(-2px);
   }
 
   .four-cs-read-more:focus-visible {
@@ -1491,7 +1600,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
     font-style: normal;
     font-weight: 400;
     line-height: 1.13;
-    letter-spacing: -0.025em;
+    letter-spacing: normal;
   }
 
   .positioning-pull-quote-inner figcaption {
@@ -1505,58 +1614,121 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
   .decision-book-section {
     box-sizing: border-box;
-    display: grid;
+    display: block;
     width: 100vw;
-    place-items: center;
-    justify-content: center;
-    min-height: clamp(42rem, 78vh, 48rem);
+    min-height: clamp(50rem, 100svh, 59rem);
     margin-right: calc(50% - 50vw);
     margin-left: calc(50% - 50vw);
-    padding: clamp(5rem, 8vw, 7.5rem) clamp(1.5rem, 4vw, 4rem);
+    padding: clamp(2.75rem, 4.2vw, 4rem) clamp(1.5rem, 4vw, 4rem) clamp(4.5rem, 6vw, 5.5rem);
     color: #1a1a1a;
     background: #cffd93;
     overflow: clip;
   }
 
   .decision-book-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 20.5rem) minmax(24rem, 32rem);
+    display: flex;
+    width: min(100%, 72rem);
+    margin: 0 auto;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    justify-self: center;
-    gap: clamp(4rem, 7.6vw, 7rem);
-    width: fit-content;
+  }
+
+  .decision-book-visual {
+    position: relative;
+    isolation: isolate;
+    width: clamp(18rem, 29.5vw, 26.5rem);
     max-width: 100%;
-    margin-right: auto;
-    margin-left: auto;
+    perspective: 62.5rem;
+  }
+
+  .decision-book-shadow {
+    position: absolute;
+    z-index: 0;
+    right: 11%;
+    bottom: -1.5%;
+    left: 11%;
+    height: 5.5%;
+    border-radius: 50%;
+    background: rgba(26, 26, 26, 0.28);
+    filter: blur(clamp(0.875rem, 1.45vw, 1.375rem));
+    pointer-events: none;
+  }
+
+  .decision-book-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    transform-style: preserve-3d;
+  }
+
+  .decision-book-image {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .decision-book-glare {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    display: block;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    -webkit-mask-image: var(--book-glare-mask);
+    mask-image: var(--book-glare-mask);
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
+
+  .decision-book-glare-sheen {
+    position: absolute;
+    inset: -38% -46%;
+    display: block;
+    background: linear-gradient(
+      112deg,
+      rgba(255, 255, 255, 0) 30%,
+      rgba(255, 255, 255, 0.1) 41%,
+      rgba(255, 255, 255, 0.62) 50%,
+      rgba(255, 255, 255, 0.14) 59%,
+      rgba(255, 255, 255, 0) 70%
+    );
+    mix-blend-mode: screen;
   }
 
   .decision-book-copy {
-    align-self: center;
+    display: flex;
+    width: min(100%, 48rem);
+    margin-top: 1.125rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
   .page-wrapper .decision-book-copy h2 {
     margin: 0;
     font-family: Fraunces, Georgia, serif;
-    font-size: clamp(2.375rem, 3.05vw, 2.75rem);
+    font-size: clamp(4rem, 5.85vw, 5.25rem);
     font-weight: 300 !important;
-    line-height: 0.98;
+    line-height: 0.96;
     letter-spacing: -0.04em;
     font-synthesis: none;
   }
 
-  .decision-book-copy h2 > span {
-    display: block;
-  }
-
   .decision-book-copy p {
-    max-width: 32rem;
-    margin: 1.25rem 0 0;
+    max-width: 25rem;
+    margin: 1.75rem 0 0;
     font-family: Dmsans, Arial, sans-serif;
     font-size: 1.125rem;
     font-weight: 400;
-    line-height: 1.35;
-    letter-spacing: -0.015em;
+    line-height: 1.28;
+    letter-spacing: 0;
   }
 
   .decision-book-cta {
@@ -1564,9 +1736,9 @@ const pageBody = pageWithFooterLogo.replaceAll(
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
-    min-height: 3.25rem;
-    margin-top: 2.5rem;
-    padding: 0 1.7rem;
+    min-height: 3.375rem;
+    margin-top: 1.875rem;
+    padding: 0 2.5rem;
     border-radius: 999px;
     color: #fff;
     background: #1a1a1a;
@@ -1587,136 +1759,29 @@ const pageBody = pageWithFooterLogo.replaceAll(
     transform: translateY(-2px);
   }
 
-  .decision-book-stack {
-    position: relative;
-    display: block;
-    width: 100%;
-    aspect-ratio: 663 / 535;
-    color: #1a1a1a;
-    text-decoration: none;
-    isolation: isolate;
-  }
-
-  .decision-book-stack:focus-visible {
-    outline: 2px solid #1a1a1a;
-    outline-offset: 0.75rem;
-  }
-
-  .decision-book-page,
-  .decision-book-cover {
-    position: absolute;
-    inset: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    border: 1px solid #cffd93;
-    border-radius: 0.35rem;
-  }
-
-  .decision-book-page {
-    object-fit: cover;
-    background: #fff;
-    transform-origin: 50% 90%;
-    transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .decision-book-page-back {
-    z-index: 0;
-    transform: translate(1.7rem, 1.1rem) rotate(-4deg);
-  }
-
-  .decision-book-page-peek {
-    z-index: 1;
-    transform: translate(0.9rem, 0.6rem) rotate(-2deg);
-  }
-
-  .decision-book-cover {
-    z-index: 2;
-    box-sizing: border-box;
-    overflow: hidden;
-    background: #fff;
-    transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .decision-book-cover-image {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .decision-book-stack:hover .decision-book-page-back {
-      transform: translate(1.1rem, 1.25rem) rotate(5deg);
-    }
-
-    .decision-book-stack:hover .decision-book-page-peek {
-      transform: translate(-3.1rem, -0.15rem) rotate(-2.5deg);
-    }
-
-    .decision-book-stack:hover .decision-book-cover {
-      transform: translateY(-0.2rem);
-    }
-  }
-
-  .decision-book-stack:focus-visible .decision-book-page-back {
-    transform: translate(1.1rem, 1.25rem) rotate(5deg);
-  }
-
-  .decision-book-stack:focus-visible .decision-book-page-peek {
-    transform: translate(-3.1rem, -0.15rem) rotate(-2.5deg);
-  }
-
-  .decision-book-stack:focus-visible .decision-book-cover {
-    transform: translateY(-0.2rem);
-  }
-
   @media (max-width: 991px) {
     .decision-book-section {
       min-height: 0;
-      padding: 6rem 2rem 7rem;
+      padding: 4rem 2rem 6rem;
     }
 
     .decision-book-inner {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 4.5rem;
-      width: min(100%, 36rem);
+      width: min(100%, 42rem);
     }
 
-    .decision-book-copy {
-      width: min(100%, 31rem);
-      justify-self: start;
-    }
-
-    .page-wrapper .decision-book-copy h2 {
-      font-size: 2.75rem;
-    }
-
-    .decision-book-stack {
-      width: min(100%, 32rem);
-      justify-self: center;
-    }
-
-    .decision-book-stack:hover .decision-book-page-peek,
-    .decision-book-stack:focus-visible .decision-book-page-peek {
-      transform: translate(2rem, -0.1rem) rotate(2deg);
+    .decision-book-visual {
+      width: min(62vw, 23rem);
     }
   }
 
   @media (max-width: 767px) {
     .decision-book-section {
-      padding: 4.5rem 1.5rem 5.75rem;
-    }
-
-    .decision-book-inner {
-      gap: 3.75rem;
+      padding: 3.5rem 1.5rem 5rem;
     }
 
     .page-wrapper .decision-book-copy h2 {
-      font-size: clamp(2.35rem, 11vw, 2.75rem);
-      line-height: 1;
+      font-size: clamp(2.75rem, 12vw, 3.75rem);
+      line-height: 0.98;
     }
 
     .decision-book-copy p {
@@ -1732,17 +1797,9 @@ const pageBody = pageWithFooterLogo.replaceAll(
       font-size: 0.875rem;
     }
 
-    .decision-book-stack {
-      width: min(100%, 30rem);
+    .decision-book-visual {
+      width: min(78vw, 21rem);
     }
-
-  }
-
-  @media (max-width: 479px) {
-    .decision-book-stack {
-      width: 100%;
-    }
-
   }
 
   .positioning-quote-panel {
@@ -1774,7 +1831,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
     font-style: normal;
     font-weight: 400;
     line-height: 1.12;
-    letter-spacing: -0.02em;
+    letter-spacing: normal;
   }
 
   .positioning-quote-panel figcaption {
@@ -1880,7 +1937,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
     margin-left: calc(50% - 50vw);
     place-items: center;
     justify-content: center;
-    padding: clamp(7rem, 10vw, 10rem) clamp(1.5rem, 5vw, 4rem);
+    padding: clamp(10rem, 13vw, 13rem) clamp(1.5rem, 5vw, 4rem) clamp(9rem, 12.3vw, 12rem);
     background-color: #fdfcfa;
     scroll-margin-top: 6rem;
   }
@@ -1895,21 +1952,26 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   .page-wrapper h2.positioning-process-heading {
-    width: fit-content;
+    width: min(100%, 70rem);
     margin: 0;
-    font-family: Dmsans, Arial, sans-serif;
-    font-size: 1.375rem;
-    font-weight: 600 !important;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    font-family: Fraunces, Georgia, serif;
+    font-size: clamp(2.75rem, 3.55vw, 3.5rem);
+    font-weight: 300 !important;
+    line-height: 1.18;
+    letter-spacing: -0.035em;
     text-align: center;
+    text-wrap: balance;
+  }
+
+  .positioning-process-heading > span {
+    display: block;
   }
 
   .positioning-process-timeline {
     position: relative;
     box-sizing: border-box;
-    width: min(calc(100% - 4rem), 26.875rem);
-    margin: 1.125rem auto 0;
+    width: min(calc(100% - 4rem), 29rem);
+    margin: 2rem auto 0;
     padding: 0;
     border: 0;
     border-radius: 0.75rem;
@@ -1981,16 +2043,16 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   .positioning-process-outcome {
-    max-width: 62rem !important;
-    margin: 2.125rem auto 0 !important;
+    max-width: 34rem !important;
+    margin: 2.25rem auto 0 !important;
     padding: 0;
     border: 0;
-    font-family: Fraunces, Arial, sans-serif;
-    font-size: clamp(3rem, 3.55vw, 3.25rem) !important;
+    font-family: Dmsans, Arial, sans-serif;
+    font-size: clamp(1.25rem, 1.55vw, 1.5rem) !important;
     font-style: normal;
-    font-weight: 300 !important;
-    line-height: 1.14 !important;
-    letter-spacing: -0.045em;
+    font-weight: 600 !important;
+    line-height: 1.27 !important;
+    letter-spacing: -0.02em;
     text-align: center;
     text-wrap: balance;
   }
@@ -2172,20 +2234,13 @@ const pageBody = pageWithFooterLogo.replaceAll(
     font-size: 64px;
     font-weight: 300 !important;
     line-height: 0.92;
-    letter-spacing: -0.055em;
+    letter-spacing: -0.02em;
     white-space: nowrap;
     font-synthesis: none;
   }
 
   .closing-folder-heading > span {
     display: inline;
-  }
-
-  .page-wrapper .closing-folder-emphasis {
-    font-family: 'DM Sans', Arial, sans-serif !important;
-    font-size: 0.94em;
-    font-weight: 400 !important;
-    letter-spacing: -0.02em;
   }
 
   .closing-folder-cta {
@@ -2222,14 +2277,13 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
   .b2b-ceos-section {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: repeat(3, 12.75rem);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(11rem, auto));
     align-items: stretch;
-    gap: clamp(1.75rem, 2.75vw, 2.75rem) clamp(2rem, 4.25vw, 4.25rem);
+    gap: clamp(1.5rem, 2.4vw, 2.25rem) clamp(1.25rem, 2.75vw, 2.5rem);
     box-sizing: border-box;
     min-height: 0;
-    padding: clamp(5rem, 8.25vw, 8.25rem) clamp(1.5rem, 3.5vw, 3.5rem)
-      clamp(2rem, 2.5vw, 2.5rem);
+    padding: clamp(4.5rem, 5.5vw, 5.5rem) clamp(1.5rem, 3.75vw, 3.75rem);
     background-color: #fff27b;
   }
 
@@ -2243,11 +2297,11 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   .page-wrapper .b2b-testimonial-heading {
-    grid-area: 2 / 2 / 3 / 3 !important;
+    grid-area: 2 / 2 / 3 / 4 !important;
     align-self: center;
-    justify-self: stretch;
-    width: 100%;
-    max-width: none;
+    justify-self: center;
+    width: min(100%, 18ch);
+    max-width: 100%;
     margin: 0;
     font-family: Fraunces, Arial, sans-serif !important;
     font-size: clamp(2.5rem, 3.45vw, 3.5rem);
@@ -2295,26 +2349,34 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   .b2b-ceos-section .b2b-card-home:nth-child(4) {
-    grid-area: 2 / 1 / 3 / 2 !important;
+    grid-area: 1 / 4 / 2 / 5 !important;
   }
 
   .b2b-ceos-section .b2b-card-home:nth-child(5) {
-    grid-area: 2 / 3 / 3 / 4 !important;
+    grid-area: 2 / 1 / 3 / 2 !important;
   }
 
   .b2b-ceos-section .b2b-card-home:nth-child(6) {
-    grid-area: 3 / 1 / 4 / 2 !important;
+    grid-area: 2 / 4 / 3 / 5 !important;
   }
 
   .b2b-ceos-section .b2b-card-home:nth-child(7) {
-    grid-area: 3 / 2 / 4 / 3 !important;
+    grid-area: 3 / 1 / 4 / 2 !important;
   }
 
   .b2b-ceos-section .b2b-card-home:nth-child(8) {
+    grid-area: 3 / 2 / 4 / 3 !important;
+  }
+
+  .b2b-ceos-section .b2b-card-home:nth-child(9) {
     grid-area: 3 / 3 / 4 / 4 !important;
   }
 
-  .b2b-ceos-section .b2b-card-home:nth-child(n + 9),
+  .b2b-ceos-section .b2b-card-home:nth-child(10) {
+    grid-area: 3 / 4 / 4 / 5 !important;
+  }
+
+  .b2b-ceos-section .b2b-card-home:nth-child(n + 11),
   .b2b-ceos-section .b2b-card-home[hidden] {
     display: none !important;
   }
@@ -2352,57 +2414,38 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   .home-hero-section .h1-home-hero {
+    max-width: 13ch;
+    font-family: Fraunces, Georgia, serif;
     font-size: var(--type-hero-size);
-    line-height: 0.92;
+    font-weight: 300;
+    line-height: 0.86;
+    letter-spacing: -0.03em;
   }
 
-  .home-hero-take,
-  .home-hero-sans-lockup,
-  .home-hero-lead,
-  .home-hero-position,
-  .home-hero-lead-letter {
-    display: inline-block;
-  }
-
-  .font-fraunces.home-hero-sans-lockup {
-    overflow: visible;
+  .home-hero-section .h1-home-hero > span {
+    display: block;
     white-space: nowrap;
   }
 
-  .home-hero-section .h1-home-hero.is-animating .home-hero-lead-letter,
-  .home-hero-section .h1-home-hero.is-animating .home-hero-position {
+  .home-hero-section .h1-home-hero.is-animating {
     will-change: transform, opacity;
   }
 
-  @media (min-width: 768px) {
-    html.hero-motion-pending .home-hero-lead-letter {
-      visibility: hidden;
-      opacity: 0;
-    }
-
-    html.hero-motion-pending .home-hero-position {
-      transform: translate3d(-1.885em, 0, 0);
-    }
-  }
-
-  @media (max-width: 767px) {
-    html.hero-motion-pending .home-hero-section .h1-home-hero {
-      visibility: hidden;
-      opacity: 0;
-      transform: translate3d(0, 1rem, 0);
-    }
+  html.hero-motion-pending .home-hero-section .h1-home-hero {
+    opacity: 0;
+    transform: translate3d(0, 0.75rem, 0);
   }
 
   .section.home-hero-section {
     isolation: isolate;
     background-color: transparent;
     min-height: calc(100svh - var(--hero-folder-bottom-gap));
-    gap: 0.25rem;
+    gap: 1.5rem;
     margin-right: var(--hero-folder-gutter);
     margin-bottom: var(--hero-folder-bottom-gap);
     margin-left: var(--hero-folder-gutter);
-    padding-top: 14.25rem;
-    padding-bottom: 8rem;
+    padding-top: 14.8125rem;
+    padding-bottom: 7.4375rem;
     position: relative;
     top: auto;
   }
@@ -2497,39 +2540,57 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   .home-hero-section > .container.grid {
+    max-width: none;
     padding-right: var(--hero-content-gutter);
     padding-left: var(--hero-content-gutter);
   }
 
+  .home-hero-section > .container.grid > .column {
+    grid-column: 1 / span 16 !important;
+    max-width: none;
+  }
+
   .home-hero-section .container.grid.grid-24-gap {
-    row-gap: 2.75rem;
+    row-gap: 2.5rem;
   }
 
   .home-hero-section .paragraph-s {
-    font-size: 1.6875rem;
+    max-width: 47.5rem;
+    font-size: clamp(1.5rem, 2vw, 2.125rem);
     line-height: 1.25;
+    letter-spacing: normal;
+    text-wrap: wrap;
   }
 
   .home-hero-section .arrow-button {
     justify-content: center;
-    min-width: 9.8125rem;
-    height: 3.25rem;
+    gap: 0.5rem;
+    min-width: 11.5rem;
+    height: 3.875rem;
     max-height: none;
+    font-size: 1.125rem;
+  }
+
+  .home-hero-section .arrow-button::after {
+    content: '→';
+    font-size: 1.35em;
+    font-weight: 400;
+    line-height: 1;
   }
 
   .page-wrapper h1 .font-fraunces,
   .page-wrapper h2 .font-fraunces {
-    font-family: Dmsans, Impact, sans-serif;
-    font-size: var(--type-paired-emphasis-scale);
-  }
-
-  .page-wrapper h3.font-fraunces {
-    font-family: Dmsans, Impact, sans-serif;
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
   }
 
   @media (min-width: 768px) {
     .home-hero-section .container.grid.grid-24-gap > :first-child {
-      grid-column: 1 / span 10 !important;
+      grid-column: 1 / span 14 !important;
       max-width: none;
     }
 
@@ -2542,25 +2603,19 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
   @media (max-width: 767px) {
     .positioning-clients-container {
-      padding-right: 1.5rem;
-      padding-left: 1.5rem;
+      padding-right: 0;
+      padding-left: 0;
     }
 
     .positioning-clients-section {
       min-height: 0;
-      padding-top: 0;
-      padding-bottom: 4rem;
-    }
-
-    .positioning-clients-statement-stage {
-      min-height: clamp(30rem, 72svh, 38rem);
-      padding: 4rem 0;
+      padding: 6.5rem 1.5rem 7rem;
     }
 
     .page-wrapper h2.positioning-clients-heading {
       width: 100%;
-      max-width: 33rem;
-      font-size: 2.5rem;
+      max-width: 36rem;
+      font-size: clamp(2.25rem, 10.2vw, 3rem);
       line-height: 1.08;
       letter-spacing: -0.03em;
     }
@@ -2570,30 +2625,37 @@ const pageBody = pageWithFooterLogo.replaceAll(
       white-space: normal;
     }
 
+    .positioning-clients-heading > span + span::before {
+      content: ' ';
+    }
+
     .positioning-clients-intro {
-      margin-top: 0;
-      font-size: 1.125rem;
-      line-height: 1.35;
-      text-align: left;
+      max-width: 18rem;
+      margin-top: 5rem;
+      font-size: 1.25rem;
+      line-height: 1.2;
+      text-align: center;
     }
 
     .positioning-clients-tags {
+      gap: 0.75rem;
       width: 100%;
-      margin-top: 1.5rem;
+      margin-top: 2rem;
     }
 
-    .positioning-clients-logos {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-column-gap: 1rem;
-      grid-row-gap: 1.5rem;
-      width: 100%;
-      margin-top: 3rem;
+    .positioning-clients-tags-row {
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      max-width: 100%;
     }
 
-    .positioning-clients-logos .logo-image.bigger {
-      width: 100%;
-      max-width: 10rem;
-      height: 3rem;
+    .positioning-clients-tags .best-fit-clients-tag {
+      min-height: 2.625rem;
+      padding: 0 1rem;
+    }
+
+    .positioning-clients-tags .paragraph-s {
+      font-size: 0.875rem;
     }
 
     .investor-trust-section {
@@ -2637,7 +2699,8 @@ const pageBody = pageWithFooterLogo.replaceAll(
     }
 
     .positioning-story-section {
-      padding: 2rem 1rem;
+      min-height: 0;
+      padding: 5rem 1rem;
     }
 
     .positioning-story-stack {
@@ -2707,7 +2770,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
     }
 
     .four-cs-copy p {
-      line-height: 1.45;
+      line-height: 1.55;
     }
 
     .four-cs-copy p + p {
@@ -2740,17 +2803,14 @@ const pageBody = pageWithFooterLogo.replaceAll(
     }
 
     .positioning-story-preview-card {
-      height: 38rem;
+      height: auto;
       min-height: 0;
-      padding-bottom: 0;
-    }
-
-    .positioning-story-preview-fade {
-      height: 10rem;
     }
 
     .four-cs-read-more {
-      bottom: 1.5rem;
+      min-width: min(100%, 17.625rem);
+      min-height: 3.5rem;
+      font-size: 1rem;
     }
 
     .positioning-pull-quote-section {
@@ -2854,37 +2914,46 @@ const pageBody = pageWithFooterLogo.replaceAll(
       padding-left: 1.5rem;
     }
 
+    .home-hero-section > .container.grid > .column {
+      grid-column: 1 / -1 !important;
+      width: 100%;
+      min-width: 0;
+    }
+
     .home-hero-section .container.grid.grid-24-gap {
       row-gap: 1.5rem;
     }
 
     .home-hero-section .paragraph-s {
+      width: 100%;
+      max-width: none;
       font-size: 1rem;
       line-height: 1.5;
     }
 
     .home-hero-section .arrow-button {
-      justify-content: flex-start;
-      min-width: 0;
+      justify-content: center;
+      min-width: 8rem;
       height: 3rem;
       max-height: 3rem;
+      font-size: 0.875rem;
+      white-space: nowrap;
     }
 
     .home-hero-section .h1-home-hero {
       line-height: 1;
     }
+
+    .home-hero-section .h1-home-hero > span {
+      white-space: normal;
+    }
   }
 
   @media (min-width: 768px) and (max-width: 991px) {
-    .positioning-clients-statement-stage {
-      min-height: clamp(34rem, 76svh, 44rem);
-      padding-right: 2.5rem;
-      padding-left: 2.5rem;
-    }
-
     .page-wrapper h2.positioning-clients-heading {
-      width: min(100%, 42rem);
-      font-size: 3rem;
+      width: min(100%, 54rem);
+      font-size: 3.25rem;
+      line-height: 1.2;
     }
 
     .positioning-clients-heading > span {
@@ -2892,8 +2961,32 @@ const pageBody = pageWithFooterLogo.replaceAll(
       white-space: normal;
     }
 
+    .positioning-clients-heading > span + span::before {
+      content: ' ';
+    }
+
+    .positioning-clients-tags {
+      gap: 0.875rem;
+    }
+
+    .positioning-clients-tags-row {
+      display: grid;
+      grid-template-columns: repeat(2, max-content);
+      gap: 0.875rem;
+    }
+
+    .positioning-clients-tags .best-fit-clients-tag {
+      min-height: 3rem;
+      padding: 0 1.125rem;
+    }
+
+    .positioning-clients-tags .paragraph-s {
+      font-size: 1rem;
+    }
+
     .positioning-story-section {
-      padding: 3rem 2rem;
+      min-height: 0;
+      padding: 6rem 2rem;
     }
 
     .positioning-story-stack {
@@ -2968,9 +3061,8 @@ const pageBody = pageWithFooterLogo.replaceAll(
     }
 
     .positioning-story-preview-card {
-      height: 38rem;
-      min-height: 0;
-      padding-bottom: 0;
+      height: auto;
+      min-height: 30rem;
     }
 
     .positioning-quote-panel {
@@ -3041,24 +3133,26 @@ const pageBody = pageWithFooterLogo.replaceAll(
 
   @media (min-width: 992px) and (max-width: 1199px) {
     .page-wrapper h2.positioning-clients-heading {
-      width: min(100%, 55rem);
+      width: min(100%, 68rem);
     }
 
     .positioning-clients-heading > span {
       display: inline;
       white-space: normal;
     }
-  }
 
-  @media (min-width: 992px) and (max-width: 1049px) {
     .b2b-ceos-section {
-      grid-template-rows: repeat(3, 14.75rem);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: auto;
     }
-  }
 
-  @media (min-width: 1050px) and (max-width: 1198px) {
-    .b2b-ceos-section {
-      grid-template-rows: repeat(3, 13.75rem);
+    .page-wrapper .b2b-testimonial-heading,
+    .b2b-ceos-section .b2b-card-home:nth-child(-n + 10) {
+      grid-area: auto !important;
+    }
+
+    .page-wrapper .b2b-testimonial-heading {
+      grid-column: 1 / -1 !important;
     }
   }
 
@@ -3108,7 +3202,7 @@ const pageBody = pageWithFooterLogo.replaceAll(
     }
 
     .page-wrapper .b2b-testimonial-heading,
-    .b2b-ceos-section .b2b-card-home:nth-child(-n + 8) {
+    .b2b-ceos-section .b2b-card-home:nth-child(-n + 10) {
       grid-area: auto !important;
     }
 
@@ -3171,24 +3265,30 @@ const pageBody = pageWithFooterLogo.replaceAll(
     }
 
     .page-wrapper h2.positioning-process-heading {
-      font-size: 1.25rem;
+      max-width: 19ch;
+      font-size: clamp(2.25rem, 10vw, 3rem);
+      line-height: 1.08;
+    }
+
+    .positioning-process-heading > span {
+      display: inline;
     }
 
     .positioning-process-timeline {
-      margin-top: 1rem;
-      width: min(calc(100% - 3rem), 26.875rem);
+      margin-top: 3rem;
+      width: min(100%, 26.875rem);
     }
 
     .positioning-process-timeline li {
-      padding: 1.125rem 1.25rem 1rem;
+      padding: 1.125rem 1.25rem 1rem 4rem;
     }
 
     .positioning-process-timeline li::before {
-      left: -2.85rem;
+      left: 0.75rem;
     }
 
     .positioning-process-timeline li:not(:last-child)::after {
-      left: -1.85rem;
+      left: 1.75rem;
     }
 
     .page-wrapper .positioning-process-step h3 {
@@ -3196,10 +3296,10 @@ const pageBody = pageWithFooterLogo.replaceAll(
     }
 
     .positioning-process-outcome {
-      max-width: 15ch !important;
-      margin-top: 3.5rem !important;
-      font-size: clamp(2.25rem, 10vw, 3rem) !important;
-      line-height: 1.05 !important;
+      max-width: 24rem !important;
+      margin-top: 2.5rem !important;
+      font-size: 1.125rem !important;
+      line-height: 1.35 !important;
     }
 
     .positioning-process-outcome > span {
@@ -3305,6 +3405,24 @@ const pageBody = pageWithFooterLogo.replaceAll(
   }
 
   @media (max-width: 479px) {
+    .navbar-new .brand-new {
+      width: 60%;
+      height: 11vw;
+      margin-left: 0;
+      justify-content: flex-start;
+    }
+
+    .navbar-new .brand-new-inner {
+      width: 56%;
+      height: auto;
+      aspect-ratio: 8 / 1;
+    }
+
+    .four-cs-meta {
+      flex-wrap: wrap;
+      row-gap: 0.75rem;
+    }
+
     .closing-folder-content {
       padding-top: 1.625rem;
       padding-right: 0.75rem;
@@ -3337,10 +3455,24 @@ const pageBody = pageWithFooterLogo.replaceAll(
       transition: none;
     }
 
-    .decision-book-cta,
-    .decision-book-page,
-    .decision-book-cover {
+    .four-cs-read-more {
       transition: none;
+    }
+
+    .decision-book-cta {
+      transition: none;
+    }
+
+    .decision-book-card,
+    .decision-book-glare,
+    .decision-book-glare-sheen,
+    .decision-book-shadow {
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .decision-book-glare {
+      opacity: 0 !important;
     }
   }
 </style>

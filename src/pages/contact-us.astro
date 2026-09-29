@@ -1,6 +1,7 @@
 ---
 import sourceBody from '../content/source-body.html?raw';
 import { applySiteCopy } from '../content/site-copy.mjs';
+import { applyPrimaryNavigation } from '../content/navigation.mjs';
 import '../styles/directional-navigation.css';
 
 const base = import.meta.env.BASE_URL.endsWith('/')
@@ -38,10 +39,8 @@ navigation = navigation
   .replace('class="navbar-new w-nav"', 'class="navbar-new is-away-from-hero w-nav"')
   .replace(navigationLogoPattern, `$1${navigationLogo}$2`)
   .replace('href="./" class="brand-new-inner', `href="${homeUrl}" class="brand-new-inner`)
-  .replace('href="#" class="nav-link-new', `href="${homeUrl}#how-it-works" class="nav-link-new`)
-  .replace('href="#clients" class="nav-link-new', `href="${homeUrl}#clients" class="nav-link-new`)
-  .replace('href="#faqs" class="nav-link-new', 'href="#faqs" aria-current="location" class="nav-link-new')
   .replace('href="https://in-the-kitchen.webflow.io/contact-us"', `href="${contactUrl}"`);
+navigation = applyPrimaryNavigation(navigation, `${base}deep-reads/`);
 
 const faq = copiedBody.slice(faqStart, footerStart);
 const rawFooter = copiedBody
@@ -451,12 +450,14 @@ const footer = rawFooter.replace(footerLogoPattern, `$1${footerLogo}$2`);
     .contact-page .navbar-new .brand-new {
       width: 60%;
       height: 11vw;
-      margin-left: -1.5rem;
+      margin-left: 0;
+      justify-content: flex-start;
     }
 
     .contact-page .navbar-new .brand-new-inner {
-      width: 62%;
-      height: 7vw;
+      width: 56%;
+      height: auto;
+      aspect-ratio: 8 / 1;
     }
 
     .contact-page .contact-hero {

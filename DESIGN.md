@@ -20,10 +20,16 @@ colors:
 typography:
   display-hero:
     fontFamily: "Fraunces, Georgia, serif"
-    fontSize: "clamp(3.25rem, 6.79vw, 7.5rem)"
+    fontSize: "clamp(3rem, 7vw, 7.5rem)"
     fontWeight: 300
-    lineHeight: 0.92
-    letterSpacing: "-0.01em"
+    lineHeight: 0.78
+    letterSpacing: "-0.03em"
+  hero-support:
+    fontFamily: "DM Sans, Arial, sans-serif"
+    fontSize: "clamp(1.5rem, 2vw, 2.125rem)"
+    fontWeight: 400
+    lineHeight: 1.25
+    letterSpacing: "normal"
   display-section:
     fontFamily: "Fraunces, Georgia, serif"
     fontSize: "clamp(3rem, 4vw, 4.5rem)"
@@ -38,9 +44,9 @@ typography:
     letterSpacing: "-0.025em"
   headline-statement:
     fontFamily: "Fraunces, Georgia, serif"
-    fontSize: "clamp(2.75rem, 4vw, 4.5rem)"
+    fontSize: "clamp(3rem, 3.75vw, 4rem)"
     fontWeight: 300
-    lineHeight: 1.08
+    lineHeight: 1.34
     letterSpacing: "-0.03em"
   title:
     fontFamily: "DM Sans, Arial, sans-serif"
@@ -66,6 +72,12 @@ typography:
     fontWeight: 400
     lineHeight: 1.38
     letterSpacing: "-0.012em"
+  pull-quote:
+    fontFamily: "DM Sans, Arial, sans-serif"
+    fontSize: "clamp(1.75rem, 2.2vw, 2.25rem)"
+    fontWeight: 400
+    lineHeight: 1.13
+    letterSpacing: "normal"
   label:
     fontFamily: "DM Sans, Arial, sans-serif"
     fontSize: "0.8125rem"
@@ -114,15 +126,20 @@ components:
   fit-chip:
     backgroundColor: "{colors.signal-pink}"
     textColor: "{colors.ink}"
-    typography: "{typography.body-small}"
+    fontFamily: "DM Sans, Arial, sans-serif"
+    fontSize: "1.25rem"
+    fontWeight: 400
+    lineHeight: 1
+    letterSpacing: "-0.02em"
     rounded: "{rounded.pill}"
-    padding: "0 14px"
-    height: "36px"
+    padding: "0 24px"
+    height: "52px"
   editorial-card:
     backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
     rounded: "{rounded.card}"
     padding: "40px 45px 45px"
+    width: "800px max"
   process-panel:
     backgroundColor: "{colors.soft-stone}"
     textColor: "{colors.ink}"
@@ -138,7 +155,7 @@ components:
     typography: "{typography.body-small}"
     rounded: "{rounded.card}"
     padding: "16–18px"
-    height: "12.75rem from 1199px; 13.75rem from 1050–1198px; 14.75rem from 992–1049px; content-driven below 992px"
+    height: "content-driven within the three-row perimeter grid"
 ---
 
 # Design System: In The Kitchen
@@ -215,37 +232,41 @@ The palette combines warm editorial neutrals with highly committed single-color 
 
 | Role | Family / weight | Size | Line height | Tracking | Primary use |
 | --- | --- | --- | --- | --- | --- |
-| Hero display | Fraunces Light 300 | `clamp(52px, 6.79vw, 120px)` | `0.92` desktop, `1` mobile | about `-0.01em` | Hero H1 only |
+| Hero display | Fraunces Light 300 | `clamp(48px, 7vw, 120px)` | `0.78` desktop, `1` mobile | `-0.03em` | Two-line hero H1 only |
+| Hero support | DM Sans Regular 400 | `clamp(24px, 2vw, 34px)` desktop; `16px` mobile | `1.25` desktop, `1.5` mobile | normal | Three-line positioning consultancy description |
 | Section display | Fraunces Light 300 | `clamp(48px, 4vw, 72px)` | `1.08` | `-0.02em` | Investor proof headline |
 | Editorial headline | Fraunces Light 300 | `40px` | `1.05` | `-0.025em` | Four Cs and decisions statements |
-| Positioning statement | Fraunces Light 300 | `clamp(44px, 4vw, 72px)` desktop; `48px` tablet; `40px` mobile | `1.08` | `-0.03em` | Near-viewport client statement, centered as a block and left-aligned internally |
+| Article subheading | Fraunces Light 300 | `18px` | `1.3` | `-0.015em` | “The four sources of competitive advantage” and “Decisions to win” |
+| Best-fit statement | Fraunces Light 300 | `clamp(48px, 3.75vw, 64px)` desktop; `52px` tablet; `clamp(36px, 10.2vw, 48px)` mobile | `1.34` desktop; `1.2` tablet; `1.08` mobile | Two authored centered lines introducing the client-fit chapter |
 | Advantage title | Fraunces Light 300 | `36px` | `36px` | `-1.41px` | Capability, Credibility, Convenience, Cost |
-| Process label | DM Sans Semibold 600 | `22px` desktop; `20px` mobile | `1.2` | `-0.02em` | Centered “Our process” title |
-| Process outcome | Fraunces Light 300 | `clamp(48px, 3.55vw, 52px)` desktop; `clamp(36px, 10vw, 48px)` mobile | `1.14` desktop; `1.05` mobile | `-0.045em` | Four-line centered statement below process panel |
+| Process thesis | Fraunces Light 300 | `clamp(44px, 3.55vw, 56px)` desktop; `clamp(36px, 10vw, 48px)` mobile | `1.18` desktop; `1.08` mobile | `-0.035em` | Two authored centered lines introducing the process |
+| Process outcome | DM Sans Semibold 600 | `clamp(20px, 1.55vw, 24px)` desktop; `18px` mobile | `1.27` desktop; `1.35` mobile | `-0.02em` | Compact three-line centered conclusion below the process panel |
 | Founder title | Fraunces Light 300 | `40px` | `0.98` | `-0.04em` | Founder biography heading |
 | Commercial title | Fraunces Light 300 | `38px` | `0.98` | `-0.04em` | Cost and investment headings |
-| Testimonial center | Fraunces Light 300 | `clamp(40px, 3.45vw, 56px)` | `0.94` | `-0.045em` | Center cell of the testimonial grid |
-| Closing display | Fraunces Light 300 | `64px` | `0.92` | `-0.055em` | Closing folder headline |
+| Testimonial heading | Fraunces Light 300 | `clamp(40px, 3.45vw, 56px)` | `0.94` | `-0.045em` | Centered heading above the testimonial grid |
+| Closing display | Fraunces Light 300 | `64px` | `0.92` | `-0.02em` | Closing folder headline |
 | FAQ display | Fraunces Light 300 | `clamp(48px, 4.85vw, 62px)` | `clamp(50px, 5vw, 64px)` | `-2px` | “Questions, answered.” |
 | Title | DM Sans Regular 400 | `22px` | `1.15` | `-0.025em` | Process row titles and large utility headings |
 | Body large | DM Sans Regular 400 | `18px` | `1.35` | `-0.015em` | Introductory and closing copy |
 | Body | DM Sans Regular 400 | `16px` | `1.45` | `-0.01em` | Standard paragraphs, FAQ answers, biographies |
+| Article body | DM Sans Regular 400 | `clamp(17px, 1.25vw, 19.2px)` full Deep Read; `18px` category-leadership article; `clamp(16px, 1.29vw, 22px)` preview | `1.72` Deep Reads; `1.6` category-leadership article; `1.5` preview | neutral | Long-form paragraphs, ordered and unordered lists, and editorial excerpts |
 | Body small | DM Sans Regular 400 | `15px` | `1.38` | `-0.012em` | Testimonial copy and compact editorial text |
+| Pull quote | DM Sans Regular 400 | `clamp(28px, 2.2vw, 36px)` | `1.13` | normal | Full-width Redpanda testimonial chapter |
 | Label | DM Sans Medium/Semibold 500–600 | `12–14px` | `1–1.35` | `-0.01em` or neutral | Buttons, counts, metadata, attributions |
 
 Body copy should normally remain between 45ch and 70ch. Preserve authored desktop line breaks where they are part of a composition, but return to natural wrapping below 768px. Never permit a forced line break to create overflow.
 
-### Paired headline rule
+### Single-face headline rule
 
-Regular headline language is Fraunces. Emphasized language inside a mixed headline is DM Sans at `0.94em`, inheriting the same line height. The sans-serif emphasis is intentionally a touch smaller so the two faces feel optically balanced. Do not use transforms, relative positioning, or hand-tuned baselines to align them.
+Every display or narrative headline uses Fraunces as one continuous typographic voice. Nested spans may preserve authored line breaks or animation hooks, but they inherit the headline’s Fraunces family, size, weight, line height, tracking, and style. Do not mix DM Sans into a Fraunces headline for emphasis.
 
-The hero and closing folder follow this pattern. The testimonial-grid headline is an approved all-Fraunces exception. Process row titles and decision utility labels are DM Sans rather than serif.
+DM Sans remains the body and utility face. It is appropriate for supporting copy, navigation, controls, labels, metadata, process row titles, decision utility labels, and wholly sans-serif utility headings. Those roles do not create mixed-face headlines.
 
-**The Never-Bold-Serif Rule.** Fraunces is only Light 300 or Regular 400. Bold, semibold, synthetic bold, and faux italic Fraunces are prohibited. Keep `font-synthesis: none` on display treatments.
+**The Never-Bold-Serif Rule.** Every Fraunces headline uses Light 300. Bold, regular, semibold, synthetic bold, and faux italic Fraunces headlines are prohibited. Keep `font-synthesis: none` on display treatments.
 
-**The Sans-Is-Slightly-Smaller Rule.** Paired DM Sans emphasis remains `0.94em` unless a future global brand change explicitly replaces the ratio in both code and this specification.
+**The All-Fraunces-Headline Rule.** If a headline contains nested emphasis or authored line-break spans, every part inherits Fraunces Light 300 from the parent. No optical size reduction or alternate-family emphasis is applied inside the headline.
 
-**The Upright-Quote Rule.** The dark Redpanda quote uses upright DM Sans Regular, not italics. Its attribution is warm white and follows the quote in normal flow.
+**The Upright-Quote Rule.** The dark Redpanda quote uses upright DM Sans Regular with normal letter spacing, not italics or tightened tracking. Its attribution is warm white and follows the quote in normal flow.
 
 ## Elevation
 
@@ -271,25 +292,31 @@ Hairlines are either Hairline or Ink at 14–18% opacity. Content cards use gent
 
 ### Navigation
 
-The supplied `public/assets/itk-logo.svg` is the only approved navigation and footer lockup. Render it at its native 160:20 ratio; never recreate it with live type.
+The supplied `public/assets/itk-logo.svg` is the only approved navigation and footer lockup. Render it at its native 160:20 ratio; never recreate it with live type. Below 480px, the navigation lockup is 56% of its folder-tab container and aligns to the container's left edge, giving the brand a clear 16px page inset and more breathing room beside the menu control.
 
-The desktop navigation is fixed, visually quiet, and transparent over the hero. The logo begins centered in the yellow tab. After the hero, it translates upward over 240ms with `cubic-bezier(0.77, 0, 0.175, 1)`, while the right cluster moves inward by the calculated logo-side inset. Downward scrolling beyond the navigation height hides the whole bar with a transform. Upward scrolling reveals it on Canvas over 280ms with `cubic-bezier(0.16, 1, 0.3, 1)`; the background fades over 180ms. Keyboard focus and an open mobile menu always keep it visible.
+The desktop navigation is fixed, visually quiet, and transparent over the hero. Its right cluster contains only the editorial **Deep Reads** link, which routes to the local, base-path-safe `${BASE_URL}deep-reads/` archive, followed by the persistent outlined **Book a call** action. Never send the primary navigation to the production Webflow archive. Do not reintroduce homepage section links into the global navigation. The logo begins centered in the yellow tab. After the hero, it translates upward over 240ms with `cubic-bezier(0.77, 0, 0.175, 1)`, while the right cluster moves inward by the calculated logo-side inset. Downward scrolling beyond the navigation height hides the whole bar with a transform. Upward scrolling reveals it on Canvas over 280ms with `cubic-bezier(0.16, 1, 0.3, 1)`; the background fades over 180ms. Keyboard focus and an open mobile menu always keep it visible.
 
-Links show no underline at rest. A 200ms underline expands to full width on hover and focus. At 991px and below, the navigation becomes a full-width menu under the header and the hamburger morphs into a close icon. Opening the menu locks page scrolling.
+Deep Reads shows no underline at rest. A 200ms underline expands to full width on hover and focus. At 991px and below, the navigation becomes a full-width menu containing Deep Reads and Book a call under the header, and the hamburger morphs into a close icon. Opening the menu locks page scrolling.
+
+### Deep Reads archive and articles
+
+Deep Reads is a first-party Astro destination. The local `/deep-reads/` archive contains the six current editorial entries, and every card routes to a local `/deep-reads/{slug}/` page. The archive opens with a compact Positioning Lavender prologue, capped near 31rem tall on desktop, so the article folders enter the first viewport and remain the page's primary emphasis. The prologue begins directly with the Fraunces Light headline and has no eyebrow or kicker label. Its headline uses `clamp(56px, 5.4vw, 96px)` type with `-0.02em` tracking; the supporting paragraph stays below 20px. Transparent folder-thumbnail cards follow in a three-column desktop grid, a two-column tablet grid, and a single-column mobile stack. The thumbnail is the card's primary surface; no outer Paper card, crop, or metadata rail may obscure the supplied folder silhouette. Imported thumbnails and article images live in `public/assets/deep-reads/`; navigation, cards, article-body links, and images must all resolve through Astro's base path so the same build works at `/` and on GitHub Pages at `/ITK/`.
+
+Individual Deep Reads use Fraunces Light 300 for every semantic heading and DM Sans Regular for paragraphs and lists. Article hero titles use the same relaxed `-0.02em` tracking as the Deep Reads archive display. Body and list copy share `clamp(17px, 1.25vw, 19.2px)` sizing with `1.72` line height. Imported article figures fill the centered reading measure, with both the figure and its image centered by auto inline margins; legacy rich-text alignment classes must never offset imagery from the article column. The opening metadata stays compact, while the yellow bottom-line statement uses `clamp(26px, 2.65vw, 42px)` Fraunces Light type, reducing to `28px` on small screens, inside a panel with no folder tab. Dark editorial pull quotes may expand to the full article measure but use a compact `clamp(18px, 1.5vw, 26px)` Fraunces Light scale at `1.2` line height, reducing to `18px` on small screens. Each article ends with the shared homepage FAQ and footer through `SiteChrome.astro`; route-specific copies of those modules are not permitted.
+
+The generated content snapshot is `src/content/deep-reads.generated.json`. `scripts/import-deep-reads.mjs` is the explicit refresh path for synchronizing the owned production archive; after refresh, review all six routes, local assets, internal links, and base-path output before committing.
 
 ### Hero folder
 
 The opening field is an inset yellow folder, not a full-bleed rectangle. It uses side gutters of `clamp(16px, 1.8vw, 32px)` and a bottom gap of `clamp(24px, 2.2vw, 32px)`. The yellow body begins below the supplied `hero-yellow-tab.svg`; tab and body overlap by about 2px so no Canvas seam appears. The absolute tab rail stays transparent so the overlapping yellow body can fill SVG anti-aliasing and fractional-pixel edges. The body's responsive corner radius must optically match the tab shoulders.
 
-Hero content begins at `clamp(24px, 8.85vw, 128px)` inside the body. Desktop padding is 228px top and 128px bottom; mobile uses 160px top and 96px bottom. The hero remains in normal flow and approximates one viewport in height. Supporting copy is 27px / 1.25 on desktop and 16px / 1.5 on mobile. The CTA sits directly below and left-aligned with the copy.
+Hero content begins at `clamp(24px, 8.85vw, 160px)` inside the body. Desktop padding is 237px top and 119px bottom; mobile uses 160px top and 96px bottom. The hero remains in normal flow and approximates one viewport in height. The authored headline is two all-Fraunces Light lines—“Own the positioning” / “that scales everything.”—at `clamp(48px, 7vw, 120px)`, `0.86` line height, and `-0.03em` tracking. Supporting copy is `clamp(24px, 2vw, 34px)` / `1.25` on desktop within a 47.5rem measure and 16px / 1.5 on mobile. The desktop CTA is approximately 190×64px at the reference viewport, reads **Book a call →**, and sits directly below and left-aligned with the copy; mobile returns to the compact 48px action.
 
-### Fit chips and client logos
+### Best-fit statement and chips
 
-The positioning statement is a deliberate editorial pause between the hero and client proof. Its stage occupies `clamp(36rem, 80svh, 52rem)` on desktop and vertically centers the four authored lines without pinning or scroll effects. The statement remains left-aligned inside its centered intrinsic-width block. Desktop scales up to 72px, with natural wrapping from 992–1199px; tablet uses 48px inside a 42rem measure; mobile uses a `clamp(30rem, 72svh, 38rem)` stage and 40px type so the moment stays immersive without introducing overflow. Supporting intro copy, fit chips, and logos remain in normal flow beneath the stage.
+The first chapter under the hero is a near-screen-height Canvas field. It opens with two explicit, centered Fraunces Light lines: the crossroads statement followed by the scaling statement. At the 1705 × 959 reference viewport, the headline begins approximately 170px into the section, the DM Sans qualifier lands near the vertical midpoint, and the chip rows follow with a compact 32px gap. The section stays in normal flow and uses whitespace—not a separate card, logo wall, border, or decorative effect—to create the pause.
 
-Best-fit chips are 36px tall Signal Pink pills with 14px horizontal padding and DM Sans 15px / 18px. The eight-chip rail is centered with a 16px gap and wraps below 992px.
-
-Client logos form a 4 × 3 desktop grid with 80px column gaps and 32px row gaps. Each logo box is approximately 192 × 58px and preserves the supplied asset's transparent padding. Below 768px the grid becomes two columns. Never crop, stretch, recolor, or equalize logos by force.
+The qualifier is DM Sans Bold at `clamp(24px, 1.7vw, 30px)` with `1.2` line height and centered alignment. Best-fit chips are 52px-tall Signal Pink pills with 24px horizontal padding and DM Sans Regular 20px / 1. The pills preserve their content-driven widths and never distribute into equal columns. Desktop uses two independently centered four-chip rows with 20px horizontal and vertical gaps; tablet reflows each row into two columns; mobile wraps naturally without horizontal overflow. Client logos do not appear in this chapter.
 
 ### Investor proof
 
@@ -297,31 +324,35 @@ Investor proof is an inset Soft Stone panel on Canvas with a responsive 12–16p
 
 ### Positioning editorial card
 
-The homepage shows the Four Cs as a deliberately incomplete article preview centered on Positioning Lavender. The Paper card remains `min(49.76vw, 726px)` with a 10px radius, but its desktop height is capped at `min(44.7vw, 652px)`. A neutral Paper fade masks the final 160px or less, and a centered Deep Ink **Read More →** pill links to `/articles/category-leadership/`; its label and arrow use a 6px gap. The preview is 608px tall on mobile and tablet so the headline, metadata, lead copy, and cutoff remain legible.
+The homepage shows the Four Cs as a concise Paper article card centered in a full-viewport Positioning Lavender chapter. At desktop sizes the card is capped at 800px wide with a 10px radius and a minimum height of 556px. It contains the two Fraunces Light title statements, the reading/listen and author metadata row, one hairline rule, and one short DM Sans excerpt. The excerpt uses `clamp(16px, 1.29vw, 22px)` type with `1.5` line height (`1.55` on small screens), and ends with the four dimensions—**capability, credibility, convenience and cost**—in DM Sans Bold. There is no continuation fade and no partially visible article content.
 
-The dedicated article route carries the complete Four Cs, full-width Redpanda quote, and decision-based positioning module. It reuses the homepage navigation and footer and preserves the same 726px Paper reading measure on Positioning Lavender.
+A separate centered **Read The Article →** pill sits 32–36px below the card and links to `/articles/category-leadership/`. The action is 64px tall and approximately 282px wide on desktop, uses white DM Sans Semibold 20px text on `#8D82C9`, and darkens to `#7469B5` on hover. On mobile, the section returns to content height, the metadata remains readable, and the CTA becomes 56px tall without exceeding the card width.
+
+The dedicated article route carries the complete Four Cs, full-width Redpanda quote, and decision-based positioning module. It reuses the homepage navigation, full FAQ, and compact footer and preserves the same 726px Paper reading measure on Positioning Lavender. Every semantic `h1`–`h3` inside the article content uses Fraunces at Light 300 or Regular 400; article subheads use Regular 400 and never synthetic bold. Long-form paragraphs, ordered lists, unordered lists, list items, and Four Cs descriptions remain DM Sans Regular at 18px with a `1.6` line height, reducing to 16px while retaining the same leading ratio on small screens. List markers and indentation provide structure without shrinking the list copy below the surrounding paragraph size.
 
 The article metadata row places “4 min read” and a compact outlined Listen/Stop control on the left, with a centered, unscaled 40px circular crop of the approved square `jon-itkin-byline.png` headshot and “By Jon Itkin” on the right. The portrait reduces to 36px on mobile. The browser speech-synthesis control hides when unsupported and exposes pressed state.
 
-The four advantage sources use a 2 × 2 ruled grid with 24px between columns; below 768px they become one column. On the article page the grid remains fully visible; on the homepage its opening edge is intentionally interrupted by the preview fade.
+The four advantage sources use a 2 × 2 ruled grid with 24px between columns on the dedicated article page and become one column below 768px. The homepage preview intentionally stops before this grid.
 
-The dark Redpanda quote is a full-width Deep Ink chapter between the article sections, with a centered 34rem reading measure and `clamp(36rem, 72vh, 46rem)` minimum height. It uses upright DM Sans up to 36px, no decorative quotation marks, and a warm-white attribution in normal flow. The following decision module returns to a Paper card on Positioning Lavender and ends with eight compact ruled rows in this order: Intentions, Playing Field, Market Segment, Buyer, Problem, Alternatives, Advantages, How You Win. Count badges are outlined pills; Buyer has 4 decisions.
+The dark Redpanda quote is a full-width Deep Ink chapter between the article sections, with a centered 34rem reading measure and `clamp(36rem, 72vh, 46rem)` minimum height. It uses upright DM Sans up to 36px with normal letter spacing, no decorative quotation marks, and a warm-white attribution in normal flow. The following decision module returns to a Paper card on Positioning Lavender and ends with eight compact ruled rows in this order: Intentions, Playing Field, Market Segment, Buyer, Problem, Alternatives, Advantages, How You Win. Count badges are outlined pills; Buyer has 4 decisions.
 
 ### Decision book promotion
 
-The homepage follows the full-width Redpanda quote with a Decision Green book-promotion chapter. On desktop, a left-aligned Fraunces argument and Deep Ink **Get the book →** pill sit beside a `663:535` interactive page stack. The two-column grid is content-width rather than stretch-width, and that exact visual group is centered inside the full-viewport green field; it stacks into one reading flow below 992px. The front page uses the approved photographic `decision-book-cover-photo.png` as one full-bleed image with a centered `object-fit: cover` crop. Its typography, portrait, and photographed book construction must remain part of the source image rather than being rebuilt in HTML.
+The homepage follows the full-width Redpanda quote with a full-viewport Decision Green book-promotion chapter. Its single centered column places the supplied transparent `decision-book-cover-upright.png` above the Fraunces Light headline **“We wrote the book on it.”**, a compact centered DM Sans paragraph, and the Deep Ink **Get the book →** pill. The book remains a single intact `1468:1906` raster asset; its cover typography, portrait, paper texture, and physical construction must never be cropped, rebuilt, or overlaid in HTML. A single blurred Deep Ink ellipse sits behind the lower edge as the approved infinite-sweep contact shadow; it has no horizon line or shadow on the surrounding copy.
 
-The stack has exactly three layers: the photographic front page, the supplied `decision-book-background-page.svg` as the middle page, and one blank Paper page at the back. Every layer carries a one-pixel Decision Green (`#CFFD93`) stroke so page edges remain clean against the section background. At rest both back pages peek below the cover. On fine-pointer hover or keyboard focus, the illustrated SVG page fans left by no more than about 3rem so its left edge and left-side layout are revealed, the blank page fans right, and the cover rises by 3px. Use transforms only, a 420ms `cubic-bezier(0.16, 1, 0.3, 1)` curve, and no shadows. Reduced-motion users receive the same revealed state without interpolation.
+On fine-pointer devices, the book uses a tvOS-style material response: cursor position drives at most `±5deg` of X rotation and `±6deg` of Y rotation, lifts the cover by 6px, and scales it to `1.025`. A single masked white specular band moves across the supplied book silhouette while the contact shadow counter-shifts by at most 18px, tightens, and softens with the lift. This masked material glare is the only approved gradient in the chapter. `gsap.quickTo()` reuses transform and opacity tweens with `expo.out` easing. The effect is decorative, keeps the CTA as the chapter's only control, and is completely disabled on touch devices and under `prefers-reduced-motion`.
+
+At a 1440px desktop viewport the image canvas is approximately 424px wide, the headline remains one line at 84px, and the supporting copy is held to a 25rem measure. The composition remains centered as the section narrows; below 992px the book scales to at most 23rem, and below 768px it uses at most 78vw while the headline wraps naturally. The CTA remains the only interactive element in this chapter.
 
 ### Process list
 
-The process section is a centered, near-screen-height editorial pause on Canvas. A compact DM Sans Semibold **Our process** label sits directly above a maximum-430px Soft Stone panel. The panel contains five full-width DM Sans rows separated by 2px Canvas rules. Two-digit `01–05` labels sit outside the left edge and align to each row’s vertical center; quiet 8%-Ink one-pixel segments connect the numbers without crossing them. Rows use approximately 20px top, 24px sides, and 18px bottom padding. A four-line, maximum-62rem Fraunces Light outcome statement sits about 34px beneath the panel and closes the chapter. Do not add the superseded thesis/method column, arrowheads, shadows, gradients, illustrations, decorative nodes, or alternating offsets. Below 768px, panel insets and number offsets tighten while the outcome returns to natural responsive wrapping.
+The process section is a centered, near-screen-height editorial pause on Canvas. It opens with the two authored Fraunces Light lines **“Positioning is something you do.”** and **“Our process is built to help you actually do it.”** at a maximum 70rem measure. A maximum-29rem Soft Stone panel sits about 32px below and contains five full-width DM Sans rows separated by 2px Canvas rules. Two-digit `01–05` labels sit outside the panel on desktop and align to each row’s vertical center; quiet 8%-Ink one-pixel segments connect the numbers without crossing them. Rows use approximately 20px top, 24px sides, and 18px bottom padding. The fourth row reads **“Core sales and marketing assets that make positioning shippable.”** A maximum-34rem DM Sans Semibold conclusion sits about 36px beneath the panel in three authored lines: **“You walk away with positioning decisions you / fully own, and everything you need to hit the / market harder than ever.”** Do not add an “Our process” label, arrowheads, shadows, gradients, illustrations, decorative nodes, or alternating offsets. Below 768px, the number rail moves inside the Soft Stone panel, the thesis wraps naturally, and the conclusion returns to natural responsive wrapping.
 
 ### Rotating testimonial grid
 
-The Testimonial Yellow field uses a 3 × 3 desktop grid. Eight equal Canvas cards occupy the perimeter and the all-Fraunces Deep Ink heading spans the full center cell with center-aligned text, rather than centering an intrinsic-width text box. Rows are `12.75rem` from 1199px up, `13.75rem` from 1050–1198px, and `14.75rem` from 992–1049px so the approved quotes can wrap without clipping as the columns narrow; below 992px the cards are content-driven. The grid uses 28–44px gaps. Cards use 16–18px padding, a 10px radius, DM Sans 15px quote copy, and 13px attribution copy separated by a quiet top rule. The footer begins 0.75rem after the quote and uses 0.5rem top padding.
+The Testimonial Yellow field uses a four-column, three-row perimeter composition at 1200px and wider. Four Canvas quote cards fill the first row, one card sits at each side of the middle row, and four cards fill the last row. The all-Fraunces Light Deep Ink heading occupies the two central cells in the middle row, creating a deliberate open editorial center instead of a heading band above the cards. Rows are content-driven with an `11rem` minimum so approved copy never clips. From 992–1199px the heading moves above a two-column grid; below 768px the cards become a one-column list. The grid uses 20–40px gaps. Cards use 16–18px padding, a 10px radius, DM Sans 15px quote copy, and 13px attribution copy separated by a quiet top rule. The footer begins 0.75rem after the quote and uses 0.5rem top padding.
 
-The approved pool contains 11 testimonials. Eight are visible; every 2.2 seconds one perimeter card crossfades and moves 8px over 220ms. Rotation pauses on hover, keyboard focus, viewport exit, and document hide. Under reduced motion, the first eight remain static. Below 992px the heading moves above a two-column grid; below 768px cards become a one-column, content-driven list.
+The approved pool contains 11 testimonials. Ten are visible around the heading; every 2.2 seconds one perimeter card crossfades and moves 8px over 220ms. Rotation pauses on hover, keyboard focus, viewport exit, and document hide. Under reduced motion, the first ten remain static. Below 1200px the heading returns above the grid so the reading order remains clear.
 
 ### Founder profile
 
@@ -335,11 +366,11 @@ On fine-pointer devices, the founder portrait uses a restrained tvOS-style depth
 
 The closing CTA is a centered Action Blue folder on Canvas. Its height is content-driven and follows the compact contact-folder proportion instead of a landscape aspect ratio. The content receives `3.15rem` vertical padding on desktop, `3.5rem` from 480–991px, and `1.625rem` below 480px. The smallest layout uses `0.75rem` side padding so the first headline line remains intact. On wide screens it caps at 56rem. The shell is `min(58%, 56rem)` on desktop, `min(86%, 40rem)` below 992px, and 92% below 768px.
 
-The body uses an 8px radius and a compact tab rising 25px. The headline/action group is vertically centered by balanced vertical padding, with 78px desktop side padding. The headline is one continuous desktop line: Fraunces Light for “It’s time to take” and DM Sans Regular at `0.94em` for “a position.” Below 992px, it returns to natural responsive wrapping. The only action is the Decision Green pill.
+The body uses an 8px radius and a compact tab rising 25px. The headline/action group is vertically centered by balanced vertical padding, with 78px desktop side padding. The complete headline, “It’s time to take a position.”, is one continuous Fraunces Light line on desktop with relaxed `-0.02em` tracking. Below 992px, it returns to natural responsive wrapping. The only action is the Decision Green pill.
 
 ### FAQ, contact, and footer
 
-FAQ uses Canvas with Ink type and 14%-Ink row rules. “Questions, answered.” is an all-Fraunces Light display at `62px / 64px` with `-2px` tracking on wide screens; both lines share the same face, weight, and size. The ten-item source is shared by homepage and contact page; the first item is open by default. Headers are keyboard-operable and expose expanded state. Answers animate to measured height over 300ms, and the plus rotates 45 degrees. Recalculate open heights after fonts load and on resize.
+FAQ uses Canvas with Ink type and 14%-Ink row rules. “Questions, answered.” is an all-Fraunces Light display at `62px / 64px` with `-2px` tracking on wide screens; both lines share the same face, weight, and size. The ten-item source is shared by the homepage, contact page, and dedicated article pages, and it always appears directly above the shared compact footer; the first item is open by default. Headers are keyboard-operable and expose expanded state. Answers animate to measured height over 300ms, and the plus rotates 45 degrees. Recalculate open heights after fonts load and on resize.
 
 The contact page keeps the shared navigation, a centered Action Blue contact folder, the shared FAQ, and the shared compact footer. Retired legacy interstitials, marquees, and alternate footers must not return.
 
@@ -349,9 +380,11 @@ The footer reuses `itk-logo.svg` at 160:20. Its descriptor is case-sensitive: **
 
 Motion is feedback, not ornament. Prefer opacity and transform. Core timings are 160–180ms for small state changes, 200–220ms for underlines and card swaps, 240–280ms for navigation movement, 300ms for accordion height, and 420ms for the book-page reveal. Smooth anchor scrolling is allowed. Every hover state needs a keyboard-focus equivalent.
 
-The hero headline uses one immediate, continuous movement with no introductory delay or stepped midpoint. It begins in the compact “Take the position” state: all four letters of `lead` are hidden while `position` is translated left into their inline space. Over 320ms with `expo.out`, all four letters reveal together while `position` resolves directly to its natural inline position, producing “Take the lead position.” The supporting line and CTA remain stationary throughout.
+The hero headline uses one immediate, continuous 320ms reveal with no introductory delay or stepped midpoint. The complete two-line Fraunces headline moves upward 12px while fading from 0 to 1 with `expo.out`; it is never assembled word-by-word. The supporting paragraph and CTA remain stationary throughout.
 
-There is no letter stagger, hold, or vertical motion in the desktop animation. At mobile sizes, preserve the final inline headline and use one immediate 400ms opacity-and-y reveal with `expo.out`. Under reduced motion, render the final state immediately with no interpolation. Hero animation must use transforms and opacity only, clear its temporary inline styles after completion, and never alter document flow.
+There is no letter stagger or hold. Desktop and mobile use the same immediate headline-only reveal so the message feels present at first paint. Under reduced motion, render the final state immediately with no interpolation. Hero animation must use transforms and opacity only, clear its temporary inline styles after completion, and never alter document flow.
+
+Because the hero intro is a critical first-paint moment, its trigger is dependency-free and runs directly after the hero markup is parsed; it must not wait for the larger interaction bundle. The headline exposes `running` and `ready` states for verification, resolves to the final state on `pagehide`, and includes a 1.2-second fail-open guard so a delayed or failed script can never leave the headline hidden.
 
 Under `prefers-reduced-motion`, disable smooth scrolling, testimonial rotation, animated navigation movement, accordion transitions, and nonessential hover translations. Preserve state changes without interpolation.
 
@@ -361,7 +394,7 @@ Under `prefers-reduced-motion`, disable smooth scrolling, testimonial rotation, 
 
 - **Do** preserve the recognizable identity and treat the implemented site and supplied references as the primary visual authority.
 - **Do** let typography carry hierarchy through contrast, scale, pacing, and authored line breaks.
-- **Do** use Fraunces only at weight 300 or 400 and DM Sans for body, utility, controls, and paired emphasis.
+- **Do** use Fraunces Light 300 for every display and narrative headline; use DM Sans for body, utility, controls, labels, metadata, and approved wholly sans-serif utility headings.
 - **Do** center text blocks by their container when requested while preserving the intended internal text alignment.
 - **Do** use Canvas as the default surface, Deep Ink instead of pure black, and 1px quiet rules for structure.
 - **Do** keep calls to action concise, visible, and consistent: **Book a call**, except for the approved closing-folder and book-promotion labels.
